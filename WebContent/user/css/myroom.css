@@ -1,0 +1,29 @@
+.center-menu ul{width:200px;}
+.center-menu ul li{ background:#f4f4f4; list-style:none; padding:10px; 
+font-family:"open sans", serif ;
+   font-size:12px;}
+.center-menu ul li i{font-size:10px; color:#ccc; padding-right:5px;}
+ 
+.center-menu ul li a{color:#575757; display:block; text-decoration:none; width:100%;}
+.center-menu ul li:nth-child(1){border-right: 5px solid #8d54a3}
+.center-menu ul li:nth-child(2){border-right: 5px solid #6CC437}
+.center-menu ul li:nth-child(3){border-right: 5px solid #f28c1d}
+.center-menu ul li:nth-child(4){border-right: 5px solid #e94979}
+.center-menu ul li:nth-child(5){border-right: 5px solid #00B0F0}
+.center-menu ul li:nth-child(6){border-right: 5px solid #cc3333}
+.center-menu ul li:nth-child(7){border-right: 5px solid #FABE09}
+.center-menu ul li:nth-child(8){border-right: 5px solid #e94979}
+.center-menu ul li:nth-child(9){border-right: 5px solid #8d54a3}
+.center-menu ul li:nth-child(2){border-right: 5px solid #6CC437}
+
+.center-menu ul li:hover a{color:#575757; text-decoration:none;}
+.center-menu ul li:nth-child(1):hover{background-color:#8d54a3}
+.center-menu ul li:nth-child(2):hover{background-color:#6CC437}
+.center-menu ul li:nth-child(3):hover{background-color:#f28c1d}
+.center-menu ul li:nth-child(4):hover{background-color:#e94979}
+.center-menu ul li:nth-child(5):hover{background-color:#00B0F0}
+.center-menu ul li:nth-child(6):hover{background-color:#cc3333}
+.center-menu ul li:nth-child(7):hover{background-color:#FABE09}
+.center-menu ul li:nth-child(8):hover{background-color:#e94979}
+.center-menu ul li:nth-child(9):hover{background-color:#8d54a3}
+.center-menu ul li:nth-child(2):hover{background-color:#6CC437}
