@@ -45,8 +45,8 @@
             </div>
       	</div>
       <div class="modal-footer">
+        <button type="button" class="btn btn-danger">CREATE</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">CLOSE</button>
-        <button type="button" class="btn">CREATE</button>
       </div>
     </div>
   </div>

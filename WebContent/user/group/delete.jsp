@@ -19,7 +19,7 @@
        	</div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn">탈퇴</button>
+        <button type="button" class="btn btn-danger">탈퇴</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">CLOSE</button>
       </div>
     </div>

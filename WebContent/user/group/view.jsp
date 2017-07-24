@@ -3,12 +3,6 @@
 <%@include file="/common/template/head_include.jsp"%>
 <link rel="stylesheet" href="/akcord/user/group/css/list.css">
 <%@ include file="/common/template/nav.jsp" %>
-<style>
-	.btn {
-		background-color: #346969;
-		color: white;
-	}
-</style>
    <div class="container">
      <div class="container container-pad" id="property-listings">
        <div class="row">
@@ -52,8 +46,8 @@
 					</div>
 				</div>
 				<div class="pull-right">
-					<button type="button" class="btn btn-md">수정</button>
-					<button type="button" class="btn btn-md">삭제</button>
+					<button type="button" class="btn btn-md btn-danger">수정</button>
+					<button type="button" class="btn btn-md btn-default">삭제</button>
 				</div>
 			</div>
 		</div>

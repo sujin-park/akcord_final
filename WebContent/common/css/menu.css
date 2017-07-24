@@ -47,3 +47,6 @@ div.container-head{
 #bell-btn{
     margin-top:20px;
 }
+
+.form-control{ box-shadow:none; border-color:#eee;}
+.form-control:focus{ box-shadow:none; border-color:#d34e4c;}

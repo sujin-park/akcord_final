@@ -22,12 +22,6 @@
 		
 	}
 </script>
-<style>
-.btn {
-	background-color: #346969;
-	color: white;
-}
-</style>
 		<section class="content page-top row">
 			<div class="col-sm-10 col-sm-push-1" style="padding-top: 60px;">
 				<div class="col-sm-10">
@@ -37,7 +31,7 @@
 					<div class="panel-body">
 						<div class="row" style="padding-bottom:10px;">
 							<div class="col-sm-6 pull-left">
-								<button type="button" class="btn btn-md" onclick="javascript:plusMember();">
+								<button type="button" class="btn btn-md btn-danger" onclick="javascript:plusMember();">
 									<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 								</button>
 								<span>그룹원 추가</span>
@@ -52,7 +46,7 @@
 												<option value="name">전공명</option>
 											</select>
 												<input type="text" class="form-control" name="word" placeholder="검색어 입력" size="25">
-												<button type="button" class="btn btn-sm">SEARCH</button>
+												<button type="button" class="btn btn-sm btn-danger">SEARCH</button>
 										</div>
 									</div>
 								</div>
@@ -107,7 +101,7 @@
 												</td>
 												<td>
 													<p align="center" data-placement="top" data-toggle="tooltip" title="Edit">
-														<button type="button" class="btn btn-sm" onclick="javascript:joinGroup();">
+														<button type="button" class="btn btn-sm btn-danger" onclick="javascript:joinGroup();">
 											    			<span class="glyphicon glyphicon-remove">
 											    		</button>
 											    	</p>

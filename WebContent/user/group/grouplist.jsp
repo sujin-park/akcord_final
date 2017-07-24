@@ -1,30 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/common/template/head_include.jsp"%>
-<link rel="stylesheet" href="/akcord/css/group.css">
+<link rel="stylesheet" href="/akcord_project/user/group/css/group.css">
 <%@ include file="/common/template/nav.jsp" %>
 <script type="text/javascript">
 
 $(document).ready(function(){
-	function creategroup() {
-	      $('#myModal').modal({
+	$('#create').click(function(){
+		$('#myModal').modal({
 	    	show : true  
 	      });
-	}
+	});
 	
-	function viewlist() {
-		
-		
-	}
-
-	function joinGroup() {
+	$('#joinGroup').click(function(){
 		$('#joingroupM').modal({
 			show : true
 		});
-		
-	}
-});
+	});
 
+	$('#accept').click(function(){
+		$(location).attr('href','${root}/group/list.akcord');
+	});
+});
 </script>
 		<section class="content page-top row">
 			<div class="col-sm-10 col-sm-push-1" style="padding-top: 60px;">
@@ -32,8 +29,8 @@ $(document).ready(function(){
 					<div class="panel-body">
 						<div class="row" style="padding-bottom:10px;">
 							<div class="col-sm-6 pull-left">
-								<button type="button" class="btn btn-sm btn-danger" onclick="javascript:creategroup();">그룹방 개설</button>
-								<button type="button" class="btn btn-sm btn-default" onclick="javascript:viewlist();">승인 리스트</button>
+								<button type="button" id="create" class="btn btn-sm btn-danger">그룹방 개설</button>
+								<button type="button" id="accept" class="btn btn-sm btn-default">승인 리스트</button>
 							</div>
 							<div class="row">
 								<div class="form-group form-inline">
@@ -45,7 +42,7 @@ $(document).ready(function(){
 												<option value="name">그룹방명</option>
 											</select>
 												<input type="text" class="form-control" name="word" placeholder="검색어 입력" size="25">
-												<button type="button" class="btn btn-sm">SEARCH</button>
+												<button type="button" class="btn btn-sm btn-danger">SEARCH</button>
 										</div>
 									</div>
 								</div>
@@ -94,7 +91,7 @@ $(document).ready(function(){
 												</td>
 												<td>
 													<p align="center" data-placement="top" data-toggle="tooltip" title="Edit">
-														<button type="button" class="btn btn-warning" onclick="javascript:joinGroup();">
+														<button type="button" id="joinGroup" class="btn btn-danger">
 											    			<span class="glyphicon glyphicon-thumbs-up"></span>
 											    		</button>
 											    	</p>
