@@ -1,15 +1,11 @@
-<%@include file="/common/template/head_include.jsp" %>
-<%@ include file="/common/template/nav.jsp" %>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@include file="/common/template/head_include.jsp" %>
+<%@ include file="/common/template/nav.jsp" %>
 
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
+
 	$(document).ready(function() {
 		$('#answerBtn').click(function() {
 			//joinmove();
@@ -17,6 +13,7 @@
 		});
 	});
 </script>
+
 <style>
 .gi-2x {
 	font-size: 2em;
@@ -52,7 +49,7 @@
 		<div class="col-sm-12" row="25"
 			style="border: 1px solid; color: gray; height: 250px;"></div>
 		<label class="col-sm-11"></label>
-		<button type="button" class="btn btn-danger col-sm-1 btn btn-danger-md" id="answerBtn">Answer</button>
+		<button type="button" class="btn btn-danger col-sm-1 btn" id="answerBtn">Answer</button>
 	</div>
 
 	<div class="col-sm-12">
@@ -61,34 +58,6 @@
 			<hr style="border: solid 0.5px gray;">
 		</div>
 	</div>
-	<!--  <button type="button" class="btn btn-danger btn btn-danger-default btn btn-danger-sm">
-          <span class="glyphicon glyphicon-thumbs-up"></span> Like
-        </button>
-         <button type="button" class="btn btn-danger btn btn-danger-default btn btn-danger-sm">
-          <span class="glyphicon glyphicon-thumbs-down"></span> Unlike
-        </button>
-        
-        		<button type="button" class="btn btn-danger btn btn-danger-danger col-sm-1 btn btn-danger-md">Answer</button>
-        		
-        		
-        		
-        		
-        		<button type="button" class="btn btn-danger col-sm-1" data-toggle="collapse" data-target="#demo">Commend</button>
-        		
-        		 <div class="media">
-    <div class="media-left media-top">
-      <img src="img_avatar1.png" class="media-object" style="width:80px">
-    </div>
-    <div class="media-body">
-      <h4 class="media-heading">Media Top</h4>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-    </div>
-  </div>
-  <hr>
-		
-     -->
 
 	<br>
 	<div class="col-sm-1"></div>
@@ -109,13 +78,13 @@
 
 		<div class="col-sm-12" row="25"
 			style="border: 1px solid; color: gray; height: 250px;"></div>
-		<div class="col-sm-12 form-group">
+		<div class="col-sm-12 form-group" style="margin-left: -15px">
 			<button type="button" class="btn btn-danger col-sm-1 " data-toggle="collapse"
-				data-target="#demo">Commend</button>
+				data-target="#demo" aria-expanded="false" aria-controls="#demo">Commend</button>
 
 		</div>
 
-		<div id="demo" class="collapse col-sm-12 ">
+		<div id="demo" class="collapse col-sm-12">
 			<div class="media">
 				<div class="media-left media-top">
 					<img src="img_avatar1.png" class="media-object" style="width: 80px">
