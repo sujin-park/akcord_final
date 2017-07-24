@@ -1,9 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <%@include file="/common/template/head_include.jsp"%>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <%@ include file="/common/template/nav.jsp" %>
-	
+
+<script>
+$(document).ready(function() {
+	$('#questionBtn').click(function() {
+		//joinmove();
+		document.location.href = "question.jsp";
+	});
+});
+</script>	
+
 	<div class="container" style="margin-top: 10pt;">
 	<div class="row">
 
@@ -12,7 +22,7 @@
 	<div class="col-sm-2 form-group" >
 		<h5 class="col-sm-12">전공분야</h5>
 		<div class="col-sm-12 form-group " style="width: 100%;" >
-			<button id="question" class="btn btn-default" style="width: 100%;">Q질문하기</button>
+			<button id="questionBtn" class="btn btn-danger" style="width: 100%;">Q질문하기</button>
 			<hr>
 		</div>
 			<a id="c1" href="">인문계열</a><hr>

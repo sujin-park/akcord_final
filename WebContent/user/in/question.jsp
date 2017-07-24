@@ -4,9 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 	<!-- include libraries(jQuery, bootstrap) -->
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script> 
@@ -28,7 +26,14 @@
     $(document).ready(function() {
 		$('#cancelBtn').click(function() {
 			//joinmove();
-			document.location.href = "qna.jsp";
+			document.location.href = "inmain.jsp";
+		});
+	});
+    $(document).ready(function() {
+    	
+		$('#resetBtn').click(function() {
+			//joinmove();
+		$('.note-editable').empty();
 		});
 	});
   </script>
@@ -36,7 +41,7 @@
 
 
 <!-- 회원 고유코드, 제목, 내용, 작성날짜(sysdate), 카테고리 고유번호  -->
-
+<div class="container col-sm-12 form-group">
 		<form class="form-horizontal" action="">
 			<fieldset>
 				<div class="form-group">
@@ -70,7 +75,7 @@
 					<button type="button" class="btn btn-danger col-sm-1 btn-lg" id="cancelBtn">cancel</button>
 					<div class="col-sm-9"></div>
 				<div>
-				<button type="button" class="btn btn-danger col-sm-1 btn-lg">reset</button>
+				<button type="button" class="btn btn-danger col-sm-1 btn-lg" id="resetBtn">reset</button>
 				
 				<button type="button" class="btn btn-danger col-sm-1 btn-lg">Save</button>
 			</div>
@@ -81,6 +86,6 @@
 			</fieldset>
 		
 		</form>
-	
+	</div>
 </body>
 </html>
