@@ -7,7 +7,7 @@
 			<div class="panel-heading">
 				<h4 class="panel-title">
 					<a data-toggle="collapse" href="#collapse-1">
-					<img alt=""	src="/akcord/doc/img/icon.png" height="50" width="50"> </a>
+					<img alt=""	src="/${root}/doc/img/icon.png" height="50" width="50"> </a>
 				</h4>
 			</div>
 			<div id="collapse-1" class="panel-collapse collapse" >
