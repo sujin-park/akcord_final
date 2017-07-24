@@ -23,7 +23,7 @@ $(document).ready(function() {
 	<div class="col-sm-3" ></div>
 	<div class="col-sm-6" >
          <div class="form-group">
-         	<h1>공지사항 글쓰기</h1>
+         	<h2>공지사항 글쓰기</h2>
             <label for="title">SUBJECT</label>
             <input type="text" name="title" class="form-control" id="title" required>
          </div>
