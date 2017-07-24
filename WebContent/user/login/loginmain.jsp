@@ -40,7 +40,7 @@ $(document).ready(function(){
 				<fieldset>
 				
 				<div class="modal-content" id="img01" style="position: absolute; left: 15%;" >
-								<img src="${root}/img/loginview.jpg"
+								<img src="${root}/doc/img/loginview.jpg"
 									style="width: 700px; height: 600px;">
 
 				<div class="modal-body" style="position: absolute; top:63%; left: 38%;" >								
