@@ -96,7 +96,7 @@
 												</td>
 												<td>
 													<p align="center" data-placement="top" data-toggle="tooltip" title="Edit">
-														<button type="button" class="btn btn-sm" onclick="javascript:joinGroup();">
+														<button type="button" class="btn btn-warning" onclick="javascript:joinGroup();">
 											    			<span class="glyphicon glyphicon-thumbs-up"></span>
 											    		</button>
 											    	</p>
