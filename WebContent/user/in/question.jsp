@@ -36,7 +36,7 @@
 
 
 <!-- 회원 고유코드, 제목, 내용, 작성날짜(sysdate), 카테고리 고유번호  -->
-
+<div class="container col-sm-12 form-group">
 		<form class="form-horizontal" action="">
 			<fieldset>
 				<div class="form-group">
@@ -81,6 +81,6 @@
 			</fieldset>
 		
 		</form>
-	
+	</div>
 </body>
 </html>

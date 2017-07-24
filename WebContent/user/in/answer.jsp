@@ -13,7 +13,7 @@
 	$(document).ready(function() {
 		$('#answerBtn').click(function() {
 			//joinmove();
-			document.location.href = "question.jsp";
+			
 		});
 	});
 </script>
@@ -52,7 +52,7 @@
 		<div class="col-sm-12" row="25"
 			style="border: 1px solid; color: gray; height: 250px;"></div>
 		<label class="col-sm-11"></label>
-		<button type="button" class="btn btn-danger col-sm-1 btn btn-danger-md" id="answerBtn">Answer</button>
+		<button type="button" class="btn col-sm-1 btn-md" id="answerBtn">Answer</button>
 	</div>
 
 	<div class="col-sm-12">
@@ -61,19 +61,19 @@
 			<hr style="border: solid 0.5px gray;">
 		</div>
 	</div>
-	<!--  <button type="button" class="btn btn-danger btn btn-danger-default btn btn-danger-sm">
+	<!--  <button type="button" class="btn btn-default btn-sm">
           <span class="glyphicon glyphicon-thumbs-up"></span> Like
         </button>
-         <button type="button" class="btn btn-danger btn btn-danger-default btn btn-danger-sm">
+         <button type="button" class="btn btn-default btn-sm">
           <span class="glyphicon glyphicon-thumbs-down"></span> Unlike
         </button>
         
-        		<button type="button" class="btn btn-danger btn btn-danger-danger col-sm-1 btn btn-danger-md">Answer</button>
+        		<button type="button" class="btn btn-danger col-sm-1 btn-md">Answer</button>
         		
         		
         		
         		
-        		<button type="button" class="btn btn-danger col-sm-1" data-toggle="collapse" data-target="#demo">Commend</button>
+        		<button type="button" class="btn col-sm-1" data-toggle="collapse" data-target="#demo">Commend</button>
         		
         		 <div class="media">
     <div class="media-left media-top">
@@ -107,28 +107,11 @@
 			<hr>
 		</div>
 
-		<div class="col-sm-12" row="25"
-			style="border: 1px solid; color: gray; height: 250px;"></div>
-		<div class="col-sm-12 form-group">
-			<button type="button" class="btn btn-danger col-sm-1 " data-toggle="collapse"
-				data-target="#demo">Commend</button>
-
-		</div>
-
-		<div id="demo" class="collapse col-sm-12 ">
-			<div class="media">
-				<div class="media-left media-top">
-					<img src="img_avatar1.png" class="media-object" style="width: 80px">
-				</div>
-
-				<div class="media-body ">
-					<h4 class="media-heading">Title</h4>
-					<p>test 1</p>
-
-				</div>
-			</div>
-			<hr>
-		</div>
+		 <label for="comment" class="col-sm-12">Comment:</label>
+ 		 <textarea class="form-control" rows="15" id="comment"></textarea>
+		<button type="button" class="btn btn-danger col-sm-1 btn-lg">Save</button>
+			 <label class="col-sm-10"></label>	
+		<button type="button" class="btn btn-danger col-sm-1 btn-lg">Cancel</button>
 	</div>
 
 
