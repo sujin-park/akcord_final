@@ -52,7 +52,7 @@
 		<div class="col-sm-12" row="25"
 			style="border: 1px solid; color: gray; height: 250px;"></div>
 		<label class="col-sm-11"></label>
-		<button type="button" class="btn col-sm-1 btn-md" id="answerBtn">Answer</button>
+		<button type="button" class="btn btn btn-danger col-sm-1 btn-md" id="answerBtn">Answer</button>
 	</div>
 
 	<div class="col-sm-12">
@@ -94,24 +94,18 @@
 	<div class="col-sm-1"></div>
 	<div class="col-sm-10" style="border: 1px solid; color: gray">
 		<br> <br> <label for="comment" class="col-sm-1">아이디
-			: </label> <label class="col-sm-1">id</label> <label class="col-sm-6">님의
+			: </label> <label class="col-sm-1">id</label> <label class="col-sm-8">님의
 			답변입니다.</label> <label for="comment" class="col-sm-1">작성일: </label> <label
-			class="col-sm-1">sysdate</label> <label class="col-sm-2"
-			style="text-align: right"> <span
-			class="glyphicon glyphicon-thumbs-up gi-2x"></span>
-			&nbsp;&nbsp;&nbsp; <span
-			class="glyphicon glyphicon-thumbs-down gi-2x"></span>
-		</label>
+			class="col-sm-1">sysdate</label> 
 
-		<div class="col-sm-12">
-			<hr>
-		</div>
 
-		 <label for="comment" class="col-sm-12">Comment:</label>
+
+		 <label for="comment" class="col-sm-12">Answer : </label>
  		 <textarea class="form-control" rows="15" id="comment"></textarea>
-		<button type="button" class="btn btn-danger col-sm-1 btn-lg">Save</button>
+		
 			 <label class="col-sm-10"></label>	
-		<button type="button" class="btn btn-danger col-sm-1 btn-lg">Cancel</button>
+		<button type="button" class="btn btn-danger col-sm-1 btn-md" id="cancelBtn">Cancel</button>
+		<button type="button" class="btn btn-danger col-sm-1 btn-md" id="saveBtn">Save</button>
 	</div>
 
 
