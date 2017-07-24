@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>akcord-notice-page</title>
+    <title>akcord-notxice-page</title>
 
     <meta name="description" content="Source code generated using layoutit.com">
     <meta name="author" content="LayoutIt!">
@@ -16,7 +16,7 @@
 
 <style>
 .btn {
-	background-color: #346969;
+	background-color: ;
 	color: white;
 }
 </style>
