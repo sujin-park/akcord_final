@@ -4,6 +4,8 @@
 <link rel="stylesheet" href="/akcord/css/group.css">
 <%@ include file="/common/template/nav.jsp" %>
 <script type="text/javascript">
+
+$(document).ready(function(){
 	function creategroup() {
 	      $('#myModal').modal({
 	    	show : true  
@@ -21,20 +23,16 @@
 		});
 		
 	}
+});
+
 </script>
-<style>
-.btn {
-	background-color: #346969;
-	color: white;
-}
-</style>
 		<section class="content page-top row">
 			<div class="col-sm-10 col-sm-push-1" style="padding-top: 60px;">
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<div class="row" style="padding-bottom:10px;">
 							<div class="col-sm-6 pull-left">
-								<button type="button" class="btn btn-sm" onclick="javascript:creategroup();">그룹방 개설</button>
+								<button type="button" class="btn btn-sm btn-danger" onclick="javascript:creategroup();">그룹방 개설</button>
 								<button type="button" class="btn btn-sm btn-default" onclick="javascript:viewlist();">승인 리스트</button>
 							</div>
 							<div class="row">
@@ -134,7 +132,7 @@
 				  	</ul>
 			  </div>
 		</nav>
-<%@include file="/WEB-INF/user/group/creategroup.jsp"%>
-<%@include file="/WEB-INF/user/group/join.jsp"%>
+<%@include file="/user/group/creategroup.jsp"%>
+<%@include file="/user/group/join.jsp"%>
 	</body>
 </html>
