@@ -8,14 +8,22 @@
 <meta name="author" content="LayoutIt!">
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
+<style>
+.btn {
+	background-color: #346969;
+	color: white;
+}
+</style>
 <%@ include file="/common/template/nav.jsp" %>
+<section class="content page-top row">
    <div class="container-fluid">
 	<div class="row">
-		<div class="col-sm-12">
-		<h3 class="text-center">
-				회원관리
-			</h3>
-			<div class="tabbable" id="tabs-630325">
+		<div class="col-sm-10 col-sm-push-1" style="padding-top: 60px;">
+		<div class="col-sm-10 col-sm-push-1">
+					<h3>회원 관리</h3>
+		</div>
+		<div class="panel panel-default" style="padding:30px;">
+			<div class="tabbable" id="tabs-630325" align="left" style="width: 80%;">
 				<ul class="nav nav-tabs">
 					<li class="active">
 						<a href="#panel-822060" data-toggle="tab">회원목록</a>
@@ -28,8 +36,6 @@
 					<div class="tab-pane" id="panel-822060">
 					</div>
 					<div class="tab-pane" id="panel-822061">
-					</div>
-					<div class="tab-pane active" id="panel-368017">
 					</div>
 				</div>
 			</div>
@@ -65,150 +71,63 @@
 			<table class="table table-bordered table-hover table-condensed">
 				<thead>
 					<tr>
-						<th>
-							#
-						</th>
-						<th>
-							회원ID
-						</th>
-						<th>
-							이름
-						</th>
-						<th>
-							휴대폰번호
-						</th>
-						<th>
-							성벌
-						</th>
-						<th>
-							전공
-						</th>
-                        <th>
-							가입일
-						</th>
-						<th>
-							블랙리스트처리
-						</th>
+						<th>1</th>
+						<th>회원ID</th>
+						<th>이름</th>
+						<th>휴대폰번호</th>
+						<th>성별</th>
+						<th>전공</th>
+                        <th>가입일</th>
+						<th>블랙리스트처리</th>
 					</tr>
 				</thead>
 				<tbody>
+				<%for(int i=0; i<5; i++){ %>
 					<tr>
-						<td>
-							1
-						</td>
-						<td>
-							TB - Monthly
-						</td>
-						<th>
-							황혜정
-						</th>
-						<td>
-							0102558474
-						</td>
-						<td>
-							여
-						</td>
-						<td>
-							major
-						</td>
-                        <td>
-							01/04/2012
-						</td>
-						<td>
-								<button type="button" class="btn btn-sm">
-				Default
-			</button>
-						</td>
-					</tr>
-					<tr class="active">
-						<td>
-							1
-						</td>
-						<td>
-							TB - Monthly
-						</td>
-						<th>
-							김도영
-						</th>
-						<td>
-							0102558474
-						</td>
-						<td>
-							여
-						</td>
-						<td>
-							major
-						</td>
-                        <td>
-							01/04/2012
-						</td>
+						<td>1</td>
+						<td>TB - Monthly</td>
+						<th>황혜정</th>
+						<td>0102558474</td>
+						<td>여</td>
+						<td>major</td>
+                        <td>01/04/2012</td>
 						<td>
 						<button type="button" class="btn btn-sm">
-				Default
-			</button>
+						Default
+						</button>
 						</td>
 					</tr>
-					<tr class="success">
-						<td>
-							2
-						</td>
-						<td>
-							TB - Monthly
-						</td>
-						<th>
-							박수진
-						</th>
-						<td>
-							0102558474
-						</td>
-						<td>
-							여
-						</td>
-						<td>
-							major
-						</td>
-                        <td>
-							01/04/2012
-						</td>
-						<td>
-								<button type="button" class="btn btn-sm">
-				Default
-			</button>
-						</td>
-					</tr>
-					<tr class="warning">
-						<td>
-							3
-						</td>
-						<td>
-							TB - Monthly
-						</td>
-						<th>
-							박영주
-						</th>
-						<td>
-							0102558474
-						</td>
-						<td>
-							여
-						</td>
-						<td>
-							major
-						</td>
-                        <td>
-							01/04/2012
-						</td>
-						<td>
-								<button type="button" class="btn btn-sm">
-				Default
-			</button>
-						</td>
-					</tr>
+					<%
+					}
+					%>
 				</tbody>
 			</table>
+			</div>
 		</div>
 	</div>
 </div>
+</section>
+		<nav>
+			<div align="center">
+				  <ul class="pagination">
+				    <li>
+				      <a href="#" aria-label="Previous">
+				        <span aria-hidden="true">&laquo;</span>
+				      </a>
+				    </li>
+				    <li><a href="#">1</a></li>
+				    <li><a href="#">2</a></li>
+				    <li><a href="#">3</a></li>
+				    <li><a href="#">4</a></li>
+				    <li><a href="#">5</a></li>
+				    <li>
+				      <a href="#" aria-label="Next">
+				        <span aria-hidden="true">&raquo;</span>
+				      </a>
+				    </li>
+				  	</ul>
+			  </div>
+		</nav>
 <div class="modal fade" id="modal-container-947726" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog" style="width:30%">
 					<div class="modal-content">
@@ -243,13 +162,9 @@
 					</div>
 					
 				</div>
-				
+
 			</div>
-			
-		</div>
-	</div>
-</div>
-    <script src="js/jquery.min.js"></script>
+   <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/scripts.js"></script>
   </body>

@@ -3,7 +3,6 @@
 <%@include file="/common/template/head_include.jsp" %>
 <html lang="en">
   <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,20 +12,22 @@
     <meta name="description" content="Source code generated using layoutit.com">
     <meta name="author" content="LayoutIt!">
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-
-  </head>
-  <body>
-  
 <%@ include file="/common/template/nav.jsp" %>
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-sm-12">
-			<h1>
-				공지사항 목록
-			</h1>
-            <div class="btn-group"> 
+
+<style>
+.btn {
+	background-color: #346969;
+	color: white;
+}
+</style>
+<section class="content page-top row">
+			<div class="col-sm-10 col-sm-push-1" style="padding-top: 60px;">
+			
+				<div class="col-sm-10 col-sm-push-1">
+					<h2>공지사항 목록</h2>
+				</div>
+				<div class="panel panel-default" style="padding:30px;">
+            <div class="btn-group" >  
 				
 					<select class="form-control" id="membersort" name="membersort">
 								<option>글정렬</option>
@@ -41,56 +42,29 @@
 						<th>
 							<input type="checkbox" name="ck_1" value="1">
 						</th>
-						<th>
-							공지 제목
-						</th>
-						<th>
-							등록일
-						</th>
-						<th>
-							조회수
-						</th>
-						<th>
-							공개여부
-						</th>
+						<th>공지 제목</th>
+						<th>등록일</th>
+						<th>조회수</th>
+						<th>공개여부</th>
 					</tr>
 				</thead>
 				<tbody>
+					<%
+						for (int i=0; i<5; i++) {
+					%>		
 					<tr>
 						<td>
 							<input type="checkbox" name="ck_1" value="1">
 						</td>
-						<td>
-							TB - Monthly
-						</td>
-						<td>
-							01/04/2012
-						</td>
-						<td>
-							Default
-						</td>
-						<td>
-							공개
-						</td>
+						<td>공지제목입니다~!!!!!</td>
+						<td>1/04/2012</td>
+						<td>Default</td>
+						<td>비공개</td>
 					</tr>
-					<tr class="active">
-						<td>
-							<input type="checkbox" name="ck_1" value="1">
-						</td>
-						<td>
-							TB - Monthly
-						</td>
-						<td>
-							01/04/2012
-						</td>
-						<td>
-							Approved
-						</td>
-						<td>
-							비공개
-						</td>
-					</tr>
-					
+					<%
+					}
+					%>
+					</tbody>
 			</table> 
 			<div align="right">
 			<button type="button" class="btn btn-sm" onclick="javascript:write();">
@@ -103,12 +77,30 @@
 				공개하기
 			</button>
 			</div>
+			</div>
 		</div>
-	</div>
-</div>
 
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/scripts.js"></script>
+</section>
+<nav>
+			<div align="center">
+				  <ul class="pagination">
+				    <li>
+				      <a href="#" aria-label="Previous">
+				        <span aria-hidden="true">&laquo;</span>
+				      </a>
+				    </li>
+				    <li><a href="#">1</a></li>
+				    <li><a href="#">2</a></li>
+				    <li><a href="#">3</a></li>
+				    <li><a href="#">4</a></li>
+				    <li><a href="#">5</a></li>
+				    <li>
+				      <a href="#" aria-label="Next">
+				        <span aria-hidden="true">&raquo;</span>
+				      </a>
+				    </li>
+				  	</ul>
+			  </div>
+		</nav>
   </body>
 </html>
