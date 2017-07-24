@@ -26,7 +26,7 @@
 				
 				<div class="modal-content" >
 				<div class="modal-header">
-					<h4 class="modal-title"><img src="${root}/img/login.jpg" style="width: 100%"></h4>
+					<h4 class="modal-title"><img src="${root}/doc/img/login.jpg" style="width: 100%"></h4>
 				</div>
 				<form class="form-horizontal" action="">
 				<fieldset>
