@@ -135,6 +135,6 @@
 			  </div>
 		</nav>
 <%@include file="/user/group/creategroup.jsp"%>
-<%@include file="/user/group/joingroup.jsp"%>
+<%@include file="/user/group/join.jsp"%>
 	</body>
 </html>

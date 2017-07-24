@@ -22,7 +22,7 @@ a {
 }
 .box-shad {
     -webkit-box-shadow: 1px 1px 0 rgba(0,0,0,.2);
-    box-shadow: 1px 1px 0 rgba(0,0,0,.2);
+    box-shadow: 1px 1px  rgba(0,0,0,.2);
 }
 .brdr {
     border: 1px solid #ededed;
@@ -55,7 +55,8 @@ a {
     color: #535353;
 }
 
-
+.form-control{ box-shadow:none; border-color:#eee;}
+.form-control:focus{ box-shadow:none; border-color:#00b09c;}
 
 
 /**** MEDIA QUERIES ****/

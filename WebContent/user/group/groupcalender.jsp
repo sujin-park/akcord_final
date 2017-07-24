@@ -5,7 +5,7 @@
 <link href='/akcord/user/group/css/fullcalendar.print.css' rel='stylesheet' media='print' />
 <script src='/akcord/js/lib/moment.min.js' charset="utf-8"></script>
 <script src='/akcord/js/lib/jquery-ui.min.js' charset="utf-8"></script>
-<script src='/akcord/js/fullcalendar.js' charset="utf-8"></script>
+<script src='/akcord/js/lib/fullcalendar.js' charset="utf-8"></script>
 <style>
 	.btn {
 		background-color: #346969;

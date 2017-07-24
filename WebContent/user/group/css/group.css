@@ -39,6 +39,7 @@ body {
 /*	--------------------------------------------------
 	:: Check-box 설정
 	-------------------------------------------------- */
+
 .ckbox {
 	position: relative;
 }
@@ -65,8 +66,8 @@ body {
 	background-color: #fff;
 }
 .ckbox input[type="checkbox"]:checked + label:before {
-	border-color: #ebb31f;
-	background-color: #ebb31f;
+	border-color: #346969;
+	background-color: #346969;
 }
 .ckbox input[type="checkbox"]:checked + label:after {
 	top: 3px;
@@ -77,6 +78,7 @@ body {
 	font-family: 'Glyphicons Halflings';
 	position: absolute;
 }
+
 /*	--------------------------------------------------
 	:: Table 설정
 	-------------------------------------------------- */
@@ -122,17 +124,8 @@ body {
 	font-size: 14px;
 	color: #999;
 }
-.contact-form{ margin-top:15px;}
-.contact-form .textarea{ min-height:220px; resize:none;}
-.form-control{ box-shadow:none; border-color:#eee; height:49px;}
+.form-control{ box-shadow:none; border-color:#eee;}
 .form-control:focus{ box-shadow:none; border-color:#00b09c;}
-.form-control-feedback{ line-height:50px;}
-.main-btn{ background:#00b09c; border-color:#00b09c; color:#fff;}
-.main-btn:hover{ background:#00a491;color:#fff;}
-.form-control-feedback {
-line-height: 50px;
-top: 0px;
-}
 
 /*	--------------------------------------------------
 	:: Page Navigxation 설정

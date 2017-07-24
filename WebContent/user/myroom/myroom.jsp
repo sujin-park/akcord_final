@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="/common/template/head_include.jsp"%>
-<link rel="stylesheet" href="/akcord/user/css/myroom.css">
+<link rel="stylesheet" href="/akcord/user/myroom/css/myroom.css">
 <style type="text/css">
 select {
     width: 100px;
