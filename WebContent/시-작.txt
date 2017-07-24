@@ -13,3 +13,7 @@
 
 항상 commit > pull... 하기 ㅠ.ㅠ 
 push 하기전에도 무조건 commit > pull... > push
+
+
+.classpath / .project / pom.properties / context.xml 등등
+jsp파일이나 자기가 추가한 .jar파일 외에는 다 다 다 다 커밋 앤 푸시 하지않기!!!!!!!!!!!!!!!!!!!!!!!!
