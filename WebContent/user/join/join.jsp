@@ -29,7 +29,7 @@
 								<input type="text" id="id" name="id" class="form-control">
 							</div>
 							<div class="col-sm-4">
-							<button id="idcheck" name="idcheck" class="btn btn-info"" value="">중복체크확인</button>
+							<button id="idcheck" name="idcheck" class="btn btn-danger" value="">중복체크확인</button>
 							</div>
 						</div>
 						
@@ -112,7 +112,7 @@
 								<input type="text" id="zipcode" name="zipcode" class="form-control">
 							</div>
 							<div class="col-sm-3">
-							<button id="zipsearch" name="zipsearch" class="btn btn-info"" value="">우편번호검색</button>
+							<button id="zipsearch" name="zipsearch" class="btn btn-danger" value="">우편번호검색</button>
 							</div>
 						</div>
 						
@@ -133,8 +133,8 @@
 						
 						</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-info" data-dismiss="modal">회원등록</button>
-				<button type="button" class="btn btn-info" data-dismiss="modal">등록취소</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">회원등록</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">등록취소</button>
 			</div>
 						
 						
