@@ -145,6 +145,6 @@
 				  	</ul>
 			  </div>
 		</nav>
-<%@include file="/WEB-INF/user/group/plusmember.jsp"%>
+<%@include file="/user/group/plusmember.jsp"%>
 	</body>
 </html>
