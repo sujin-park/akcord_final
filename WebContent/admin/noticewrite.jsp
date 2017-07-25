@@ -15,6 +15,11 @@ $(document).ready(function() {
        focus: false,          // 페이지가 열릴때 포커스를 지정함
        lang: 'ko-KR' 
    });
+   $('#registerBtn').click(function(){
+
+		document.noticeWriteform.action = "${root}/admin/noticewrite.akcord";
+		document.noticeWriteform.submit(); 
+   });
 });
 </script>
 <%@ include file="/common/template/nav.jsp" %>
@@ -23,26 +28,31 @@ $(document).ready(function() {
 	<div class="col-sm-3" ></div>
 	<div class="col-sm-6" >
          <div class="form-group">
-         	<h2>공지사항 글쓰기dds</h2>
+         	<h2>공지사항 글쓰기</h2>
+         	</div>
+	<form name ="noticeWriteform" method="post" action="">
             <label for="title">SUBJECT</label>
-            <input type="text" name="title" class="form-control" id="title" required>
-         </div>
+            <input type="text" name="subject" class="form-control" id="subject" value="">
+         
          <div class="form-group">
             <label for="content">CONTENT</label>
             <textarea name="content" id="content" class="form-control" required></textarea>
           
          </div>
          <div align="center">
-           <button type="button" class="btn btn-sm">
+           <button type="button" class="btn btn-sm" id="registerBtn">
 				등록
 			</button>
 			<button type="button" class="btn btn-sm">
 				취소
 			</button>
 			</div>
+			</form>
       </div>
       	<div class="col-sm-3" ></div>
+      	
       </div>
+      
 </div>
 </body>
 </html>
