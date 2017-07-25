@@ -1,5 +1,7 @@
 package com.akcord.group.dao;
 
-public interface GroupDao {
+import com.akcord.group.model.GroupRoomDto;
 
+public interface GroupDao {
+	public int createG(GroupRoomDto groupRoomDto);
 }

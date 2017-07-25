@@ -4,7 +4,6 @@
 <link rel="stylesheet" href="/akcord_project/user/group/css/group.css">
 <%@ include file="/common/template/nav.jsp" %>
 <script type="text/javascript">
-
 $(document).ready(function(){
 	$('#create').click(function(){
 		$('#myModal').modal({
@@ -20,6 +19,11 @@ $(document).ready(function(){
 
 	$('#accept').click(function(){
 		$(location).attr('href','${root}/group/list.akcord');
+	});
+	
+	$('#creategroup').click(function(){
+		$('form[name=createG]').attr('action','${root}/group/make.akcord');
+		$('form[name=createG]').submit();
 	});
 });
 </script>
@@ -52,7 +56,7 @@ $(document).ready(function(){
 								<div class="table-container table-responsive" style="margin-left: 20px; margin-right: 20px">
 									<table class="table table-filter" id="extable">
 										<tbody>
-											<tr class="primary" align="center" >
+											<tr class="primary" align="center">
 												<td width="15%">생성일</td>
 												<td width="15%">전공</td>
 												<td width="20%">그룹방명</td>

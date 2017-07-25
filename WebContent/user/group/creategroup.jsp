@@ -10,42 +10,42 @@
       </div>
       <div class="modal-body">
       	<div class="row">
-	      	<form class="form-horizontal" action="">
+	      	<form class="form-horizontal" action="" method="post" name="createG">
 		      		<div class="form-group">
 	                  <label for="concept" class="col-sm-3 control-label">전공</label>
 	                  	<div class="col-sm-8">
 	                  	<select class="form-control" id="status" name="status">
-	                          <option>컴퓨터공학과</option>
-	                          <option>산업공학과</option>
+	                          <option value="컴퓨터공학과">컴퓨터공학과</option>
+	                          <option value="산업공학과">산업공학과</option>
 	                      </select>
 	                  	</div>
 	                </div>
 	                 <div class="form-group">
 	                      <label for="description" class="col-sm-3 control-label">그룹방 이름</label>
 	                      <div class="col-sm-8">
-	                          <input type="text" class="form-control" id="name" name="name">
+	                          <input type="text" class="form-control" id="groupName" name="groupName">
 	                      </div>
 	                 </div> 
 	                 <div class="form-group">
 	                      <label for="status" class="col-sm-3 control-label">최대 인원</label>
 	                      <div class="col-sm-8">
 	                          <select class="form-control" id="count" name="count">
-	                              <option>4</option>
-	                              <option>8</option>
+	                              <option value="4">4</option>
+	                              <option value="8">8</option>
 	                          </select>
 	                      </div>
 	                 </div>
 	                 <div class="form-group">
 	                      <label for="amount" class="col-sm-3 control-label">그룹방 소개</label>
 	                      <div class="col-sm-8">
-	                          <textarea  class="form-control" id="description" name="description" rows="5" cols="46.5"></textarea>
+	                          <textarea  class="form-control" id="comment" name="comment" rows="5" cols="46.5"></textarea>
 	                      </div>
 	                 </div>
                </form>
             </div>
       	</div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger">CREATE</button>
+        <button type="button" class="btn btn-danger" id="creategroup">CREATE</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">CLOSE</button>
       </div>
     </div>
