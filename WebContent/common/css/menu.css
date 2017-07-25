@@ -3,6 +3,7 @@ div.panel-group{
     height:auto;
     background-color:#f6f6f6;
     z-index:9999999;
+    position:absolute;
     float:left;
     overflow:hidden;
 }
@@ -14,12 +15,8 @@ li .list-group-item{
 
 }
 
-a:active{
-    background-color:aqua;
-}
-
 #group{
-    overflow:hidden;
+      overflow:hidden;
 }
 
 
