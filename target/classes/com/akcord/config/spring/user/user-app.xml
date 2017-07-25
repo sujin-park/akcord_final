@@ -21,6 +21,7 @@
 		<property name="dataSource" ref="ds"/>
 	</bean>
 	
+	
 	<bean id="ss" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="ssfb" />
 	</bean>

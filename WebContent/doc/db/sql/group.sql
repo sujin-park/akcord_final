@@ -19,4 +19,3 @@ select my.subject, my.content, my.update_date
 from grouproom_hw gh, myroom_next my
 where gh.myroom_next_id = my.myroom_next_id
 and schedule_id = ?
-
