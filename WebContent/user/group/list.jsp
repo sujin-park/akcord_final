@@ -3,6 +3,13 @@
 <%@include file="/common/template/head_include.jsp"%>
 <link rel="stylesheet" href="/akcord_project/user/group/css/list.css">
 <%@include file="/common/template/nav.jsp"%>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#listBtn_G').click(function(){
+			$(location).attr('href','${root}/group/list.akcord');
+		});
+	});
+</script>
     <div class="container-fluid">
         <div class="container container-pad" id="property-listings">
             
@@ -14,7 +21,7 @@
             </div>
             <div class="row"  style="padding-bottom:10px;">
 				<div class="col-sm-10">
-					<button type="button" class="btn btn-md btn-danger">
+					<button type="button" class="btn btn-md btn-danger" id="listBtn_G">
 					<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
 					</button>
 				</div>

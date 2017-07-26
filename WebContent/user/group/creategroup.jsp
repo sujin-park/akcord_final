@@ -14,9 +14,9 @@
 		      		<div class="form-group">
 	                  <label for="concept" class="col-sm-3 control-label">전공</label>
 	                  	<div class="col-sm-8">
-	                  	<select class="form-control" id="status" name="status">
-	                          <option value="컴퓨터공학과">컴퓨터공학과</option>
-	                          <option value="산업공학과">산업공학과</option>
+	                  	<select class="form-control" id="majorId" name="majorId">
+	                          <option value="1">컴퓨터공학과</option>
+	                          <option value="2">산업공학과</option>
 	                      </select>
 	                  	</div>
 	                </div>
@@ -29,7 +29,7 @@
 	                 <div class="form-group">
 	                      <label for="status" class="col-sm-3 control-label">최대 인원</label>
 	                      <div class="col-sm-8">
-	                          <select class="form-control" id="count" name="count">
+	                          <select class="form-control" id="gCount" name="gCount">
 	                              <option value="4">4</option>
 	                              <option value="8">8</option>
 	                          </select>
@@ -38,7 +38,7 @@
 	                 <div class="form-group">
 	                      <label for="amount" class="col-sm-3 control-label">그룹방 소개</label>
 	                      <div class="col-sm-8">
-	                          <textarea  class="form-control" id="comment" name="comment" rows="5" cols="46.5"></textarea>
+	                          <textarea  class="form-control" id="content" name="content" rows="5" cols="46.5"></textarea>
 	                      </div>
 	                 </div>
                </form>
