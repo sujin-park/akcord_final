@@ -1,5 +1,8 @@
 package com.akcord.group.service;
 
-public class GroupMainServiceImpl {
+import org.springframework.stereotype.Service;
+
+@Service
+public class GroupMainServiceImpl  implements GroupMainService{
 
 }

@@ -42,8 +42,8 @@
        </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">CLOSE</button>
         <button type="button" class="btn btn-danger">JOIN</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">CLOSE</button>
       </div>
     </div>
   </div>

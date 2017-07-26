@@ -1,17 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/common/template/head_include.jsp"%>
-<link href='/akcord/user/group/css/fullcalendar.css' rel='stylesheet' />
-<link href='/akcord/user/group/css/fullcalendar.print.css' rel='stylesheet' media='print' />
-<script src='/akcord/js/lib/moment.min.js' charset="utf-8"></script>
-<script src='/akcord/js/lib/jquery-ui.min.js' charset="utf-8"></script>
-<script src='/akcord/js/lib/fullcalendar.js' charset="utf-8"></script>
-<style>
-	.btn {
-		background-color: #346969;
-		color: white;
-	}
-</style>
+<link href='/akcord_project/user/group/css/fullcalendar.css' rel='stylesheet' />
+<link href='/akcord_project/user/group/css/fullcalendar.print.css' rel='stylesheet' media='print' />
+<script src='/akcord_project/js/lib/moment.min.js' charset="utf-8"></script>
+<script src='/akcord_project/js/lib/jquery-ui.min.js' charset="utf-8"></script>
+<script src='/akcord_project/js/lib/fullcalendar.js' charset="utf-8"></script>
 <script>
 	$(document).ready(function() {
 		
@@ -128,9 +122,9 @@
 <div class="container">
 	<div class="row">
 		<div class="col-sm-6" style="border:5px;">
-			<button type="button" class="btn btn-sm">그룹방 글 목록</button>
-			<button type="button" class="btn btn-sm">그룹원 관리</button>
-			<button type="button" class="btn btn-sm" id="deletegroup">그룹 탈퇴</button>
+			<button type="button" class="btn btn-sm btn-danger">그룹방 글 목록</button>
+			<button type="button" class="btn btn-sm btn-danger">그룹원 관리</button>
+			<button type="button" class="btn btn-sm btn-default" id="deletegroup">그룹 탈퇴</button>
 		</div>
 	</div>
 	<div class="row" style="margin:30px;">
@@ -141,3 +135,4 @@
 <%@ include file="/user/group/delete.jsp" %>
 </body>
 </html>
+

@@ -45,8 +45,8 @@ $(document).ready(function(){
 
 
 				<div class="modal-body" style="position: absolute; top:63%; left: 38%;" >								
-					<button id="loginBtn" type="button" class="btn btn-default" data-toggle="modal" data-target="#loginBtnModal" >&nbsp;로그인&nbsp;</button>
-					<button id="joinBtn" type="button" class="btn btn-default" data-toggle="modal" data-target="#joinBtnModal">회원가입</button>		
+					<button id="loginBtn" type="button" class="btn btn-danger" data-toggle="modal" data-target="#loginBtnModal" >&nbsp;로그인&nbsp;</button>
+					<button id="joinBtn" type="button" class="btn btn-danger" data-toggle="modal" data-target="#joinBtnModal">회원가입</button>		
 				</div>
 			</div>
 			</div>	

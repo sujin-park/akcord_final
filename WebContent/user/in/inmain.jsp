@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
- <%@include file="/common/template/head_include.jsp"%>
+
+<%@include file="/common/template/head_include.jsp"%>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <%@ include file="/common/template/nav.jsp" %>
+
 <script>
 $(document).ready(function() {
 	$('#questionBtn').click(function() {
@@ -11,6 +13,7 @@ $(document).ready(function() {
 	});
 });
 </script>	
+
 	<div class="container" style="margin-top: 10pt;">
 	<div class="row">
 

@@ -22,7 +22,7 @@
 					<tr id="" name="">
 						<td colspan="3">팔로우 할 사람을 검색하세요.</td>
 						<td>
-							<button type="button" class="btn btn-md">
+							<button type="button" class="btn btn-md btn-danger">
 								<span class="glyphicon glyphicon-thumbs-up"></span>
 							</button>
 						</td>
@@ -37,7 +37,7 @@
       		<div class="input-group">
 	      		<input type="text" class="form-control" size="25"  placeholder="아이디를 입력하세요">
 	      		<div class="input-group-btn">
-	        	<button type="button" class="btn btn-md">검색</button>
+	        	<button type="button" class="btn btn-md btn-danger">검색</button>
 	        	<button type="button" class="btn btn-default" data-dismiss="modal">CLOSE</button>
 	        	</div>
         	</div>

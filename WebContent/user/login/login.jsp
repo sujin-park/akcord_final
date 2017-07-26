@@ -46,11 +46,11 @@
 							</div>
 				</div>		
 				<div class="col-sm-12 control-label">
-					<button id="loginBtn" style="width:100%;" type="button" class="btn btn-default" data-dismiss="modal" >&nbsp;로그인&nbsp;</button>	
+					<button id="loginBtn" style="width:100%;" type="button" class="btn btn-danger" data-dismiss="modal" >&nbsp;로그인&nbsp;</button>	
 				</div>
 				
 				<div class="col-sm-12 control-label">
-					<button id="loginBtn" style="width:100%;" type="button" class="btn btn-default" data-dismiss="modal" >&nbsp;취소&nbsp;</button>
+					<button id="loginBtn" style="width:100%;" type="button" class="btn btn-danger" data-dismiss="modal" >&nbsp;취소&nbsp;</button>
 				</div>
 				
 				<div class="modal-footer">

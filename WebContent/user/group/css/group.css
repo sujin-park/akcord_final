@@ -124,9 +124,9 @@ body {
 	font-size: 14px;
 	color: #999;
 }
-.form-control{ box-shadow:none; border-color:#eee;}
-.form-control:focus{ box-shadow:none; border-color:#00b09c;}
 
+.form-control{ box-shadow:none; border-color:#eee;}
+.form-control:focus{ box-shadow:none; border-color:#d34e4c;}
 /*	--------------------------------------------------
 	:: Page Navigxation 설정
 	-------------------------------------------------- */

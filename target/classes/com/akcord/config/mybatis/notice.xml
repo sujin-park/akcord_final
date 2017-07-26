@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+<mapper namespace="com.akcord.admin.dao.NoticeDao">
+	
+	<insert id="noticeWrite" parameterType="noticeDto">
+		insert 
+		into notice(notice_id,subject,content,is_notice,reg_date,hit)
+		values(#{notice_id},#{subject},#{content},#{is_notice},sysdate,#{hit})       
+	</insert>
+	
+	<select id="getNoticeList" resultType="noticeDto">
+		select notice_id,subject,content,is_notice,reg_date,hit
+		from notice		
+	</select>
+</mapper>

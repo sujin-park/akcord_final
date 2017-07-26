@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="root" value="${pageContext.request.contextPath}"/>
+    
 <%@include file="/common/template/head_include.jsp" %>
 <html lang="en">
   <head>
@@ -13,7 +16,34 @@
     <meta name="author" content="LayoutIt!">
 
 <%@ include file="/common/template/nav.jsp" %>
+<script type="text/javascript">
 
+$(document).ready(function (){
+	$('#noticeWriteBtn').click(function (){
+		$(location).attr('href','${root}/admin/noticewrite.akcord');	
+	});
+
+	  $('#checkAll').click(function() {
+		    $('.checkbox').prop('checked', this.checked);
+		  });	
+	  $('#noticeDeleteBtn').click(function (){
+			
+			 var checkList=[];
+			$('input:checkbox[name=checkbox]:checked').each(function () {
+				console.log($(this).$('.checkbox').val());
+				checkList.push($(this).val()); 
+			});
+			
+			var data={"checkList":checkList};
+			
+			console.log("><<<"+data);
+			document.noticeform.action = "${root}/admin/noticedelete.akcord?data=";
+			
+		});
+});
+
+
+</script>
 <style>
 .btn {
 	background-color: ;
@@ -26,6 +56,7 @@
 				<div class="col-sm-10 col-sm-push-1">
 					<h2>공지사항 목록</h2>
 				</div>
+				<form name ="noticeform" method="post" action="">
 				<div class="panel panel-default" style="padding:30px;">
             <div class="btn-group" >  
 				
@@ -36,11 +67,12 @@
                     </select>
 			</div> 
 
+
 			<table class="table">
 				<thead>
 					<tr>
 						<th>
-							<input type="checkbox" name="ck_1" value="1">
+							<input type="checkbox" name="checkAll" id="checkAll" value="1">
 						</th>
 						<th>공지 제목</th>
 						<th>등록일</th>
@@ -49,28 +81,26 @@
 					</tr>
 				</thead>
 				<tbody>
-					<%
-						for (int i=0; i<5; i++) {
-					%>		
+				<c:forEach var="notice" items="${noticeList}">
+					
 					<tr>
 						<td>
-							<input type="checkbox" name="ck_1" value="1">
+							<input class="checkbox" type="checkbox" name="checkbox" id="checkbox${i.index}" value="${notice.notice_id}">
 						</td>
-						<td>공지제목입니다~!!!!!</td>
-						<td>1/04/2012</td>
-						<td>Default</td>
+						<td>${notice.subject }</td>
+						<td>${notice.reg_date }</td>
+						<td>${notice.hit }</td>
 						<td>비공개</td>
 					</tr>
-					<%
-					}
-					%>
+				
+					</c:forEach>
 					</tbody>
 			</table> 
 			<div align="right">
-			<button type="button" class="btn btn-sm" onclick="javascript:write();">
+			<button type="button" class="btn btn-sm" id="noticeWriteBtn">
 				새글쓰기
 			</button>
-			<button type="button" class="btn btn-sm">
+			<button type="button" class="btn btn-sm" id="noticeDeleteBtn">
 				삭제하기
 			</button>
 			<button type="button" class="btn btn-sm">
@@ -78,6 +108,7 @@
 			</button>
 			</div>
 			</div>
+			</form>
 		</div>
 
 </section>

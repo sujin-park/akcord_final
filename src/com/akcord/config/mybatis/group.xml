@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper     
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.akcord.group.dao.GroupDao">
+    
+    <insert id="createG" parameterType="groupRoomDto">
+        insert into grouproom
+        (group_id, major_id, group_name, content, leader_id, reg_date, g_count)
+        values (seq_group_id.nextval, #{majorId}, #{groupName}, #{content}, #{leaderId},
+        sysdate, #{gCount})
+    </insert>
+    
+    <select id="grouplist" resultType="groupRoomDto">
+        select g.reg_date as regDate, m.major_name majorName, g.group_name groupName,
+               g.content content, u.name name from users u, grouproom g, major m
+               where u.user_id = g.leader_id and
+               g.major_id = m.major_id
+    </select>
+</mapper>
