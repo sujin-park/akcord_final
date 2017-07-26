@@ -18,7 +18,7 @@ $(document).ready(function(){
 	});
 
 	$('#accept').click(function(){
-		$(location).attr('href','${root}/group/list.akcord');
+		$(location).attr('href','${root}/group/waitinglist.akcord');
 	});
 	
 	$('#creategroup').click(function(){
@@ -64,33 +64,31 @@ $(document).ready(function(){
 												<td width="15%">리더</td>
 												<td width="15%">JOIN</td>
 											</tr>
-										<%
-											for (int i=0; i<5; i++) {
-										%>
+										<c:forEach var="groupRoomDto" items="grouplist">
 											<tr>
 												<td>
 													<div class="media">
-														<p class="media-meta">2017.07.17</p>
+														<p class="media-meta">${groupRoomDto.regDate}</p>
 													</div>
 												</td>
 												<td>
 													<div class="media">
-														<p class="media-meta">컴퓨터공학과</p>
+														<p class="media-meta">${groupRoomDto.majorName}</p>
 													</div>
 												</td>
 												<td>
 													<div class="media">
-														<div class="media-meta">JAVA</div>
+														<div class="media-meta">${groupRoomDto.groupName}</div>
 													</div>
 												</td>
 												<td>
 													<div class="media">
-														<span class="media-meta">자바 공부하기</span>
+														<span class="media-meta">${groupRoomDto.content}</span>
 													</div>
 												</td>
 												<td>
 													<div class="media">
-														<span class="media-meta">박수진</span>
+														<span class="media-meta">${groupRoomDto.name}</span>
 													</div>
 												</td>
 												<td>
@@ -101,9 +99,7 @@ $(document).ready(function(){
 											    	</p>
 											    </td>
 											</tr>
-										<%
-											}
-										%>
+										</c:forEach>
 										</tbody>
 									</table>
 								</div>

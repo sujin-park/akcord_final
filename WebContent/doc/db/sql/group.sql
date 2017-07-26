@@ -19,3 +19,9 @@ select my.subject, my.content, my.update_date
 from grouproom_hw gh, myroom_next my
 where gh.myroom_next_id = my.myroom_next_id
 and schedule_id = ?
+
+그룹방 리스트
+select g.reg_date, m.major_name, g.group_name,
+g.content, u.name from users u, grouproom g, major m
+where u.user_id = g.leader_id and
+g.major_id = m.major_id;

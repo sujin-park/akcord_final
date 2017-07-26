@@ -14,7 +14,7 @@ import com.akcord.admin.service.NoticeService;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-	@Autowired
+	//@Autowired
 	private NoticeService noticeService;
 	
 	@RequestMapping(value="/noticewrite.akcord",method=RequestMethod.GET)

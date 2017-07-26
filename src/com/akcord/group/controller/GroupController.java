@@ -1,10 +1,12 @@
 package com.akcord.group.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.akcord.group.model.GroupRoomDto;
@@ -14,8 +16,10 @@ import com.akcord.group.service.GroupService;
 @RequestMapping("/group")
 public class GroupController {
 	
+	@Autowired
+	private GroupService groupService;
 	
-	@RequestMapping("/list.akcord")
+	@RequestMapping("/waitinglist.akcord")
 	public ModelAndView acceptlist(){
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/user/group/waitinglist");
@@ -23,16 +27,26 @@ public class GroupController {
 	}
 	
 	@RequestMapping("/make.akcord")
-	public ModelAndView makegroup(Map<String, String> map){
+	public ModelAndView makegroup(@RequestParam Map<String, String> map){
 		ModelAndView mav = new ModelAndView();
 		GroupRoomDto groupRoomDto = new GroupRoomDto();
-		groupRoomDto.setMajorId(1);
+		groupRoomDto.setMajorId(Integer.parseInt(map.get("majorId")));
 		groupRoomDto.setGroupName(map.get("groupName"));
-		groupRoomDto.setComment(map.get("comment"));
+		groupRoomDto.setContent(map.get("content"));
 		groupRoomDto.setLeaderId(1);
-		groupRoomDto.setCount(Integer.parseInt(map.get("count")));
+		groupRoomDto.setgCount(Integer.parseInt(map.get("gCount")));
+		int cnt = groupService.createG(groupRoomDto);
 		
-		//System.out.println("그룹방 개설하기이");
+		return mav;
+	}
+	
+	@RequestMapping("/list.akcord")
+	public ModelAndView list() {
+		ModelAndView mav = new ModelAndView();
+		List<GroupRoomDto> list = groupService.grouplist();
+		System.out.println(list.size() + "group controller");
+		mav.addObject("grouplist", list);
+		mav.setViewName("/user/group/grouplist");
 		return mav;
 	}
 }
