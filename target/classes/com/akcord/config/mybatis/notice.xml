@@ -11,4 +11,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(#{notice_id},#{subject},#{content},#{is_notice},sysdate,#{hit})       
 	</insert>
 	
+	<select id="getNoticeList" resultType="noticeDto">
+		select notice_id,subject,content,is_notice,reg_date,hit
+		from notice		
+	</select>
 </mapper>

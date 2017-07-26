@@ -7,9 +7,11 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
     <properties resource="com/akcord/config/mybatis/dbinfo.properties"/>
     <typeAliases>
         <typeAlias alias="noticeDto" type="com.akcord.admin.model.NoticeDto"/>
+        <typeAlias alias="groupRoomDto" type="com.akcord.group.model.GroupRoomDto"/>
     </typeAliases>
     <mappers>
-        <mapper resource="com/akcord/config/mybatis/notice.xml"/>                 
+        <mapper resource="com/akcord/config/mybatis/notice.xml"/>
+        <mapper resource="com/akcord/config/mybatis/group.xml"/>
     </mappers>
     
 </configuration>
