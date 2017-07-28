@@ -25,8 +25,9 @@
 		});
 		$('#cancelBtn').click(function() {
 			//joinmove();
-			document.location.href = "inmain.jsp";
-		});
+			$(location).attr('href', '${root}/in/inmain.akcord');
+			});
+			
 		$('#resetBtn').click(function() {
 			//joinmove();
 			$('.note-editable').empty();
