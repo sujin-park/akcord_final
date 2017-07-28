@@ -1,16 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/common/template/head_include.jsp"%>
-<link rel="stylesheet" href="/akcord/css/group.css">
+<link rel="stylesheet" href="/akcord_project/user/group/css/group.css">
 <%@include file="/common/template/nav.jsp"%>
-<link rel="stylesheet" href="/akcord/css/group.css">
-<title>GROUP LIST</title>
-<style>
-	.btn {
-		background-color: #346969;
-		color: white;
+<script type="text/javascript">
+	function cancel(seq) {
+		document.location.href ="${root}/group/cancel.akcord?seq="+seq;
 	}
-</style>
+</script>
+<title>GROUP LIST</title>
 	<section class="content page-top row">
 		<div class="col-sm-10 col-sm-push-1" style="padding-top: 60px;">
 			<div class="panel panel-default">
@@ -27,47 +25,51 @@
 										<td width="15%">리더</td>
 										<td width="15%">CANCEL</td>
 									</tr>
-								<%
-									for (int i=0; i<5; i++) {
-								%>
+								<c:if test="${waitlist.size() == 0}">
+									<tr>
+										<td colspan="6">
+											<div class="media-meta">가입 대기중인 그룹방이 없습니다.</div>
+										</td>
+									</tr>
+								</c:if>
+								<c:if test="${waitlist.size() != 0}">
+								<c:forEach var="WaitDto" items="${waitlist}">
+									<input type="hidden" id="cancelSeq" value="${WaitDto.groupId}">
 									<tr>
 										<td>
 											<div class="media">
-												<p class="media-meta">2017.07.17</p>
+												<p class="media-meta">${WaitDto.waitingDate}</p>
 											</div>
 										</td>
 										<td>
 											<div class="media">
-												<p class="media-meta">컴퓨터공학과</p>
+												<p class="media-meta">${WaitDto.majorName}</p>
 											</div>
 										</td>
 										<td>
 											<div class="media">
-												<div class="media-meta">JAVA</div>
+												<div class="media-meta">${WaitDto.groupName}</div>
 											</div>
 										</td>
 										<td>
 											<div class="media">
-												<span class="media-meta">자바 공부하기</span>
+												<span class="media-meta">${WaitDto.content}</span>
 											</div>
 										</td>
 										<td>
 											<div class="media">
-												<span class="media-meta">박수진</span>
+												<span class="media-meta">${WaitDto.name}</span>
 											</div>
 										</td>
-										<td>
-											<p data-placement="top" data-toggle="tooltip" title="Delete" align="center">
-												<button class="btn-danger btn-sm" data-title="Delete" data-toggle="modal" data-target="#delete" >
+										<td align="center">
+												<button class="btn-danger btn-sm" id="cancel${WaitDto.groupId}" onclick="javascript:cancel(${WaitDto.groupId});">
 													<span class="glyphicon glyphicon-remove">
 													</span>
 												</button>
-											</p>
 									    </td>
 									</tr>
-								<%
-									}
-								%>
+								</c:forEach>
+								</c:if>
 								</tbody>
 							</table>
 						</div>

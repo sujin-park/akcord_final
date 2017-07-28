@@ -6,7 +6,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('#listBtn_G').click(function(){
-			$(location).attr('href','${root}/group/list.akcord');
+			$(location).attr('href','${root}/group/list.akcord?pg=1&key=word=');
 		});
 	});
 </script>

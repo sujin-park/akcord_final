@@ -56,7 +56,7 @@ a {
 }
 
 .form-control{ box-shadow:none; border-color:#eee;}
-.form-control:focus{ box-shadow:none; border-color:#d33d3d;}
+.form-control:focus{ box-shadow:none; border-color:#d34e4c;}
 
 
 /**** MEDIA QUERIES ****/

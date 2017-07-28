@@ -19,8 +19,17 @@
 		$('#plusmember').modal({
 			show : true
 		});
-		
+
 	}
+
+	$(document).ready(function() {
+		$('#deleteM').on('click', function(){
+			var i = $(this).index();
+			alert(i);
+			//alert($('#waitDate').eq(i).val());
+			
+		});
+	});
 </script>
 		<section class="content page-top row">
 			<div class="col-sm-10 col-sm-push-1" style="padding-top: 60px;">
@@ -28,6 +37,22 @@
 					<h3>그룹원 관리</h3>
 				</div>
 				<div class="panel panel-default">
+					<div class="tabbable" id="tabs-630325" align="left" style="width: 90%;">
+						<ul class="nav nav-tabs">
+							<li class="active">
+								<a href="#panel-822060" data-toggle="tab">대기 리스트</a>
+							</li>
+							<li>
+								<a href="#panel-822061" data-toggle="tab">그룹 리스트</a>
+							</li>
+						</ul>
+						<div class="tab-content">
+							<div class="tab-pane" id="panel-822060">
+							</div>
+							<div class="tab-pane" id="panel-822061">
+						</div>
+					</div>
+				</div>
 					<div class="panel-body">
 						<div class="row" style="padding-bottom:10px;">
 							<div class="col-sm-6 pull-left">
@@ -64,15 +89,14 @@
 													</div>
 												</td>
 												<td width="15%">가입일</td>
-												<td width="20%">전공</td>
+												<td width="15%">전공</td>
 												<td width="20%">아이디</td>
 												<td width="20%">이름</td>
-												<td width="15%">DELETE</td>
+												<td width="10%">ACCEPT</td>
+												<td width="10%">DELETE</td>
 											</tr>
-										<%
-											for (int i=0; i<5; i++) {
-										%>
-											<tr>
+										<c:forEach var="listDto" items="${glist}">
+											<tr class="Wlist">
 												<td>
 													<div class="ckbox">
 														<input type="checkbox" class="checkthis" id="checkbox" name ="checkbox" value=""> <label
@@ -81,35 +105,38 @@
 												</td>
 												<td>
 													<div class="media">
-														<p class="media-meta">2017.07.17</p>
+														<p class="media-meta" id="waitDate">${listDto.regDate}</p>
 													</div>
 												</td>
 												<td>
 													<div class="media">
-														<p class="media-meta">컴퓨터공학과</p>
+														<p class="media-meta" id="waitMajor">${listDto.majorName}</p>
 													</div>
 												</td>
 												<td>
 													<div class="media">
-														<div class="media-meta">JAVA</div>
+														<div class="media-meta" id="waitId">${listDto.userId}</div>
 													</div>
 												</td>
 												<td>
 													<div class="media">
-														<span class="media-meta">자바 공부하기</span>
+														<span class="media-meta" id="waitName">${listDto.name}</span>
 													</div>
 												</td>
 												<td>
 													<p align="center" data-placement="top" data-toggle="tooltip" title="Edit">
-														<button type="button" class="btn btn-sm btn-danger" onclick="javascript:joinGroup();">
-											    			<span class="glyphicon glyphicon-remove">
+														<button type="button" class="btn btn-sm btn-danger" id="acceptG">
+											    			<span class="glyphicon glyphicon-heart">
 											    		</button>
 											    	</p>
 											    </td>
+												<td align="center">
+													<button type="button" class="btn btn-sm btn-default" id="deleteM">
+										    			<span class="glyphicon glyphicon-remove">
+										    		</button>
+											    </td>
 											</tr>
-										<%
-											}
-										%>
+										</c:forEach>
 										</tbody>
 									</table>
 								</div>
