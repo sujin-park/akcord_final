@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.akcord.group.model.GroupListDto;
@@ -23,6 +24,7 @@ public class GroupMainController {
 		mav.setViewName("/user/group/list");
 		return mav;
 	}
+	
 	@RequestMapping("/group.akcord")
 	public ModelAndView groupList() {
 		ModelAndView mav = new ModelAndView();
@@ -30,6 +32,13 @@ public class GroupMainController {
 		List<GroupListDto> glist = groupMainService.gMemberlist(seq);
 		mav.addObject("glist", glist);
 		mav.setViewName("/user/group/setgroup");
+		return mav;
+	}
+	
+	@RequestMapping("/delete.akcord")
+	public ModelAndView delete(@RequestParam("id") String id) {
+		ModelAndView mav = new ModelAndView();
+		System.out.println(id);
 		return mav;
 	}
 }

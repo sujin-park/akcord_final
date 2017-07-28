@@ -1,15 +1,14 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@include file="/common/template/head_include.jsp" %>
-<%@ include file="/common/template/nav.jsp" %>
+<%@include file="/common/template/head_include.jsp"%>
+<%@ include file="/common/template/nav.jsp"%>
 
 <script>
-
 	$(document).ready(function() {
 		$('#answerBtn').click(function() {
-			//joinmove();
-			document.location.href = "question.jsp";
+
+			$(location).attr('href', '${root}/in/answer.akcord');
 		});
 	});
 </script>
@@ -31,6 +30,7 @@
 	font-size: 5em;
 }
 </style>
+
 <div class="container col-sm-12 form-group">
 	<br>
 	<div class="col-sm-1"></div>
@@ -49,7 +49,8 @@
 		<div class="col-sm-12" row="25"
 			style="border: 1px solid; color: gray; height: 250px;"></div>
 		<label class="col-sm-11"></label>
-		<button type="button" class="btn btn-danger col-sm-1 btn" id="answerBtn">Answer</button>
+		<button type="button" class="btn btn-danger col-sm-1 btn"
+			id="answerBtn">Answer</button>
 	</div>
 
 	<div class="col-sm-12">
@@ -79,8 +80,9 @@
 		<div class="col-sm-12" row="25"
 			style="border: 1px solid; color: gray; height: 250px;"></div>
 		<div class="col-sm-12 form-group" style="margin-left: -15px">
-			<button type="button" class="btn btn-danger col-sm-1 " data-toggle="collapse"
-				data-target="#demo" aria-expanded="false" aria-controls="#demo">Commend</button>
+			<button type="button" class="btn btn-danger col-sm-1 "
+				data-toggle="collapse" data-target="#demo" aria-expanded="false"
+				aria-controls="#demo">Commend</button>
 
 		</div>
 

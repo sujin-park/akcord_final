@@ -14,9 +14,11 @@
 			header: {
 				left: 'prev,next today',
 				center: 'title',
+				
 				right: 'month,agendaWeek,agendaDay'
 			},
 			defaultDate:  new Date().getTime(),
+			
 			navLinks: true, // can click day/week names to navigate views
 			selectable: true,
 			selectHelper: true,

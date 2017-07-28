@@ -9,11 +9,7 @@
 	    	show : true  
 	      });
 	}
-	
-	function viewlist() {
-		
-		
-	}
+
 
 	function plusMember() {
 		$('#plusmember').modal({
@@ -21,15 +17,28 @@
 		});
 
 	}
-
 	$(document).ready(function() {
-		$('#deleteM').on('click', function(){
-			var i = $(this).index();
-			alert(i);
-			//alert($('#waitDate').eq(i).val());
-			
+		$('#deleteM').click(function(){
+			var joinseq = $('#joinseq').val();
+			$(location).attr('href', '${root}/group/join.akcord?seq='+joinseq);
 		});
 	});
+
+	function deleteM(id) {
+		//var valueArr = new Array();
+		//$("input[name=checkbox]:checked").each(function() {
+		//	valueArr.push($(this).val());
+		//});
+		//if (valueArr == "") {
+		//	alert("");
+		
+		if (confirm("승인을 거절하시겠습니까?")) {
+				alert(id);			
+				document.location.href = "${root}/groupmain/delete.akcord?id="+id;
+			}
+		
+	}
+
 </script>
 		<section class="content page-top row">
 			<div class="col-sm-10 col-sm-push-1" style="padding-top: 60px;">
@@ -126,13 +135,14 @@
 												<td>
 													<p align="center" data-placement="top" data-toggle="tooltip" title="Edit">
 														<button type="button" class="btn btn-sm btn-danger" id="acceptG">
-											    			<span class="glyphicon glyphicon-heart">
+											    			<span class="glyphicon glyphicon-heart"></span>
 											    		</button>
 											    	</p>
 											    </td>
 												<td align="center">
-													<button type="button" class="btn btn-sm btn-default" id="deleteM">
-										    			<span class="glyphicon glyphicon-remove">
+													<button type="button" class="btn btn-sm btn-default" id="deleteM" 
+															onclick="javascript:deleteM(${listDto.userId});">
+										    			<span class="glyphicon glyphicon-remove"></span>
 										    		</button>
 											    </td>
 											</tr>

@@ -20,11 +20,8 @@ $(document).ready(function(){
 		$('form[name=createG]').submit();
 	});
 	
-	$('#joinG').click(function(){
-		var joinseq = $('#joinseq').val();
-		$(location).attr('href', '${root}/group/join.akcord?seq='+joinseq);
-	});
-	
+
+
 });
 
 function joinGroup(seq) {

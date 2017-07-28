@@ -9,11 +9,14 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         <typeAlias alias="noticeDto" type="com.akcord.admin.model.NoticeDto"/>
         <typeAlias alias="groupRoomDto" type="com.akcord.group.model.GroupRoomDto"/>
         <typeAlias alias="groupListDto" type="com.akcord.group.model.GroupListDto"/>
+        <typeAlias alias="inDto" type="com.akcord.in.model.InDto"/>
     </typeAliases>
     <mappers>
         <mapper resource="com/akcord/config/mybatis/notice.xml"/>
         <mapper resource="com/akcord/config/mybatis/group.xml"/>
         <mapper resource="com/akcord/config/mybatis/groupmain.xml"/>
+        <mapper resource="com/akcord/config/mybatis/in.xml"/>
+        
     </mappers>
     
 </configuration>
