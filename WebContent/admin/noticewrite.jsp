@@ -17,7 +17,7 @@ $(document).ready(function() {
    });
    $('#registerBtn').click(function(){
 
-		document.noticeWriteform.action = "${root}/admin/noticewrite.akcord";
+		document.noticeWriteform.action = "${root}/notice/noticewrite.akcord";
 		document.noticeWriteform.submit(); 
    });
 });
@@ -36,8 +36,8 @@ $(document).ready(function() {
          
          <div class="form-group">
             <label for="content">CONTENT</label>
-            <textarea name="content" id="content" class="form-control" required></textarea>
-          
+            <textarea name="content" id="content" class="form-control" required>
+            </textarea>
          </div>
          <div align="center">
            <button type="button" class="btn btn-sm" id="registerBtn">

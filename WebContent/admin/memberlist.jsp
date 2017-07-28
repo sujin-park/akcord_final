@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="root" value="${pageContext.request.contextPath}"/>
+ 
 <%@include file="/common/template/head_include.jsp" %>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -82,24 +85,25 @@
 					</tr>
 				</thead>
 				<tbody>
-				<%for(int i=0; i<5; i++){ %>
+				<c:forEach var="user" items="${userList}">
+				
+			
 					<tr>
-						<td>1</td>
-						<td>TB - Monthly</td>
-						<th>황혜정</th>
-						<td>0102558474</td>
-						<td>여</td>
-						<td>major</td>
-                        <td>01/04/2012</td>
+						<td>${user.user_id }</td>
+						<td>${user.id }</td>
+						<th>${user.name}</th>
+						<td>${user.tel1 }</td>
+						<td>${user.gender }</td>
+						<td>전공나올부분</td>
+                        <td>${user.reg_date }</td>
 						<td>
 						<button type="button" class="btn btn-sm">
 						Default
 						</button>
 						</td>
 					</tr>
-					<%
-					}
-					%>
+				
+					</c:forEach>
 				</tbody>
 			</table>
 			</div>

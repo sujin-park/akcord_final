@@ -20,26 +20,57 @@
 
 $(document).ready(function (){
 	$('#noticeWriteBtn').click(function (){
-		$(location).attr('href','${root}/admin/noticewrite.akcord');	
+		$(location).attr('href','${root}/notice/noticewrite.akcord');	
 	});
 
 	  $('#checkAll').click(function() {
 		    $('.checkbox').prop('checked', this.checked);
 		  });	
 	  $('#noticeDeleteBtn').click(function (){
+			 var str;
+			 var values = new Array();
+			$('input:checkbox[name=admincheckbox]:checked').each(function () {
+				values.push($(this).val());
+		
+			});
+			/* document.noticeform.action = "${root}/admin/noticedelete.akcord?str=checkList" */
+			$(location).attr('href','${root}/notice/noticedelete.akcord?str='+values);
+						
 			
-			 var checkList=[];
-			$('input:checkbox[name=checkbox]:checked').each(function () {
-				console.log($(this).$('.checkbox').val());
-				checkList.push($(this).val()); 
+			
+		});	  
+	  $('#publicBtn').click(function (){
+		 	 var str;
+			 var values = new Array();
+			$('input:checkbox[name=admincheckbox]:checked').each(function () {
+				values.push($(this).val());
+			
 			});
 			
-			var data={"checkList":checkList};
+			$(location).attr('href','${root}/notice/noticepublic.akcord?str='+values);
+		  
+	  });
+	  $('#publicBtn').click(function (){
+		 	 var str;
+			 var values = new Array();
+			$('input:checkbox[name=admincheckbox]:checked').each(function () {
+				values.push($(this).val());
 			
-			console.log("><<<"+data);
-			document.noticeform.action = "${root}/admin/noticedelete.akcord?data=";
+			});
 			
-		});
+			$(location).attr('href','${root}/notice/noticepublic.akcord?str='+values);
+		  
+	  });
+	
+		   $("#membersort").change(function () {   
+		    
+		      $("#membersort option:selected").each(function () {   
+		    	  var str =$(this).val();
+		    	
+	      $(location).attr('href','${root}/notice/noticeorder.akcord?str='+str);
+ 	      });
+		   }); 
+	 
 });
 
 
@@ -62,37 +93,42 @@ $(document).ready(function (){
 				
 					<select class="form-control" id="membersort" name="membersort">
 								<option>글정렬</option>
-                                <option>최신순</option>
-                                <option>조회순</option>
+                                <option value="1">등록일순</option>
+                                <option value="2">조회순</option>
                     </select>
-			</div> 
-
-
+			</div>
 			<table class="table">
 				<thead>
-					<tr>
-						<th>
-							<input type="checkbox" name="checkAll" id="checkAll" value="1">
-						</th>
-						<th>공지 제목</th>
-						<th>등록일</th>
-						<th>조회수</th>
-						<th>공개여부</th>
-					</tr>
+				<tr>
+					<th>
+					<input type="checkbox" name="checkAll" id="checkAll" value="1">
+					</th>
+					<th>글번호</th>
+					<th>공지 제목</th>
+					<th>등록일</th>
+					<th>조회수</th>
+					<th>공개여부</th>
+				</tr>
 				</thead>
 				<tbody>
 				<c:forEach var="notice" items="${noticeList}">
-					
 					<tr>
 						<td>
-							<input class="checkbox" type="checkbox" name="checkbox" id="checkbox${i.index}" value="${notice.notice_id}">
+							<input class="checkbox" type="checkbox" name="admincheckbox" id="checkbox" value="${notice.notice_id}">
 						</td>
-						<td>${notice.subject }</td>
+						<td>${notice.notice_id }</td>
+						<td><a href="${root }/notice/noticemodify.akcord?nid=${notice.notice_id}">${notice.subject }</a></td>
 						<td>${notice.reg_date }</td>
 						<td>${notice.hit }</td>
-						<td>비공개</td>
+						<c:choose>
+   						 <c:when test="${notice.is_notice==0}">
+							<td>비공개</td>
+						</c:when>
+						<c:otherwise>
+						<td>공개</td>
+						</c:otherwise>
+						</c:choose>
 					</tr>
-				
 					</c:forEach>
 					</tbody>
 			</table> 
@@ -103,14 +139,13 @@ $(document).ready(function (){
 			<button type="button" class="btn btn-sm" id="noticeDeleteBtn">
 				삭제하기
 			</button>
-			<button type="button" class="btn btn-sm">
+			<button type="button" class="btn btn-sm" id="publicBtn">
 				공개하기
 			</button>
 			</div>
 			</div>
 			</form>
 		</div>
-
 </section>
 <nav>
 			<div align="center">
