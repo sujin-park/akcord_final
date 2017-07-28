@@ -9,8 +9,7 @@
 $(document).ready(function() {
 	$('#questionBtn').click(function() {
 		//joinmove();
-		document.location.href = "question.jsp";
-	});
+		$(location).attr('href', '${root}/in/question.akcord');	});
 });
 </script>	
 
