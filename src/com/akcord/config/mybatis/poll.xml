@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.akcord.main.poll.dao.PollDao">
+	<insert id="pollmake" parameterType="pollDto">
+		insert all
+		into poll (poll_id, subject, chart_type, start_date, end_date)
+		values(poll_seq.nextval, #{subject}, #{charttype}, #{startdate}, #{enddate})
+		into poll_detail (content, count, line)
+		values (#{content}, 0, ${line})
+		select * from dual
+	</insert>
+	
+	<select id="pollList" parameterType="pollDto">
+		select poll_id, subject, start_date, end_date, 
+		(select max(count) from poll_detail where poll id like '${pollId}') tc
+		from poll
+	</select>
+	
+	<update id="pollclose">
+		update poll set end_date = 'sysdate' where poll_id like '${pollId}'
+	</update>
+</mapper>
+
