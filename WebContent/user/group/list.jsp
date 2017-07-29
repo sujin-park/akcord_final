@@ -6,7 +6,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('#listBtn_G').click(function(){
-			$(location).attr('href','${root}/group/list.akcord');
+			$(location).attr('href','${root}/group/list.akcord?pg=1&key=word=');
 		});
 	});
 </script>
@@ -16,7 +16,7 @@
             <div class="row">
               <div class="col-sm-12  style="padding-bottom:10px;">
                 <h1>GROUP HOMEWORK</h1>
-                <p>2017/07/19 ~ 2017/07/26</p>
+                <p>2017/07/19 ~ 2017/07/26</p> ddd
               </div>
             </div>
             <div class="row"  style="padding-bottom:10px;">

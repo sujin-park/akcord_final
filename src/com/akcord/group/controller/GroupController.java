@@ -1,7 +1,10 @@
 package com.akcord.group.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.akcord.group.model.GroupRoomDto;
+import com.akcord.group.model.MajorDto;
 import com.akcord.group.service.GroupService;
 
 @Controller
@@ -19,34 +23,52 @@ public class GroupController {
 	@Autowired
 	private GroupService groupService;
 	
-	@RequestMapping("/waitinglist.akcord")
-	public ModelAndView acceptlist(){
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("/user/group/waitinglist");
-		return mav;
-	}
-	
 	@RequestMapping("/make.akcord")
-	public ModelAndView makegroup(@RequestParam Map<String, String> map){
-		ModelAndView mav = new ModelAndView();
-		GroupRoomDto groupRoomDto = new GroupRoomDto();
-		groupRoomDto.setMajorId(Integer.parseInt(map.get("majorId")));
-		groupRoomDto.setGroupName(map.get("groupName"));
-		groupRoomDto.setContent(map.get("content"));
+	public String makegroup(GroupRoomDto groupRoomDto, HttpSession session){
 		groupRoomDto.setLeaderId(1);
-		groupRoomDto.setgCount(Integer.parseInt(map.get("gCount")));
 		int cnt = groupService.createG(groupRoomDto);
-		
-		return mav;
+		return "redirect:/group/list.akcord";
 	}
 	
 	@RequestMapping("/list.akcord")
-	public ModelAndView list() {
+	public ModelAndView list(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		List<GroupRoomDto> list = groupService.grouplist();
-		System.out.println(list.size() + "group controller");
+		String myseq = "1";
+		List<GroupRoomDto> list = groupService.grouplist(myseq);
+		List<MajorDto> majorlist = groupService.majorlist();
+		mav.addObject("mList", majorlist);
 		mav.addObject("grouplist", list);
 		mav.setViewName("/user/group/grouplist");
 		return mav;
+	}
+	
+	@RequestMapping("/waitinglist.akcord")
+	public ModelAndView acceptlist(){
+		ModelAndView mav = new ModelAndView();
+		//mav.addObject("", waitinglist);
+		//요청일, 전공, 그룹방명, 그룹방내용, 리더
+		int seq = 1; // session에서 내 시퀀스 가져와야함
+		List<GroupRoomDto> waitinglist = groupService.waitinglist(seq);
+		mav.addObject("waitlist", waitinglist);
+		mav.setViewName("/user/group/waitinglist");
+		return mav;
+	}
+	@RequestMapping("/join.akcord")
+	public ModelAndView join(@RequestParam("seq") String seq, HttpSession session){
+		ModelAndView mav = new ModelAndView();
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("seq", seq);
+		map.put("userId", "1"); // 사용자 아이디는 세션에서 가져오기
+		int cnt = groupService.joinGroup(map);
+		List<GroupRoomDto> list = groupService.grouplist(seq);
+		mav.addObject("grouplist", list);
+		mav.setViewName("/user/group/grouplist");
+		return mav;
+	}
+	@RequestMapping("/cancel.akcord")
+	public String cancel(@RequestParam("seq") String seq) {
+		ModelAndView mav = new ModelAndView();
+		int cnt = groupService.cancel(seq);
+		return "redirect:/group/waitinglist.akcord";
 	}
 }

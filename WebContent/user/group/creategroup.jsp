@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="root" value="${pageContext.request.contextPath}"/>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" style="width:40%">
     <div class="modal-content">
@@ -15,8 +16,9 @@
 	                  <label for="concept" class="col-sm-3 control-label">전공</label>
 	                  	<div class="col-sm-8">
 	                  	<select class="form-control" id="majorId" name="majorId">
-	                          <option value="1">컴퓨터공학과</option>
-	                          <option value="2">산업공학과</option>
+	                      <c:forEach var="majorDto" items="${mList}">
+	                          <option value="${majorDto.majorId}">${majorDto.majorName}</option>
+	                      </c:forEach>
 	                      </select>
 	                  	</div>
 	                </div>
@@ -32,6 +34,10 @@
 	                          <select class="form-control" id="gCount" name="gCount">
 	                              <option value="4">4</option>
 	                              <option value="8">8</option>
+	                              <option value="8">12</option>
+	                              <option value="8">16</option>
+	                              <option value="8">20</option>
+	                              <option value="8">24</option>
 	                          </select>
 	                      </div>
 	                 </div>

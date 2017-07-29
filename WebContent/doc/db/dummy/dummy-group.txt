@@ -1,0 +1,70 @@
+insert into grouproom values (1, 1, '자바', '그룹방 1번에 대한 코멘트', 1, sysdate, 8);
+insert into grouproom values (2, 1, '자바', '그룹방 2번에 대한 코멘트', 1, sysdate, 8);
+insert into grouproom values (3, 2, '오라클', '그룹방 3번에 대한 코멘트', 2, sysdate, 12);
+insert into grouproom values (4, 3, 'DB', '그룹방 4번에 대한 코멘트', 3, sysdate, 4);
+insert into grouproom values (5, 4, 'C++', '그룹방 5번에 대한 코멘트', 4, sysdate, 12);
+insert into grouproom values (6, 5, 'JQuery', '그룹방 6번에 대한 코멘트', 5, sysdate, 8);
+
+
+
+insert into grouproom_list values (2, 1, 0);
+insert into grouproom_list values (2, 2, 1);
+insert into grouproom_list values (2, 3, 0);
+insert into grouproom_list values (2, 4, 1);
+insert into grouproom_list values (2, 5, 1);
+insert into grouproom_list values (3, 1, 0);
+insert into grouproom_list values (3, 2, 0);
+insert into grouproom_list values (3, 3, 0);
+insert into grouproom_list values (3, 4, 1);
+insert into grouproom_list values (3, 5, 1);
+insert into grouproom_list values (4, 1, 0);
+insert into grouproom_list values (4, 2, 0);
+insert into grouproom_list values (4, 3, 0);
+insert into grouproom_list values (4, 4, 1);
+insert into grouproom_list values (4, 5, 1);
+insert into grouproom_list values (5, 1, 0);
+insert into grouproom_list values (5, 2, 0);
+insert into grouproom_list values (5, 3, 0);
+insert into grouproom_list values (5, 4, 1);
+insert into grouproom_list values (5, 5, 1);
+
+
+
+
+insert into schedule (schedule_id, group_id, schedule_name, detail, start_date, end_date)
+values (1, 2, 'JAVA', '자바 공부하기', '17-07-22', '17-07-26');
+
+insert into schedule (schedule_id, group_id, schedule_name, detail, start_date, end_date)
+values (2, 3, 'oracle', '디비 공부하기', '17-07-23', '17-07-26');
+
+insert into schedule (schedule_id, group_id, schedule_name, detail, start_date, end_date)
+values (3, 4, 'c++', 'c++ 공부하기', '17-07-20', '17-07-26');
+
+insert into schedule (schedule_id, group_id, schedule_name, detail, start_date, end_date)
+values (4, 5, 'java script', 'js 공부하기', '17-07-15', '17-07-26');
+
+insert into schedule (schedule_id, group_id, schedule_name, detail, start_date, end_date)
+values (5, 6, 'js', 'js 공부하기', '17-07-18', '17-07-26');
+
+insert into schedule (schedule_id, group_id, schedule_name, detail, start_date, end_date)
+values (6, 6, 'jquery', 'jquery 공부하기', '17-07-20', '17-07-26');
+
+
+insert into grouproom_hw values (1, 2, 1);
+insert into grouproom_hw values (2, 2, 1);
+insert into grouproom_hw values (3, 2, 1);
+insert into grouproom_hw values (4, 3, 1);
+insert into grouproom_hw values (5, 3, 2);
+
+insert into grouproom_hw values (6, 3, 2);
+insert into grouproom_hw values (7, 4, 2);
+insert into grouproom_hw values (8, 4, 3);
+insert into grouproom_hw values (9, 4, 3);
+insert into grouproom_hw values (10, 5, 3);
+
+
+insert into grouproom_hw values (11, 5, 4);
+insert into grouproom_hw values (12, 5, 4);
+insert into grouproom_hw values (13, 6, 5);
+insert into grouproom_hw values (14, 6, 5);
+insert into grouproom_hw values (15, 6, 6);
