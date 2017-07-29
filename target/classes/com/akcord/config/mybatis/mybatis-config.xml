@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         <typeAlias alias="noticeDto" type="com.akcord.admin.model.NoticeDto"/>
         <typeAlias alias="groupRoomDto" type="com.akcord.group.model.GroupRoomDto"/>
         <typeAlias alias="userDto" type="com.akcord.user.model.UserDto"/>
-        
+        <typeAlias alias="majorDto" type="com.akcord.user.model.MajorDto"/>
         <typeAlias alias="inDto" type="com.akcord.in.model.InDto"/>
     </typeAliases>
     <mappers>

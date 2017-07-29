@@ -18,32 +18,117 @@
 }
 </style>
 <%@ include file="/common/template/nav.jsp" %>
+<script type="text/javascript">
+$(document).ready(function(){
+
+	$('.black').find('#blackRegBtn').click(function(){
+		var str;
+		str =$(this).val();
+		$(location).attr('href','${root}/usermanager/blackuserReg.akcord?str='+str);
+		
+	});
+	$('#majorPlusBtn').click(function (){
+		var mname= $('#major_name').val();
+	$(location).attr('href','${root}/usermanager/mayjorPlus.akcord?mname='+mname);	
+	});
+});
+
+</script>
 <section class="content page-top row">
    <div class="container-fluid">
 	<div class="row">
-		<div class="col-sm-10 col-sm-push-1" style="padding-top: 60px;">
 		<div class="col-sm-10 col-sm-push-1">
 					<h3>회원 관리</h3>
 		</div>
-		<div class="panel panel-default" style="padding:30px;">
-			<div class="tabbable" id="tabs-630325" align="left" style="width: 80%;">
+
+		<div class="col-sm-10 col-sm-push-1" style="padding-top: 20px;">
+	
+		<div class="panel panel-default">
+			<div class="tabbable" id="tabs-630325">
 				<ul class="nav nav-tabs">
 					<li class="active">
-						<a href="#panel-822060" data-toggle="tab">회원목록</a>
+						<a href="#userList" data-toggle="tab">회원목록</a>
 					</li>
 					<li>
-						<a href="#panel-822061" data-toggle="tab">블랙리스트</a>
+						<a href="#blackList" data-toggle="tab">블랙리스트</a>
 					</li>
 				</ul>
 				<div class="tab-content">
-					<div class="tab-pane" id="panel-822060">
-					</div>
+					<div class="tab-pane fade in active" id="userList">
+				<!-- 	</div>
 					<div class="tab-pane" id="panel-822061">
-					</div>
-				</div>
-			</div>
+					</div> -->
+				
 			
 				<form class="navbar-form navbar-left" role="search">
+						<div class="form-group">
+							<select class="form-control" id="membersort" name="membersort">
+								<option>회원정렬</option>
+                                <option>가입일</option>
+                                <option>이름</option>
+                             </select>
+                        <button type="submit" class="btn btn-default">
+							검색
+						</button>
+						<select class="form-control" id="status" name="status">
+                                <option>회원검색</option>
+                                <option>아이디검색</option>
+                                <option>번호검색</option>
+                         </select>
+							<input type="text" class="form-control" />
+						</div> 
+						<button type="submit" class="btn btn-default">
+							Submit
+						</button>
+					</form>
+					  <div class="text-right">
+					<button style="right" id="majorBtn"
+					 href="#modal-container-947726" role="button" class="btn" data-toggle="modal">
+							전공추가
+					</button>
+					</div>
+					
+			<table class="table table-bordered table-hover table-condensed">
+				<thead>
+					<tr>
+						<th>1</th>
+						<th>회원ID</th>
+						<th>이름</th>
+						<th>휴대폰번호</th>
+						<th>성별</th>
+						<th>전공</th>
+                        <th>가입일</th>
+						<th>블랙리스트처리</th>
+					</tr>
+				</thead>
+				<tbody>
+				<c:forEach var="user" items="${userList}">
+				<c:if test="${user.is_block!=1}">
+				
+			
+					<tr class="black">
+						<td>${user.user_id }</td>
+						<td>${user.id }</td>
+						<th>${user.name}</th>
+						<td>${user.tel1 }-${user.tel2}-${user.tel3 }</td>
+						<td>${user.gender }</td>
+						<td>전공나올부분</td>
+                        <td>${user.reg_date }</td>
+						<td>
+						<button type="button" class="btn btn-sm" id="blackRegBtn" value="${user.user_id }">
+						등록
+						</button>
+						</td>
+					</tr>
+				
+					</c:if>
+					</c:forEach>
+				</tbody>
+				</table>
+			
+			</div>
+			<div class="tab-pane" id="blackList">
+			<form class="navbar-form navbar-left" role="search">
 						<div class="form-group">
 							<select class="form-control" id="membersort" name="membersort">
 								<option>회원정렬</option>
@@ -81,34 +166,37 @@
 						<th>성별</th>
 						<th>전공</th>
                         <th>가입일</th>
-						<th>블랙리스트처리</th>
 					</tr>
 				</thead>
 				<tbody>
 				<c:forEach var="user" items="${userList}">
+				<c:if test="${user.is_block==1}">
 				
 			
-					<tr>
+					<tr class="black">
 						<td>${user.user_id }</td>
 						<td>${user.id }</td>
 						<th>${user.name}</th>
-						<td>${user.tel1 }</td>
+						<td>${user.tel1 }-${user.tel2}-${user.tel3 }</td>
 						<td>${user.gender }</td>
 						<td>전공나올부분</td>
                         <td>${user.reg_date }</td>
-						<td>
-						<button type="button" class="btn btn-sm">
-						Default
-						</button>
-						</td>
+					
 					</tr>
 				
+					</c:if>
 					</c:forEach>
 				</tbody>
-			</table>
+				</table>
+			
+			</div>
+			</div>
+				</div>
+			
 			</div>
 		</div>
 	</div>
+</div>
 </div>
 </section>
 		<nav>
@@ -146,20 +234,21 @@
 							</h4>
 						</div>
 						<div class="modal-body">
-						&nbsp;&nbsp;&nbsp;<select>
-		 <option value="">전공목록</option>
-  		 <option value="com">컴퓨터</option>
- 		 <option value="elec">전자</option>
- 		 <option value="manage">경영</option>
-		</select>&nbsp;
-							전공이름 <input type="text" name="major" value="">
+						&nbsp;&nbsp;&nbsp;
+						<select>
+						<option value="">전공목록</option> 
+						<c:forEach var="major" items="${majorList}">
+		 			 	<option>${major.major_name }</option>
+ 		 		 		</c:forEach>
+						</select>&nbsp;
+							전공이름 <input type="text" name="major_name" id="major_name" value="">
 						</div>
 						<div class="modal-footer">
 							 
 							<button type="button" class="btn btn-default" data-dismiss="modal">
 								Close
 							</button> 
-							<button type="button" class="btn btn-primary">
+							<button type="button" class="btn btn-primary" id="majorPlusBtn">
 								Save changes
 							</button>
 						</div>
