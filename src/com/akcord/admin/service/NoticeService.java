@@ -10,5 +10,7 @@ public interface NoticeService {
 	NoticeDto getNotice(String notice_id);
 	int modify(NoticeDto noticeDto);
 	int delete(String notice_id);
+	int noticePublic(String notice_id);
+	List<NoticeDto> getNoticeOrder(String str);
 
 }

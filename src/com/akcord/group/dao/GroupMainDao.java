@@ -1,5 +1,9 @@
 package com.akcord.group.dao;
 
-public interface GroupMainDao {
+import java.util.List;
 
+import com.akcord.group.model.GroupListDto;
+
+public interface GroupMainDao {
+	public List<GroupListDto> gMemberlist(String seq);
 }

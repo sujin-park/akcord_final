@@ -21,7 +21,8 @@
 			<div class="col-sm-10 col-sm-push-1" style="padding-top: 60px;">
 			
 				<div class="col-sm-10 col-sm-push-1">
-					<a href="${root }/admin/mvnoticelist.akcord">공지사항 목록으로이동</a>
+					<a href="${root }/notice/mvnoticelist.akcord">공지사항 목록으로이동</a>
+					<a href="${root }/usermanager/mvmemberlist.akcord">회원 목록으로이동</a>
 				</div>
 			
 			</div>

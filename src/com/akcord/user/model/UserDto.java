@@ -2,7 +2,7 @@ package com.akcord.user.model;
 
 public class UserDto {
 
-	private String name; 
+	private String name;
 	private int user_id;
 	private int major_id;
 	private String id;
@@ -20,6 +20,14 @@ public class UserDto {
 	private String addr1;
 	private String addr2;
 	private int is_block;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	public int getUser_id() {
 		return user_id;
@@ -156,7 +164,5 @@ public class UserDto {
 	public void setIs_block(int is_block) {
 		this.is_block = is_block;
 	}
-
-
 
 }

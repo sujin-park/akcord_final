@@ -4,8 +4,8 @@
         type="javax.sql.DataSource"
         factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory"
         driverClassName="oracle.jdbc.driver.OracleDriver"
-        url="jdbc:oracle:thin:@192.168.18.106:1521:orcl" username="kitri"
-        password="kitri" maxTotal="100" maxIdle="30" maxWaitMillis="10000"
+        url="jdbc:oracle:thin:@localhost:1522:orcl" username="akcord"
+        password="akcord" maxTotal="100" maxIdle="30" maxWaitMillis="10000"
         removeAbandonedTimeout="60"
         logAbandoned="true"/>
     

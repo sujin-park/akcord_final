@@ -11,12 +11,6 @@ $(document).ready(function(){
 	      });
 	});
 	
-	$('#joinGroup').click(function(){
-		$('#joingroupM').modal({
-			show : true
-		});
-	});
-
 	$('#accept').click(function(){
 		$(location).attr('href','${root}/group/waitinglist.akcord');
 	});
@@ -25,7 +19,23 @@ $(document).ready(function(){
 		$('form[name=createG]').attr('action','${root}/group/make.akcord');
 		$('form[name=createG]').submit();
 	});
+	
+
+
 });
+
+function joinGroup(seq) {
+	var seq = $('#seq'+seq).val();
+	$('#joinseq').val(seq);
+	$('#major').val($('#majorName'+seq).text());
+	$('#groupN').val($('#groupName'+seq).text());
+	$('#Jcontent').text($('#content'+seq).text());
+	$('#fullCount').text($('#gCount'+seq).val() + '명');
+	$('#nowCount').text($('#nowCount'+seq).val() + '  명/');
+	$('#joingroupM').modal({
+		show : true
+	});
+}
 </script>
 		<section class="content page-top row">
 			<div class="col-sm-10 col-sm-push-1" style="padding-top: 60px;">
@@ -64,36 +74,40 @@ $(document).ready(function(){
 												<td width="15%">리더</td>
 												<td width="15%">JOIN</td>
 											</tr>
-										<c:forEach var="groupRoomDto" items="grouplist">
+										<c:forEach var="GroupRoomDto" items="${grouplist}">
+											<input type="hidden" id="seq${GroupRoomDto.groupId}" value="${GroupRoomDto.groupId}">
+											<input type="hidden" id="gCount${GroupRoomDto.groupId}" value="${GroupRoomDto.gCount}">
+											<input type="hidden" id="nowCount${GroupRoomDto.groupId}" value="${GroupRoomDto.nowCount}">
 											<tr>
 												<td>
 													<div class="media">
-														<p class="media-meta">${groupRoomDto.regDate}</p>
+														<p class="media-meta">${GroupRoomDto.regDate}</p>
 													</div>
 												</td>
 												<td>
 													<div class="media">
-														<p class="media-meta">${groupRoomDto.majorName}</p>
+														<p class="media-meta" id="majorName${GroupRoomDto.groupId}">${GroupRoomDto.majorName}</p>
 													</div>
 												</td>
 												<td>
 													<div class="media">
-														<div class="media-meta">${groupRoomDto.groupName}</div>
+														<div class="media-meta" id="groupName${GroupRoomDto.groupId}">${GroupRoomDto.groupName}</div>
 													</div>
 												</td>
 												<td>
 													<div class="media">
-														<span class="media-meta">${groupRoomDto.content}</span>
+														<span class="media-meta" id="content${GroupRoomDto.groupId}">${GroupRoomDto.content}</span>
 													</div>
 												</td>
 												<td>
 													<div class="media">
-														<span class="media-meta">${groupRoomDto.name}</span>
+														<span class="media-meta">${GroupRoomDto.name}</span>
 													</div>
 												</td>
 												<td>
 													<p align="center" data-placement="top" data-toggle="tooltip" title="Edit">
-														<button type="button" id="joinGroup" class="btn btn-danger">
+														<button type="button" id="joinGroup" class="btn btn-danger"
+														 onclick="javascript:joinGroup(${GroupRoomDto.groupId});">
 											    			<span class="glyphicon glyphicon-thumbs-up"></span>
 											    		</button>
 											    	</p>
