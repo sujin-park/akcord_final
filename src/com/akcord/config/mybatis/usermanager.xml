@@ -6,7 +6,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.akcord.admin.dao.UserManagerDao">
     <select id="getUserList" resultType="UserDto">
         select user_id,id,name,m.major_name,tel1,tel2,tel3,reg_date,is_block
-        from users u,major m where m.major_id=u.major_id
-        order by user_id	
+        from users u,major m where m.major_id=u.major_id        order by user_id	
+    </select>
+    <update id="blackuserReg" parameterType="String">
+        update users set is_block='1' where user_id=#{user_id}
+     </update>
+    <insert id="majorPlus" parameterType="String">
+        insert into major(major_id,major_name)
+        values(seq_major_id.nextval,#{major_name})
+    </insert>
+    <select id="getMajor" resultType="MajorDto">
+        select major_name from major
     </select>
 </mapper>

@@ -13,4 +13,5 @@ public interface NoticeDao {
 	int modify(NoticeDto noticeDto);
 	int delete(String notice_id);
 	int noticePublic(String notice_id);
+	
 }

@@ -69,7 +69,7 @@ $(document).ready(function (){
 		    	
 	      $(location).attr('href','${root}/notice/noticeorder.akcord?str='+str);
  	      });
-		   }); 
+	 }); 
 	 
 });
 
