@@ -6,6 +6,7 @@
 <script src='/akcord_project/js/lib/moment.min.js' charset="utf-8"></script>
 <script src='/akcord_project/js/lib/jquery-ui.min.js' charset="utf-8"></script>
 <script src='/akcord_project/js/lib/fullcalendar.js' charset="utf-8"></script>
+
 <script>
 	$(document).ready(function() {
 		

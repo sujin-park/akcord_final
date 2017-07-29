@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.akcord.group.dao.GroupMainDao">
 
     <select id="gMemberlist" parameterType="String" resultType="groupListDto">
-        select g.group_id groupId, u.name name, u.id userId, m.major_name majorName, gl.reg_date regDate
+        select g.group_id groupId, u.name name, u.id userId, m.major_name majorName, gl.reg_date regDate, u.user_id seq
                 from grouproom_list gl, grouproom g, users u, major m
                 where gl.group_id = g.group_id
                 and u.user_id = gl.user_id
@@ -14,5 +14,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 and gl.user_id != 1
     </select>
     
+    <delete id="rejectMember" parameterType="String">
+        delete grouproom_list where user_id = #{seq}
+    </delete>
     
+    <update id="acceptMember" parameterType="String">
+        update grouproom_list set is_accept = 1
+               where user_id = #{seq}
+    </update>
+    
+    <select id="searchlist" parameterType="String" resultType="groupListDto">
+        select u.id userId, m.major_name majorName, u.name name, u.user_id seq
+            from users u, major m
+            where u.major_id = m.major_id
+            and u.user_id not in (
+            select user_id from grouproom_list where group_id = 2)
+            and u.id like '%' || #{sid} || '%'
+    </select>
+    
+    <insert id="invite" parameterType="java.util.Map">
+        insert into grouproom_list (group_id, user_id, is_accept, reg_date)
+        values (#{groupid}, #{seq}, 0, sysdate)
+    </insert>
 </mapper>

@@ -1,6 +1,7 @@
 package com.akcord.group.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +19,7 @@ public class GroupMainController {
 	@Autowired
 	private GroupMainService groupMainService;
 	
-	@RequestMapping("/list.akcord")
+	@RequestMapping("/list.akcord") // 글목록
 	public ModelAndView groupMain(){
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/user/group/list");
@@ -26,7 +27,7 @@ public class GroupMainController {
 	}
 	
 	@RequestMapping("/group.akcord")
-	public ModelAndView groupList() {
+	public ModelAndView groupList() { // 그룹원 관리 
 		ModelAndView mav = new ModelAndView();
 		String seq = "1";
 		List<GroupListDto> glist = groupMainService.gMemberlist(seq);
@@ -35,10 +36,31 @@ public class GroupMainController {
 		return mav;
 	}
 	
-	@RequestMapping("/delete.akcord")
-	public ModelAndView delete(@RequestParam("id") String id) {
+	@RequestMapping("/reject.akcord") // 대기중인 회원 지우기
+	public String delete(@RequestParam("seq") String seq) {
+		int cnt = groupMainService.rejectMember(seq);
+		return "redirect:/groupmain/group.akcord";
+	}
+	
+	
+	@RequestMapping("/accept.akcord") // 회원 승인해주기
+	public String accept(@RequestParam("seq") String seq) {
+		int cnt = groupMainService.acceptMember(seq);
+		return "redirect:/groupmain/group.akcord";
+	}
+	
+	@RequestMapping("/search.akcord")
+	public ModelAndView search(@RequestParam("sid") String sid) {
 		ModelAndView mav = new ModelAndView();
-		System.out.println(id);
+		List<GroupListDto> searchlist = groupMainService.searchlist(sid);
+		mav.addObject("slist", searchlist);
+		mav.setViewName("/user/group/plusmem");
 		return mav;
+	}
+	@RequestMapping("/invite.akcord")
+	public String invite(@RequestParam Map<String, String> map){
+		ModelAndView mav = new ModelAndView();
+		int cnt = groupMainService.invite(map);
+		return "redirect:/groupmain/group.akcord";
 	}
 }

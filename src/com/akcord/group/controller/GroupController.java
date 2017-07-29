@@ -54,16 +54,13 @@ public class GroupController {
 		return mav;
 	}
 	@RequestMapping("/join.akcord")
-	public ModelAndView join(@RequestParam("seq") String seq, HttpSession session){
+	public String join(@RequestParam("seq") String seq, HttpSession session){
 		ModelAndView mav = new ModelAndView();
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("seq", seq);
 		map.put("userId", "1"); // 사용자 아이디는 세션에서 가져오기
 		int cnt = groupService.joinGroup(map);
-		List<GroupRoomDto> list = groupService.grouplist(seq);
-		mav.addObject("grouplist", list);
-		mav.setViewName("/user/group/grouplist");
-		return mav;
+		return "redirect:/group/list.akcord";
 	}
 	@RequestMapping("/cancel.akcord")
 	public String cancel(@RequestParam("seq") String seq) {

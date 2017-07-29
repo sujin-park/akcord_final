@@ -4,41 +4,52 @@
 <link rel="stylesheet" href="/akcord_project/user/group/css/group.css">
 <%@ include file="/common/template/nav.jsp" %>
 <script type="text/javascript">
-	function creategroup() {
-	      $('#myModal').modal({
-	    	show : true  
-	      });
-	}
 
+	function deleteM(seq) {
+	if (${isInvite!= null}) {
+		alert("그룹방에 초대 되었습니다.	");
+	}
+		if (confirm("승인을 거절하시겠습니까?")) {
+			document.location.href = "${root}/groupmain/reject.akcord?seq="+seq;
+		}
+	}
+	
 
 	function plusMember() {
+		var div = document.getElementById("tbodyselect");
+		div.innerHTML='<tr align="center"><td colspan="4">초대할 사람을 검색하세요.</td></tr>';
 		$('#plusmember').modal({
 			show : true
 		});
 
 	}
-	$(document).ready(function() {
-		$('#deleteM').click(function(){
-			var joinseq = $('#joinseq').val();
-			$(location).attr('href', '${root}/group/join.akcord?seq='+joinseq);
-		});
-	});
-
-	function deleteM(id) {
-		//var valueArr = new Array();
-		//$("input[name=checkbox]:checked").each(function() {
-		//	valueArr.push($(this).val());
-		//});
-		//if (valueArr == "") {
-		//	alert("");
-		
-		if (confirm("승인을 거절하시겠습니까?")) {
-				alert(id);			
-				document.location.href = "${root}/groupmain/delete.akcord?id="+id;
-			}
-		
+	function acceptM(seq) {
+		if (confirm("승인하시겠습니까?")) {
+			document.location.href = "${root}/groupmain/accept.akcord?seq="+seq;
+		}
 	}
-
+	
+	function searchMember() {
+ 		var selectname = $("#memberselect").val();
+ 		if(selectname=="") {
+ 			alert("검색할 아이디를 입력하세요");
+ 		} else {
+ 				$.get("${root}/groupmain/search.akcord?sid="+selectname, 
+ 						function(data, status){
+ 						var div = document.getElementById("tbodyselect");
+ 						div.innerHTML=data;
+ 						});
+ 						$("#memberselect").val('');
+ 		}
+ 	}
+	
+	function invite(seq) {
+		if (confirm("그룹방에 초대하시겠습니까?")) {
+			var groupid = $('#groupid').val();
+			document.location.href = "${root}/groupmain/invite.akcord?seq="+seq +"&groupid="+groupid;
+		}
+	}
+	
 </script>
 		<section class="content page-top row">
 			<div class="col-sm-10 col-sm-push-1" style="padding-top: 60px;">
@@ -105,6 +116,7 @@
 												<td width="10%">DELETE</td>
 											</tr>
 										<c:forEach var="listDto" items="${glist}">
+											<input type="hidden" id="groupid" value="${listDto.groupId}">
 											<tr class="Wlist">
 												<td>
 													<div class="ckbox">
@@ -132,16 +144,15 @@
 														<span class="media-meta" id="waitName">${listDto.name}</span>
 													</div>
 												</td>
-												<td>
-													<p align="center" data-placement="top" data-toggle="tooltip" title="Edit">
-														<button type="button" class="btn btn-sm btn-danger" id="acceptG">
-											    			<span class="glyphicon glyphicon-heart"></span>
-											    		</button>
-											    	</p>
+												<td align="center">
+													<button type="button" class="btn btn-sm btn-danger" id="acceptG"
+													onclick="javascript:acceptM(${listDto.seq})">
+										    			<span class="glyphicon glyphicon-heart"></span>
+										    		</button>
 											    </td>
 												<td align="center">
-													<button type="button" class="btn btn-sm btn-default" id="deleteM" 
-															onclick="javascript:deleteM(${listDto.userId});">
+													<button type="button" class="btn btn-sm btn-default" id="deleteM"
+													onclick="javascript:deleteM(${listDto.seq})">
 										    			<span class="glyphicon glyphicon-remove"></span>
 										    		</button>
 											    </td>
@@ -155,27 +166,6 @@
 				</div>
 			</div>
 		</section>
-		<nav>
-			<div align="center">
-				  <ul class="pagination">
-				    <li>
-				      <a href="#" aria-label="Previous">
-				        <span aria-hidden="true">&laquo;</span>
-				      </a>
-				    </li>
-				    <li><a href="#">1</a></li>
-				    <li><a href="#">2</a></li>
-				    <li><a href="#">3</a></li>
-				    <li><a href="#">4</a></li>
-				    <li><a href="#">5</a></li>
-				    <li>
-				      <a href="#" aria-label="Next">
-				        <span aria-hidden="true">&raquo;</span>
-				      </a>
-				    </li>
-				  	</ul>
-			  </div>
-		</nav>
 <%@include file="/user/group/plusmember.jsp"%>
 	</body>
 </html>

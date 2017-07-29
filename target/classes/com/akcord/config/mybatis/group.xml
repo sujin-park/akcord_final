@@ -5,10 +5,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.akcord.group.dao.GroupDao">
     
     <insert id="createG" parameterType="groupRoomDto">
-        insert into grouproom
+        insert all 
+        into grouproom
         (group_id, major_id, group_name, content, leader_id, reg_date, g_count)
         values (seq_group_id.nextval, #{majorId}, #{groupName}, #{content}, #{leaderId},
         sysdate, #{gCount})
+        into grouproom_list
+        (group_id, user_id, is_accept, reg_date) values (seq_group_id.currval, #{leaderId}, 1, sysdate)
+         select * from dual
     </insert>
     
     <select id="grouplist" parameterType="String" resultType="groupRoomDto">
