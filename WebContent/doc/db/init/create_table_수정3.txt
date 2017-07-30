@@ -86,133 +86,133 @@ DROP INDEX PK_POLL;
 
 DROP INDEX PK_SCHEDULE;
 
-/* »õ Å×ÀÌºí */
+/* ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ */
 DROP TABLE USERS 
 	CASCADE CONSTRAINTS;
 
-/* »õ Å×ÀÌºí2 */
+/* ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½2 */
 DROP TABLE MAJOR 
 	CASCADE CONSTRAINTS;
 
-/* »õ Å×ÀÌºí3 */
+/* ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½3 */
 DROP TABLE MYROOM_NEXT 
 	CASCADE CONSTRAINTS;
 
-/* »õ Å×ÀÌºí4 */
+/* ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½4 */
 DROP TABLE GROUPROOM 
 	CASCADE CONSTRAINTS;
 
-/* »õ Å×ÀÌºí5 */
+/* ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½5 */
 DROP TABLE QNA 
 	CASCADE CONSTRAINTS;
 
-/* »õ Å×ÀÌºí6 */
+/* ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½6 */
 DROP TABLE QNA_COMMENT 
 	CASCADE CONSTRAINTS;
 
-/* »õ Å×ÀÌºí7 */
+/* ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½7 */
 DROP TABLE QNA_COMMENT_RE 
 	CASCADE CONSTRAINTS;
 
-/* »õ Å×ÀÌºí9 */
+/* ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½9 */
 DROP TABLE GROUPROOM_LIST 
 	CASCADE CONSTRAINTS;
 
-/* »õ Å×ÀÌºí10 */
+/* ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½10 */
 DROP TABLE QNA_CHOOSE 
 	CASCADE CONSTRAINTS;
 
-/* »õ Å×ÀÌºí11 */
+/* ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½11 */
 DROP TABLE NOTICE 
 	CASCADE CONSTRAINTS;
 
-/* »õ Å×ÀÌºí12 */
+/* ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½12 */
 DROP TABLE MYROOM 
 	CASCADE CONSTRAINTS;
 
-/* »õ Å×ÀÌºí13 */
+/* ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½13 */
 DROP TABLE POLL 
 	CASCADE CONSTRAINTS;
 
-/* »õ Å×ÀÌºí14 */
+/* ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½14 */
 DROP TABLE POLL_DETAIL 
 	CASCADE CONSTRAINTS;
 
-/* »õ Å×ÀÌºí15 */
+/* ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½15 */
 DROP TABLE POLL_YESNO 
 	CASCADE CONSTRAINTS;
 
-/* »õ Å×ÀÌºí16 */
+/* ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½16 */
 DROP TABLE SCHEDULE 
 	CASCADE CONSTRAINTS;
 
-/* »õ Å×ÀÌºí18 */
+/* ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½18 */
 DROP TABLE ALARM 
 	CASCADE CONSTRAINTS;
 
-/* »õ Å×ÀÌºí19 */
+/* ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½19 */
 DROP TABLE GROUPROOM_HW 
 	CASCADE CONSTRAINTS;
 
-/* »õ Å×ÀÌºí */
+/* ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ */
 CREATE TABLE USERS (
-	USER_ID NUMBER NOT NULL, /* »õ ÄÃ·³ */
-	MAJOR_ID NUMBER, /* »õ ÄÃ·³7 */
-	ID VARCHAR2(100) NOT NULL, /* »õ ÄÃ·³2 */
-	PASSWORD VARCHAR2(300) NOT NULL, /* »õ ÄÃ·³3 */
-	NAME VARCHAR2(300) NOT NULL, /* »õ ÄÃ·³16 */
-	TYPE NUMBER(1) NOT NULL, /* »õ ÄÃ·³4 */
-	GENDER NUMBER(1) NOT NULL, /* »õ ÄÃ·³5 */
-	BIRTH1 NUMBER NOT NULL, /* »õ ÄÃ·³6 */
-	BIRTH2 NUMBER, /* »õ ÄÃ·³17 */
-	BIRTH3 NUMBER, /* »õ ÄÃ·³18 */
-	REG_DATE DATE NOT NULL, /* »õ ÄÃ·³8 */
-	TEL1 NUMBER, /* »õ ÄÃ·³9 */
-	TEL2 NUMBER, /* »õ ÄÃ·³10 */
-	TEL3 NUMBER, /* »õ ÄÃ·³11 */
-	ZIPCODE NUMBER, /* »õ ÄÃ·³12 */
-	ADDR1 VARCHAR2(1000), /* »õ ÄÃ·³13 */
-	ADDR2 VARCHAR2(2000), /* »õ ÄÃ·³14 */
-	IS_BLOCK NUMBER /* »õ ÄÃ·³15 */
+	USER_ID NUMBER NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½ */
+	MAJOR_ID NUMBER, /* ï¿½ï¿½ ï¿½Ã·ï¿½7 */
+	ID VARCHAR2(100) NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½2 */
+	PASSWORD VARCHAR2(300) NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½3 */
+	NAME VARCHAR2(300) NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½16 */
+	TYPE NUMBER(1) NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½4 */
+	GENDER NUMBER(1) NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½5 */
+	BIRTH1 NUMBER NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½6 */
+	BIRTH2 NUMBER, /* ï¿½ï¿½ ï¿½Ã·ï¿½17 */
+	BIRTH3 NUMBER, /* ï¿½ï¿½ ï¿½Ã·ï¿½18 */
+	REG_DATE DATE NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½8 */
+	TEL1 NUMBER, /* ï¿½ï¿½ ï¿½Ã·ï¿½9 */
+	TEL2 NUMBER, /* ï¿½ï¿½ ï¿½Ã·ï¿½10 */
+	TEL3 NUMBER, /* ï¿½ï¿½ ï¿½Ã·ï¿½11 */
+	ZIPCODE NUMBER, /* ï¿½ï¿½ ï¿½Ã·ï¿½12 */
+	ADDR1 VARCHAR2(1000), /* ï¿½ï¿½ ï¿½Ã·ï¿½13 */
+	ADDR2 VARCHAR2(2000), /* ï¿½ï¿½ ï¿½Ã·ï¿½14 */
+	IS_BLOCK NUMBER /* ï¿½ï¿½ ï¿½Ã·ï¿½15 */
 );
 
-COMMENT ON TABLE USERS IS '»õ Å×ÀÌºí';
+COMMENT ON TABLE USERS IS 'ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½';
 
-COMMENT ON COLUMN USERS.USER_ID IS 'È¸¿ø °íÀ¯¹øÈ£';
+COMMENT ON COLUMN USERS.USER_ID IS 'È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£';
 
-COMMENT ON COLUMN USERS.MAJOR_ID IS 'Àü°ø °íÀ¯¹øÈ£';
+COMMENT ON COLUMN USERS.MAJOR_ID IS 'ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£';
 
-COMMENT ON COLUMN USERS.ID IS 'È¸¿ø ¾ÆÀÌµð';
+COMMENT ON COLUMN USERS.ID IS 'È¸ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½';
 
-COMMENT ON COLUMN USERS.PASSWORD IS 'ºñ¹Ð¹øÈ£';
+COMMENT ON COLUMN USERS.PASSWORD IS 'ï¿½ï¿½Ð¹ï¿½È£';
 
-COMMENT ON COLUMN USERS.NAME IS '¼ºÇÔ';
+COMMENT ON COLUMN USERS.NAME IS 'ï¿½ï¿½ï¿½ï¿½';
 
-COMMENT ON COLUMN USERS.TYPE IS 'È¸¿ø Å¸ÀÔ(°ü¸®ÀÚ: 0 / È¸¿ø : 1)';
+COMMENT ON COLUMN USERS.TYPE IS 'È¸ï¿½ï¿½ Å¸ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½: 0 / È¸ï¿½ï¿½ : 1)';
 
-COMMENT ON COLUMN USERS.GENDER IS '¼ºº°';
+COMMENT ON COLUMN USERS.GENDER IS 'ï¿½ï¿½ï¿½ï¿½';
 
-COMMENT ON COLUMN USERS.BIRTH1 IS '»ý³â¿ùÀÏ (³âµµ)';
+COMMENT ON COLUMN USERS.BIRTH1 IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (ï¿½âµµ)';
 
-COMMENT ON COLUMN USERS.BIRTH2 IS '»ý³â¿ùÀÏ (¿ù)';
+COMMENT ON COLUMN USERS.BIRTH2 IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½)';
 
-COMMENT ON COLUMN USERS.BIRTH3 IS '»ý³â¿ùÀÏ (ÀÏ)';
+COMMENT ON COLUMN USERS.BIRTH3 IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½)';
 
-COMMENT ON COLUMN USERS.REG_DATE IS '°¡ÀÔÀÏ';
+COMMENT ON COLUMN USERS.REG_DATE IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
 
-COMMENT ON COLUMN USERS.TEL1 IS 'ÀüÈ­¹øÈ£ ¾ÕÀÚ¸®';
+COMMENT ON COLUMN USERS.TEL1 IS 'ï¿½ï¿½È­ï¿½ï¿½È£ ï¿½ï¿½ï¿½Ú¸ï¿½';
 
-COMMENT ON COLUMN USERS.TEL2 IS 'ÀüÈ­¹øÈ£ 2';
+COMMENT ON COLUMN USERS.TEL2 IS 'ï¿½ï¿½È­ï¿½ï¿½È£ 2';
 
-COMMENT ON COLUMN USERS.TEL3 IS 'ÀüÈ­¹øÈ£ 3';
+COMMENT ON COLUMN USERS.TEL3 IS 'ï¿½ï¿½È­ï¿½ï¿½È£ 3';
 
-COMMENT ON COLUMN USERS.ZIPCODE IS '¿ìÆí¹øÈ£';
+COMMENT ON COLUMN USERS.ZIPCODE IS 'ï¿½ï¿½ï¿½ï¿½ï¿½È£';
 
-COMMENT ON COLUMN USERS.ADDR1 IS 'ÁÖ¼Ò';
+COMMENT ON COLUMN USERS.ADDR1 IS 'ï¿½Ö¼ï¿½';
 
-COMMENT ON COLUMN USERS.ADDR2 IS '»ó¼¼ÁÖ¼Ò';
+COMMENT ON COLUMN USERS.ADDR2 IS 'ï¿½ï¿½ï¿½Ö¼ï¿½';
 
-COMMENT ON COLUMN USERS.IS_BLOCK IS '0 : Á¤»ó / 1: ºí·¢¸®½ºÆ®';
+COMMENT ON COLUMN USERS.IS_BLOCK IS '0 : ï¿½ï¿½ï¿½ï¿½ / 1: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®';
 
 CREATE UNIQUE INDEX PK_USERS
 	ON USERS (
@@ -226,17 +226,17 @@ ALTER TABLE USERS
 			USER_ID
 		);
 
-/* »õ Å×ÀÌºí2 */
+/* ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½2 */
 CREATE TABLE MAJOR (
-	MAJOR_ID NUMBER NOT NULL, /* »õ ÄÃ·³ */
-	MAJOR_NAME VARCHAR2(300) NOT NULL /* »õ ÄÃ·³2 */
+	MAJOR_ID NUMBER NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½ */
+	MAJOR_NAME VARCHAR2(300) NOT NULL /* ï¿½ï¿½ ï¿½Ã·ï¿½2 */
 );
 
-COMMENT ON TABLE MAJOR IS '»õ Å×ÀÌºí2';
+COMMENT ON TABLE MAJOR IS 'ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½2';
 
-COMMENT ON COLUMN MAJOR.MAJOR_ID IS 'Àü°ø °íÀ¯¹øÈ£';
+COMMENT ON COLUMN MAJOR.MAJOR_ID IS 'ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£';
 
-COMMENT ON COLUMN MAJOR.MAJOR_NAME IS 'Àü°ø¸í';
+COMMENT ON COLUMN MAJOR.MAJOR_NAME IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
 
 CREATE UNIQUE INDEX PK_MAJOR
 	ON MAJOR (
@@ -250,35 +250,35 @@ ALTER TABLE MAJOR
 			MAJOR_ID
 		);
 
-/* »õ Å×ÀÌºí3 */
+/* ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½3 */
 CREATE TABLE MYROOM_NEXT (
-	MYROOM_NEXT_ID NUMBER NOT NULL, /* »õ ÄÃ·³ */
-	MYROOM_ID NUMBER NOT NULL, /* »õ ÄÃ·³2 */
-	USER_ID NUMBER NOT NULL, /* »õ ÄÃ·³3 */
-	SUBJECT VARCHAR2(3000), /* »õ ÄÃ·³4 */
-	CONTENT CLOB, /* »õ ÄÃ·³5 */
-	REG_DATE DATE NOT NULL, /* »õ ÄÃ·³7 */
-	UPDATE_DATE DATE, /* »õ ÄÃ·³8 */
-	IS_SHARE NUMBER NOT NULL /* »õ ÄÃ·³6 */
+	MYROOM_NEXT_ID NUMBER NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½ */
+	MYROOM_ID NUMBER NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½2 */
+	USER_ID NUMBER NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½3 */
+	SUBJECT VARCHAR2(3000), /* ï¿½ï¿½ ï¿½Ã·ï¿½4 */
+	CONTENT CLOB, /* ï¿½ï¿½ ï¿½Ã·ï¿½5 */
+	REG_DATE DATE NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½7 */
+	UPDATE_DATE DATE, /* ï¿½ï¿½ ï¿½Ã·ï¿½8 */
+	IS_SHARE NUMBER NOT NULL /* ï¿½ï¿½ ï¿½Ã·ï¿½6 */
 );
 
-COMMENT ON TABLE MYROOM_NEXT IS '»õ Å×ÀÌºí3';
+COMMENT ON TABLE MYROOM_NEXT IS 'ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½3';
 
-COMMENT ON COLUMN MYROOM_NEXT.MYROOM_NEXT_ID IS '³» ±Û °íÀ¯¹øÈ£';
+COMMENT ON COLUMN MYROOM_NEXT.MYROOM_NEXT_ID IS 'ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£';
 
-COMMENT ON COLUMN MYROOM_NEXT.MYROOM_ID IS '¼½¼Ç °íÀ¯¹øÈ£';
+COMMENT ON COLUMN MYROOM_NEXT.MYROOM_ID IS 'ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£';
 
-COMMENT ON COLUMN MYROOM_NEXT.USER_ID IS 'È¸¿ø °íÀ¯¹øÈ£';
+COMMENT ON COLUMN MYROOM_NEXT.USER_ID IS 'È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£';
 
-COMMENT ON COLUMN MYROOM_NEXT.SUBJECT IS '³»±ÛÁ¦¸ñ';
+COMMENT ON COLUMN MYROOM_NEXT.SUBJECT IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
 
-COMMENT ON COLUMN MYROOM_NEXT.CONTENT IS '³»±Û³»¿ë';
+COMMENT ON COLUMN MYROOM_NEXT.CONTENT IS 'ï¿½ï¿½ï¿½Û³ï¿½ï¿½ï¿½';
 
-COMMENT ON COLUMN MYROOM_NEXT.REG_DATE IS '³»±Û µî·ÏÀÏ';
+COMMENT ON COLUMN MYROOM_NEXT.REG_DATE IS 'ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½';
 
-COMMENT ON COLUMN MYROOM_NEXT.UPDATE_DATE IS '³»±Û ¼öÁ¤ÀÏ';
+COMMENT ON COLUMN MYROOM_NEXT.UPDATE_DATE IS 'ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
 
-COMMENT ON COLUMN MYROOM_NEXT.IS_SHARE IS '°øÀ¯ ¿©ºÎ';
+COMMENT ON COLUMN MYROOM_NEXT.IS_SHARE IS 'ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½';
 
 CREATE UNIQUE INDEX PK_MYROOM_NEXT
 	ON MYROOM_NEXT (
@@ -292,32 +292,32 @@ ALTER TABLE MYROOM_NEXT
 			MYROOM_NEXT_ID
 		);
 
-/* »õ Å×ÀÌºí4 */
+/* ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½4 */
 CREATE TABLE GROUPROOM (
-	GROUP_ID NUMBER NOT NULL, /* »õ ÄÃ·³ */
-	MAJOR_ID NUMBER, /* »õ ÄÃ·³5 */
-	GROUP_NAME VARCHAR2(1000) NOT NULL, /* »õ ÄÃ·³2 */
-	CONTENT VARCHAR2(1000), /* »õ ÄÃ·³3 */
-	LEADER_ID NUMBER NOT NULL, /* »õ ÄÃ·³4 */
-	REG_DATE DATE NOT NULL, /* »õ ÄÃ·³6 */
-	G_COUNT NUMBER /* »õ ÄÃ·³7 */
+	GROUP_ID NUMBER NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½ */
+	MAJOR_ID NUMBER, /* ï¿½ï¿½ ï¿½Ã·ï¿½5 */
+	GROUP_NAME VARCHAR2(1000) NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½2 */
+	CONTENT VARCHAR2(1000), /* ï¿½ï¿½ ï¿½Ã·ï¿½3 */
+	LEADER_ID NUMBER NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½4 */
+	REG_DATE DATE NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½6 */
+	G_COUNT NUMBER /* ï¿½ï¿½ ï¿½Ã·ï¿½7 */
 );
 
-COMMENT ON TABLE GROUPROOM IS '»õ Å×ÀÌºí4';
+COMMENT ON TABLE GROUPROOM IS 'ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½4';
 
-COMMENT ON COLUMN GROUPROOM.GROUP_ID IS '±×·ì¹æ °íÀ¯¹øÈ£';
+COMMENT ON COLUMN GROUPROOM.GROUP_ID IS 'ï¿½×·ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£';
 
-COMMENT ON COLUMN GROUPROOM.MAJOR_ID IS 'Àü°ø °íÀ¯¹øÈ£';
+COMMENT ON COLUMN GROUPROOM.MAJOR_ID IS 'ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£';
 
-COMMENT ON COLUMN GROUPROOM.GROUP_NAME IS '±×·ì¹æ ÀÌ¸§';
+COMMENT ON COLUMN GROUPROOM.GROUP_NAME IS 'ï¿½×·ï¿½ï¿½ ï¿½Ì¸ï¿½';
 
-COMMENT ON COLUMN GROUPROOM.CONTENT IS '±×·ì¹æ ¼ÒÁ¦¸ñ';
+COMMENT ON COLUMN GROUPROOM.CONTENT IS 'ï¿½×·ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
 
-COMMENT ON COLUMN GROUPROOM.LEADER_ID IS '±×·ì¹æ ¸®´õ';
+COMMENT ON COLUMN GROUPROOM.LEADER_ID IS 'ï¿½×·ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½';
 
-COMMENT ON COLUMN GROUPROOM.REG_DATE IS '±×·ì¹æ »ý¼ºÀÏ';
+COMMENT ON COLUMN GROUPROOM.REG_DATE IS 'ï¿½×·ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
 
-COMMENT ON COLUMN GROUPROOM.G_COUNT IS '±×·ì¹æ ÀÎ¿ø¼ö Á¦ÇÑ';
+COMMENT ON COLUMN GROUPROOM.G_COUNT IS 'ï¿½×·ï¿½ï¿½ ï¿½Î¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½';
 
 CREATE UNIQUE INDEX PK_GROUPROOM
 	ON GROUPROOM (
@@ -331,32 +331,32 @@ ALTER TABLE GROUPROOM
 			GROUP_ID
 		);
 
-/* »õ Å×ÀÌºí5 */
+/* ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½5 */
 CREATE TABLE QNA (
-	QNA_ID NUMBER NOT NULL, /* »õ ÄÃ·³ */
-	USER_ID NUMBER NOT NULL, /* »õ ÄÃ·³5 */
-	MAJOR_ID NUMBER, /* »õ ÄÃ·³4 */
-	SUBJECT VARCHAR2(2000) NOT NULL, /* »õ ÄÃ·³2 */
-	CONTENT CLOB NOT NULL, /* »õ ÄÃ·³3 */
-	REG_DATE DATE NOT NULL, /* »õ ÄÃ·³6 */
-	HIT NUMBER /* »õ ÄÃ·³7 */
+	QNA_ID NUMBER NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½ */
+	USER_ID NUMBER NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½5 */
+	MAJOR_ID NUMBER, /* ï¿½ï¿½ ï¿½Ã·ï¿½4 */
+	SUBJECT VARCHAR2(2000) NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½2 */
+	CONTENT CLOB NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½3 */
+	REG_DATE DATE NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½6 */
+	HIT NUMBER /* ï¿½ï¿½ ï¿½Ã·ï¿½7 */
 );
 
-COMMENT ON TABLE QNA IS '»õ Å×ÀÌºí5';
+COMMENT ON TABLE QNA IS 'ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½5';
 
-COMMENT ON COLUMN QNA.QNA_ID IS 'Áú¹® °íÀ¯¹øÈ£';
+COMMENT ON COLUMN QNA.QNA_ID IS 'ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£';
 
-COMMENT ON COLUMN QNA.USER_ID IS 'È¸¿ø °íÀ¯¹øÈ£';
+COMMENT ON COLUMN QNA.USER_ID IS 'È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£';
 
-COMMENT ON COLUMN QNA.MAJOR_ID IS 'Àü°ø °íÀ¯¹øÈ£';
+COMMENT ON COLUMN QNA.MAJOR_ID IS 'ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£';
 
-COMMENT ON COLUMN QNA.SUBJECT IS 'Áú¹® Á¦¸ñ';
+COMMENT ON COLUMN QNA.SUBJECT IS 'ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½';
 
-COMMENT ON COLUMN QNA.CONTENT IS 'Áú¹® ³»¿ë';
+COMMENT ON COLUMN QNA.CONTENT IS 'ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½';
 
-COMMENT ON COLUMN QNA.REG_DATE IS 'Áú¹® µî·ÏÀÏ';
+COMMENT ON COLUMN QNA.REG_DATE IS 'ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½';
 
-COMMENT ON COLUMN QNA.HIT IS 'Á¶È¸¼ö';
+COMMENT ON COLUMN QNA.HIT IS 'ï¿½ï¿½È¸ï¿½ï¿½';
 
 CREATE UNIQUE INDEX PK_QNA
 	ON QNA (
@@ -370,26 +370,26 @@ ALTER TABLE QNA
 			QNA_ID
 		);
 
-/* »õ Å×ÀÌºí6 */
+/* ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½6 */
 CREATE TABLE QNA_COMMENT (
-	QNA_COMMENT_ID NUMBER NOT NULL, /* »õ ÄÃ·³ */
-	QNA_ID NUMBER NOT NULL, /* »õ ÄÃ·³3 */
-	USER_ID NUMBER NOT NULL, /* »õ ÄÃ·³4 */
-	QNA_COMMENT CLOB NOT NULL, /* »õ ÄÃ·³2 */
-	REG_DATE DATE NOT NULL /* »õ ÄÃ·³5 */
+	QNA_COMMENT_ID NUMBER NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½ */
+	QNA_ID NUMBER NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½3 */
+	USER_ID NUMBER NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½4 */
+	QNA_COMMENT CLOB NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½2 */
+	REG_DATE DATE NOT NULL /* ï¿½ï¿½ ï¿½Ã·ï¿½5 */
 );
 
-COMMENT ON TABLE QNA_COMMENT IS '»õ Å×ÀÌºí6';
+COMMENT ON TABLE QNA_COMMENT IS 'ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½6';
 
-COMMENT ON COLUMN QNA_COMMENT.QNA_COMMENT_ID IS '´äº¯ °íÀ¯¹øÈ£';
+COMMENT ON COLUMN QNA_COMMENT.QNA_COMMENT_ID IS 'ï¿½äº¯ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£';
 
-COMMENT ON COLUMN QNA_COMMENT.QNA_ID IS 'Áú¹® °íÀ¯¹øÈ£';
+COMMENT ON COLUMN QNA_COMMENT.QNA_ID IS 'ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£';
 
-COMMENT ON COLUMN QNA_COMMENT.USER_ID IS 'È¸¿ø °íÀ¯¹øÈ£';
+COMMENT ON COLUMN QNA_COMMENT.USER_ID IS 'È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£';
 
-COMMENT ON COLUMN QNA_COMMENT.QNA_COMMENT IS '´äº¯ ³»¿ë';
+COMMENT ON COLUMN QNA_COMMENT.QNA_COMMENT IS 'ï¿½äº¯ ï¿½ï¿½ï¿½ï¿½';
 
-COMMENT ON COLUMN QNA_COMMENT.REG_DATE IS '´äº¯ µî·ÏÀÏ';
+COMMENT ON COLUMN QNA_COMMENT.REG_DATE IS 'ï¿½äº¯ ï¿½ï¿½ï¿½ï¿½ï¿½';
 
 CREATE UNIQUE INDEX PK_QNA_COMMENT
 	ON QNA_COMMENT (
@@ -403,26 +403,26 @@ ALTER TABLE QNA_COMMENT
 			QNA_COMMENT_ID
 		);
 
-/* »õ Å×ÀÌºí7 */
+/* ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½7 */
 CREATE TABLE QNA_COMMENT_RE (
-	QNA_RE_ID NUMBER NOT NULL, /* »õ ÄÃ·³ */
-	QNA_COMMENT_ID NUMBER NOT NULL, /* »õ ÄÃ·³2 */
-	USER_ID NUMBER, /* »õ ÄÃ·³4 */
-	RE_COMMENT CLOB NOT NULL, /* »õ ÄÃ·³3 */
-	REG_DATE DATE NOT NULL /* »õ ÄÃ·³5 */
+	QNA_RE_ID NUMBER NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½ */
+	QNA_COMMENT_ID NUMBER NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½2 */
+	USER_ID NUMBER, /* ï¿½ï¿½ ï¿½Ã·ï¿½4 */
+	RE_COMMENT CLOB NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½3 */
+	REG_DATE DATE NOT NULL /* ï¿½ï¿½ ï¿½Ã·ï¿½5 */
 );
 
-COMMENT ON TABLE QNA_COMMENT_RE IS '»õ Å×ÀÌºí7';
+COMMENT ON TABLE QNA_COMMENT_RE IS 'ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½7';
 
-COMMENT ON COLUMN QNA_COMMENT_RE.QNA_RE_ID IS '´äº¯ ´ñ±Û °íÀ¯¹øÈ£';
+COMMENT ON COLUMN QNA_COMMENT_RE.QNA_RE_ID IS 'ï¿½äº¯ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£';
 
-COMMENT ON COLUMN QNA_COMMENT_RE.QNA_COMMENT_ID IS '´äº¯ °íÀ¯¹øÈ£';
+COMMENT ON COLUMN QNA_COMMENT_RE.QNA_COMMENT_ID IS 'ï¿½äº¯ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£';
 
-COMMENT ON COLUMN QNA_COMMENT_RE.USER_ID IS 'È¸¿ø °íÀ¯¹øÈ£';
+COMMENT ON COLUMN QNA_COMMENT_RE.USER_ID IS 'È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£';
 
-COMMENT ON COLUMN QNA_COMMENT_RE.RE_COMMENT IS '´ñ±Û ³»¿ë';
+COMMENT ON COLUMN QNA_COMMENT_RE.RE_COMMENT IS 'ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½';
 
-COMMENT ON COLUMN QNA_COMMENT_RE.REG_DATE IS '´ñ±Û µî·ÏÀÏ';
+COMMENT ON COLUMN QNA_COMMENT_RE.REG_DATE IS 'ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½';
 
 CREATE UNIQUE INDEX PK_QNA_COMMENT_RE
 	ON QNA_COMMENT_RE (
@@ -436,59 +436,59 @@ ALTER TABLE QNA_COMMENT_RE
 			QNA_RE_ID
 		);
 
-/* »õ Å×ÀÌºí9 */
+/* ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½9 */
 CREATE TABLE GROUPROOM_LIST (
-	GROUP_ID NUMBER NOT NULL, /* »õ ÄÃ·³2 */
-	USER_ID NUMBER NOT NULL, /* »õ ÄÃ·³3 */
-	IS_ACCEPT NUMBER, /* »õ ÄÃ·³ */
-	REG_DATE DATE /* »õ ÄÃ·³4 */
+	GROUP_ID NUMBER NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½2 */
+	USER_ID NUMBER NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½3 */
+	IS_ACCEPT NUMBER, /* ï¿½ï¿½ ï¿½Ã·ï¿½ */
+	REG_DATE DATE /* ï¿½ï¿½ ï¿½Ã·ï¿½4 */
 );
 
-COMMENT ON TABLE GROUPROOM_LIST IS '»õ Å×ÀÌºí9';
+COMMENT ON TABLE GROUPROOM_LIST IS 'ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½9';
 
-COMMENT ON COLUMN GROUPROOM_LIST.GROUP_ID IS '±×·ì¹æ °íÀ¯¹øÈ£';
+COMMENT ON COLUMN GROUPROOM_LIST.GROUP_ID IS 'ï¿½×·ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£';
 
-COMMENT ON COLUMN GROUPROOM_LIST.USER_ID IS 'È¸¿ø °íÀ¯¹øÈ£';
+COMMENT ON COLUMN GROUPROOM_LIST.USER_ID IS 'È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£';
 
-COMMENT ON COLUMN GROUPROOM_LIST.IS_ACCEPT IS '½ÂÀÎ¿©ºÎ';
+COMMENT ON COLUMN GROUPROOM_LIST.IS_ACCEPT IS 'ï¿½ï¿½ï¿½Î¿ï¿½ï¿½ï¿½';
 
-COMMENT ON COLUMN GROUPROOM_LIST.REG_DATE IS '¿äÃ»ÀÏ / ½ÂÀÎÀÏ';
+COMMENT ON COLUMN GROUPROOM_LIST.REG_DATE IS 'ï¿½ï¿½Ã»ï¿½ï¿½ / ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
 
-/* »õ Å×ÀÌºí10 */
+/* ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½10 */
 CREATE TABLE QNA_CHOOSE (
-	QNA_COMMENT_ID NUMBER NOT NULL, /* »õ ÄÃ·³3 */
-	GOOD_OR_BAD NUMBER NOT NULL /* »õ ÄÃ·³2 */
+	QNA_COMMENT_ID NUMBER NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½3 */
+	GOOD_OR_BAD NUMBER NOT NULL /* ï¿½ï¿½ ï¿½Ã·ï¿½2 */
 );
 
-COMMENT ON TABLE QNA_CHOOSE IS '»õ Å×ÀÌºí10';
+COMMENT ON TABLE QNA_CHOOSE IS 'ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½10';
 
-COMMENT ON COLUMN QNA_CHOOSE.QNA_COMMENT_ID IS '´äº¯ °íÀ¯¹øÈ£';
+COMMENT ON COLUMN QNA_CHOOSE.QNA_COMMENT_ID IS 'ï¿½äº¯ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£';
 
-COMMENT ON COLUMN QNA_CHOOSE.GOOD_OR_BAD IS 'ÁÁ¾Æ¿ä 1 / ½È¾î¿ä 2';
+COMMENT ON COLUMN QNA_CHOOSE.GOOD_OR_BAD IS 'ï¿½ï¿½ï¿½Æ¿ï¿½ 1 / ï¿½È¾ï¿½ï¿½ 2';
 
-/* »õ Å×ÀÌºí11 */
+/* ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½11 */
 CREATE TABLE NOTICE (
-	NOTICE_ID NUMBER NOT NULL, /* »õ ÄÃ·³ */
-	SUBJECT VARCHAR2(1000) NOT NULL, /* »õ ÄÃ·³2 */
-	CONTENT CLOB NOT NULL, /* »õ ÄÃ·³3 */
-	IS_NOTICE NUMBER, /* »õ ÄÃ·³4 */
-	REG_DATE DATE NOT NULL, /* »õ ÄÃ·³5 */
-	HIT NUMBER /* »õ ÄÃ·³7 */
+	NOTICE_ID NUMBER NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½ */
+	SUBJECT VARCHAR2(1000) NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½2 */
+	CONTENT CLOB NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½3 */
+	IS_NOTICE NUMBER, /* ï¿½ï¿½ ï¿½Ã·ï¿½4 */
+	REG_DATE DATE NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½5 */
+	HIT NUMBER /* ï¿½ï¿½ ï¿½Ã·ï¿½7 */
 );
 
-COMMENT ON TABLE NOTICE IS '»õ Å×ÀÌºí11';
+COMMENT ON TABLE NOTICE IS 'ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½11';
 
-COMMENT ON COLUMN NOTICE.NOTICE_ID IS '°øÁö»çÇ× °íÀ¯¹øÈ£';
+COMMENT ON COLUMN NOTICE.NOTICE_ID IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£';
 
-COMMENT ON COLUMN NOTICE.SUBJECT IS '°øÁö»çÇ× Á¦¸ñ';
+COMMENT ON COLUMN NOTICE.SUBJECT IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½';
 
-COMMENT ON COLUMN NOTICE.CONTENT IS '°øÁö»çÇ× ³»¿ë';
+COMMENT ON COLUMN NOTICE.CONTENT IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½';
 
-COMMENT ON COLUMN NOTICE.IS_NOTICE IS '°øÁö»çÇ× ³ëÃâ¿©ºÎ';
+COMMENT ON COLUMN NOTICE.IS_NOTICE IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½â¿©ï¿½ï¿½';
 
-COMMENT ON COLUMN NOTICE.REG_DATE IS '°øÁö»çÇ× µî·ÏÀÏ';
+COMMENT ON COLUMN NOTICE.REG_DATE IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½';
 
-COMMENT ON COLUMN NOTICE.HIT IS 'Á¶È¸¼ö';
+COMMENT ON COLUMN NOTICE.HIT IS 'ï¿½ï¿½È¸ï¿½ï¿½';
 
 CREATE UNIQUE INDEX PK_NOTICE
 	ON NOTICE (
@@ -502,20 +502,20 @@ ALTER TABLE NOTICE
 			NOTICE_ID
 		);
 
-/* »õ Å×ÀÌºí12 */
+/* ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½12 */
 CREATE TABLE MYROOM (
-	MYROOM_ID NUMBER NOT NULL, /* »õ ÄÃ·³ */
-	USER_ID NUMBER NOT NULL, /* »õ ÄÃ·³3 */
-	SUBJECT VARCHAR2(3000) NOT NULL /* »õ ÄÃ·³2 */
+	MYROOM_ID NUMBER NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½ */
+	USER_ID NUMBER NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½3 */
+	SUBJECT VARCHAR2(3000) NOT NULL /* ï¿½ï¿½ ï¿½Ã·ï¿½2 */
 );
 
-COMMENT ON TABLE MYROOM IS '»õ Å×ÀÌºí12';
+COMMENT ON TABLE MYROOM IS 'ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½12';
 
-COMMENT ON COLUMN MYROOM.MYROOM_ID IS '³» ±Û ¼½¼Ç °íÀ¯¹øÈ£';
+COMMENT ON COLUMN MYROOM.MYROOM_ID IS 'ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£';
 
-COMMENT ON COLUMN MYROOM.USER_ID IS 'È¸¿ø °íÀ¯¹øÈ£';
+COMMENT ON COLUMN MYROOM.USER_ID IS 'È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£';
 
-COMMENT ON COLUMN MYROOM.SUBJECT IS '¼½¼Ç Á¦¸ñ';
+COMMENT ON COLUMN MYROOM.SUBJECT IS 'ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½';
 
 CREATE UNIQUE INDEX PK_MYROOM
 	ON MYROOM (
@@ -529,29 +529,29 @@ ALTER TABLE MYROOM
 			MYROOM_ID
 		);
 
-/* »õ Å×ÀÌºí13 */
+/* ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½13 */
 CREATE TABLE POLL (
-	POLL_ID NUMBER NOT NULL, /* »õ ÄÃ·³ */
-	SUBJECT VARCHAR2(1000) NOT NULL, /* »õ ÄÃ·³2 */
-	MEMO VARCHAR2(3000), /* »õ ÄÃ·³3 */
-	CHART_TYPE NUMBER, /* »õ ÄÃ·³4 */
-	START_DATE DATE, /* »õ ÄÃ·³6 */
-	END_DATE DATE /* »õ ÄÃ·³7 */
+	POLL_ID NUMBER NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½ */
+	SUBJECT VARCHAR2(1000) NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½2 */
+	MEMO VARCHAR2(3000), /* ï¿½ï¿½ ï¿½Ã·ï¿½3 */
+	CHART_TYPE NUMBER, /* ï¿½ï¿½ ï¿½Ã·ï¿½4 */
+	START_DATE DATE, /* ï¿½ï¿½ ï¿½Ã·ï¿½6 */
+	END_DATE DATE /* ï¿½ï¿½ ï¿½Ã·ï¿½7 */
 );
 
-COMMENT ON TABLE POLL IS '»õ Å×ÀÌºí13';
+COMMENT ON TABLE POLL IS 'ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½13';
 
-COMMENT ON COLUMN POLL.POLL_ID IS '¼³¹®Á¶»ç °íÀ¯¹øÈ£';
+COMMENT ON COLUMN POLL.POLL_ID IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£';
 
-COMMENT ON COLUMN POLL.SUBJECT IS '¼³¹®Á¶»ç Á¦¸ñ';
+COMMENT ON COLUMN POLL.SUBJECT IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½';
 
-COMMENT ON COLUMN POLL.MEMO IS '¼³¹®Á¶»ç ¸Þ¸ð';
+COMMENT ON COLUMN POLL.MEMO IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¸ï¿½';
 
-COMMENT ON COLUMN POLL.CHART_TYPE IS '0 : ¸·´ë / 1 : ´ÙÀÌ¾î±×·¥ 2: ÆÄÀÌ';
+COMMENT ON COLUMN POLL.CHART_TYPE IS '0 : ï¿½ï¿½ï¿½ï¿½ / 1 : ï¿½ï¿½ï¿½Ì¾ï¿½×·ï¿½ 2: ï¿½ï¿½ï¿½ï¿½';
 
-COMMENT ON COLUMN POLL.START_DATE IS '¼³¹®Á¶»ç µî·ÏÀÏ';
+COMMENT ON COLUMN POLL.START_DATE IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½';
 
-COMMENT ON COLUMN POLL.END_DATE IS '¼³¹®Á¶»ç ¸¶°¨ÀÏ';
+COMMENT ON COLUMN POLL.END_DATE IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
 
 CREATE UNIQUE INDEX PK_POLL
 	ON POLL (
@@ -565,62 +565,62 @@ ALTER TABLE POLL
 			POLL_ID
 		);
 
-/* »õ Å×ÀÌºí14 */
+/* ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½14 */
 CREATE TABLE POLL_DETAIL (
-	POLL_ID NUMBER NOT NULL, /* »õ ÄÃ·³2 */
-	CONTENT VARCHAR2(2000), /* »õ ÄÃ·³ */
-	COUNT NUMBER /* »õ ÄÃ·³3 */
+	POLL_ID NUMBER NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½2 */
+	CONTENT VARCHAR2(2000), /* ï¿½ï¿½ ï¿½Ã·ï¿½ */
+	COUNT NUMBER /* ï¿½ï¿½ ï¿½Ã·ï¿½3 */
 );
 
-COMMENT ON TABLE POLL_DETAIL IS '»õ Å×ÀÌºí14';
+COMMENT ON TABLE POLL_DETAIL IS 'ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½14';
 
-COMMENT ON COLUMN POLL_DETAIL.POLL_ID IS '¼³¹®Á¶»ç °íÀ¯¹øÈ£';
+COMMENT ON COLUMN POLL_DETAIL.POLL_ID IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£';
 
-COMMENT ON COLUMN POLL_DETAIL.CONTENT IS 'Ç×¸ñ';
+COMMENT ON COLUMN POLL_DETAIL.CONTENT IS 'ï¿½×¸ï¿½';
 
-COMMENT ON COLUMN POLL_DETAIL.COUNT IS '¼³¹®Á¶»ç ÇÕ°è';
+COMMENT ON COLUMN POLL_DETAIL.COUNT IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Õ°ï¿½';
 
-/* »õ Å×ÀÌºí15 */
+/* ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½15 */
 CREATE TABLE POLL_YESNO (
-	POLL_ID NUMBER NOT NULL, /* »õ ÄÃ·³2 */
-	USER_ID NUMBER NOT NULL /* »õ ÄÃ·³3 */
+	POLL_ID NUMBER NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½2 */
+	USER_ID NUMBER NOT NULL /* ï¿½ï¿½ ï¿½Ã·ï¿½3 */
 );
 
-COMMENT ON TABLE POLL_YESNO IS '»õ Å×ÀÌºí15';
+COMMENT ON TABLE POLL_YESNO IS 'ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½15';
 
-COMMENT ON COLUMN POLL_YESNO.POLL_ID IS '¼³¹®Á¶»ç °íÀ¯¹øÈ£';
+COMMENT ON COLUMN POLL_YESNO.POLL_ID IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£';
 
-COMMENT ON COLUMN POLL_YESNO.USER_ID IS 'È¸¿ø °íÀ¯¹øÈ£';
+COMMENT ON COLUMN POLL_YESNO.USER_ID IS 'È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£';
 
-/* »õ Å×ÀÌºí16 */
+/* ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½16 */
 CREATE TABLE SCHEDULE (
-	SCHEDULE_ID NUMBER NOT NULL, /* »õ ÄÃ·³ */
-	GROUP_ID NUMBER NOT NULL, /* »õ ÄÃ·³8 */
-	SCHEDULE_NAME VARCHAR2(1000) NOT NULL, /* »õ ÄÃ·³2 */
-	DETAIL VARCHAR2(3000), /* »õ ÄÃ·³3 */
-	START_DATE VARCHAR2(100), /* »õ ÄÃ·³4 */
-	START_TIME VARCHAR2(100), /* »õ ÄÃ·³5 */
-	END_DATE VARCHAR2(100), /* »õ ÄÃ·³6 */
-	END_TIME VARCHAR2(100) /* »õ ÄÃ·³7 */
+	SCHEDULE_ID NUMBER NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½ */
+	GROUP_ID NUMBER NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½8 */
+	SCHEDULE_NAME VARCHAR2(1000) NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½2 */
+	DETAIL VARCHAR2(3000), /* ï¿½ï¿½ ï¿½Ã·ï¿½3 */
+	START_DATE VARCHAR2(100), /* ï¿½ï¿½ ï¿½Ã·ï¿½4 */
+	START_TIME VARCHAR2(100), /* ï¿½ï¿½ ï¿½Ã·ï¿½5 */
+	END_DATE VARCHAR2(100), /* ï¿½ï¿½ ï¿½Ã·ï¿½6 */
+	END_TIME VARCHAR2(100) /* ï¿½ï¿½ ï¿½Ã·ï¿½7 */
 );
 
-COMMENT ON TABLE SCHEDULE IS '»õ Å×ÀÌºí16';
+COMMENT ON TABLE SCHEDULE IS 'ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½16';
 
-COMMENT ON COLUMN SCHEDULE.SCHEDULE_ID IS 'ÀÏÁ¤ °íÀ¯¹øÈ£';
+COMMENT ON COLUMN SCHEDULE.SCHEDULE_ID IS 'ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£';
 
-COMMENT ON COLUMN SCHEDULE.GROUP_ID IS '±×·ì¹æ °íÀ¯¹øÈ£';
+COMMENT ON COLUMN SCHEDULE.GROUP_ID IS 'ï¿½×·ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£';
 
-COMMENT ON COLUMN SCHEDULE.SCHEDULE_NAME IS 'ÀÏÁ¤¸í';
+COMMENT ON COLUMN SCHEDULE.SCHEDULE_NAME IS 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
 
-COMMENT ON COLUMN SCHEDULE.DETAIL IS 'ÀÏÁ¤ ³»¿ë';
+COMMENT ON COLUMN SCHEDULE.DETAIL IS 'ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½';
 
-COMMENT ON COLUMN SCHEDULE.START_DATE IS 'ÀÏÁ¤ ½ÃÀÛ³¯Â¥';
+COMMENT ON COLUMN SCHEDULE.START_DATE IS 'ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Û³ï¿½Â¥';
 
-COMMENT ON COLUMN SCHEDULE.START_TIME IS 'ÀÏÁ¤ ½ÃÀÛ½Ã°£';
+COMMENT ON COLUMN SCHEDULE.START_TIME IS 'ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Û½Ã°ï¿½';
 
-COMMENT ON COLUMN SCHEDULE.END_DATE IS 'ÀÏÁ¤ ¸¶°¨³¯Â¥';
+COMMENT ON COLUMN SCHEDULE.END_DATE IS 'ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¥';
 
-COMMENT ON COLUMN SCHEDULE.END_TIME IS 'ÀÏÁ¤ ¸¶°¨½Ã°£';
+COMMENT ON COLUMN SCHEDULE.END_TIME IS 'ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ã°ï¿½';
 
 CREATE UNIQUE INDEX PK_SCHEDULE
 	ON SCHEDULE (
@@ -634,38 +634,38 @@ ALTER TABLE SCHEDULE
 			SCHEDULE_ID
 		);
 
-/* »õ Å×ÀÌºí18 */
+/* ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½18 */
 CREATE TABLE ALARM (
-	TARGET_ID NUMBER NOT NULL, /* »õ ÄÃ·³2 */
-	KEY NUMBER NOT NULL, /* »õ ÄÃ·³ */
-	LOGTIME DATE NOT NULL, /* »õ ÄÃ·³3 */
-	SEQUENCE_NUM NUMBER NOT NULL, /* »õ ÄÃ·³4 */
-	FLAG NUMBER /* »õ ÄÃ·³5 */
+	TARGET_ID NUMBER NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½2 */
+	KEY NUMBER NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½ */
+	LOGTIME DATE NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½3 */
+	SEQUENCE_NUM NUMBER NOT NULL, /* ï¿½ï¿½ ï¿½Ã·ï¿½4 */
+	FLAG NUMBER /* ï¿½ï¿½ ï¿½Ã·ï¿½5 */
 );
 
-COMMENT ON TABLE ALARM IS '»õ Å×ÀÌºí18';
+COMMENT ON TABLE ALARM IS 'ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½18';
 
-COMMENT ON COLUMN ALARM.TARGET_ID IS '¾Ë¸²´ë»ó È¸¿ø °íÀ¯¹øÈ£';
+COMMENT ON COLUMN ALARM.TARGET_ID IS 'ï¿½Ë¸ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£';
 
-COMMENT ON COLUMN ALARM.KEY IS '¾×¼Ç Á¾·ù';
+COMMENT ON COLUMN ALARM.KEY IS 'ï¿½×¼ï¿½ ï¿½ï¿½ï¿½ï¿½';
 
-COMMENT ON COLUMN ALARM.LOGTIME IS '¾Ë¸² ±â·Ï ³¯Â¥';
+COMMENT ON COLUMN ALARM.LOGTIME IS 'ï¿½Ë¸ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Â¥';
 
-COMMENT ON COLUMN ALARM.SEQUENCE_NUM IS '¾×¼ÇÀÇ °íÀ¯°ª';
+COMMENT ON COLUMN ALARM.SEQUENCE_NUM IS 'ï¿½×¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
 
-COMMENT ON COLUMN ALARM.FLAG IS '0 : ¾ÈºÃ´Ù / 1 :È®ÀÎ';
+COMMENT ON COLUMN ALARM.FLAG IS '0 : ï¿½ÈºÃ´ï¿½ / 1 :È®ï¿½ï¿½';
 
-/* »õ Å×ÀÌºí19 */
+/* ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½19 */
 CREATE TABLE GROUPROOM_HW (
-	MYROOM_NEXT_ID NUMBER, /* »õ ÄÃ·³3 */
-	GROUP_ID NUMBER, /* »õ ÄÃ·³4 */
-	SCHEDULE_ID NUMBER /* »õ ÄÃ·³ */
+	MYROOM_NEXT_ID NUMBER, /* ï¿½ï¿½ ï¿½Ã·ï¿½3 */
+	GROUP_ID NUMBER, /* ï¿½ï¿½ ï¿½Ã·ï¿½4 */
+	SCHEDULE_ID NUMBER /* ï¿½ï¿½ ï¿½Ã·ï¿½ */
 );
 
-COMMENT ON TABLE GROUPROOM_HW IS '»õ Å×ÀÌºí19';
+COMMENT ON TABLE GROUPROOM_HW IS 'ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½19';
 
-COMMENT ON COLUMN GROUPROOM_HW.MYROOM_NEXT_ID IS '±Û ¹øÈ£';
+COMMENT ON COLUMN GROUPROOM_HW.MYROOM_NEXT_ID IS 'ï¿½ï¿½ ï¿½ï¿½È£';
 
-COMMENT ON COLUMN GROUPROOM_HW.GROUP_ID IS '±×·ì ¹øÈ£';
+COMMENT ON COLUMN GROUPROOM_HW.GROUP_ID IS 'ï¿½×·ï¿½ ï¿½ï¿½È£';
 
-COMMENT ON COLUMN GROUPROOM_HW.SCHEDULE_ID IS 'ÀÏÁ¤ °íÀ¯¹øÈ£';
+COMMENT ON COLUMN GROUPROOM_HW.SCHEDULE_ID IS 'ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£';
