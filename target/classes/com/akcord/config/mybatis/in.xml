@@ -3,6 +3,14 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 <mapper namespace="com.akcord.in.dao.InDao">
-    
-  
+    <insert id="answerroom" parameterType="inDto">
+        insert into qna
+        (qna_id,user_id,major_id,subject,content,reg_date,hit)
+        values (#{qna_id}, #{user_id}, #{major_id}, #{subject}, #{content},sysdate,#{hit})
+    </insert>
+    <select id="answerlist" resultType="inDto">
+        select qna_id,user_id,major_id,subject,content,reg_date,hit
+        from qna
+        where user_id = #{user_id}
+    </select>
 </mapper>

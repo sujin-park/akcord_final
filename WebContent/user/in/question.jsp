@@ -26,12 +26,19 @@
 		$('#cancelBtn').click(function() {
 			//joinmove();
 			$(location).attr('href', '${root}/in/inmain.akcord');
-			});
-			
+		});
+
 		$('#resetBtn').click(function() {
 			//joinmove();
 			$('.note-editable').empty();
 		});
+		$('#saveBtn').click(function() {
+			
+			$('form[name=questionFrom]').attr('action','${root}/in/inmain.akcord');
+			$('form[name=questionFrom]').submit();
+				
+		});
+
 	});
 </script>
 <title>Insert title here</title>
@@ -39,22 +46,21 @@
 
 <!-- 회원 고유코드, 제목, 내용, 작성날짜(sysdate), 카테고리 고유번호  -->
 <div class="container col-sm-12 form-group">
-	<form class="form-horizontal" action="">
+	<form id="questionFrom" name="questionFrom" class="form-horizontal" action="">
+	
 		<fieldset>
 			<div class="form-group">
 				<label class="col-sm-2 control-label"></label>
 				<div class="col-sm-1">
-					<div class="dropdown">
-						<button class="btn  dropdown-toggle" type="button"
-							data-toggle="dropdown">
-							카테고리 선택 <span class="caret"></span>
-						</button>
-						<ul class="dropdown-menu">
-							<li><a href="#">HTML</a></li>
-							<li><a href="#">CSS</a></li>
-							<li><a href="#">JavaScript</a></li>
-						</ul>
-					</div>
+					
+					<select
+							class="form-control" id="sel1">
+							<option >CSS</option>
+							<option>HTML</option>
+							<option>C++</option>
+							<option>JAVA</option>
+						</select>
+					
 				</div>
 				<div class="col-sm-7">
 					<input type="text" class="form-control" id="usr"
@@ -74,7 +80,7 @@
 						<button type="button" class="btn btn-danger col-sm-1 btn-lg"
 							id="resetBtn">reset</button>
 
-						<button type="button" class="btn btn-danger col-sm-1 btn-lg">Save</button>
+						<button type="button" class="btn btn-danger col-sm-1 btn-lg" id="saveBtn">Save</button>
 					</div>
 				</div>
 
@@ -82,7 +88,9 @@
 
 		</fieldset>
 
+	
 	</form>
 </div>
+
 </body>
 </html>

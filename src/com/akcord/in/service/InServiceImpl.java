@@ -16,14 +16,14 @@ public class InServiceImpl implements InService{
 	private SqlSession sqlSession;
 
 	@Override
-	public int inroom(InDto inDto) {
+	public int answerroom(InDto inDto) {
 		// TODO Auto-generated method stub
-		return sqlSession.getMapper(InDao.class).inroom(inDto);
+		return sqlSession.getMapper(InDao.class).answerroom(inDto);
 	}
 
 	@Override
-	public List<InDto> inlist() {
+	public List<InDto> answerlist() {
 		// TODO Auto-generated method stub
-		return sqlSession.getMapper(InDao.class).inlist();
+		return sqlSession.getMapper(InDao.class).answerlist();
 	}
 }
