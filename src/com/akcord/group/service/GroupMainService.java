@@ -16,4 +16,6 @@ public interface GroupMainService {
 	public List<GroupListDto> searchlist(String sid);
 	
 	public int invite(Map<String, String> map);
+	
+	public List<GroupListDto> originlist(String seq);
 }

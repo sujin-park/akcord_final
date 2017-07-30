@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.akcord.group.model.GroupRoomDto;
 import com.akcord.group.model.MajorDto;
 import com.akcord.group.service.GroupService;
+import com.akcord.user.model.UserDto;
 
 @Controller
 @RequestMapping("/group")
@@ -25,7 +26,8 @@ public class GroupController {
 	
 	@RequestMapping("/make.akcord")
 	public String makegroup(GroupRoomDto groupRoomDto, HttpSession session){
-		groupRoomDto.setLeaderId(1);
+		UserDto user = (UserDto) session.getAttribute("user");
+		groupRoomDto.setLeaderId(user.getUser_id());
 		int cnt = groupService.createG(groupRoomDto);
 		return "redirect:/group/list.akcord";
 	}
@@ -33,8 +35,8 @@ public class GroupController {
 	@RequestMapping("/list.akcord")
 	public ModelAndView list(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		String myseq = "1";
-		List<GroupRoomDto> list = groupService.grouplist(myseq);
+		UserDto user = (UserDto) session.getAttribute("user");
+		List<GroupRoomDto> list = groupService.grouplist(user.getUser_id()+"");
 		List<MajorDto> majorlist = groupService.majorlist();
 		mav.addObject("mList", majorlist);
 		mav.addObject("grouplist", list);
@@ -43,12 +45,10 @@ public class GroupController {
 	}
 	
 	@RequestMapping("/waitinglist.akcord")
-	public ModelAndView acceptlist(){
+	public ModelAndView acceptlist(HttpSession session){
 		ModelAndView mav = new ModelAndView();
-		//mav.addObject("", waitinglist);
-		//요청일, 전공, 그룹방명, 그룹방내용, 리더
-		int seq = 1; // session에서 내 시퀀스 가져와야함
-		List<GroupRoomDto> waitinglist = groupService.waitinglist(seq);
+		UserDto user = (UserDto) session.getAttribute("user");
+		List<GroupRoomDto> waitinglist = groupService.waitinglist(user.getUser_id());
 		mav.addObject("waitlist", waitinglist);
 		mav.setViewName("/user/group/waitinglist");
 		return mav;
@@ -56,9 +56,10 @@ public class GroupController {
 	@RequestMapping("/join.akcord")
 	public String join(@RequestParam("seq") String seq, HttpSession session){
 		ModelAndView mav = new ModelAndView();
+		UserDto user = (UserDto) session.getAttribute("user");
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("seq", seq);
-		map.put("userId", "1"); // 사용자 아이디는 세션에서 가져오기
+		map.put("userId", user.getUser_id()+"");
 		int cnt = groupService.joinGroup(map);
 		return "redirect:/group/list.akcord";
 	}

@@ -3,6 +3,8 @@ package com.akcord.group.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.akcord.group.model.GroupListDto;
 import com.akcord.group.service.GroupMainService;
+import com.akcord.user.model.UserDto;
 
 @Controller
 @RequestMapping("/groupmain")
@@ -27,21 +30,26 @@ public class GroupMainController {
 	}
 	
 	@RequestMapping("/group.akcord")
-	public ModelAndView groupList() { // 그룹원 관리 
+	public ModelAndView groupList(HttpSession session) { // 그룹원 관리 
 		ModelAndView mav = new ModelAndView();
-		String seq = "1";
-		List<GroupListDto> glist = groupMainService.gMemberlist(seq);
+		UserDto user = (UserDto) session.getAttribute("user");
+		List<GroupListDto> glist = groupMainService.gMemberlist(user.getUser_id()+"");
 		mav.addObject("glist", glist);
 		mav.setViewName("/user/group/setgroup");
 		return mav;
 	}
 	
 	@RequestMapping("/reject.akcord") // 대기중인 회원 지우기
-	public String delete(@RequestParam("seq") String seq) {
+	public String delete(@RequestParam("seq") String seq, @RequestParam("state") int state) {
 		int cnt = groupMainService.rejectMember(seq);
-		return "redirect:/groupmain/group.akcord";
+		String path = "";
+		if (state == 1) {
+			path = "redirect:/groupmain/group.akcord";
+		} else {
+			path = "redirect:/groupmain/group.akcord";
+		}
+		return path;
 	}
-	
 	
 	@RequestMapping("/accept.akcord") // 회원 승인해주기
 	public String accept(@RequestParam("seq") String seq) {
@@ -62,5 +70,14 @@ public class GroupMainController {
 		ModelAndView mav = new ModelAndView();
 		int cnt = groupMainService.invite(map);
 		return "redirect:/groupmain/group.akcord";
+	}
+	@RequestMapping("/grouplist.akcord")
+	public ModelAndView grouplist(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		UserDto user = (UserDto) session.getAttribute("user");
+		List<GroupListDto> grouplist = groupMainService.originlist(user.getUser_id()+"");
+		mav.addObject("oglist", grouplist);
+		mav.setViewName("/user/group/origingroup");
+		return mav;
 	}
 }

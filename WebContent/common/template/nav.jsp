@@ -1,7 +1,8 @@
  <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<link rel="stylesheet" type="text/css" href="./css/menu.css">
-    <div class="headline">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="root" value="${pageContext.request.contextPath}" />
+<div class="headline">
     
     <!-- nav -->
 
@@ -11,68 +12,89 @@
          <div class="panel-heading">
             <h4 class="panel-title">
                <a data-toggle="collapse" href="#collapse-1">
-               <img alt=""   src="./img/icon.png" height="35" width="35"> </a>
+               <img alt=""   src="${root}/doc/img/icon.png" height="35" width="35">
+              	
+               </a>
             </h4>
          </div>
-         <div id="collapse-1" class="panel-collapse collapse" >
+         
+         <div id="collapse-1" class="panel-collapse collapse">
+				 <div class="input-group">
+				      <input type="text" class="form-control" placeholder="단어를 입력해주세요">
+				      <span class="input-group-btn">
+				        <button class="btn btn-danger" type="button">
+				        	SEARCH
+	                  	</button>
+				      </span>
+			    </div>
             <ul class="list-group">
                <li class="list-group-item">
+               	  <div class="list-heading">
+                     <h4 class="list-title">
+                        <a href="">공지사항</a>
+                     </h4>
+                  </div> 
+                  <div class="list-heading1">
+                     <h4 class="list-title" style="padding-top:20px;">
+                        <a href="">MY ROOM</a>
+                     </h4>
+                  </div>
                   <div class="list-heading">
                      <h4 class="list-title">
-                        <a data-toggle="collapse" href="#collapse-2">ONE</a>
+                        <a href="#collapse-2" a data-toggle="collapse">GROUP ROOM</a>
                      </h4>
                   </div> <!-- more menu for ONE -->
                   <div id="collapse-2" class="panel-collapse collapse">
-                     <ul class="list-group">
-                        <li class="list-group-item"><div>uno</div></li>
-                        <li class="list-group-item">do</li>
-                        <li class="list-group-item">Thre</li>
+                     <ul>
+                        <li><a href="#">전체 그룹방</a></li>
+                        <li><a href="#">내 그룹방</a></li>
                      </ul>
-                     <div class="panel-footer">THis is FFOOOOOOT</div>
                   </div>
-               </li>
-
-               <li class="list-group-item">
-                  <div class="list-heading">
-                     <h4 class="list-title">
-                        <a data-toggle="collapse" href="#collapse3">TWO</a>
+                  <div class="list-heading1">
+                     <h4 class="list-title" style="padding-top:20px;">
+                        <a href="">지식인</a>
                      </h4>
                   </div>
-               <!-- more menu for TWO -->
-                  <div id="collapse3" class="panel-collapse collapse">
-                     <ul class="list-group">
-                        <li class="list-group-item"><div>하하나</div></li>
-                        <li class="list-group-item">두둘</li>
-                        <li class="list-group-item">세셋</li>
-                     </ul>
-                     <div class="panel-footer">푸터는 왜 있는그거니</div>
+               	   <div class="list-heading">
+                     <h4 class="list-title">
+                        <a href="">STUDY CAFE</a>
+                     </h4>
                   </div>
-               
+                  <div class="list-heading1">
+                     <h4 class="list-title" style="padding-top:20px;"> 
+                        <a href="">MY PAGE</a>
+                     </h4>
+                  </div> 
+                  <div class="list-heading">
+                     <h4 class="list-title">
+                        <a href="#collapse-3" a data-toggle="collapse">관리</a>
+                     </h4>
+                  </div>
+                  <div id="collapse-3" class="panel-collapse collapse">
+                     <ul>
+                        <li><a href="#">회원관리</a></li>
+                        <li><a href="#">통계</a></li>
+                     </ul>
+                  </div> 
                </li>
-               <li class="list-group-item">Three</li>
             </ul>
-            <div class="panel-footer">Footer</div>
          </div>
       </div>
-
-    
     
 <!-- HEAD -->
-<div class="container-head">
-
-           <div class="c_01 c">
-              <h3>AKord</h3>
-           </div>
-           
-            <div class="c_02 c">
-              <h4><a href="#">login</a></h4>
-           </div>
-           
-            <div class="c_03 c">
-               <a href=""><img alt="" src="./img/bell-icon.png" width="20" height="20"><span class="badge">5</span></a>
-           </div>
-
+	<div class="container-head">
+	
+	           <div class="c_01 c">
+	              <h3 id="logo"><a href="">AKCORD</a></h3>
+	           </div>
+	           
+	           
+	            <div class="c_03 c pull-right">
+	               <a href=""><img alt="" src="${root}/doc/img/bell-icon.png" width="20" height="20"><span class="badge">5</span></a>
+	           </div>
+	           <div class="login_info pull-right">
+	              	박수진님 환영합니다
+	           </div>
+	           
+	</div>
 </div>
-     
-     
-     </div>

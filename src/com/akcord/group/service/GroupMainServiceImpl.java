@@ -41,4 +41,9 @@ public class GroupMainServiceImpl  implements GroupMainService{
 		return sqlSession.getMapper(GroupMainDao.class).invite(map);
 	}
 
+	@Override
+	public List<GroupListDto> originlist(String seq) {
+		return sqlSession.getMapper(GroupMainDao.class).originlist(seq);
+	}
+
 }
