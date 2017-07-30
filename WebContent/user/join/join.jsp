@@ -1,6 +1,74 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="root" value="${pageContext.request.contextPath}" />
+<script>
 
+var count = 1;
+
+$(document).ready(function (){
+	$('#id').keyup(function(){
+		var output = '4자이상 12자 이하로 입력해주세요.'
+		var resultView = $('#result');
+		var sid = $(this).val();//document.getElementById("id").value;
+//		alert(sid.length);
+		if(sid.length > 3 && sid.length < 13){
+			$.ajax({
+				type : 'GET',
+				dataType : 'json',
+				url : '${root}/user/idCheck.akcord',
+				data : {'sid' : sid},
+				success : function(data){
+					if(data.count == 0){
+						output = '<font color="blue">' + data.sid + '</font>는 사용가능한 아이디입니다.';
+						count = 0;
+					}else{
+						output = '<font color="red">' + data.sid + '</font>는 사용불가능한 아이디입니다.';
+					}
+					resultView.empty();
+					resultView.append(output);
+				},
+				error : function(e){
+						alert("에러발생!! >>" + e)
+				}
+			});
+
+		}else {
+			resultView.empty();
+			resultView.append(output);
+		}
+	});
+
+	
+	$('#joinB').click(function(){
+		join();
+	});
+	
+});
+
+function join(){
+	if(document.getElementById("id").value == "") {
+		alert("아이디 입력!");
+		return;
+	} else if(count != 0){ 
+		alert("아이디 검사!");
+		return;
+	}else if(document.getElementById("name").value == "") {
+		alert("이름 입력!");
+		return;
+	} else if(document.getElementById("password").value  == "") {
+		alert("비밀번호 입력!");
+		return;
+	} else if(document.getElementById("password").value != document.getElementById("pwcheck").value) {
+		alert("비밀번호 확인!");
+		return;
+	} else {
+		document.joinform.action = "${root}/user/join.akcord";
+		document.joinform.submit();
+	}
+}
+
+</script>
 
 <!-- 회원가입 Modal-->
 <div class="modal fade" id="joinBtnModal" role="dialog" >
@@ -14,29 +82,38 @@
 				<h4 class="modal-title"><img src="${root}/doc/img/join.jpg" style="width: 100%"></h4>
 			</div>
 			<div class="modal-body">
-				<form class="form-horizontal" action="">
+				<form class="form-horizontal" id="join" action="post">
 					<fieldset>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">이름</label>
-							<div class="col-sm-8">
+							<div class="col-sm-4">
 								<input type="text" id="name" name="name" class="form-control">
 							</div>
+														
+							<label class="col-sm-2 control-label">성별</label>
+						<div class="radio-inline col-sm-1 control-label">
+ 							<label><input type="radio" id="gender" name="optradio">남</label>
 						</div>
+						<div class="radio-inline col-sm-1 control-label">
+  							<label><input type="radio" id="gender1" name="optradio">여</label>
+						</div>
+						</div>
+
 
 						<div class="form-group">
 							<label class="col-sm-3 control-label">아이디</label>
-							<div class="col-sm-5">
-								<input type="text" id="id" name="id" class="form-control">
+							<div class="col-sm-8">
+								<input type="text" id="id" name="id" class="form-control" value="">
 							</div>
-							<div class="col-sm-4">
-							<button id="idcheck" name="idcheck" class="btn btn-danger" value="">중복체크확인</button>
+							<div id="result" class="col-sm-11" style="text-align: center;">
 							</div>
 						</div>
 						
 						<div class="form-group">
 							<label class="col-sm-3 control-label">비밀번호</label>
 							<div class="col-sm-8">
-								<input type="password" id="pw" name="pw" class="form-control">
+						
+								<input type="password" id="password" name="password" class="form-control">
 							</div>
 						</div>
 						
@@ -133,8 +210,8 @@
 						
 						</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-danger" data-dismiss="modal">회원등록</button>
-				<button type="button" class="btn btn-danger" data-dismiss="modal">등록취소</button>
+				<button id="joinB" type="button" class="btn btn-danger" data-dismiss="modal">회원등록</button>
+				<button id="closeBtn" type="button" class="btn btn-danger" data-dismiss="modal">등록취소</button>
 			</div>
 						
 						

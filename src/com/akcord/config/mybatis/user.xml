@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-</beans>
+<mapper namespace="com.akcord.user.dao.UserDao">
+	<!-- 쿼리문 작성하기 -->
+	
+	<!-- 아이디확인 -->
+	<select id="idCheck" parameterType="String" resultType="int">
+		select count(id)
+		from users
+		where id=#{id}
+	</select>
+	
+	<!-- 로그인 -->
+	<select id="login" parameterType="java.util.Map" resultType="userDto">
+		select id, name
+		from users
+		where id=#{id} and password=#{password} and is_block =0
+	</select>
+
+</mapper>	

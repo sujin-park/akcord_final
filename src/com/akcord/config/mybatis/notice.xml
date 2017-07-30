@@ -8,11 +8,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="noticeWrite" parameterType="noticeDto">
 		insert 
 		into notice(notice_id,subject,content,is_notice,reg_date,hit)
-		values(#{notice_id},#{subject},#{content},#{is_notice},sysdate,#{hit})       
+		values(seq_notice_id.nextval,#{subject},#{content},#{is_notice},sysdate,#{hit})       
 	</insert>
 	
 	<select id="getNoticeList" resultType="noticeDto">
 		select notice_id,subject,content,is_notice,reg_date,hit
-		from notice		
+		from notice	order by notice_id desc
 	</select>
+	
+	<select id="getNoticeOrder" parameterType="String" resultType="noticeDto">
+		
+		<bind name="str" value="'%'+_parameter.getStr()+'%'"/> 
+		select notice_id,subject,content,is_notice,reg_date,hit from notice	
+		<if test="">
+			order by reg_date
+		</if>
+		<if test='#{str}.equals("2")'>
+			order by hit	
+		</if>
+	</select>
+	
+	<delete id="delete" parameterType="String">
+		delete from notice where notice_id=#{notice_id}
+	</delete>
+	
+	<select id="getNotice" parameterType="String" resultType="noticeDto">
+		select notice_id,subject,content,is_notice,reg_date,hit
+		from notice where notice_id=#{notice_id}
+	</select>
+	
+	<update id="modify" parameterType="noticeDto">
+		update notice
+		set subject=#{subject},content=#{content},reg_date=sysdate
+		where notice_id=#{notice_id}	
+	</update>
+	
+	<update id="noticePublic">
+		update notice set is_notice='1' where notice_id=#{notice_id}		
+	</update>
 </mapper>

@@ -9,7 +9,7 @@ div.panel-group{
 }
  
 
-/* ¼¼ºÎ ¸Þ´º »ö»ó ¼³Á¤ */
+/* ï¿½ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
 li .list-group-item{
     background-color:#f6f6f6;
 
@@ -20,7 +20,7 @@ li .list-group-item{
 }
 
 
-/* Çìµå Å©±â ¹× »ö»ó ¼³Á¤*/
+/* ï¿½ï¿½ï¿½ Å©ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½*/
 div.container-head{
     height:auto;
     background-color:#f6f6f6;
@@ -48,3 +48,6 @@ margin-left:10%;
 .list-title{
     width:170px;
 }
+
+.form-control{ box-shadow:none; border-color:#eee;}
+.form-control:focus{ box-shadow:none; border-color:#d34e4c;}

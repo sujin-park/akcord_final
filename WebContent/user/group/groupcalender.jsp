@@ -14,9 +14,11 @@
 			header: {
 				left: 'prev,next today',
 				center: 'title',
+				
 				right: 'month,agendaWeek,agendaDay'
 			},
 			defaultDate:  new Date().getTime(),
+			
 			navLinks: true, // can click day/week names to navigate views
 			selectable: true,
 			selectHelper: true,
@@ -118,12 +120,24 @@
 		float:left;
 	}
 </style>
+<script>
+	$(document).ready(function() {
+		$('#contentlist').on('click', function() {
+			$(location).attr('href', '${root}/groupmain/list.akcord');
+		});
+		
+		$('#Gmemberlist').on('click', function() {
+			$(location).attr('href', '${root}/groupmain/group.akcord');
+		});
+		
+	});
+</script>
 <%@ include file="/common/template/nav.jsp" %>
 <div class="container">
 	<div class="row">
 		<div class="col-sm-6" style="border:5px;">
-			<button type="button" class="btn btn-sm btn-danger">그룹방 글 목록</button>
-			<button type="button" class="btn btn-sm btn-danger">그룹원 관리</button>
+			<button type="button" class="btn btn-sm btn-danger" id="contentlist">그룹방 글 목록</button>
+			<button type="button" class="btn btn-sm btn-danger" id="Gmemberlist">그룹원 관리</button>
 			<button type="button" class="btn btn-sm btn-default" id="deletegroup">그룹 탈퇴</button>
 		</div>
 	</div>
