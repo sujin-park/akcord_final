@@ -7,7 +7,7 @@ import com.akcord.user.model.UserDto;
 public interface UserService {
 	
 	int idCheck(String id);
-	int join(UserDto userDto);
+	int join(Map<String, String> map);
 	
 	UserDto login(Map<String, String> map);
 	

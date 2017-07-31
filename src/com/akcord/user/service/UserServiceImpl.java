@@ -41,8 +41,8 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public int join(UserDto userDto) {
-		return 0;
+	public int join(Map<String, String> map) {
+		return sqlSession.getMapper(UserDao.class).join(map);
 	}
 
 }

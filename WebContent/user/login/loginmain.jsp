@@ -16,7 +16,6 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <body>
 
-
 <script type="text/javascript">
 $(document).ready(function(){
     // Show the Modal on load
@@ -39,7 +38,7 @@ $(document).ready(function(){
 				<form class="form-horizontal" action="">
 				<fieldset>
 				
-				<div class="modal-content" id="img01" style="position: absolute; left: 15%;" >
+				<div class="modal-content img-rounded" id="img01" style="position: absolute;" >
 								<img src="${root}/doc/img/loginview.jpg"
 									style="width: 700px; height: 600px;">
 

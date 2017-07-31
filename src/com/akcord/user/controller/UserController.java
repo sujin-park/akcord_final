@@ -30,11 +30,11 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/join.akcord", method=RequestMethod.POST)
-	public ModelAndView join(UserDto userDto){
+	public ModelAndView join(@RequestParam Map<String, String> map){
 		ModelAndView mav = new ModelAndView();
-		int cnt = userService.join(userDto);
-		mav.addObject("user", userDto);
-		mav.setViewName("/join/joinok");
+		int cnt = userService.join(map);
+		mav.addObject("user", map);
+		mav.setViewName("/user/login/loginmain");
 		return mav;
 		
 	}
