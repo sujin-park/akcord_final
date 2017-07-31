@@ -12,7 +12,7 @@
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
 <style>
-.btn {
+.btn  
 	background-color: #346969;
 	color: white;
 }
@@ -112,7 +112,7 @@ $(document).ready(function(){
 						<th>${user.name}</th>
 						<td>${user.tel1 }-${user.tel2}-${user.tel3 }</td>
 						<td>${user.gender }</td>
-						<td>${user.major_name }</td>
+						<td>전공나올부분</td>
                         <td>${user.reg_date }</td>
 						<td>
 						<button type="button" class="btn btn-sm" id="blackRegBtn" value="${user.user_id }">
