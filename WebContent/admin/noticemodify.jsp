@@ -19,6 +19,14 @@
 
 $(document).ready(function(){
 	$('#modifyBtn').click(function(){
+		 var str= $('#content').val();
+			if($('#subject').val()==""){
+				alert("제목을입력해주세요");
+				return;
+			}if(str.length<=5){
+				alert("내용을입력해주세요");
+				return;
+			}
 		document.noticeModifyform.action = "${root}/notice/noticemodify.akcord";
 		document.noticeModifyform.submit();
 	});

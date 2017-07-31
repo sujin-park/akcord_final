@@ -2,6 +2,8 @@ package com.akcord.admin.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +24,7 @@ public class NoticeController {
 	private NoticeService noticeService;
 	
 	@RequestMapping("/mvnoticelist.akcord")
-	public ModelAndView mvnoticelist(){
+	public ModelAndView mvnoticelist(HttpSession session){
 		ModelAndView mav = new ModelAndView();
 		List<NoticeDto> list = noticeService.getNoticeList();
 		mav.addObject("noticeList",list);

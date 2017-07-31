@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.akcord.admin.model.UserManageDto;
 import com.akcord.admin.service.UserManagerService;
 import com.akcord.user.model.MajorDto;
 import com.akcord.user.model.UserDto;
@@ -22,10 +23,10 @@ public class UserManagerController {
 	@RequestMapping("/mvmemberlist.akcord")
 	public ModelAndView mvuserList(){
 		ModelAndView mav = new ModelAndView();
-		List<UserDto> list = userManagerService.getUserList();
+		List<UserManageDto> list = userManagerService.getUserList();
 		List<MajorDto> mlist = userManagerService.getMajor();
-		mav.addObject("userList",list);
 		mav.addObject("majorList",mlist);
+		mav.addObject("userList",list);
 		mav.setViewName("/admin/memberlist");
 		return mav;
 	}
@@ -34,7 +35,9 @@ public class UserManagerController {
 	public ModelAndView blackuserReg(@RequestParam("str") String str){
 		ModelAndView mav = new ModelAndView();
 		int cnt= userManagerService.blackuserReg(str);
-		List<UserDto> list = userManagerService.getUserList();
+		List<UserManageDto> list = userManagerService.getUserList();
+		List<MajorDto> mlist = userManagerService.getMajor();
+		mav.addObject("majorList",mlist);
 		mav.addObject("userList",list);
 		mav.setViewName("/admin/memberlist");
 		return mav;
@@ -43,7 +46,7 @@ public class UserManagerController {
 	public ModelAndView majorPlus(@RequestParam("mname") String mname){
 		ModelAndView mav = new ModelAndView();
 		int cnt= userManagerService.majorPlus(mname);
-		List<UserDto> list = userManagerService.getUserList();
+		List<UserManageDto> list = userManagerService.getUserList();
 		List<MajorDto> mlist = userManagerService.getMajor();
 		mav.addObject("userList",list);
 		mav.addObject("majorList",mlist);

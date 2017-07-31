@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.akcord.admin.dao.UserManagerDao;
+import com.akcord.admin.model.UserManageDto;
 import com.akcord.user.model.MajorDto;
 import com.akcord.user.model.UserDto;
-
 @Service
 public class UserManagerServiceImpl implements UserManagerService {
 
@@ -17,7 +17,7 @@ public class UserManagerServiceImpl implements UserManagerService {
 	private SqlSession sqlSession;
 		
 	@Override
-	public List<UserDto> getUserList() {
+	public List<UserManageDto> getUserList() {
 		return sqlSession.getMapper(UserManagerDao.class).getUserList();
 	}
 
