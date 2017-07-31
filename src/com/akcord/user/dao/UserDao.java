@@ -8,7 +8,8 @@ import com.akcord.user.model.UserDto;
 public interface UserDao {
 	
 	int idCheck(String id);
-	int register(UserDto userDto);
+	int join(Map<String, String> map);
+
 	
 	UserDto login(Map<String, String> map);
 	
