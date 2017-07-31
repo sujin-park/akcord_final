@@ -32,12 +32,17 @@
 	                      <label for="status" class="col-sm-3 control-label">최대 인원</label>
 	                      <div class="col-sm-8">
 	                          <select class="form-control" id="gCount" name="gCount">
+	                          	  <option>최소 4명 / 최대 40명</option>
 	                              <option value="4">4</option>
 	                              <option value="8">8</option>
-	                              <option value="8">12</option>
-	                              <option value="8">16</option>
-	                              <option value="8">20</option>
-	                              <option value="8">24</option>
+	                              <option value="12">12</option>
+	                              <option value="16">16</option>
+	                              <option value="20">20</option>
+	                              <option value="24">24</option>
+	                              <option value="28">28</option>
+	                              <option value="32">32</option>
+	                              <option value="36">36</option>
+	                              <option value="40">40</option>
 	                          </select>
 	                      </div>
 	                 </div>

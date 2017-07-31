@@ -16,12 +16,26 @@ $(document).ready(function(){
 	});
 	
 	$('#creategroup').click(function(){
+		if($('#groupName').val() == "") {
+			alert("그룹방 이름을 입력해주세요.");
+			return;
+		} else if ($('#gCount').val() == 0) {
+			alert("그룹방 최대 인원을 선택해주세요.");
+			return;
+		} else if ($('#content').val() == "") {
+			alert("그룹방 소개를 입력해주세요.");
+			return;
+		} else {
 		$('form[name=createG]').attr('action','${root}/group/make.akcord');
 		$('form[name=createG]').submit();
+		}
 	});
 	
-
-
+	$('#joinG').click(function(){
+		var joinseq = $('#joinseq').val();
+		$(location).attr('href', '${root}/group/join.akcord?seq='+joinseq);
+	});
+	
 });
 
 function joinGroup(seq) {
@@ -68,10 +82,11 @@ function joinGroup(seq) {
 										<tbody>
 											<tr class="primary" align="center">
 												<td width="15%">생성일</td>
-												<td width="15%">전공</td>
-												<td width="20%">그룹방명</td>
+												<td width="10%">전공</td>
+												<td width="15%">그룹방명</td>
 												<td width="20%">그룹방내용</td>
 												<td width="15%">리더</td>
+												<td width="10%">인원</td>
 												<td width="15%">JOIN</td>
 											</tr>
 										<c:forEach var="GroupRoomDto" items="${grouplist}">
@@ -102,6 +117,11 @@ function joinGroup(seq) {
 												<td>
 													<div class="media">
 														<span class="media-meta">${GroupRoomDto.name}</span>
+													</div>
+												</td>
+												<td>
+													<div class="media">
+														<span class="media-meta">${GroupRoomDto.nowCount} / ${GroupRoomDto.gCount} 명</span>
 													</div>
 												</td>
 												<td>

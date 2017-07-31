@@ -6,6 +6,7 @@
 <script src='/akcord_project/js/lib/moment.min.js' charset="utf-8"></script>
 <script src='/akcord_project/js/lib/jquery-ui.min.js' charset="utf-8"></script>
 <script src='/akcord_project/js/lib/fullcalendar.js' charset="utf-8"></script>
+
 <script>
 	$(document).ready(function() {
 		
@@ -139,6 +140,7 @@
 			<button type="button" class="btn btn-sm btn-danger" id="contentlist">그룹방 글 목록</button>
 			<button type="button" class="btn btn-sm btn-danger" id="Gmemberlist">그룹원 관리</button>
 			<button type="button" class="btn btn-sm btn-default" id="deletegroup">그룹 탈퇴</button>
+			<button type="button" class="btn btn-sm btn-default" id="deletegroup">그룹 삭제</button>
 		</div>
 	</div>
 	<div class="row" style="margin:30px;">

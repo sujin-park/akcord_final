@@ -16,7 +16,7 @@
             <div class="row">
               <div class="col-sm-12  style="padding-bottom:10px;">
                 <h1>GROUP HOMEWORK</h1>
-                <p>2017/07/19 ~ 2017/07/26</p> ddd
+                <p>2017/07/19 ~ 2017/07/26</p>
               </div>
             </div>
             <div class="row"  style="padding-bottom:10px;">
