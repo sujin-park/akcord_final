@@ -9,7 +9,7 @@ import com.akcord.group.model.MajorDto;
 public interface GroupDao {
 	public int createG(GroupRoomDto groupRoomDto);
 
-	public List<GroupRoomDto> grouplist(String myseq);
+	public List<GroupRoomDto> grouplist(Map<String, String> query);
 
 	public List<GroupRoomDto> waitinglist(int seq);
 
@@ -19,5 +19,7 @@ public interface GroupDao {
 
 	public int joinGroup(Map<String, String> map);
 	
-	public int cancel(String seq);
+	public int cancel(Map<String, String> map);
+	
+	public int accept(Map<String, String> map);	
 }

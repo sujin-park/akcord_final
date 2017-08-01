@@ -15,13 +15,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          select * from dual
     </insert>
     
-    <select id="grouplist" parameterType="String" resultType="groupRoomDto">
-        select (select count(group_id) from grouproom_list gl where gl.group_id = g.group_id and gl.is_accept = 1) nowCount, g.group_id groupId, g.reg_date as regDate, m.major_name majorName, g.group_name groupName,
-               g.content content, g.g_count gCount, u.name name from users u, grouproom g, major m
-               where u.user_id = g.leader_id and
-               g.major_id = m.major_id
-               and g.leader_id != #{myseq}
-               order by g.reg_date desc
+    <select id="grouplist" parameterType="java.util.Map" resultType="groupRoomDto">
+        select b.*
+            from(select rownum rn, a.*
+                from(
+                    select (select count(group_id) from grouproom_list gl where gl.group_id = g.group_id and gl.is_accept = 1) nowCount, g.group_id groupId, g.reg_date as regDate, m.major_name majorName, g.group_name groupName,
+                           g.content content, g.g_count gCount, u.name name from users u, grouproom g, major m
+                           where u.user_id = g.leader_id and
+                           g.major_id = m.major_id
+                           and g.leader_id != #{myseq}
+                        <if test="key != '' and word != ''">
+                            <if test="key == 'majorName'">
+                                and m.major_name like '%' || #{word} ||'%'
+                            </if>
+                            <if test="key != 'majorName'">
+                                and g.group_name  like '%' || #{word} ||'%'
+                            </if>
+                        </if>
+                           order by g.reg_date desc
+                           
+                   ) a
+               where rownum &lt;= #{end}
+           ) b
+           where b.rn &gt; #{start}
     </select>
     
     <select id="waitinglist" parameterType="int" resultType="groupRoomDto">
@@ -41,14 +57,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         from major
     </select>
     
-    <insert id="joinGroup" parameterType="String">
+    <insert id="joinGroup" parameterType="java.util.Map">
         insert into grouproom_list values (#{seq}, #{userId}, 0,sysdate)
     </insert>
     
-    <delete id="cancel" parameterType="String">
+    <delete id="cancel" parameterType="java.util.Map">
         delete grouproom_list where group_id = #{seq}
                and is_accept = 0
+               and user_id = #{userId}
     </delete>
     
+    <update id="accept" parameterType="java.util.Map">
+        update grouproom_list set is_accept = 1
+               where group_id = #{seq}
+               and user_id = #{userId}
+    </update>
     
 </mapper>

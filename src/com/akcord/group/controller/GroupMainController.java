@@ -1,5 +1,6 @@
 package com.akcord.group.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,38 +23,51 @@ public class GroupMainController {
 	@Autowired
 	private GroupMainService groupMainService;
 	
+	@RequestMapping("/main.akcord") // 글목록
+	public ModelAndView main(@RequestParam("groupId") int groupId){
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("groupId", groupId);
+		mav.setViewName("/user/group/main/groupcalender");
+		return mav;
+	}
+	
+	
 	@RequestMapping("/list.akcord") // 글목록
 	public ModelAndView groupMain(){
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("/user/group/list");
+		mav.setViewName("/user/group/main/list");
 		return mav;
 	}
 	
 	@RequestMapping("/group.akcord")
-	public ModelAndView groupList(HttpSession session) { // 그룹원 관리 
+	public ModelAndView groupList(@RequestParam Map<String, String> query, HttpSession session) { // 그룹원 관리 
 		ModelAndView mav = new ModelAndView();
 		UserDto user = (UserDto) session.getAttribute("user");
-		List<GroupListDto> glist = groupMainService.gMemberlist(user.getUser_id()+"");
+		int groupId = Integer.parseInt(query.get("groupId"));
+		query.put("user_id", user.getUser_id()+"");
+		List<GroupListDto> glist = groupMainService.gMemberlist(query);
+		mav.addObject("groupId", groupId);
 		mav.addObject("glist", glist);
-		mav.setViewName("/user/group/setgroup");
+		mav.setViewName("/user/group/main/setting");
 		return mav;
 	}
 	
 	@RequestMapping("/reject.akcord") // 대기중인 회원 지우기
-	public String delete(@RequestParam("seq") String seq, @RequestParam("state") int state) {
-		int cnt = groupMainService.rejectMember(seq);
+	public String delete(@RequestParam Map<String, String> map) {
+		int cnt = groupMainService.rejectMember(map);
 		String path = "";
-		if (state == 1) {
-			path = "redirect:/groupmain/group.akcord";
+		int groupId = Integer.parseInt(map.get("groupId"));
+		if (Integer.parseInt(map.get("state")) == 1) {
+			path = "redirect:/groupmain/group.akcord?groupId="+groupId;
 		} else {
-			path = "redirect:/groupmain/group.akcord";
+			path = "redirect:/groupmain/group.akcord?groupId="+groupId;
 		}
 		return path;
 	}
 	
 	@RequestMapping("/accept.akcord") // 회원 승인해주기
-	public String accept(@RequestParam("seq") String seq) {
-		int cnt = groupMainService.acceptMember(seq);
+	public String accept(@RequestParam Map<String, String> map) {
+		int cnt = groupMainService.acceptMember(map);
 		return "redirect:/groupmain/group.akcord";
 	}
 	
@@ -62,22 +76,28 @@ public class GroupMainController {
 		ModelAndView mav = new ModelAndView();
 		List<GroupListDto> searchlist = groupMainService.searchlist(sid);
 		mav.addObject("slist", searchlist);
-		mav.setViewName("/user/group/plusmem");
+		mav.setViewName("/user/group/main/plusmem");
 		return mav;
 	}
+	
 	@RequestMapping("/invite.akcord")
 	public String invite(@RequestParam Map<String, String> map){
 		ModelAndView mav = new ModelAndView();
 		int cnt = groupMainService.invite(map);
-		return "redirect:/groupmain/group.akcord";
+		int groupId = Integer.parseInt(map.get("groupId"));
+		return "redirect:/groupmain/group.akcord?groupId="+groupId;
 	}
+	
 	@RequestMapping("/grouplist.akcord")
-	public ModelAndView grouplist(HttpSession session) {
+	public ModelAndView grouplist(@RequestParam("groupId") int groupId, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		UserDto user = (UserDto) session.getAttribute("user");
-		List<GroupListDto> grouplist = groupMainService.originlist(user.getUser_id()+"");
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("seq", user.getUser_id()+"");
+		map.put("groupId", groupId+"");
+		List<GroupListDto> grouplist = groupMainService.originlist(map);
 		mav.addObject("oglist", grouplist);
-		mav.setViewName("/user/group/origingroup");
+		mav.setViewName("/user/group/main/origingroup");
 		return mav;
 	}
 }

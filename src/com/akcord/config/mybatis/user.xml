@@ -14,7 +14,6 @@
 	
 	<!-- 로그인 -->
 	<select id="login" parameterType="java.util.Map" resultType="userDto">
-		select user_id, type, id, name
 		select user_id, id, name, type
 		from users
 		where not is_block = 1 and id=#{id} and password=#{password}   

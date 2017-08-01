@@ -5,23 +5,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.akcord.group.dao.GroupMainDao">
 
     <select id="gMemberlist" parameterType="java.util.Map" resultType="groupListDto">
-        select g.group_id groupId, u.name name, u.id userId, m.major_name majorName, gl.reg_date regDate, u.user_id seq
-                from grouproom_list gl, grouproom g, users u, major m
-                where gl.group_id = g.group_id
-                and u.user_id = gl.user_id
-                and m.major_id = u.major_id
-                and g.group_id = 2
-                and gl.user_id != #{seq}
-                and gl.is_accept = 0
+        select b.*
+        from(select rownum rn, a.*
+        from(        
+                select g.group_id groupId, u.name name, u.id userId, m.major_name majorName, gl.reg_date regDate, u.user_id seq
+                        from grouproom_list gl, grouproom g, users u, major m
+                        where gl.group_id = g.group_id
+                        and u.user_id = gl.user_id
+                        and m.major_id = u.major_id
+                        and g.group_id = #{groupId}
+                        and gl.user_id != #{user_id}
+                        and gl.is_accept = 0
+                        <if test="key != '' and word != ''">
+                            <if test="key == 'id'">
+                                and u.id like '%' || #{word} ||'%'
+                            </if>
+                            <if test="key != 'id'">
+                                and m.major_name  like '%' || #{word} ||'%'
+                            </if>
+                        </if>
+                ) a
+                where rownum &lt;= #{end}
+            ) b
+            where b.rn &gt; #{start}                 
+                     
     </select>
     
-    <delete id="rejectMember" parameterType="String">
-        delete grouproom_list where user_id = #{seq}
+    <delete id="rejectMember" parameterType="java.util.Map">
+        delete grouproom_list where user_id = #{seq} and group_id = #{groupId}
     </delete>
     
-    <update id="acceptMember" parameterType="String">
+    <update id="acceptMember" parameterType="java.util.Map">
         update grouproom_list set is_accept = 1
-               where user_id = #{seq}
+               where user_id = #{seq} and group_id = #{groupId}
     </update>
     
     <select id="searchlist" parameterType="String" resultType="groupListDto">
@@ -35,16 +51,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <insert id="invite" parameterType="java.util.Map">
         insert into grouproom_list (group_id, user_id, is_accept, reg_date)
-        values (#{groupid}, #{seq}, 0, sysdate)
+        values (#{groupId}, #{seq}, 0, sysdate)
     </insert>
     
-    <select id="originlist" parameterType="String" resultType="groupListDto">
+    <select id="originlist" parameterType="java.util.Map" resultType="groupListDto">
         select g.group_id groupId, u.name name, u.id userId, m.major_name majorName, gl.reg_date regDate, u.user_id seq
                 from grouproom_list gl, grouproom g, users u, major m
                 where gl.group_id = g.group_id
                 and u.user_id = gl.user_id
                 and m.major_id = u.major_id
-                and g.group_id = 2
+                and g.group_id = #{groupId}
                 and gl.user_id != #{seq}
                 and gl.is_accept = 1
     </select>
