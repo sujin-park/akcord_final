@@ -5,7 +5,6 @@ import java.util.Map;
 
 import com.akcord.group.model.GroupRoomDto;
 import com.akcord.user.model.UserDto;
-
 public interface UserService {
 	
 	int idCheck(String id);

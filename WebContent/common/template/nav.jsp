@@ -31,7 +31,7 @@
                <li class="list-group-item">
                	  <div class="list-heading">
                      <h4 class="list-title">
-                        <a href="">공지사항</a>
+                        <a href="${root }/notice/mvnoticelist.akcord">공지사항</a>
                      </h4>
                   </div> 
                   <div class="list-heading1">
@@ -79,7 +79,7 @@
                   </div>
                   <div id="collapse-3" class="panel-collapse collapse">
                      <ul>
-                        <li><a href="#">회원관리</a></li>
+                        <li><a href="${root }/usermanager/mvmemberlist.akcord">회원관리</a></li>
                         <li><a href="#">통계</a></li>
                      </ul>
                   </div> 
@@ -104,4 +104,4 @@
               	박수진님 환영합니다
            </div>
 	    </div>       
-	</div>
+	</div>

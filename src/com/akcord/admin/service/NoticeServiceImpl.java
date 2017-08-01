@@ -1,6 +1,7 @@
 package com.akcord.admin.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,8 @@ public class NoticeServiceImpl implements NoticeService {
 		return sqlSession.getMapper(NoticeDao.class).noticePublic(notice_id);
 	}
 	@Override
-	public List<NoticeDto> getNoticeOrder(String str) {
+	public List<NoticeDto> getNoticeOrder(Map<String, String> str) {
 		return sqlSession.getMapper(NoticeDao.class).getNoticeOrder(str);
 	}
+	
 }
