@@ -15,7 +15,6 @@ public interface UserService {
 	UserDto getUser(String id);
 	int modify(UserDto userDto);
 	int delete(String id);
-
 	
 	List<GroupRoomDto> group(String seq);
 }
