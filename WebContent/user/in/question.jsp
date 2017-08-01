@@ -34,36 +34,44 @@
 		});
 		$('#saveBtn').click(function() {
 			
-			$('form[name=questionFrom]').attr('action','${root}/in/inmain.akcord');
-			$('form[name=questionFrom]').submit();
+			$('form[name=questionFrom]').attr('method','post').attr('action','${root}/in/inmain.akcord').submit();
+		
 				
 		});
+		 $('#content').summernote({
+		      height: 500,          // 기본 높이값
+		       minHeight: null,      // 최소 높이값(null은 제한 없음)
+		       maxHeight: null,      // 최대 높이값(null은 제한 없음)
+		       focus: false,          // 페이지가 열릴때 포커스를 지정함
+		       lang: 'ko-KR' 
+		   });
 
 	});
 </script>
 <title>Insert title here</title>
 
 
+
 <!-- 회원 고유코드, 제목, 내용, 작성날짜(sysdate), 카테고리 고유번호  -->
-<div class="container col-sm-12 form-group">
+<div class="container col-sm-12 form-group" style="padding-top:60px;">
 	<form id="questionFrom" name="questionFrom" class="form-horizontal" action="">
+	<input type="hidden" name="hit" value="1">
 	
 		<fieldset>
 			<div class="form-group">
 				<label class="col-sm-2 control-label"></label>
 				<div class="col-sm-1">
 					
-					<select
-							class="form-control" id="sel1">
-							<option >CSS</option>
-							<option>HTML</option>
-							<option>C++</option>
-							<option>JAVA</option>
-						</select>
+					<select class="form-control" id="sel1" name="major_id">
+							<option value="1">CSS</option>
+							<option value="2">HTML</option>
+							<option value="3">C++</option>
+							<option value="4">JAVA</option>
+					</select>
 					
 				</div>
-				<div class="col-sm-7">
-					<input type="text" class="form-control" id="usr"
+				<div class="col-sm-7" >
+					<input type="text" class="form-control" id="usr" name="subject"
 						placeholder="제목을 입력해주세요">
 				</div>
 
@@ -72,7 +80,13 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label"></label>
 				<div class="col-sm-8">
-					<div id="summernote">내용을 입력해주세요.</div>
+					    <div class="form-group">
+           			
+           	 				<textarea name="content" id="content" class="form-control" placeholder="내용을 입력해주세요" required>
+            			</textarea>
+         				</div>
+       
+			
 					<button type="button" class="btn btn-danger col-sm-1 btn-lg"
 						id="cancelBtn">cancel</button>
 					<div class="col-sm-9"></div>

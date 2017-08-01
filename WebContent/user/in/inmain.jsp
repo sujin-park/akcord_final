@@ -4,7 +4,11 @@
 <%@include file="/common/template/head_include.jsp"%>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <%@ include file="/common/template/nav.jsp" %>
+<style>
+.media-heading { display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
+
+</style>
 <script>
 $(document).ready(function() {
 	$('#questionBtn').click(function() {
@@ -61,42 +65,20 @@ $(document).ready(function() {
 	<!-- 리스트 -->		
 	<div class="col-sm-10 form-group">
 		<hr>
-
+		<c:forEach var="inDto" items="${inlist}">
 		<div class="media">
-			<dt class="media-heading col-sm-6">글제목</dt>
-			<p class="media-body col-sm-10" style="height: 50px; width: 100%;">글 내용이 나오는 공간입니다.최대3줄 </p>
-			<dt class ="col-sm-4">2017.07.21</dt>
+			<a  href="#" class="link_board_03">
+			<dt class="media-heading col-sm-6" ><p overflow: hidden;>${inDto.subject }</p></dt>
+			<dt class="media-heading col-sm-2">아이디 : ${inDto.user_id }</dt>
+			<p class="media-body col-sm-10" style="height: 50px; width: 100%;">${inDto.content }</p>
+			<dt class ="col-sm-4">${inDto.reg_date}</dt>
 			<dt class ="col-sm-3">답글수 : 0</dt>
-			<dt class ="col-sm-3">조회수 : 0</dt>
+			<dt class ="col-sm-3">조회수 : ${inDto.hit }</dt>
+			</a>
 		</div>
 		<hr>
-		
-		<div class="media">
-			<dt class="media-heading col-sm-6">글제목</dt>
-			<p class="media-body col-sm-10" style="height: 50px; width: 100%;">글 내용이 나오는 공간입니다.최대3줄 </p>
-			<dt class ="col-sm-4">2017.07.21</dt>
-			<dt class ="col-sm-3">답글수 : 0</dt>
-			<dt class ="col-sm-3">조회수 : 0</dt>
-		</div>
-		<hr>
-		
-		<div class="media">
-			<dt class="media-heading col-sm-6">글제목</dt>
-			<p class="media-body col-sm-10" style="height: 50px; width: 100%;">글 내용이 나오는 공간입니다.최대3줄 </p>
-			<dt class ="col-sm-4">2017.07.21</dt>
-			<dt class ="col-sm-3">답글수 : 0</dt>
-			<dt class ="col-sm-3">조회수 : 0</dt>
-		</div>
-		<hr>
-		
-		<div class="media">
-			<dt class="media-heading col-sm-6">글제목</dt>
-			<p class="media-body col-sm-10" style="height: 50px; width: 100%;">글 내용이 나오는 공간입니다.최대3줄 </p>
-			<dt class ="col-sm-4">2017.07.21</dt>
-			<dt class ="col-sm-3">답글수 : 0</dt>
-			<dt class ="col-sm-3">조회수 : 0</dt>
-		</div>
-		<hr>
+		</c:forEach>
+	
 		
   	</div>
 	

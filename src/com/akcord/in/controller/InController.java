@@ -1,5 +1,6 @@
 package com.akcord.in.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -11,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import com.akcord.group.model.GroupRoomDto;
+import com.akcord.group.model.MajorDto;
 import com.akcord.in.model.InDto;
 import com.akcord.in.service.InService;
 import com.akcord.user.model.UserDto;
@@ -53,20 +55,31 @@ public class InController {
 		return mav;
 	}
 	@RequestMapping(value="/inmain.akcord", method=RequestMethod.POST)
-	public ModelAndView answer(@RequestParam Map<String, String> queryString,
-			InDto inDto, HttpSession session){
+	public String answer(InDto inDto, HttpSession session){
 		System.out.println("여까진 오냐");
 		ModelAndView mav = new ModelAndView();
-		UserDto userDto = (UserDto) session.getAttribute("userInfo");
+		UserDto userDto = (UserDto) session.getAttribute("user");
+		inDto.setUser_id(userDto.getUser_id());
 		if(userDto != null) {
 			
-			
-			
 			int cnt = inService.answerroom(inDto);
-			mav.addObject("qs", queryString);
-			mav.setViewName("inmain");
+			mav.addObject("inDto", inDto);
+		
+			
 	
-		}		return mav;
+		}		return "redirect:/in/list.akcord";
+	}
+	@RequestMapping("/list.akcord")
+	public ModelAndView list(HttpSession session) {
+		System.out.println("여기까진 오냐 list");
+		ModelAndView mav = new ModelAndView();
+		UserDto user = (UserDto) session.getAttribute("user");
+		
+		List<InDto> inlist = inService.answerlist();
+		mav.addObject("inlist", inlist);
+		
+		mav.setViewName("/user/in/inmain");
+		return mav;
 	}
 	
 }

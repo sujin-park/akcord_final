@@ -52,7 +52,7 @@
                   </div>
                   <div class="list-heading1">
                      <h4 class="list-title" style="padding-top:20px;">
-                        <a href="">지식인</a>
+                        <a href="${root }/in/list.akcord">지식인</a>
                      </h4>
                   </div>
                	   <div class="list-heading">

@@ -6,11 +6,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <insert id="answerroom" parameterType="inDto">
         insert into qna
         (qna_id,user_id,major_id,subject,content,reg_date,hit)
-        values (#{qna_id}, #{user_id}, #{major_id}, #{subject}, #{content},sysdate,#{hit})
+        values (seq_qna_id.nextval, #{user_id}, #{major_id}, #{subject}, #{content}, sysdate, 1)
     </insert>
     <select id="answerlist" resultType="inDto">
         select qna_id,user_id,major_id,subject,content,reg_date,hit
         from qna
-        where user_id = #{user_id}
     </select>
 </mapper>

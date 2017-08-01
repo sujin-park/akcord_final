@@ -25,6 +25,7 @@ $(document).ready(function(){
         $("#loginmainModal").modal({show: false});
     });
 });
+
 </script>
 
 	<!-- 로그인 Modal-->
