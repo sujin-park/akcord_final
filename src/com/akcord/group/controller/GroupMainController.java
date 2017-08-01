@@ -58,9 +58,9 @@ public class GroupMainController {
 		String path = "";
 		int groupId = Integer.parseInt(map.get("groupId"));
 		if (Integer.parseInt(map.get("state")) == 1) {
-			path = "redirect:/groupmain/group.akcord?groupId="+groupId;
+			path = "redirect:/groupmain/group.akcord?groupId="+groupId+"&pg=1&key=&word=&order=";
 		} else {
-			path = "redirect:/groupmain/group.akcord?groupId="+groupId;
+			path = "redirect:/groupmain/group.akcord?groupId="+groupId+"&pg=1&key=&word=&order=";
 		}
 		return path;
 	}
@@ -68,7 +68,8 @@ public class GroupMainController {
 	@RequestMapping("/accept.akcord") // 회원 승인해주기
 	public String accept(@RequestParam Map<String, String> map) {
 		int cnt = groupMainService.acceptMember(map);
-		return "redirect:/groupmain/group.akcord";
+		int groupId= Integer.parseInt(map.get("groupId"));
+		return "redirect:/groupmain/group.akcord?groupId="+groupId+"&pg=1&key=&word=&order=";
 	}
 	
 	@RequestMapping("/search.akcord")
@@ -85,7 +86,7 @@ public class GroupMainController {
 		ModelAndView mav = new ModelAndView();
 		int cnt = groupMainService.invite(map);
 		int groupId = Integer.parseInt(map.get("groupId"));
-		return "redirect:/groupmain/group.akcord?groupId="+groupId;
+		return "redirect:/groupmain/group.akcord?groupId="+groupId+"&pg=1&key=&word=&order=";
 	}
 	
 	@RequestMapping("/grouplist.akcord")

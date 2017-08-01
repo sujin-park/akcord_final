@@ -26,8 +26,8 @@ public class GroupServiceImpl implements GroupService{
 	@Override
 	public List<GroupRoomDto> grouplist(Map<String,String> query) {
 		int pg = Integer.parseInt(query.get("pg"));
-		int end = pg * BoardConstant.GROUP_LIST_SIZE;
-		int start = end - BoardConstant.GROUP_LIST_SIZE;
+		int end = pg * BoardConstant.LIST_SIZE;
+		int start = end - BoardConstant.LIST_SIZE;
 		query.put("start", start+"");
 		query.put("end", end+"");
 		return sqlSession.getMapper(GroupDao.class).grouplist(query);

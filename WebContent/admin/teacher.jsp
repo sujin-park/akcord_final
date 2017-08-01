@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/common/template/head_include.jsp" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="root" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,10 +10,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>My Library</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    <script src="/akcord/js/lib/jquery.min.js"></script>
-    <script src="/akcord/js/lib/bootstrap.min.js"></script>
+    <script src="${root}/js/lib/jquery.min.js"></script>
+    <script src="${root}/js/lib/bootstrap.min.js"></script>
     <!-- <script src="/cafeproject/js/bootswatch.js"></script> -->
 
 	
@@ -84,7 +84,7 @@
     <div class="row">
 
 <!-- Center ======================================================================================= -->
-        <div class="col-sm-12">
+        <div class="col-sm-12">     
 			<div class="page-header">
 			    <h2 id="container">온라인투표</h2>
 			</div>
@@ -96,10 +96,21 @@
            	</div>
            	
            	<script type="text/javascript">
+    
             $(document).ready(function() {
             	//네비바 체크
             	/* $('#apoll').addClass('active'); */
-            	
+			
+				// Request Method :: GET 
+				/* 
+				$.ajax({
+				 type: 'GET', 
+				 dataType: 'json',
+				 url: '${root}/poll/list.akcord',
+				 data: “id=”+id.val()+”&password=”+password.val()+”&name=”+name.val(),
+				 
+				});
+            	 */
             	//결과보기
             	$('.btn.btn-xs.btn-primary').click(function() {
             		var seq = $(this).parents('td').siblings().eq(0).text();
@@ -112,35 +123,83 @@
             	
             	//투표수정
             	$('.btn.btn-xs.btn-info').click(function() {
-            		var seq = $(this).parents('td').siblings().eq(0).text();
-            		alert(seq + "번 투표 기간변경 이동!!!");
-            		$('#pollModifyModal').on('show.bs.modal', function(event) {
-            			var modal = $(this)
-              		  	modal.find('#startDay').val('2017-07-01');
-                		modal.find('#endDay').val('2017-07-25');
-                		modal.find('#charttype').val('p');
-                		modal.find('#question').val('질문이 나와요!!!!');
-                		for(var i=1;i<5;i++) {
-                			var lab = $('<label class="col-sm-3"></label>');
-	                		var inp = $('<div class="col-sm-8">')
-	                					.append('<input type="text" name="answer" class="answerInp form-control" value="답변문항' + i + '입니다." readonly="readonly">');
-	                		modal.find('#answerDivM').append(lab).append(inp);
-            			}
-              		});          	
-              		$('#pollModifyModal').modal();
+                   	var seq = $(this).parents('td').siblings().eq(0).text();
+
+            		$('#seq').attr('value', seq);
+            		//$(location).attr('href','${root}/poll/modify.akcord?seq='+seq);
+            		$.ajax({
+       				 type: 'GET', 
+       				 dataType: 'json',
+       				 url: '${root}/poll/modify.akcord?seq='+seq,
+       				 //data : {'data', data},
+       				 
+       				 success : function(data){
+       					//getHidden(data);
+       				 	upModal(data);
+
+       				 }
+       				});
             	});
             	
+        		
+        		function getHidden(data){
+        			var output = '<table>';
+        			var size = data.contlist.length;
+        			// 여긴 투표 정보
+        				output += '<tr>';
+        				output += '<td id="mdSubject">'+data.Subject+'</td>';
+        				output += '<td id="mdStartDate">'+data.StartDate+'</td>';
+        				output += '<td id="mdEndDate">'+data.EndDate+'</td>';
+        				output += '<td id="mdChartType">'+data.ChartType+'</td>';
+        				output += '<td id="contsize">'+size+'</td>';
+        				output += '</tr>';
+        				output += '<tr>';
+        				//얘들은 투표 항목들
+        			for (var i = 0; i < size; i++) {
+        				output += '<td id="content'+i+'">'+data.contlist[i]+'</td>';
+					}
+        				output += '</tr>';
+        				output += '</table>';
+        			$('#pollInfoHere').empty();
+        			alert(output);
+        			$('#pollInfoHere').append(output);
+        		}
+
             	//투표종료
             	$('.btn.btn-xs.btn-danger').click(function() {
             		var seq = $(this).parents('td').siblings().eq(0).text();
+            		$(location).attr('href','${root}/poll/delete.akcord?seq='+seq);
             		alert(seq + "번 투표 종료!!!");
             	});
             	
             });
+            
+            function upModal(data){
+    			$('#pollModifyModal').on('show.bs.modal', function(event) {
+        			var modal = $(this)
+          		  	modal.find('#startDay').val(data.StartDate);
+            		modal.find('#endDay').val(data.EndDate);
+            		modal.find('#charttype').val(data.ChartType);
+            		modal.find('#question').val(data.Subject);
+            		modal.find('#poll_id').val(data.poll_id);
+            		for(var i=0;i<data.contlist.length;i++) {
+            			var lab = $('<label class="col-sm-3"></label>');
+                		var inp = $('<div class="col-sm-8">')
+                					.append('<input type="text" name="answer" class="answerInp form-control" value="'+data.contlist[i]+'" readonly="readonly">');
+                		modal.find('#answerDivM').append(lab).append(inp);
+        			}
+          		});          	
+          		$('#pollModifyModal').modal();
+    		}
             </script>
             
 			<div class="col-sm-12">
  				<div class="table-responsive">
+ 				   <form id="modifyForm" name="modifyForm">
+ 				<div id="attach_file_hdn"></div>	
+			    <input type="hidden" name="seq" value="" id="seq">
+			    <input type="hidden" name="" value="">
+				<input type="hidden" name="" value="">
             		<table class="table table-hover">
                     	<colgroup>
                         <col width="80">
@@ -159,21 +218,24 @@
                         <th class="text-center">비고</th>
                     </tr>
                     </thead>
+                 
                     <tbody class="notice_list">
                         <!--<tr><td colspan="5" class="text-center">가입한 회원이 없습니다.</td></tr>-->
+                        <c:forEach var="list" items="${list}">
                         <tr data-seq="2">
-                            <td class="text-center">2</td>
-                            <td class="subject">이번 여름 휴가지로 가고싶은곳은?</td>
-                            <td class="text-center">3258</td>
-                            <td class="text-center">17.07.01 ~ 17.07.30</td>
+                            <td class="text-center">${list.poll_id}</td>
+                            <td class="subject">${list.subject}</td>
+                            <td class="text-center">${list.count}</td>
+                            <td class="text-center">${list.startDate} ~ ${list.endDate}</td>
                             <td class="etc text-center">
                             	<button type="button" id="pollResultBtn" class="btn btn-xs btn-primary" data-backdrop="static">결과보기</button>
             					<button type="button" id="pollModifyBtn" class="btn btn-xs btn-info" data-backdrop="static">기간변경</button>
             					<button type="button" id="pollStopBtn" class="btn btn-xs btn-danger" data-backdrop="static">투표종료</button>
                             </td>
                         </tr>
+                        </c:forEach>
                         <tr data-seq="1">
-                            <td class="text-center">1</td>
+                            <td id="seq" class="text-center">13</td>
                             <td class="subject">가장 좋아하는 과목은 무엇입니까??</td>
                             <td class="text-center">1867</td>
                             <td class="text-center">17.06.01 ~ 17.06.15</td>
@@ -184,11 +246,13 @@
                             </td>
                         </tr>
                         </tbody>
+                        
                     </table>
+                    </form>
                 </div>
 			</div>
         </div>
-        
+    
         <div class="col-sm-12" style="height: 5px;"></div>
         
         <div class="col-sm-12">
@@ -237,9 +301,12 @@
 			</ul>
        	</div>
 
+
 <!-- 공지사항 작성 Modal -->
 
 <script type="text/javascript">
+var answer = new Array();	// 문항 내용을 담을 배열
+
 $(document).ready(function() {
 	var answerCount = 1;
 	$('#answerPlusBtn').click(function() {
@@ -257,18 +324,19 @@ $(document).ready(function() {
 	
 	$(document).on('click', '#writeBtn', function() {
 		//http://naradesign.net/wp/2011/07/20/1663/ << 유효성검사
-		alert(">>>> " + $('.answerInp').length);
 		if($('#startDay').val() > $('#endDay').val()) {
 			alert("투표기간 오류!!");
 			return;
 		} else if(answerCount < 2) {
 			alert("설문 문항 오류!!");
 			return;
-		} else {
-			alert("투표생성!!!");
+		}  else {
+			answer = document.getElementsByClassName(".answerInp form-control");
+			$('#makeForm').attr('method','post').attr('action','${root}/poll/make.akcord').submit();
 		}
 	});
 });
+
 </script>
 <div id="pollWriteModal" class="modal fade" role="dialog">
 	<div class="modal-dialog" style="width: 50%;">
@@ -279,26 +347,26 @@ $(document).ready(function() {
 	        	<h4 class="modal-title">투표생성</h4>
 	      	</div>
 	      	<div class="modal-body">
-			    <form class="form-horizontal" action="#">
+			    <form class="form-horizontal" action="" id="makeForm" name="makeForm">
 			    	<fieldset>
 			    	<div class="form-group">
 				    	<label class="col-sm-3 control-label">투표기간</label>
 	
 	                    <div class="col-sm-8">
-	                        <input type="date" id="startDay" class="form-control" placeholder="시작일">
-	                        <input type="date" id="endDay" class="form-control" placeholder="종료일">
+	                        <input type="date" name="startDate" id="startDay" class="form-control" placeholder="시작일">
+	                        <input type="date" name="endDate" id="endDay" class="form-control" placeholder="종료일">
 	                    </div>
 	                </div>
 	                <div class="form-group">
 				    	<label class="col-sm-3 control-label">그래프형식</label>
 	
 	                    <div class="col-sm-8">
-	                        <select id="charttype" class="form-control">
-	                        	<option value="b">바차트
-	                        	<option value="p">파이차트
-	                        	<option value="g">꺽은선차트
-	                        	<option value="l">라인차트
-	                        	<option value="b">버블차트
+	                        <select id="charttype" name="chartType" class="form-control">
+	                        	<option value="1">바차트
+	                        	<option value="2">파이차트
+	                        	<option value="3">꺽은선차트
+	                        	<option value="4">라인차트
+	                        	<option value="5">버블차트
 	                        </select>
 	                    </div>
 	                </div>
@@ -306,7 +374,7 @@ $(document).ready(function() {
 				    	<label class="col-sm-3 control-label">주제</label>
 	
 	                    <div class="col-sm-8">
-	                        <input type="text" id="question" class="form-control" placeholder="주제">
+	                        <input type="text" name="subject" id="subject" class="form-control" placeholder="주제">
 	                    </div>
 	                </div>
 			        <div class="form-group">
@@ -320,7 +388,7 @@ $(document).ready(function() {
 	                <div id="answerDiv" class="form-group">
                     	<div id="answerD" class="col-sm-10">
 	                    	<div class="col-sm-11">
-	                        	<input type="text" name="answer" class="answerInp form-control" placeholder="문항">
+	                        	<input type="text" id="answer" name="answer" class="answerInp form-control" placeholder="문항">
 	                        </div>
 	                        <div class="col-sm-1">
 								<button type="button" class="answerMinusBtn btn btn-md btn-warning">문항제거</button>
@@ -328,6 +396,11 @@ $(document).ready(function() {
                         </div>
 	                </div>
 			        </fieldset>
+			       <div id="attach_file_hdn"></div>	
+			    <input type="hidden" name="answer" value="${answer}">
+			    <input type="hidden" name="" value="">
+				<input type="hidden" name="" value="">
+			        
 			    </form>
 			</div>
 	      	<div class="modal-footer">
@@ -383,6 +456,8 @@ $(document).ready(function() {
 			return;
 		} else {
 			alert("투표수정!!!");
+        	//투표 기간 변경 ㄱㄱ
+			$('#dateForm').attr('method','post').attr('action','${root}/poll//modifydate.akcord').submit();
 		}
 	});
 });
@@ -396,26 +471,27 @@ $(document).ready(function() {
 	        	<h4 class="modal-title">투표수정</h4>
 	      	</div>
 	      	<div class="modal-body">
-			    <form class="form-horizontal" action="#">
+			    <form class="form-horizontal" action="#" id="dateForm">
 			    	<fieldset>
 			    	<div class="form-group">
+			    	    <div style="display:none" ><input type="text"  name="poll_id" id="poll_id" ></div>   
 				    	<label class="col-sm-3 control-label">투표기간</label>
 	
 	                    <div class="col-sm-8">
-	                        <input type="date" id="startDay" class="form-control" placeholder="시작일">
-	                        <input type="date" id="endDay" class="form-control" placeholder="종료일">
+	                        <input type="date" name="startDate" id="startDay" class="form-control" placeholder="시작일">
+	                        <input type="date" name="endDate" id="endDay" class="form-control" placeholder="종료일">
 	                    </div>
 	                </div>
 	                <div class="form-group">
 				    	<label class="col-sm-3 control-label">그래프형식</label>
 	
 	                    <div class="col-sm-8">
-	                        <select id="charttype" class="form-control">
-	                        	<option value="b">바차트
-	                        	<option value="p">파이차트
-	                        	<option value="g">꺽은선차트
-	                        	<option value="l">라인차트
-	                        	<option value="b">버블차트
+	                        <select id="charttype" name="charttype" class="form-control">
+	                        	<option value="1">바차트
+	                        	<option value="2">파이차트
+	                        	<option value="3">꺽은선차트
+	                        	<option value="4">라인차트
+	                        	<option value="5">버블차트
 	                        </select>
 	                    </div>
 	                </div>
@@ -423,7 +499,7 @@ $(document).ready(function() {
 				    	<label class="col-sm-3 control-label">주제</label>
 	
 	                    <div class="col-sm-8">
-	                        <input type="text" id="question" class="form-control" placeholder="주제" readonly="readonly">
+	                        <input type="text" name="subject" id="question" class="form-control" placeholder="주제" readonly="readonly">
 	                    </div>
 	                </div>
 			        <div class="form-group">

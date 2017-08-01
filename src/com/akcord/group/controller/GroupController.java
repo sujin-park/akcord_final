@@ -14,8 +14,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.akcord.group.model.GroupRoomDto;
 import com.akcord.group.model.MajorDto;
+import com.akcord.group.service.CommonService;
 import com.akcord.group.service.GroupService;
 import com.akcord.user.model.UserDto;
+import com.akcord.util.PageNavigation;
 
 @Controller
 @RequestMapping("/group")
@@ -24,6 +26,8 @@ public class GroupController {
 	@Autowired
 	private GroupService groupService;
 	
+	@Autowired
+	private CommonService commonService;
 	
 	@RequestMapping("/make.akcord")
 	public String makegroup(GroupRoomDto groupRoomDto, HttpSession session){
@@ -41,6 +45,10 @@ public class GroupController {
 		query.put("myseq", userDto.getUser_id()+"");
 		List<GroupRoomDto> list = groupService.grouplist(query);
 		List<MajorDto> majorlist = groupService.majorlist();
+		PageNavigation pageNavigation = commonService.makePageNavigation(query);
+		pageNavigation.setRoot("/akcord_project");
+		pageNavigation.setNavigator();
+		mav.addObject("navigator", pageNavigation);
 		mav.addObject("mList", majorlist);
 		mav.addObject("grouplist", list);
 		mav.setViewName("/user/group/grouplist");
