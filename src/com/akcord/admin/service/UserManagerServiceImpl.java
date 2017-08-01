@@ -1,15 +1,16 @@
 package com.akcord.admin.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.akcord.admin.dao.UserManagerDao;
+import com.akcord.admin.model.UserManageDto;
 import com.akcord.user.model.MajorDto;
 import com.akcord.user.model.UserDto;
-
 @Service
 public class UserManagerServiceImpl implements UserManagerService {
 
@@ -17,7 +18,7 @@ public class UserManagerServiceImpl implements UserManagerService {
 	private SqlSession sqlSession;
 		
 	@Override
-	public List<UserDto> getUserList() {
+	public List<UserManageDto> getUserList() {
 		return sqlSession.getMapper(UserManagerDao.class).getUserList();
 	}
 
@@ -39,6 +40,11 @@ public class UserManagerServiceImpl implements UserManagerService {
 	@Override
 	public List<MajorDto> getMajor() {
 		return sqlSession.getMapper(UserManagerDao.class).getMajor();
+	}
+
+	@Override
+	public List<UserManageDto> getMemberOrder(Map<String, String> str) {
+		return sqlSession.getMapper(UserManagerDao.class).getMemberOrder(str);
 	}
 
 }

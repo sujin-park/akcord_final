@@ -3,16 +3,23 @@
 }
 
 .panel-group{
-
     width:300px;
     height:auto;
     background-color:#f6f6f6;
-    z-index:9999999;
+    z-index:210;
     position:absolute;
     float:left;
     overflow:hidden;
+    position:fixed;
+    border-bottom: 1px solid #ccc;
 }
 
+#collapse-4 {
+    background-color:#e3e3e3;
+    margin-left:10px;
+    margin-right:10px;
+    overflow:auto;
+}
 
 #group{
       overflow:hidden;

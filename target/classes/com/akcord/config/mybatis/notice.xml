@@ -17,15 +17,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="getNoticeOrder" parameterType="String" resultType="noticeDto">
+		select rownum rn,a.* from (select notice_id,subject,content,is_notice,reg_date,hit 
+		from notice	
+		<choose>
+			<when test="str=='1'">
+			order by reg_date asc) a
+		</when>
+			<otherwise>
+				order by notice_id asc) a
+			</otherwise>
+		</choose>
 		
-		<bind name="str" value="'%'+_parameter.getStr()+'%'"/> 
-		select notice_id,subject,content,is_notice,reg_date,hit from notice	
-		<if test="">
-			order by reg_date
-		</if>
-		<if test='#{str}.equals("2")'>
-			order by hit	
-		</if>
 	</select>
 	
 	<delete id="delete" parameterType="String">

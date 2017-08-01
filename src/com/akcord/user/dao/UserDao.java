@@ -1,7 +1,9 @@
 package com.akcord.user.dao;
 
+import java.util.List;
 import java.util.Map;
 
+import com.akcord.group.model.GroupRoomDto;
 import com.akcord.user.model.UserDto;
 
 
@@ -16,5 +18,5 @@ public interface UserDao {
 	UserDto getUser(String id);
 	int modify(UserDto userDto);
 	int delete(String id);
-	
+	List<GroupRoomDto> group(String seq);
 }

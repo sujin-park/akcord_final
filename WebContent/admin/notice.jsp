@@ -62,12 +62,11 @@ $(document).ready(function (){
 		  
 	  });
 	
-		   $("#membersort").change(function () {   
+		   $("#noticesort").change(function () {   
 		    
-		      $("#membersort option:selected").each(function () {   
-		    	  var str =$(this).val();
-		    	
-	      $(location).attr('href','${root}/notice/noticeorder.akcord?str='+str);
+		      $("#noticesort option:selected").each(function () {   
+		    	 var str =$(this).val();
+	     		 $(location).attr('href','${root}/notice/noticeorder.akcord?str='+str);
  	      });
 	 }); 
 	 
@@ -91,10 +90,10 @@ $(document).ready(function (){
 				<div class="panel panel-default" style="padding:30px;">
             <div class="btn-group" >  
 				
-					<select class="form-control" id="membersort" name="membersort">
+					<select class="form-control" id="noticesort" name="noticesort">
 								<option>글정렬</option>
-                                <option value="1">등록일순</option>
-                                <option value="2">조회순</option>
+                                <option id="str" value="1">등록일순</option>
+                                <option id="str" value="2">조회순</option>
                     </select>
 			</div>
 			<table class="table">
@@ -107,11 +106,17 @@ $(document).ready(function (){
 					<th>공지 제목</th>
 					<th>등록일</th>
 					<th>조회수</th>
-					<th>공개여부</th>
+				<c:if test="${user.type!=1} ">
+					<th>공개여부${user.type }</th>
+					</c:if>
 				</tr>
 				</thead>
 				<tbody>
+				<c:if test="${user.type==1}">
+				<!--회원이면 공개글만보여야함....타입이 1이고 이즈노티스가 1인것만  -->
 				<c:forEach var="notice" items="${noticeList}">
+				<c:choose>
+				<c:when test="${notice.is_notice ==1 }">
 					<tr>
 						<td>
 							<input class="checkbox" type="checkbox" name="admincheckbox" id="checkbox" value="${notice.notice_id}">
@@ -128,8 +133,33 @@ $(document).ready(function (){
 						<td>공개</td>
 						</c:otherwise>
 						</c:choose>
+ 						
+					</tr>
+					</c:when>  
+					</c:choose>
+					</c:forEach></c:if>
+				<c:if test="${user.type==0}">
+				<!--회원이면 공개글만보여야함....타입이 1이고 이즈노티스가 1인것만  -->
+				<c:forEach var="notice" items="${noticeList}">
+					<tr>
+						<td>
+							<input class="checkbox" type="checkbox" name="admincheckbox" id="checkbox" value="${notice.notice_id}">
+						</td>
+						<td>${notice.notice_id }</td>
+						<td><a href="${root }/notice/noticemodify.akcord?nid=${notice.notice_id}">${notice.subject }</a></td>
+						<td>${notice.reg_date }</td>
+						<td>${notice.hit }</td>
+						<c:choose>
+   						 <c:when test="${notice.is_notice==0}">
+							<td>비공개</td>
+						</c:when>
+						<c:otherwise>
+						<td>공개</td>
+						</c:otherwise>
+						</c:choose>	
 					</tr>
 					</c:forEach>
+					</c:if>
 					</tbody>
 			</table> 
 			<div align="right">
