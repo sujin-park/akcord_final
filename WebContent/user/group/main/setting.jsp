@@ -64,16 +64,19 @@
 			$('#pg').val('1');
 			$('#key').val($('#skey').val());
 			$('#word').val($('#sword').val());
+			$('#groupId').val($('#sgroupid').val());
 			$('#commonForm').attr('action', '${root}/groupmain/group.akcord').submit();
 		});
 	});
 
 </script>
+<input type="hidden" id="sgroupid" name="sgroupid" value="${groupId}">
 		<section class="content page-top row">
 			<div class="col-sm-10 col-sm-push-1" style="padding-top: 60px;">
 				<div class="col-sm-10">
 					<h3>그룹원 관리</h3>
 				</div>
+				
 				<div class="panel panel-default">
 					<div class="tabbable" id="tabs-630325" align="left" style="width: 100%; clear:both;">
 						<ul class="nav nav-tabs">

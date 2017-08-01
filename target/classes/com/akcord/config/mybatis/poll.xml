@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.akcord.main.poll.dao.PollDao">
+    
+    <select id="getNextPollSeq" resultType="int">
+        select SEQ_POLL_ID.nextval 
+        from dual
+    </select>
+    
+    <insert id="pollmake" parameterType="pollDto">
+        insert
+        into poll (subject, chart_type, start_date, end_date, poll_id)
+        values (#{subject}, #{chartType}, #{startDate}, #{endDate}, SEQ_POLL_ID.currval)
+    </insert>
+    <insert id="pollmakeContent" parameterType="pollDto">
+        insert
+        into poll_detail (poll_id, content, count)
+        values (SEQ_POLL_ID.currval, #{content, jdbcType=VARCHAR}, 0)
+    </insert>
+    
+    <select id="polllist" parameterType="pollDto" resultType="pollDto">
+        select poll_id, subject, to_char(start_date, 'YY.MM.DD') startDate, to_char(end_date, 'YY.MM.DD') endDate, 
+        (select sum(count) from poll_detail where poll_id = 12) count
+        from poll
+    </select>
+    
+    <select id="pollmodify" parameterType="Integer" resultType="pollDto">
+        select poll_id, subject, to_char(start_date, 'YYYY-MM-DD') startDate, to_char(end_date, 'YYYY-MM-DD') endDate, chart_type ChartType
+        from poll
+        where poll_id = #{poll_id} 
+    </select>
+    
+    <update id="pollmodifydate" parameterType="pollDto">
+        update poll 
+        set start_date = #{startDate}, end_date = #{endDate}
+        where poll_id = #{poll_id}
+    </update>
+    
+    <select id="pollgetContent" parameterType="Integer" resultType="String">
+        select content
+        from poll_detail
+        where poll_id = #{poll_id}
+    </select>
+    
+    <update id="pollclose" parameterType="Integer">
+        update poll 
+        set end_date = 'sysdate'
+        where poll_id = #{poll_id}
+    </update>
+    
+</mapper>
+
