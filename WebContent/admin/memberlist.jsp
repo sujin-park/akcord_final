@@ -11,12 +11,7 @@
 <meta name="author" content="LayoutIt!">
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
-<style>
-.btn  
-	background-color: #346969;
-	color: white;
-}
-</style>
+
 <%@ include file="/common/template/nav.jsp" %>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -31,6 +26,14 @@ $(document).ready(function(){
 		var mname= $('#major_name').val();
 	$(location).attr('href','${root}/usermanager/mayjorPlus.akcord?mname='+mname);	
 	});
+	
+	$("#membersort").change(function () {   
+		    
+	      $("#membersort option:selected").each(function () {   
+	    	 var str =$(this).val();
+    		 $(location).attr('href','${root}/usermanager/memberOrder.akcord?str='+str);
+      });
+}); 
 });
 
 </script>
@@ -64,16 +67,16 @@ $(document).ready(function(){
 						<div class="form-group">
 							<select class="form-control" id="membersort" name="membersort">
 								<option>회원정렬</option>
-                                <option>가입일</option>
-                                <option>이름</option>
+                                <option id="str" value="1">가입일</option>
+                                <option id="str" value="2">이름</option>
                              </select>
                         <button type="submit" class="btn btn-default">
 							검색
 						</button>
-						<select class="form-control" id="status" name="status">
-                                <option>회원검색</option>
-                                <option>아이디검색</option>
-                                <option>번호검색</option>
+						<select class="form-control" id="skey" name="skey">
+                                <option value="search">회원검색</option>
+                                <option value="sid">아이디검색</option>
+                                <option value="snum">번호검색</option>
                          </select>
 							<input type="text" class="form-control" />
 						</div> 
@@ -112,7 +115,7 @@ $(document).ready(function(){
 						<th>${user.name}</th>
 						<td>${user.tel1 }-${user.tel2}-${user.tel3 }</td>
 						<td>${user.gender }</td>
-						<td>전공나올부분</td>
+						<td>${user.major_name }</td>
                         <td>${user.reg_date }</td>
 						<td>
 						<button type="button" class="btn btn-sm" id="blackRegBtn" value="${user.user_id }">

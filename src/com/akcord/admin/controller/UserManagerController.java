@@ -1,13 +1,16 @@
 package com.akcord.admin.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.akcord.admin.model.NoticeDto;
 import com.akcord.admin.model.UserManageDto;
 import com.akcord.admin.service.UserManagerService;
 import com.akcord.user.model.MajorDto;
@@ -50,6 +53,15 @@ public class UserManagerController {
 		List<MajorDto> mlist = userManagerService.getMajor();
 		mav.addObject("userList",list);
 		mav.addObject("majorList",mlist);
+		mav.setViewName("/admin/memberlist");
+		return mav;
+	}
+	@RequestMapping(value="/memberOrder.akcord",method=RequestMethod.GET)
+	public ModelAndView memberOrder(@RequestParam Map<String,String> str){
+		ModelAndView mav = new ModelAndView();
+		System.out.println(str);
+		List<UserManageDto> list = userManagerService.getMemberOrder(str);
+		mav.addObject("userList",list);
 		mav.setViewName("/admin/memberlist");
 		return mav;
 	}

@@ -27,7 +27,6 @@ $(document).ready(function(){
     });
 });
 </script>
-
 	<!-- 로그인 Modal-->
 	<div class="modal fade" id="loginmainModal" role="dialog" data-backdrop="static" data-keyboard="true">
 	<div class="modal-dialog" style="width: 50%;" >
@@ -42,8 +41,6 @@ $(document).ready(function(){
 				<div class="modal-content" id="img01" style="position: absolute; left: 15%;" >
 								<img src="${root}/doc/img/loginview.jpg"
 									style="width: 700px; height: 600px;">
-
-
 				<div class="modal-body" style="position: absolute; top:63%; left: 38%;" >								
 					<button id="loginBtn" type="button" class="btn btn-danger" data-toggle="modal" data-target="#loginBtnModal" >&nbsp;로그인&nbsp;</button>
 					<button id="joinBtn" type="button" class="btn btn-danger" data-toggle="modal" data-target="#joinBtnModal">회원가입</button>		

@@ -1,6 +1,7 @@
 package com.akcord.admin.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.akcord.admin.model.NoticeDto;
+import com.akcord.admin.model.UserManageDto;
 import com.akcord.admin.service.NoticeService;
 import com.akcord.admin.service.UserManagerService;
 import com.akcord.user.model.UserDto;
@@ -27,8 +29,11 @@ public class NoticeController {
 	public ModelAndView mvnoticelist(HttpSession session){
 		ModelAndView mav = new ModelAndView();
 		List<NoticeDto> list = noticeService.getNoticeList();
+		UserDto userDto = (UserDto) session.getAttribute("user");
+		mav.addObject("user",userDto);
 		mav.addObject("noticeList",list);
 		mav.setViewName("/admin/notice");
+		
 		return mav;
 	}
 	
@@ -62,6 +67,15 @@ public class NoticeController {
 		return mav;
 	}
 	@RequestMapping(value="/noticeorder.akcord",method=RequestMethod.GET)
+	public ModelAndView noticeOrder(@RequestParam Map<String,String> str){
+		ModelAndView mav = new ModelAndView();
+		System.out.println(str);
+		List<NoticeDto> list = noticeService.getNoticeOrder(str);
+		mav.addObject("noticeList",list);
+		mav.setViewName("/admin/notice");
+		return mav;
+	}
+/*	@RequestMapping(value="/noticeorder.akcord",method=RequestMethod.GET)
 	public ModelAndView noticeOrder(@RequestParam("str") String str){
 		ModelAndView mav = new ModelAndView();
 		System.out.println(str);
@@ -70,7 +84,7 @@ public class NoticeController {
 		mav.setViewName("/admin/notice");
 		return mav;
 	}
-	@RequestMapping(value="/noticewrite.akcord",method=RequestMethod.POST)
+*/	@RequestMapping(value="/noticewrite.akcord",method=RequestMethod.POST)
 	public ModelAndView noticeWrite(NoticeDto noticeDto){
 		ModelAndView mav = new ModelAndView();
 		int cnt = noticeService.noticeWrite(noticeDto);
