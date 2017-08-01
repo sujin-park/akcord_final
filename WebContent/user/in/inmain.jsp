@@ -14,6 +14,14 @@ $(document).ready(function() {
 	$('#questionBtn').click(function() {
 		//joinmove();
 		$(location).attr('href', '${root}/in/question.akcord');	});
+	$('.link_board_03').click(function() {
+		//alert("글보기 번호1 : " + $(this).parent().parent().children().eq(0).text());
+		//alert("글보기 번호2 : " + $(this).parents('tr').children('.bseq').text());
+		//alert("글보기 번호3 : " + $(this).attr('data-seq'));
+		
+		$('#qna_id').val($(this).attr('data-seq'));
+		$('#commonForm').attr('action', '${root}/in/qna.akcord').submit();
+	});
 });
 </script>	
 
@@ -67,8 +75,9 @@ $(document).ready(function() {
 		<hr>
 		<c:forEach var="inDto" items="${inlist}">
 		<div class="media">
-			<a  href="#" class="link_board_03">
+			<a  href="#" class="link_board_03" data-seq="#{inDto.qna_id}">
 			<dt class="media-heading col-sm-6" ><p overflow: hidden;>${inDto.subject }</p></dt>
+			<dt class="media-heading col-sm-2"></dt>
 			<dt class="media-heading col-sm-2">아이디 : ${inDto.user_id }</dt>
 			<p class="media-body col-sm-10" style="height: 50px; width: 100%;">${inDto.content }</p>
 			<dt class ="col-sm-4">${inDto.reg_date}</dt>
