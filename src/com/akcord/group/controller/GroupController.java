@@ -35,9 +35,7 @@ public class GroupController {
 		groupRoomDto.setLeaderId(user.getUser_id());
 		int cnt = groupService.createG(groupRoomDto);
 		return "redirect:/group/list.akcord";
-	
 	}
-	
 	@RequestMapping("/list.akcord")
 	public ModelAndView list(HttpSession session, @RequestParam Map<String,String> query) {
 		ModelAndView mav = new ModelAndView();
