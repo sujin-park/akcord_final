@@ -20,10 +20,7 @@
 $(document).ready(function(){
     // Show the Modal on load
     $("#loginmainModal").modal("show");
-    
-    $("#joinBtnModal").click(function(){
-        $("#loginmainModal").modal({show: false});
-    });
+   
 });
 </script>
 
@@ -59,5 +56,7 @@ $(document).ready(function(){
 
 <!-- 로그인 모달 -->
 <%@ include file="/user/login/login.jsp" %>
+<!--  우편번호 모달 -->
+<%@ include file="/user/join/zipsearch.jsp" %>
 </body>
 </html>
