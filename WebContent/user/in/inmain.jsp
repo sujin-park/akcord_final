@@ -14,20 +14,20 @@ $(document).ready(function() {
 	$('#questionBtn').click(function() {
 		//joinmove();
 		$(location).attr('href', '${root}/in/question.akcord');	});
-	$('.link_board_03').click(function() {
+//	$('.link_board_03').click(function() {
 		//alert("글보기 번호1 : " + $(this).parent().parent().children().eq(0).text());
 		//alert("글보기 번호2 : " + $(this).parents('tr').children('.bseq').text());
 		//alert("글보기 번호3 : " + $(this).attr('data-seq'));
 		
-		$('#qna_id').val($(this).attr('data-seq'));
-		$('#commonForm').attr('action', '${root}/in/qna.akcord').submit();
-	});
+	//	$('#qna_id').val($(this).attr('data-seq'));
+	//	$('#inmainform').attr('action', '${root}/in/qna.akcord').submit();
+	//});
 });
 </script>	
 
+<form class="inmainform" id="inmainform" name="inmainform" action="">
 	<div class="container" style="margin-top: 10pt;">
 	<div class="row">
-
 
 	<!-- 왼쪽 카테고리 -->
 	<div class="col-sm-2 form-group" >
@@ -74,8 +74,9 @@ $(document).ready(function() {
 	<div class="col-sm-10 form-group">
 		<hr>
 		<c:forEach var="inDto" items="${inlist}">
-		<div class="media">
-			<a  href="#" class="link_board_03" data-seq="#{inDto.qna_id}">
+	<%-- 		<a  href="#" class="link_board_03" data-seq="#{inDto.qna_id}">
+ --%>		<div class="media">
+		
 			<dt class="media-heading col-sm-6" ><p overflow: hidden;>${inDto.subject }</p></dt>
 			<dt class="media-heading col-sm-2"></dt>
 			<dt class="media-heading col-sm-2">아이디 : ${inDto.user_id }</dt>
@@ -83,8 +84,9 @@ $(document).ready(function() {
 			<dt class ="col-sm-4">${inDto.reg_date}</dt>
 			<dt class ="col-sm-3">답글수 : 0</dt>
 			<dt class ="col-sm-3">조회수 : ${inDto.hit }</dt>
-			</a>
+		
 		</div>
+			</a>
 		<hr>
 		</c:forEach>
 	
@@ -93,6 +95,6 @@ $(document).ready(function() {
 	
 	</div>
 	
-
+<!-- </form> -->
 </body>
 </html>

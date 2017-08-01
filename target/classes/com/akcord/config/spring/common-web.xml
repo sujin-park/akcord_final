@@ -10,6 +10,7 @@
 	<bean id="vr" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="suffix" value=".jsp"/>
 	</bean>
+   
 
    <mvc:annotation-driven>
       <mvc:message-converters>
@@ -23,4 +24,5 @@
          </bean>
       </mvc:message-converters>
    </mvc:annotation-driven>
+   
 </beans>
