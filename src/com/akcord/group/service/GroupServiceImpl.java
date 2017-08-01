@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.akcord.group.dao.GroupDao;
 import com.akcord.group.model.GroupRoomDto;
 import com.akcord.group.model.MajorDto;
+import com.akcord.util.BoardConstant;
 
 @Service
 public class GroupServiceImpl implements GroupService{
@@ -23,8 +24,13 @@ public class GroupServiceImpl implements GroupService{
 	}
 
 	@Override
-	public List<GroupRoomDto> grouplist(String myseq) {
-		return sqlSession.getMapper(GroupDao.class).grouplist(myseq);
+	public List<GroupRoomDto> grouplist(Map<String,String> query) {
+		int pg = Integer.parseInt(query.get("pg"));
+		int end = pg * BoardConstant.LIST_SIZE;
+		int start = end - BoardConstant.LIST_SIZE;
+		query.put("start", start+"");
+		query.put("end", end+"");
+		return sqlSession.getMapper(GroupDao.class).grouplist(query);
 	}
 	
 	public List<GroupRoomDto> waitinglist(int seq) {
@@ -47,8 +53,13 @@ public class GroupServiceImpl implements GroupService{
 	}
 
 	@Override
-	public int cancel(String seq) {
-		return sqlSession.getMapper(GroupDao.class).cancel(seq);
+	public int cancel(Map<String, String> map) {
+		return sqlSession.getMapper(GroupDao.class).cancel(map);
+	}
+
+	@Override
+	public int accept(Map<String, String> map) {
+		return sqlSession.getMapper(GroupDao.class).accept(map);
 	}
 
 }

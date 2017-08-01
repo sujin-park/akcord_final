@@ -9,7 +9,7 @@
    <!-- collapse -->
    <div class="panel-group">
 
-         <div class="panel-heading">
+         <div class="panel-heading" style="padding-left:30%;">
             <h4 class="panel-title">
                <a data-toggle="collapse" href="#collapse-1">
                <img alt=""   src="${root}/doc/img/icon.png" height="35" width="35">
@@ -31,7 +31,7 @@
                <li class="list-group-item">
                	  <div class="list-heading">
                      <h4 class="list-title">
-                        <a href="">공지사항</a>
+                        <a href="${root }/notice/mvnoticelist.akcord">공지사항</a>
                      </h4>
                   </div> 
                   <div class="list-heading1">
@@ -46,10 +46,17 @@
                   </div> <!-- more menu for ONE -->
                   <div id="collapse-2" class="panel-collapse collapse">
                      <ul>
-                        <li><a href="#">전체 그룹방</a></li>
-                        <li><a href="#">내 그룹방</a></li>
+                        <li><a href="${root}/group/list.akcord?pg=1&key=&word=&order=">전체 그룹방</a></li>
+                        <li><a href="#collapse-4" a data-toggle="collapse"> 내 그룹방</a></li>
                      </ul>
                   </div>
+                   <div id="collapse-4" class="panel-collapse collapse">
+                     <ul>
+                     	<c:forEach var="g_list" items="${group_list}">
+	                        <li><a href="${root}/groupmain/main.akcord?groupId=${g_list.groupId}"> ${g_list.majorName}  : ${g_list.groupName}</a></li>
+	                     </c:forEach>
+                     </ul>
+                  	</div>
                   <div class="list-heading1">
                      <h4 class="list-title" style="padding-top:20px;">
                         <a href="">지식인</a>
@@ -72,7 +79,7 @@
                   </div>
                   <div id="collapse-3" class="panel-collapse collapse">
                      <ul>
-                        <li><a href="#">회원관리</a></li>
+                        <li><a href="${root }/usermanager/mvmemberlist.akcord">회원관리</a></li>
                         <li><a href="#">통계</a></li>
                      </ul>
                   </div> 
@@ -83,18 +90,18 @@
     
 <!-- HEAD -->
 	<div class="container-head">
-	
-	           <div class="c_01 c">
-	              <h3 id="logo"><a href="">AKCORD</a></h3>
-	           </div>
-	           
-	           
-	            <div class="c_03 c pull-right">
-	               <a href=""><img alt="" src="${root}/doc/img/bell-icon.png" width="20" height="20"><span class="badge">5</span></a>
-	           </div>
-	           <div class="login_info pull-right">
-	              	박수진님 환영합니다
-	           </div>
-	           
-	</div>
-</div>
+		   <div class="col-sm-3">
+		   </div>
+           <div class="c_01 c">
+              <h3 id="logo"><a href="${root}/index.jsp">AKCORD</a></h3>
+           </div>
+           
+           
+            <div class="c_03 c pull-right" style="padding-right:80px;">
+               <a href=""><img alt="" src="${root}/doc/img/bell-icon.png" width="20" height="20"><span class="badge">5</span></a>
+           </div>
+           <div class="login_info pull-right">
+              	박수진님 환영합니다
+           </div>
+	    </div>       
+	</div>

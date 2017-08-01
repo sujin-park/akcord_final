@@ -10,8 +10,10 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         <typeAlias alias="groupRoomDto" type="com.akcord.group.model.GroupRoomDto"/>
         <typeAlias alias="userDto" type="com.akcord.user.model.UserDto"/>
         <typeAlias alias="majorDto" type="com.akcord.user.model.MajorDto"/>
+        <typeAlias alias="userManageDto" type="com.akcord.admin.model.UserManageDto"/>
         <typeAlias alias="groupListDto" type="com.akcord.group.model.GroupListDto"/>
         <typeAlias alias="inDto" type="com.akcord.in.model.InDto"/>
+        <typeAlias alias="pollDto" type="com.akcord.main.poll.model.PollDto"/>
     </typeAliases>
     <mappers>
         <mapper resource="com/akcord/config/mybatis/notice.xml"/>
@@ -20,7 +22,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         <mapper resource="com/akcord/config/mybatis/groupmain.xml"/>
         <mapper resource="com/akcord/config/mybatis/usermanager.xml"/>
         <mapper resource="com/akcord/config/mybatis/in.xml"/>
-        
+        <mapper resource="com/akcord/config/mybatis/common.xml"/>
+        <mapper resource="com/akcord/config/mybatis/poll.xml"/>
     </mappers>
     
 </configuration>

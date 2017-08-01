@@ -16,4 +16,6 @@
 	<bean id="ss" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="ssfb"/>
 	</bean>
+	
+	
 </beans>

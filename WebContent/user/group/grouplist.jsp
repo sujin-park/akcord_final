@@ -3,6 +3,7 @@
 <%@include file="/common/template/head_include.jsp"%>
 <link rel="stylesheet" href="/akcord_project/user/group/css/group.css">
 <%@ include file="/common/template/nav.jsp" %>
+<%@ include file="/common/public.jsp" %>
 <script type="text/javascript">
 $(document).ready(function(){
 	$('#create').click(function(){
@@ -36,6 +37,12 @@ $(document).ready(function(){
 		$(location).attr('href', '${root}/group/join.akcord?seq='+joinseq);
 	});
 	
+	$('#searchBtn').click(function(){
+		$('#pg').val('1');
+		$('#key').val($('#skey').val());
+		$('#word').val($('#sword').val());
+		$('#commonForm').attr('action', '${root}/group/list.akcord').submit();
+	});
 });
 
 function joinGroup(seq) {
@@ -52,7 +59,8 @@ function joinGroup(seq) {
 }
 </script>
 		<section class="content page-top row">
-			<div class="col-sm-10 col-sm-push-1" style="padding-top: 60px;">
+			<div class="col-sm-10 col-sm-push-1">
+			<h2>GROUP LIST</h2>
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<div class="row" style="padding-bottom:10px;">
@@ -65,12 +73,12 @@ function joinGroup(seq) {
 									<div class="col-sm-6 pull-right">
 										<div class="col-sm-3"></div>
 										<div class="col-sm-9">
-											<select class="form-control" name="key">
-												<option value="title">전공명</option>
-												<option value="name">그룹방명</option>
+											<select class="form-control" name="skey" id="skey">
+												<option value="majorName">전공명</option>
+												<option value="groupName">그룹방명</option>
 											</select>
-												<input type="text" class="form-control" name="word" placeholder="검색어 입력" size="25">
-												<button type="button" class="btn btn-sm btn-danger">SEARCH</button>
+												<input type="text" class="form-control" id="sword" name="sword" placeholder="검색어 입력" size="25">
+												<button type="button" class="btn btn-sm btn-danger" id="searchBtn">SEARCH</button>
 										</div>
 									</div>
 								</div>
@@ -142,28 +150,8 @@ function joinGroup(seq) {
 				</div>
 			</div>
 		</section>
-		<nav>
-			<div align="center">
-				  <ul class="pagination">
-				    <li>
-				      <a href="#" aria-label="Previous">
-				        <span aria-hidden="true">&laquo;</span>
-				      </a>
-				    </li>
-				    <li><a href="#">1</a></li>
-				    <li><a href="#">2</a></li>
-				    <li><a href="#">3</a></li>
-				    <li><a href="#">4</a></li>
-				    <li><a href="#">5</a></li>
-				    <li>
-				      <a href="#" aria-label="Next">
-				        <span aria-hidden="true">&raquo;</span>
-				      </a>
-				    </li>
-				  	</ul>
-			  </div>
-		</nav>
-<%@include file="/user/group/creategroup.jsp"%>
+${navigator.navigator}
+<%@include file="/user/group/create.jsp"%>
 <%@include file="/user/group/join.jsp"%>
 	</body>
 </html>

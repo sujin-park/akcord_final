@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="/common/public.jsp" %>
 <div class="panel-body">
 						<div class="row" style="padding-bottom:10px;">
 							<div class="col-sm-6 pull-left">
@@ -13,12 +14,12 @@
 									<div class="col-sm-6 pull-right">
 										<div class="col-sm-3"></div>
 										<div class="col-sm-9">
-											<select class="form-control" name="key">
-												<option value="title">아이디</option>
-												<option value="name">전공명</option>
+											<select class="form-control" name="skey" id="skey">
+												<option value="id">아이디</option>
+												<option value="majorName">전공명</option>
 											</select>
-												<input type="text" class="form-control" name="word" placeholder="검색어 입력" size="25">
-												<button type="button" class="btn btn-sm btn-danger">SEARCH</button>
+												<input type="text" class="form-control" name="sword" id="sword" placeholder="검색어 입력" size="25">
+												<button type="button" class="btn btn-sm btn-danger" id="searchBtn">SEARCH</button>
 										</div>
 									</div>
 								</div>

@@ -14,9 +14,19 @@
 	
 	<!-- 로그인 -->
 	<select id="login" parameterType="java.util.Map" resultType="userDto">
-		select id, name
+		select user_id, id, name, type
 		from users
 		where not is_block = 1 and id=#{id} and password=#{password}   
+	</select>
+	
+	<!-- 메뉴바에 그룹리스트 나오는거 -->
+	<select id="group" parameterType="String" resultType="groupRoomDto">
+		select g.group_name groupName, m.major_name majorName, g.group_id groupId from users u, grouproom g, grouproom_list gl, major m
+				where u.user_id = gl.user_id
+				and g.group_id = gl.group_id
+				and m.major_id = u.major_id
+				and u.user_id = #{seq}
+				and gl.is_accept = 1 
 	</select>
 	
 	<!-- 회원가입 -->

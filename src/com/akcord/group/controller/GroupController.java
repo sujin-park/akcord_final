@@ -14,8 +14,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.akcord.group.model.GroupRoomDto;
 import com.akcord.group.model.MajorDto;
+import com.akcord.group.service.CommonService;
 import com.akcord.group.service.GroupService;
 import com.akcord.user.model.UserDto;
+import com.akcord.util.PageNavigation;
 
 @Controller
 @RequestMapping("/group")
@@ -24,6 +26,9 @@ public class GroupController {
 	@Autowired
 	private GroupService groupService;
 	
+	@Autowired
+	private CommonService commonService;
+	
 	@RequestMapping("/make.akcord")
 	public String makegroup(GroupRoomDto groupRoomDto, HttpSession session){
 		UserDto user = (UserDto) session.getAttribute("user");
@@ -31,13 +36,17 @@ public class GroupController {
 		int cnt = groupService.createG(groupRoomDto);
 		return "redirect:/group/list.akcord";
 	}
-	
 	@RequestMapping("/list.akcord")
-	public ModelAndView list(HttpSession session) {
+	public ModelAndView list(HttpSession session, @RequestParam Map<String,String> query) {
 		ModelAndView mav = new ModelAndView();
-		UserDto user = (UserDto) session.getAttribute("user");
-		List<GroupRoomDto> list = groupService.grouplist(user.getUser_id()+"");
+		UserDto userDto = (UserDto) session.getAttribute("user");
+		query.put("myseq", userDto.getUser_id()+"");
+		List<GroupRoomDto> list = groupService.grouplist(query);
 		List<MajorDto> majorlist = groupService.majorlist();
+		PageNavigation pageNavigation = commonService.makePageNavigation(query);
+		pageNavigation.setRoot("/akcord_project");
+		pageNavigation.setNavigator();
+		mav.addObject("navigator", pageNavigation);
 		mav.addObject("mList", majorlist);
 		mav.addObject("grouplist", list);
 		mav.setViewName("/user/group/grouplist");
@@ -64,9 +73,24 @@ public class GroupController {
 		return "redirect:/group/list.akcord";
 	}
 	@RequestMapping("/cancel.akcord")
-	public String cancel(@RequestParam("seq") String seq) {
+	public String cancel(@RequestParam("seq") String seq, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		int cnt = groupService.cancel(seq);
+		Map<String,String> map = new HashMap<String,String>();
+		UserDto user = (UserDto) session.getAttribute("user");
+		map.put("seq", seq);
+		map.put("userId", user.getUser_id()+"");
+		int cnt = groupService.cancel(map);
+		return "redirect:/group/waitinglist.akcord";
+	}
+	
+	@RequestMapping("/accept.akcord")
+	public String accept(@RequestParam("seq") String seq, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		Map<String,String> map = new HashMap<String,String>();
+		UserDto user = (UserDto) session.getAttribute("user");
+		map.put("seq", seq);
+		map.put("userId", user.getUser_id()+"");
+		int cnt = groupService.accept(map);
 		return "redirect:/group/waitinglist.akcord";
 	}
 }

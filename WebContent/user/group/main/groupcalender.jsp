@@ -6,7 +6,7 @@
 <script src='/akcord_project/js/lib/moment.min.js' charset="utf-8"></script>
 <script src='/akcord_project/js/lib/jquery-ui.min.js' charset="utf-8"></script>
 <script src='/akcord_project/js/lib/fullcalendar.js' charset="utf-8"></script>
-
+<%@ include file="/common/public.jsp" %>
 <script>
 	$(document).ready(function() {
 		
@@ -112,7 +112,7 @@
 	}
 	
 	.container {
-		padding-top:20px;
+		padding-top:60px;
 	}
 	#calendar {
 		margin: 0 auto;
@@ -124,28 +124,33 @@
 <script>
 	$(document).ready(function() {
 		$('#contentlist').on('click', function() {
-			$(location).attr('href', '${root}/groupmain/list.akcord');
+			$(location).attr('href', '${root}/groupmain/list.akcord?groupId=${groupId}');
 		});
 		
 		$('#Gmemberlist').on('click', function() {
-			$(location).attr('href', '${root}/groupmain/group.akcord');
+			$(location).attr('href', '${root}/groupmain/group.akcord?groupId=${groupId}&pg=1&key=&word=&order=');
 		});
 		
+		$('#deletegroup').on('click', function() {
+			
+		});
 	});
 </script>
 <%@ include file="/common/template/nav.jsp" %>
-<div class="container">
-	<div class="row">
-		<div class="col-sm-6" style="border:5px;">
-			<button type="button" class="btn btn-sm btn-danger" id="contentlist">그룹방 글 목록</button>
-			<button type="button" class="btn btn-sm btn-danger" id="Gmemberlist">그룹원 관리</button>
-			<button type="button" class="btn btn-sm btn-default" id="deletegroup">그룹 탈퇴</button>
-			<button type="button" class="btn btn-sm btn-default" id="deletegroup">그룹 삭제</button>
+<div class="col-sm-10 col-sm-push-1">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="border:5px;">
+				<button type="button" class="btn btn-sm btn-danger" id="contentlist">그룹방 글 목록</button>
+				<button type="button" class="btn btn-sm btn-danger" id="Gmemberlist">그룹원 관리</button>
+				<button type="button" class="btn btn-sm btn-default" id="deletegroup">그룹 탈퇴</button>
+				<button type="button" class="btn btn-sm btn-default" id="deletegroup">그룹 삭제</button>
+			</div>
 		</div>
-	</div>
-	<div class="row" style="margin:30px;">
-		<div id='calendar' class="col-sm-8"></div>
-		<div class="col-sm-4">채팅부분</div>
+		<div class="row" style="margin:30px;">
+			<div id='calendar' class="col-sm-8"></div>
+			<div class="col-sm-4">채팅부분</div>
+		</div>
 	</div>
 </div>
 <%@ include file="/user/group/delete.jsp" %>
