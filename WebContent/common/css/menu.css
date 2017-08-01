@@ -45,6 +45,7 @@ color: #353535;
 }
 
 #logo{
+    z-index:220;
 	float: left;
 	margin-top: 0;
 	margin-bottom: 0;

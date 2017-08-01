@@ -3,17 +3,18 @@
 <%@include file="/common/template/head_include.jsp"%>
 <link rel="stylesheet" href="/akcord_project/user/group/css/group.css">
 <%@ include file="/common/template/nav.jsp" %>
+<%@ include file="/common/public.jsp" %>
 <script type="text/javascript">
 
 	function deleteM(seq) {
 		if (confirm("조원을 강퇴시키겠습니까?")) {
-			document.location.href = "${root}/groupmain/reject.akcord?seq="+seq+"&state=1";
+			document.location.href = "${root}/groupmain/reject.akcord?seq="+seq+"&state=1&groupId=${groupId}";
 		}
 	}
 
 	function exitM(seq) {
 		if (confirm("승인을 거절하시겠습니까?")) {
-			document.location.href = "${root}/groupmain/reject.akcord?seq="+seq+"&state=2";
+			document.location.href = "${root}/groupmain/reject.akcord?seq="+seq+"&state=2&groupId=${groupId}";
 		}
 	}
 	function plusMember() {
@@ -25,7 +26,7 @@
 	}
 	function acceptM(seq) {
 		if (confirm("승인하시겠습니까?")) {
-			document.location.href = "${root}/groupmain/accept.akcord?seq="+seq;
+			document.location.href = "${root}/groupmain/accept.akcord?seq="+seq +"&groupId=${groupId}";
 		}
 	}
 	
@@ -46,17 +47,24 @@
 	function invite(seq) {
 		if (confirm("그룹방에 초대하시겠습니까?")) {
 			var groupid = $('#groupid').val();
-			document.location.href = "${root}/groupmain/invite.akcord?seq="+seq +"&groupid="+groupid;
+			document.location.href = "${root}/groupmain/invite.akcord?seq="+seq +"&groupId=${groupId}";
 		}
 	}
 	
 	$(document).ready(function(){
 		$('#g').on('click', function(){
-			$.get("${root}/groupmain/grouplist.akcord?", 
+			$.get("${root}/groupmain/grouplist.akcord?groupId=${groupId}", 
 						function(data, status){
 						var div = document.getElementById('groupReal');
 						div.innerHTML=data;
 						});
+		});
+		
+		$('#searchBtn').click(function(){
+			$('#pg').val('1');
+			$('#key').val($('#skey').val());
+			$('#word').val($('#sword').val());
+			$('#commonForm').attr('action', '${root}/groupmain/group.akcord').submit();
 		});
 	});
 
@@ -78,12 +86,13 @@
 						</ul>
 						<div class="tab-content">
 							<div class="tab-pane active" id="waiting">
-								<%@include file="/user/group/waitinggroup.jsp"%>
+								<%@include file="/user/group/main/waitinggroup.jsp"%>
 							</div>
 							<div class="tab-pane" id="groupReal">
+								<!-- <%@include file="/user/group/main/origingroup.jsp" %> -->
 							</div>
 						</div>
 		</section>
-<%@include file="/user/group/plusmember.jsp"%>
+<%@include file="/user/group/main/plusmember.jsp"%>
 	</body>
 </html>

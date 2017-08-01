@@ -10,7 +10,7 @@ public interface GroupService {
 
 	public int createG(GroupRoomDto groupRoomDto); // 그룹방 개설
 	
-	public List<GroupRoomDto> grouplist(String myseq); // 처음 그룹 리스트
+	public List<GroupRoomDto> grouplist(Map<String,String> query); // 처음 그룹 리스트
 	
 	public List<GroupRoomDto> waitinglist(int seq); // 승인 리스트
 	
@@ -20,5 +20,7 @@ public interface GroupService {
 	
 	public int joinGroup(Map<String, String> map); // 그룹방 가입 요청
 	
-	public int cancel(String seq);
+	public int cancel(Map<String, String> map);
+	
+	public int accept(Map<String, String> map);
 }

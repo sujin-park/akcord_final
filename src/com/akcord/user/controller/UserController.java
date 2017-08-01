@@ -1,5 +1,6 @@
 package com.akcord.user.controller;
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.akcord.group.model.GroupRoomDto;
 import com.akcord.user.model.UserDto;
 import com.akcord.user.service.UserService;
 
@@ -30,11 +32,11 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/join.akcord", method=RequestMethod.POST)
-	public ModelAndView join(UserDto userDto){
+	public ModelAndView join(@RequestParam Map<String, String> map){
 		ModelAndView mav = new ModelAndView();
-		int cnt = userService.join(userDto);
-		mav.addObject("user", userDto);
-		mav.setViewName("/join/joinok");
+		int cnt = userService.join(map);
+		mav.addObject("user", map);
+		mav.setViewName("/user/login/loginmain");
 		return mav;
 		
 	}
@@ -61,8 +63,10 @@ public class UserController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/user/login/loginfail");
 		UserDto userDto = userService.login(map);
+		List<GroupRoomDto> group_list = userService.group(userDto.getUser_id()+"");
 		if( userDto != null){
 			session.setAttribute("user", userDto);
+			session.setAttribute("group_list", group_list);
 			mav.setViewName("/index");
 			//redirect로 해도 상관없음. String으로 리턴을 해서 
 			//ModelAndView는 request와 같기때문에 한번 받아오면 그 다음 페이지부터 유지할수 없음.

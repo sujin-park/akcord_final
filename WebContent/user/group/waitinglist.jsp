@@ -7,6 +7,10 @@
 	function cancel(seq) {
 		document.location.href ="${root}/group/cancel.akcord?seq="+seq;
 	}
+	
+	function accept(seq) {
+		document.location.href ="${root}/group/accept.akcord?seq="+seq;
+	}
 </script>
 <title>GROUP LIST</title>
 	<section class="content page-top row">
@@ -23,7 +27,7 @@
 										<td width="20%">그룹방명</td>
 										<td width="20%">그룹방내용</td>
 										<td width="15%">리더</td>
-										<td width="15%">CANCEL</td>
+										<td width="15%">승인/취소</td>
 									</tr>
 								<c:if test="${waitlist.size() == 0}">
 									<tr>
@@ -62,7 +66,11 @@
 											</div>
 										</td>
 										<td align="center">
-												<button class="btn-danger btn-sm" id="cancel${WaitDto.groupId}" onclick="javascript:cancel(${WaitDto.groupId});">
+												<button class="btn-danger btn-sm" id="accept${WaitDto.groupId}" onclick="javascript:accept(${WaitDto.groupId});">
+													<span class="glyphicon glyphicon-heart">
+													</span>
+												</button>
+												<button class="btn-default btn-sm" id="cancel${WaitDto.groupId}" onclick="javascript:cancel(${WaitDto.groupId});">
 													<span class="glyphicon glyphicon-remove">
 													</span>
 												</button>
