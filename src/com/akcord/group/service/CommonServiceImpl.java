@@ -20,7 +20,8 @@ public class CommonServiceImpl implements CommonService {
 		int totalArticleCount = 0;
 		int pg = Integer.parseInt(query.get("pg"));
 		String type = query.get("type");
-		
+		// 각자의 컨트롤러에서 query.put("type", "admin") 이런식으로 구분값을 보낸후
+		// 여기서 그 값을 꺼내서 구분하고, 각자 리스트 뿌렸던 쿼리를 count해서 글 갯수 구하기
 		if (type.equals("group")) {
 		newArticleCount = sqlSession.getMapper(CommonDao.class).newGroupListCount(query);
 		totalArticleCount = sqlSession.getMapper(CommonDao.class).totalGroupListCount(query);

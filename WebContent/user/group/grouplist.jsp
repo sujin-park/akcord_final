@@ -46,22 +46,22 @@ $(document).ready(function(){
 	
 	$('#firstBtn').click(function(){
 		$('#pg').val('1');
-		$('#key').val($('#skey').val());
-		$('#word').val($('#sword').val());
+		$('#key').val('${query.key}');
+		$('#word').val('${query.word}');
 		$('#commonForm').attr('action', '${root}/group/list.akcord').submit();
 	});
 	
 	$('.pagemove').click(function(){
 		$('#pg').val($(this).attr('data-page'));
-		$('#key').val($('#skey').val());
-		$('#word').val($('#sword').val());
+		$('#key').val('${query.key}');
+		$('#word').val('${query.word}');
 		$('#commonForm').attr('action', '${root}/group/list.akcord').submit();
 	});
 	
 	$('#lastBtn').click(function(){
 		$('#pg').val($(this).attr('data-last'));
-		$('#key').val($('#skey').val());
-		$('#word').val($('#sword').val());
+		$('#key').val('${query.key}');
+		$('#word').val('${query.word}');
 		$('#commonForm').attr('action', '${root}/group/list.akcord').submit();
 	});
 });

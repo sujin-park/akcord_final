@@ -50,6 +50,7 @@ public class GroupController {
 		mav.addObject("navigator", pageNavigation);
 		mav.addObject("mList", majorlist);
 		mav.addObject("grouplist", list);
+		mav.addObject("query", query);
 		mav.setViewName("/user/group/grouplist");
 		return mav;
 	}
