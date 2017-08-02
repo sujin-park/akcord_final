@@ -4,18 +4,30 @@
 <%@include file="/common/template/head_include.jsp"%>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <%@ include file="/common/template/nav.jsp" %>
+<style>
+.media-heading { display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
+
+</style>
 <script>
 $(document).ready(function() {
 	$('#questionBtn').click(function() {
 		//joinmove();
 		$(location).attr('href', '${root}/in/question.akcord');	});
+//	$('.link_board_03').click(function() {
+		//alert("글보기 번호1 : " + $(this).parent().parent().children().eq(0).text());
+		//alert("글보기 번호2 : " + $(this).parents('tr').children('.bseq').text());
+		//alert("글보기 번호3 : " + $(this).attr('data-seq'));
+		
+	//	$('#qna_id').val($(this).attr('data-seq'));
+	//	$('#inmainform').attr('action', '${root}/in/qna.akcord').submit();
+	//});
 });
 </script>	
 
+<form class="inmainform" id="inmainform" name="inmainform" action="">
 	<div class="container" style="margin-top: 10pt;">
 	<div class="row">
-
 
 	<!-- 왼쪽 카테고리 -->
 	<div class="col-sm-2 form-group" >
@@ -61,47 +73,28 @@ $(document).ready(function() {
 	<!-- 리스트 -->		
 	<div class="col-sm-10 form-group">
 		<hr>
-
-		<div class="media">
-			<dt class="media-heading col-sm-6">글제목</dt>
-			<p class="media-body col-sm-10" style="height: 50px; width: 100%;">글 내용이 나오는 공간입니다.최대3줄 </p>
-			<dt class ="col-sm-4">2017.07.21</dt>
-			<dt class ="col-sm-3">답글수 : 0</dt>
-			<dt class ="col-sm-3">조회수 : 0</dt>
-		</div>
-		<hr>
+		<c:forEach var="inDto" items="${inlist}">
+	<%-- 		<a  href="#" class="link_board_03" data-seq="#{inDto.qna_id}">
+ --%>		<div class="media">
 		
-		<div class="media">
-			<dt class="media-heading col-sm-6">글제목</dt>
-			<p class="media-body col-sm-10" style="height: 50px; width: 100%;">글 내용이 나오는 공간입니다.최대3줄 </p>
-			<dt class ="col-sm-4">2017.07.21</dt>
+			<dt class="media-heading col-sm-6" ><p overflow: hidden;>${inDto.subject }</p></dt>
+			<dt class="media-heading col-sm-2"></dt>
+			<dt class="media-heading col-sm-2">아이디 : ${inDto.user_id }</dt>
+			<p class="media-body col-sm-10" style="height: 50px; width: 100%;">${inDto.content }</p>
+			<dt class ="col-sm-4">${inDto.reg_date}</dt>
 			<dt class ="col-sm-3">답글수 : 0</dt>
-			<dt class ="col-sm-3">조회수 : 0</dt>
-		</div>
-		<hr>
+			<dt class ="col-sm-3">조회수 : ${inDto.hit }</dt>
 		
-		<div class="media">
-			<dt class="media-heading col-sm-6">글제목</dt>
-			<p class="media-body col-sm-10" style="height: 50px; width: 100%;">글 내용이 나오는 공간입니다.최대3줄 </p>
-			<dt class ="col-sm-4">2017.07.21</dt>
-			<dt class ="col-sm-3">답글수 : 0</dt>
-			<dt class ="col-sm-3">조회수 : 0</dt>
 		</div>
+			</a>
 		<hr>
-		
-		<div class="media">
-			<dt class="media-heading col-sm-6">글제목</dt>
-			<p class="media-body col-sm-10" style="height: 50px; width: 100%;">글 내용이 나오는 공간입니다.최대3줄 </p>
-			<dt class ="col-sm-4">2017.07.21</dt>
-			<dt class ="col-sm-3">답글수 : 0</dt>
-			<dt class ="col-sm-3">조회수 : 0</dt>
-		</div>
-		<hr>
+		</c:forEach>
+	
 		
   	</div>
 	
 	</div>
 	
-
+<!-- </form> -->
 </body>
 </html>

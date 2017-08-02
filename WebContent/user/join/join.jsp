@@ -1,12 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <c:set var="root" value="${pageContext.request.contextPath}" />
+
 <script>
 
 var count = 1;
 
+$("#zipsearch").click(function(){
+    $("#zipsearchModal").modal();
+});
+
 $(document).ready(function (){
+
 	$('#id').keyup(function(){
 		var output = '4자이상 12자 이하로 입력해주세요.'
 		var resultView = $('#result');
@@ -32,7 +39,6 @@ $(document).ready(function (){
 	}
 	});
 	
-		
 	$('#name').keyup(function(){
 		if($('#name').val() == ""){
 			$('#nameView').empty();
@@ -93,7 +99,7 @@ $(document).ready(function (){
 			$('#telView').empty();
 		}
 	});
-
+	
 	
 	$('#joinB').click(function(){
 		$('#joinForm').attr('action', '${root}/user/join.akcord').submit();
@@ -127,10 +133,10 @@ function appendDay(){
 } 
 
 
-</script>
 
+</script>
 <!-- 회원가입 Modal-->
-<div class="modal fade" id="joinBtnModal" role="dialog" >
+<div class="modal fade" id="joinBtnModal" role="dialog" aria-hidden="true" >
 	<div class="modal-dialog" style="width: 33%;">
 		
 		<div>
@@ -207,11 +213,11 @@ function appendDay(){
 						<div class="form-group">
 							<label class="col-sm-3 control-label">생년월일</label>
 							<div class="col-sm-3">
-								<select class="form-control" id="birth1" name="birth1" value="" onkeyup="javascript:appendYear();">
+								<select class="form-control" id="birth1" name="birth1" onclick="javascript:appendYear();">
 								</select>
 							</div>
 							<div class="col-sm-2">
-								<select class="form-control" id="birth2" name="birth2" value="">
+								<select class="form-control" id="birth2" name="birth2" >
 									<option value="1">01월</option>
 									<option value="2">02월</option>
 									<option value="3">03월</option>
@@ -227,7 +233,7 @@ function appendDay(){
 								</select>
 							</div>	
 							<div class="col-sm-3">
-								<select class="form-control" id="birth3" name="birth3" onkeyup="javascript:appendDay();">
+								<select class="form-control" id="birth3" name="birth3" onclick="javascript:appendDay();">
 								
 								</select>
 							</div>						
@@ -252,24 +258,24 @@ function appendDay(){
 						<div class="form-group">
 							<label class="col-sm-3 control-label">우편번호</label>
 							<div class="col-sm-5">
-								<input type="text" id="zipcode" name="zipcode" class="form-control">
+								<input type="text" id="sample6_postcode" name="zipcode" placeholder="우편번호" readonly="readonly" class="form-control">
 							</div>
 							<div class="col-sm-3">
-							<button id="zipsearch" name="zipsearch" class="btn btn-danger" value="">우편번호검색</button>
+							<a href="#zipsearchModal" id="zipsearch" name="zipsearch" class="btn btn-danger" data-toggle="modal" aria-hidden="true" value="우편번호 찾기" onclick="sample6_execDaumPostcode()">우편번호검색</a>
 							</div>
 						</div>
 						
 						<div class="form-group">
 							<label class="col-sm-3 control-label">주소</label>
 							<div class="col-sm-8">
-								<input type="text" id="addr1" name="addr1" class="form-control">
+								<input type="text" id="sample6_address" name="addr1" placeholder="주소" class="form-control">
 							</div>
 						</div>
 						
 						<div class="form-group">
 							<label class="col-sm-3 control-label"></label>
 							<div class="col-sm-8">
-								<input type="text" id="addr2" name="addr2" class="form-control" placeholder="상세주소를 적어주세요.">
+								<input type="text" id="sample6_address2" name="addr2" class="form-control"  placeholder="상세주소">
 							</div>
 						</div>
 			<div class="modal-footer">

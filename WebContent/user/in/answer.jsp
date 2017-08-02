@@ -11,6 +11,7 @@
 
 		});
 	});
+
 </script>
 <style>
 .gi-2x {

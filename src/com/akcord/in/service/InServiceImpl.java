@@ -6,7 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.akcord.group.dao.GroupDao;
+
 import com.akcord.in.dao.InDao;
 import com.akcord.in.model.InDto;
 
@@ -16,14 +16,24 @@ public class InServiceImpl implements InService{
 	private SqlSession sqlSession;
 
 	@Override
-	public int inroom(InDto inDto) {
+	public int answerroom(InDto inDto) {
 		// TODO Auto-generated method stub
-		return sqlSession.getMapper(InDao.class).inroom(inDto);
+		return sqlSession.getMapper(InDao.class).answerroom(inDto);
 	}
 
 	@Override
-	public List<InDto> inlist() {
+	public List<InDto> answerlist() {
 		// TODO Auto-generated method stub
-		return sqlSession.getMapper(InDao.class).inlist();
+		return sqlSession.getMapper(InDao.class).answerlist();
 	}
+
+	@Override
+	public InDto getId(String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	
 }

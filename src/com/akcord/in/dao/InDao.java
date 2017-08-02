@@ -12,6 +12,7 @@ import com.akcord.in.service.InService;
 
 
 public interface InDao {
-	public int inroom(InDto inDto);
-	public List<InDto> inlist(); 
+	public int answerroom(InDto inDto);
+	public List<InDto> answerlist(); 
+	
 }
