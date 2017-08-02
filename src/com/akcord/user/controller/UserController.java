@@ -63,7 +63,10 @@ public class UserController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/user/login/loginfail");
 		UserDto userDto = userService.login(map);
-		List<GroupRoomDto> group_list = userService.group(userDto.getUser_id()+"");
+		List<GroupRoomDto> group_list = null;
+		if(userDto.getType()!=0) { 
+			group_list = userService.group(userDto.getUser_id()+"");
+		}
 		if( userDto != null){
 			session.setAttribute("user", userDto);
 			session.setAttribute("group_list", group_list);
@@ -73,7 +76,5 @@ public class UserController {
 		}
 		return mav;
 	}
-	
-	
 	
 }
