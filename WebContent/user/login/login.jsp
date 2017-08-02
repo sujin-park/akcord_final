@@ -35,7 +35,7 @@ function joinmove(){
 
 	<!-- 로그인 Modal-->
 	<div class="modal fade" id="loginBtnModal" role="dialog" data-backdrop="static" data-keyboard="true">
-	<div class="modal-dialog" style="width: 20%;" >
+	<div class="modal-dialog" style="width: 40%;" >
 
 			<!-- Modal content-->			
 				
