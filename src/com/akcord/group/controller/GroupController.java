@@ -43,6 +43,7 @@ public class GroupController {
 		query.put("myseq", userDto.getUser_id()+"");
 		List<GroupRoomDto> list = groupService.grouplist(query);
 		List<MajorDto> majorlist = groupService.majorlist();
+		query.put("type", "group");
 		PageNavigation pageNavigation = commonService.makePageNavigation(query);
 		pageNavigation.setRoot("/akcord_project");
 		pageNavigation.setNavigator();

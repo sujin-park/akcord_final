@@ -91,44 +91,54 @@ public class PageNavigation {
 	public void setNavigator() {
 		 StringBuffer tmpNavigator = new StringBuffer();
 		 
-		 int prePage = (pageNo -1) / pageSize * pageSize; // 마지막페이지가 40이었을때
-		 
+		 int prePage = (pageNo -1) / BoardConstant.PAGE_SIZE * BoardConstant.PAGE_SIZE; // 마지막페이지가 40이었을때
 	      tmpNavigator.append("<div class=\"pgnav\"> \n");
 	      tmpNavigator.append(" <ul class=\"pagination\"> \n");
 	      if (this.isNowFirst()) {
-
-	         tmpNavigator.append("  <li><a href='' aria-label=\"Previous\">");
+	    	 tmpNavigator.append("  <li><a href='#' id='firstBtn' aria-label=\"Previous\">");
+		     tmpNavigator.append("   <span aria-hidden=\"true\"><font color=\"#ec9a25\">최신</font></span>\n");
+		     tmpNavigator.append("   </a></li> \n");	    	  
+	         tmpNavigator.append("  <li><a href='#' aria-label=\"Previous\">");
 	         tmpNavigator.append("   <span aria-hidden=\"true\"><font color=\"#ec9a25\">&laquo;</font></span>\n");
 	         tmpNavigator.append("   </a></li> \n");
 	      } else {
-
-		         tmpNavigator.append("  <li><a href='javascript:listArticle("+ prePage +")' aria-label=\"Previous\">");
+	    	  System.out.println("왜 여기 안와");
+		    	 tmpNavigator.append("  <li><a href='#'  id='firstBtn' aria-label=\"Previous\">");
+			     tmpNavigator.append("   <span aria-hidden=\"true\"><font color=\"#ec9a25\">최신</font></span>\n");
+			     tmpNavigator.append("   </a></li> \n");	
+		         tmpNavigator.append("  <li><a href='#' class='pagemove' data-page='"+prePage+"'>");
 		         tmpNavigator.append("   <span aria-hidden=\"true\"><font color=\"#ec9a25\">&laquo;</font></span>\n");
 		         tmpNavigator.append("   </a></li> \n");
 	      }
 	      
 	      int startPage = prePage + 1;
-	      int endPage = startPage + (pageSize - 1) ;
+	      int endPage = startPage + (BoardConstant.PAGE_SIZE - 1) ;
 	      if (endPage > totalPageCount) {
 	    	  endPage = totalPageCount; // 총 페이지의 마지막보다 위에 endPage가 더 크면 총 페이지의 마지막이 endPage가 된다. totalPage : 37 / endPage : 40
 	      }
 	      for (int i = startPage; i <= endPage; i++) {
 	         if (pageNo == i) { // 현재페이지 글씨 크기는 색이 다름, 클릭할 수 없음
-	          tmpNavigator.append("	 <li><a href='' class=\"color-orange\">" + i + "</a></li> \n");
+	          tmpNavigator.append("	 <li><a href='#' class=\"color-orange\">" + i + "</a></li> \n");
 	         } else { // 현재페이지가 아닌 다른 페이지는 클릭할 수 있고, 글씨는 다름
-	          tmpNavigator.append("	 <li><a href='javascript:listArticle(" + i + ")' class=\"color-orange\">" + i + "</a></li> \n");
+	          tmpNavigator.append("	 <li><a href='#' class=\"pagemove\" data-page='"+ i +"'>" + i + "</a></li> \n");
 	         }
 	      }
 	      
 	      if (this.isNowEnd()) {
+	    	 tmpNavigator.append("  <li><a href='#' aria-label=\"Next\">");
+			 tmpNavigator.append("   <span aria-hidden=\"true\"><font color=\"#ec9a25\">&raquo;</font></span>\n");
+			 tmpNavigator.append("   </a></li> \n"); 
 	         tmpNavigator.append("		<li><a href='' aria-label=\"Next\"> <span aria-hidden=\"true\"> \n");
-	         tmpNavigator.append("   	<font color=\"#ec9a25\">&raquo;</font></span> \n");
+	         tmpNavigator.append("   	<font color=\"#ec9a25\">끝</font></span> \n");
 	         tmpNavigator.append(" 		</a></li> \n");
 
 	      } else {
-	 		 int nextPage = prePage + pageSize + 1; // 40 + 페이지사이즈에 1 하면 그 다음 페이지사이즈에서 첫번째인 51
-	 		 tmpNavigator.append("		<li><a href='javascript:listArticle("+ totalPageCount +")' aria-label=\"Next\"> <span aria-hidden=\"true\"> \n");
-	         tmpNavigator.append("   	<font color=\"#ec9a25\">&raquo;</font></span> \n");
+	 		 int nextPage = prePage + BoardConstant.PAGE_SIZE + 1; // 40 + 페이지사이즈에 1 하면 그 다음 페이지사이즈에서 첫번째인 51
+	 		 tmpNavigator.append("  <li><a href='#' class='pagemove' data-page='"+nextPage+"'aria-label=\"Next\">");
+		     tmpNavigator.append("   <span aria-hidden=\"true\"><font color=\"#ec9a25\">&raquo;</font></span>\n");
+		     tmpNavigator.append("   </a></li> \n");
+	 		 tmpNavigator.append("		<li><a href='#' id='lastBtn' data-last='"+totalPageCount+"'aria-label=\"Next\"> <span aria-hidden=\"true\"> \n");
+	         tmpNavigator.append("   	<font color=\"#ec9a25\">끝</font></span> \n");
 	         tmpNavigator.append(" 		</a></li> \n");
 	      }
 

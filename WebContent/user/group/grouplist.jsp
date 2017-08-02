@@ -43,6 +43,27 @@ $(document).ready(function(){
 		$('#word').val($('#sword').val());
 		$('#commonForm').attr('action', '${root}/group/list.akcord').submit();
 	});
+	
+	$('#firstBtn').click(function(){
+		$('#pg').val('1');
+		$('#key').val($('#skey').val());
+		$('#word').val($('#sword').val());
+		$('#commonForm').attr('action', '${root}/group/list.akcord').submit();
+	});
+	
+	$('.pagemove').click(function(){
+		$('#pg').val($(this).attr('data-page'));
+		$('#key').val($('#skey').val());
+		$('#word').val($('#sword').val());
+		$('#commonForm').attr('action', '${root}/group/list.akcord').submit();
+	});
+	
+	$('#lastBtn').click(function(){
+		$('#pg').val($(this).attr('data-last'));
+		$('#key').val($('#skey').val());
+		$('#word').val($('#sword').val());
+		$('#commonForm').attr('action', '${root}/group/list.akcord').submit();
+	});
 });
 
 function joinGroup(seq) {
@@ -149,9 +170,12 @@ function joinGroup(seq) {
 					</div>
 				</div>
 			</div>
+			<div align="center" style="clear:both;">
+			${navigator.navigator}
+			</div>
+			<div class="col-md-6"></div>
 		</section>
-${navigator.navigator}
 <%@include file="/user/group/create.jsp"%>
 <%@include file="/user/group/join.jsp"%>
-	</body>
+</body>
 </html>

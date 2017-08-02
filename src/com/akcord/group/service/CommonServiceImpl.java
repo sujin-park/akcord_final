@@ -14,17 +14,29 @@ public class CommonServiceImpl implements CommonService {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public PageNavigation makePageNavigation(Map<String, String> map){
+	public PageNavigation makePageNavigation(Map<String, String> query){
 		PageNavigation pageNavigation = new PageNavigation();
-		String tname = "group";
-		int pg = Integer.parseInt(map.get("pg"));
-		map.put("tname", tname);
-		int newArticleCount = sqlSession.getMapper(CommonDao.class).newArticleCount(map);
+		int newArticleCount = 0;
+		int totalArticleCount = 0;
+		int pg = Integer.parseInt(query.get("pg"));
+		String type = query.get("type");
+		
+		if (type.equals("group")) {
+		newArticleCount = sqlSession.getMapper(CommonDao.class).newGroupListCount(query);
+		totalArticleCount = sqlSession.getMapper(CommonDao.class).totalGroupListCount(query);
+		}
+
+		
+		
+		
+		
+		
+		
+		
+		// 고정시켜두기		
 		pageNavigation.setNewArticleCount(newArticleCount);
-		int totalArticleCount = sqlSession.getMapper(CommonDao.class).totalArticleCount(map);
 		pageNavigation.setTotalArticleCount(totalArticleCount);
 		int totalPageCount = totalArticleCount % BoardConstant.LIST_SIZE == 0 ? totalArticleCount / BoardConstant.LIST_SIZE : totalArticleCount / BoardConstant.LIST_SIZE + 1;
-		//int totalPageCount = (totalArticleCount - 1) / BoardConstance.LIST_SIZE + 1;
 		pageNavigation.setTotalPageCount(totalPageCount);
 		pageNavigation.setNowFirst(pg <= BoardConstant.PAGE_SIZE);
 		pageNavigation.setNowEnd((totalPageCount - 1) / BoardConstant.PAGE_SIZE * BoardConstant.PAGE_SIZE < pg);
