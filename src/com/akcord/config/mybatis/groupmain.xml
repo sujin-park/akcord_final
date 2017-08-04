@@ -4,6 +4,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 <mapper namespace="com.akcord.group.dao.GroupMainDao">
 
+    <select id="gMainInfo" parameterType="int" resultType="groupRoomDto">
+        select 
+                (select count(group_id) 
+                from grouproom_list gl where gl.group_id = g.group_id and gl.is_accept = 1) nowCount, 
+                g.group_id groupId, g.reg_date as regDate, m.major_name majorName, g.group_name groupName,
+                g.content content, g.g_count gCount, u.name name, g.leader_id leaderId
+                        from users u, grouproom g, major m
+                            where u.user_id = g.leader_id and
+                            g.major_id = m.major_id
+                            and group_id = #{groupId}
+        
+    </select>
     <select id="gMemberlist" parameterType="java.util.Map" resultType="groupListDto">
         select b.*
         from(select rownum rn, a.*
@@ -22,6 +34,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                             </if>
                             <if test="key != 'id'">
                                 and m.major_name  like '%' || #{word} ||'%'
+                            </if>
+                        </if>
+                        <if test="order == ''">
+                            order by gl.reg_date desc
+                        </if>
+                        <if test="order != ''">
+                            <if test="order == 'major'">
+                                order by m.major_name desc
+                            </if>
+                            <if test="order == 'regdate'">
+                                order by gl.reg_date desc
                             </if>
                         </if>
                 ) a
@@ -64,4 +87,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 and gl.user_id != #{seq}
                 and gl.is_accept = 1
     </select>
+    
+    <select id="schedulelist" parameterType="int" resultType="scheduleDto">
+        select schedule_id scheduleId, group_id groupId, schedule_name scheduleName, detail, start_date startDate, start_time startTime,
+        end_date endDate, end_time endTime from schedule
+                where group_id = #{groupId}
+    </select>
+    
+    <insert id="scheduleInsert" parameterType="scheduleDto">
+        insert into schedule values
+        (seq_schedule_id.nextval, #{groupId}, #{scheduleName}, #{detail}, #{startDate}, #{startTime}, #{endDate}, #{endTime})
+    </insert>
 </mapper>
