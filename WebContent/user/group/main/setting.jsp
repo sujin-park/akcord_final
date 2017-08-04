@@ -65,6 +65,44 @@
 			$('#key').val($('#skey').val());
 			$('#word').val($('#sword').val());
 			$('#groupId').val($('#sgroupid').val());
+			$('#order').val('${query.order}');
+			$('#groupId').val($('#sgroupid').val());
+			$('#commonForm').attr('action', '${root}/groupmain/group.akcord').submit();
+		});
+		
+		$('#firstBtn').click(function(){
+			$('#pg').val('1');
+			$('#key').val('${query.key}');
+			$('#word').val('${query.word}');
+			$('#order').val('${query.order}');
+			$('#groupId').val($('#sgroupid').val());
+			$('#commonForm').attr('action', '${root}/groupmain/group.akcord').submit();
+		});
+		
+		$('.pagemove').click(function(){
+			$('#pg').val($(this).attr('data-page'));
+			$('#key').val('${query.key}');
+			$('#word').val('${query.word}');
+			$('#order').val('${query.order}');
+			$('#groupId').val($('#sgroupid').val());
+			$('#commonForm').attr('action', '${root}/groupmain/group.akcord').submit();
+		});
+		
+		$('#lastBtn').click(function(){
+			$('#pg').val($(this).attr('data-last'));
+			$('#key').val('${query.key}');
+			$('#word').val('${query.word}');
+			$('#order').val('${query.order}');
+			$('#groupId').val($('#sgroupid').val());
+			$('#commonForm').attr('action', '${root}/groupmain/group.akcord').submit();
+		});
+		
+		$('.order').click(function(){
+			$('#pg').val('1');
+			$('#key').val('${query.key}');
+			$('#word').val('${query.word}');
+			$('#groupId').val($('#sgroupid').val());
+			$('#order').val($(this).attr('data-order'));
 			$('#commonForm').attr('action', '${root}/groupmain/group.akcord').submit();
 		});
 	});

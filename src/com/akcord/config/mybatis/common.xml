@@ -10,11 +10,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 g.major_id = m.major_id
                 and g.leader_id != #{myseq}
                 <if test="key != '' and word != ''">
-                    <if test="key == 'subject'">
-                        and subject like '%' || #{word} ||'%'
+                    <if test="key == 'majorName'">
+                        and m.major_name like '%' || #{word} ||'%'
                     </if>
-                    <if test="key != 'subject'">
-                        and ${key} = #{word}
+                    <if test="key != 'majorName'">
+                        and g.group_name  like '%' || #{word} ||'%'
                     </if>
                 </if>
     </select>
@@ -25,5 +25,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 g.major_id = m.major_id
                 and g.leader_id != #{myseq}
                 and to_char(g.reg_date, 'yymmdd') = to_char(sysdate, 'yymmdd')
+    </select>
+    
+    <select id="totalGroupWaitCount" parameterType="java.util.Map" resultType="int">
+        select count(gl.user_id)
+                from grouproom_list gl, grouproom g, users u, major m
+                where gl.group_id = g.group_id
+                and u.user_id = gl.user_id
+                and m.major_id = u.major_id
+                and g.group_id = #{groupId}
+                and gl.user_id != #{user_id}
+                and gl.is_accept = 0
+                <if test="key != '' and word != ''">
+                    <if test="key == 'id'">
+                        and u.id like '%' || #{word} ||'%'
+                    </if>
+                    <if test="key != 'id'">
+                        and m.major_name  like '%' || #{word} ||'%'
+                    </if>
+                </if>
     </select>
 </mapper>

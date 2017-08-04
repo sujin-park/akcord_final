@@ -33,12 +33,15 @@ public class GroupController {
 	public String makegroup(GroupRoomDto groupRoomDto, HttpSession session){
 		UserDto user = (UserDto) session.getAttribute("user");
 		groupRoomDto.setLeaderId(user.getUser_id());
+		
+		System.out.println(user.getUser_id() + "유저 아이디");
 		int cnt = groupService.createG(groupRoomDto);
-		return "redirect:/group/list.akcord";
+		return "redirect:/group/list.akcord?pg=1&key=&word=&order=";
 	}
 	@RequestMapping("/list.akcord")
 	public ModelAndView list(HttpSession session, @RequestParam Map<String,String> query) {
 		ModelAndView mav = new ModelAndView();
+		
 		UserDto userDto = (UserDto) session.getAttribute("user");
 		query.put("myseq", userDto.getUser_id()+"");
 		List<GroupRoomDto> list = groupService.grouplist(query);
@@ -72,7 +75,7 @@ public class GroupController {
 		map.put("seq", seq);
 		map.put("userId", user.getUser_id()+"");
 		int cnt = groupService.joinGroup(map);
-		return "redirect:/group/list.akcord";
+		return "redirect:/group/list.akcord?pg=1&key=&word=&order=";
 	}
 	@RequestMapping("/cancel.akcord")
 	public String cancel(@RequestParam("seq") String seq, HttpSession session) {

@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.akcord.group.dao.GroupMainDao;
 import com.akcord.group.model.GroupListDto;
+import com.akcord.group.model.GroupRoomDto;
+import com.akcord.group.model.ScheduleDto;
 import com.akcord.util.BoardConstant;
 
 @Service
@@ -50,6 +52,21 @@ public class GroupMainServiceImpl  implements GroupMainService{
 	@Override
 	public List<GroupListDto> originlist(Map<String, String> map) {
 		return sqlSession.getMapper(GroupMainDao.class).originlist(map);
+	}
+
+	@Override
+	public GroupRoomDto gMainInfo(int groupId) {
+		return sqlSession.getMapper(GroupMainDao.class).gMainInfo(groupId);
+	}
+
+	@Override
+	public int scheduleInsert(ScheduleDto scheduleDto) {
+		return sqlSession.getMapper(GroupMainDao.class).scheduleInsert(scheduleDto);
+	}
+
+	@Override
+	public List<ScheduleDto> schedulelist(int groupId) {
+		return sqlSession.getMapper(GroupMainDao.class).schedulelist(groupId);
 	}
 
 }

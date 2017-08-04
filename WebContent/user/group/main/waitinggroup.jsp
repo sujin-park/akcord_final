@@ -3,6 +3,14 @@
 <%@ include file="/common/public.jsp" %>
 <div class="panel-body">
 						<div class="row" style="padding-bottom:10px;">
+							<div class="row">
+								<div class="form-group form-inline">
+									<div class="col-sm-6 pull-right"  style="padding-right:70px;">
+										<h6 class="order" data-order="major" align="right">전공순 <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></h6>
+										<h6 class="order" data-order="regdate" align="right">대기순 <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></h6>
+									</div>
+								</div>
+							</div>
 							<div class="col-sm-6 pull-left">
 								<button type="button" class="btn btn-md btn-danger" onclick="javascript:plusMember();">
 									<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
@@ -91,3 +99,7 @@
 								</div>
 							</div>
 					</div>
+								<div align="center" style="clear:both;">
+			${navigator.navigator}
+			</div>
+			<div class="col-md-6"></div>
