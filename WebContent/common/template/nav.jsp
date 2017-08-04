@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="root" value="${pageContext.request.contextPath}" />
+<body>
 <div class="headline">
     
     <!-- nav -->
@@ -59,7 +60,7 @@
                   	</div>
                   <div class="list-heading1">
                      <h4 class="list-title" style="padding-top:20px;">
-                        <a href="${root }/in/list.akcord">지식인</a>
+                        <a href="${root}/in/list.akcord">지식인</a>
                      </h4>
                   </div>
                	   <div class="list-heading">

@@ -32,7 +32,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                                 and g.group_name  like '%' || #{word} ||'%'
                             </if>
                         </if>
-                           order by g.reg_date desc
+                        <if test="order != ''">
+                            <if test="order == 'major'">
+                                order by m.major_name desc
+                            </if>
+                            <if test="order == 'gname'">
+                                order by g.group_name desc
+                            </if>
+                        </if>
+                        <if test="order == ''">
+                            order by g.reg_date desc
+                        </if>
                            
                    ) a
                where rownum &lt;= #{end}
