@@ -17,8 +17,7 @@ import com.akcord.group.model.MajorDto;
 import com.akcord.in.model.InDto;
 import com.akcord.in.service.InService;
 import com.akcord.user.model.UserDto;
-import com.kitri.board.model.ReboardDto;
-import com.kitri.member.model.MemberDto;
+
 
 
 
@@ -83,22 +82,6 @@ public class InController {
 		mav.setViewName("/user/in/inmain");
 		return mav;
 	}
-	@RequestMapping(value="/qna.html", method=RequestMethod.GET)
-	public ModelAndView view(@RequestParam Map<String, String> queryString,
-			@RequestParam("seq") int seq, HttpSession session) {
-		ModelAndView mav = new ModelAndView();
-		
-		UserDto memberDto = (UserDto) session.getAttribute("user");
-		InDto inDto = null;
-		if(memberDto != null) {
-			inDto = inService.getId(queryString);
-			}
-		
-		
-		mav.addObject("article", reboardDto);
-		mav.setViewName("view");
-		return mav;
-	}
-	
+
 	
 }
