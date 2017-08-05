@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.akcord.main.rank.dao.RankDao">
+    
+    <select id="getQna">
+        select rownum, subject
+        from
+        (select subject, hit
+        from qna
+        order by hit)
+        where rownum &lt;= 10
+    </select>
+    
+    <select id="getQnaComment">
+        select rownum, subject
+        from
+        (select subject, hit
+        from qna
+        order by hit)
+        where rownum &lt;= 10
+    </select>
+
+
+    
+</mapper>
+
