@@ -13,6 +13,7 @@
 <link href="css/style.css" rel="stylesheet">
 
 <%@ include file="/common/template/nav.jsp" %>
+<%@ include file="/common/public.jsp" %>
 <script type="text/javascript">
 $(document).ready(function(){
 
@@ -24,21 +25,71 @@ $(document).ready(function(){
 	});
 	$('#majorPlusBtn').click(function (){
 		var mname= $('#major_name').val();
-	$(location).attr('href','${root}/usermanager/mayjorPlus.akcord?mname='+mname);	
+	$(location).attr('href','${root}/usermanager/majorPlus.akcord?mname='+mname);	
 	});
 	
-	$("#membersort").change(function () {   
-		    
-	      $("#membersort option:selected").each(function () {   
+/* 	$("#membersort").change(function () {
+	      $("#membersort option:selected").each(function () {
+	    	 var st = 1;
 	    	 var str =$(this).val();
-    		 $(location).attr('href','${root}/usermanager/memberOrder.akcord?str='+str);
+    		 $(location).attr('href','${root}/usermanager/memberOrder.akcord?str='+str+'&st='+st);
       });
-}); 
+	}); */
+	
+	$("#membersort").change(function () {
+	      $("#membersort option:selected").each(function () {
+	    	$('#pg').val('1');
+	  		$('#key').val($('#skey').val());
+	  		$('#word').val($('#sword').val());	
+	  		$('#commonForm').attr('action','${root}/usermanager/mvmemberlist.akcord').submit();		
+   		 });
+	});
+	
+	$('#searchBtn').click(function (){
+		$('#pg').val('1');
+		$('#key').val($('#skey').val());
+		$('#word').val($('#sword').val());	
+		$('#commonForm').attr('action','${root}/usermanager/mvmemberlist.akcord').submit();		
+	});
+	$('#blackul').click(function (){
+		//$(this).parent().attr('class','active');
+    	$('#pg').val('1');
+		$('#key').val($('#skey').val());
+		$('#word').val($('#sword').val());	
+		$('#commonForm').attr('action','${root}/usermanager/blacklist.akcord').submit();		
+	});
+	/* $('#ul').click(function (){
+		//$(this).parent().attr('class','active');
+		$('#key').val($('#skey').val());
+		$('#word').val($('#sword').val());	
+		$('#commonForm').attr('action','${root}/usermanager/mvmemberlist.akcord').submit();		
+	}); */
+	$('#firstBtn').click(function(){
+		$('#pg').val('1');
+		$('#key').val('${query.key}');
+		$('#word').val('${query.word}');
+		$('#commonForm').attr('action', '${root}/usermanager/mvmemberlist.akcord').submit();
+	});
+	
+	$('.pagemove').click(function(){
+		$('#pg').val($(this).attr('data-page'));
+		$('#key').val('${query.key}');
+		$('#word').val('${query.word}');
+		$('#commonForm').attr('action', '${root}/usermanager/mvmemberlist.akcord').submit();
+	});
+	
+	$('#lastBtn').click(function(){
+		$('#pg').val($(this).attr('data-last'));
+		$('#key').val('${query.key}');
+		$('#word').val('${query.word}');
+		$('#commonForm').attr('action', '${root}/usermanager/mvmemberlist.akcord').submit();
+	});
+	
 });
 
 </script>
-<section class="content page-top row">
-   <div class="container-fluid">
+<section class="content page-top row"style="padding-top: 60px;">
+   <div class="container" > 
 	<div class="row">
 		<div class="col-sm-10 col-sm-push-1">
 					<h3>회원 관리</h3>
@@ -49,38 +100,37 @@ $(document).ready(function(){
 		<div class="panel panel-default">
 			<div class="tabbable" id="tabs-630325">
 				<ul class="nav nav-tabs">
-					<li class="active">
-						<a href="#userList" data-toggle="tab">회원목록</a>
+					<li>
+						<a href="#userList" id="ul" data-toggle="tab">회원목록</a>
 					</li>
 					<li>
-						<a href="#blackList" data-toggle="tab">블랙리스트</a>
+						<a href="#blackList" id="blackul" data-toggle="tab">블랙리스트</a>
 					</li>
 				</ul>
 				<div class="tab-content">
-					<div class="tab-pane fade in active" id="userList">
-				<!-- 	</div>
-					<div class="tab-pane" id="panel-822061">
-					</div> -->
+					<div class="tab-pane active" id="userList"> 
+				
+<!-- 					<div class="tab-pane fade in active" id="userList">-->					
+				<!-- 	</div><div class="tab-pane" id="panel-822061"></div> -->
 				
 			
 				<form class="navbar-form navbar-left" role="search">
 						<div class="form-group">
 							<select class="form-control" id="membersort" name="membersort">
-								<option>회원정렬</option>
+								<option >회원정렬</option>
                                 <option id="str" value="1">가입일</option>
                                 <option id="str" value="2">이름</option>
                              </select>
-                        <button type="submit" class="btn btn-default">
-							검색
-						</button>
+                     
 						<select class="form-control" id="skey" name="skey">
                                 <option value="search">회원검색</option>
+                                <option value="sname">이름검색</option>
                                 <option value="sid">아이디검색</option>
                                 <option value="snum">번호검색</option>
                          </select>
-							<input type="text" class="form-control" />
+							<input type="text" class="form-control" id="sword"/>
 						</div> 
-						<button type="submit" class="btn btn-default">
+						<button id="searchBtn" type="button" class="btn btn-default">
 							Submit
 						</button>
 					</form>
@@ -101,15 +151,13 @@ $(document).ready(function(){
 						<th>성별</th>
 						<th>전공</th>
                         <th>가입일</th>
-						<th>블랙리스트처리</th>
+						<th>블랙회원등록</th>
 					</tr>
 				</thead>
 				<tbody>
 				<c:forEach var="user" items="${userList}">
-				<c:if test="${user.is_block!=1}">
-				
-			
-					<tr class="black">
+				<c:if test="${user.is_block==0 }">
+				<tr class="black">
 						<td>${user.user_id }</td>
 						<td>${user.id }</td>
 						<th>${user.name}</th>
@@ -123,76 +171,13 @@ $(document).ready(function(){
 						</button>
 						</td>
 					</tr>
-				
-					</c:if>
+				</c:if>
 					</c:forEach>
 				</tbody>
 				</table>
 			
 			</div>
-			<div class="tab-pane" id="blackList">
-			<form class="navbar-form navbar-left" role="search">
-						<div class="form-group">
-							<select class="form-control" id="membersort" name="membersort">
-								<option>회원정렬</option>
-                                <option>가입일</option>
-                                <option>이름</option>
-                             </select>
-                        <button type="submit" class="btn btn-default">
-							검색
-						</button>
-						<select class="form-control" id="status" name="status">
-                                <option>회원검색</option>
-                                <option>아이디검색</option>
-                                <option>번호검색</option>
-                         </select>
-							<input type="text" class="form-control" />
-						</div> 
-						<button type="submit" class="btn btn-default">
-							Submit
-						</button>
-					</form>
-					  <div class="text-right">
-					<button style="right" id="modal-947726"
-					 href="#modal-container-947726" role="button" class="btn" data-toggle="modal">
-							전공추가
-					</button>
-					</div>
-					
-			<table class="table table-bordered table-hover table-condensed">
-				<thead>
-					<tr>
-						<th>1</th>
-						<th>회원ID</th>
-						<th>이름</th>
-						<th>휴대폰번호</th>
-						<th>성별</th>
-						<th>전공</th>
-                        <th>가입일</th>
-					</tr>
-				</thead>
-				<tbody>
-				<c:forEach var="user" items="${userList}">
-				<c:if test="${user.is_block==1}">
-				
-			
-					<tr class="black">
-						<td>${user.user_id }</td>
-						<td>${user.id }</td>
-						<th>${user.name}</th>
-						<td>${user.tel1 }-${user.tel2}-${user.tel3 }</td>
-						<td>${user.gender }</td>
-						<td>${user.major_name }</td>
-                        <td>${user.reg_date }</td>
-					
-					</tr>
-				
-					</c:if>
-					</c:forEach>
-				</tbody>
-				</table>
-			
-			</div>
+
 			</div>
 				</div>
 			
@@ -200,29 +185,13 @@ $(document).ready(function(){
 		</div>
 	</div>
 </div>
-</div>
+
+
+		<div align="center" style="clear:both;">
+			${navigator.navigator}
+			</div>
+			<div class="col-md-6"></div>
 </section>
-		<nav>
-			<div align="center">
-				  <ul class="pagination">
-				    <li>
-				      <a href="#" aria-label="Previous">
-				        <span aria-hidden="true">&laquo;</span>
-				      </a>
-				    </li>
-				    <li><a href="#">1</a></li>
-				    <li><a href="#">2</a></li>
-				    <li><a href="#">3</a></li>
-				    <li><a href="#">4</a></li>
-				    <li><a href="#">5</a></li>
-				    <li>
-				      <a href="#" aria-label="Next">
-				        <span aria-hidden="true">&raquo;</span>
-				      </a>
-				    </li>
-				  	</ul>
-			  </div>
-		</nav>
 <div class="modal fade" id="modal-container-947726" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog" style="width:30%">
 					<div class="modal-content">

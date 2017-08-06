@@ -3,6 +3,7 @@ package com.akcord.group.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.akcord.group.model.GroupHwDto;
 import com.akcord.group.model.GroupListDto;
 import com.akcord.group.model.GroupRoomDto;
 import com.akcord.group.model.ScheduleDto;
@@ -25,4 +26,10 @@ public interface GroupMainDao {
 	public int scheduleInsert(ScheduleDto scheduleDto);
 	
 	public List<ScheduleDto> schedulelist(int groupId);
+	
+	public int scheduleModify(ScheduleDto scheduleDto);
+	
+	public int scheduleDelete(int scheduleId);
+	
+	public List<GroupHwDto> groupArticleList(int groupId); 
 }

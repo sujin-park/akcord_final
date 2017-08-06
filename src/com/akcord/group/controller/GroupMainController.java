@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.akcord.group.model.GroupHwDto;
 import com.akcord.group.model.GroupListDto;
 import com.akcord.group.model.GroupRoomDto;
 import com.akcord.group.model.ScheduleDto;
@@ -42,17 +43,18 @@ public class GroupMainController {
 	public ModelAndView main(@RequestParam("groupId") int groupId) {
 		ModelAndView mav = new ModelAndView();
 		GroupRoomDto group = groupMainService.gMainInfo(groupId);
-		List<ScheduleDto> slist = groupMainService.schedulelist(groupId);
-		mav.addObject("slist", slist);
 		mav.addObject("gInfo", group);
 		mav.setViewName("/user/group/main/groupcalender");
 		return mav;
 	}
 
 	@RequestMapping("/list.akcord") // 글목록
-	public ModelAndView groupMain() {
+	public ModelAndView groupMain(@RequestParam("groupId") int groupId) {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("/user/group/main/list");
+		List<GroupHwDto> list = groupMainService.groupArticleList(groupId);
+		System.out.println(list.size());
+		mav.addObject("alist", list);
+		mav.setViewName("/user/group/main/articlelist");
 		return mav;
 	}
 
@@ -144,6 +146,7 @@ public class GroupMainController {
 	}
 	
 	private JSONObject makeList(int groupId) {
+		
 		List<ScheduleDto> slist = groupMainService.schedulelist(groupId);
 		
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -152,22 +155,30 @@ public class GroupMainController {
 		
 		JSONObject json = new JSONObject(); // 최종적으로 반환되는 json
 		JSONArray jarr = new JSONArray();
+		JSONArray jarr1 = new JSONArray();
 		
 		for (ScheduleDto scheduleDto : slist) {
 			JSONObject jsonaddr = new JSONObject();
+			JSONObject jsonaddr2 = new JSONObject();
+
 			jsonaddr.put("start", scheduleDto.getStartDate());
 			jsonaddr.put("end", scheduleDto.getEndDate());
 			jsonaddr.put("title", scheduleDto.getScheduleName());
 			jsonaddr.put("content", scheduleDto.getDetail());
-			if (nowdate.compareTo(scheduleDto.getEndDate().substring(0, 10).replace("/", "-")) == 1) {
-				jsonaddr.put("color", "#d34e4c");
-			} else {
+			if (nowdate.compareTo(scheduleDto.getEndDate().substring(0, 10).replace("/", "-")) >= 1) {
 				jsonaddr.put("color", "#dbdbdb");
+			} else {
+				jsonaddr.put("color", "#d34e4c");
 			}
+			
+			jsonaddr.put("scheduleId", scheduleDto.getScheduleId());
+			//jarr1.add(jsonaddr2);
 			jarr.add(jsonaddr);
 		}
 
 		 json.put("schedule", jarr);
+		// json.put("schedule2", jarr1);
+
 		return json;
 	}
 	
@@ -175,8 +186,27 @@ public class GroupMainController {
 	@RequestMapping(value = "/calendar.akcord", method = RequestMethod.GET)
 	public @ResponseBody String list(@RequestParam("groupId") int groupId) {
 		JSONObject json = makeList(groupId);
-		System.out.println(json);
 		return json.toJSONString();
 	}
 	
+	@RequestMapping("/modify.akcord")
+	public @ResponseBody String modify(ScheduleDto scheduleDto) {
+		String sdate = scheduleDto.getStartDate();
+		String edate = scheduleDto.getEndDate();
+		int groupId = scheduleDto.getGroupId();
+		scheduleDto.setStartDate(sdate.replace("/", "-").substring(0, 10));
+		scheduleDto.setEndDate(edate.replace("/", "-").substring(0, 10));
+		scheduleDto.setStartTime(sdate.substring(sdate.lastIndexOf(" ")) + ":00");
+		scheduleDto.setEndTime(edate.substring(edate.lastIndexOf(" ")) + ":00");
+		int cnt = groupMainService.scheduleModify(scheduleDto);
+		JSONObject json = makeList(groupId);
+		return json.toJSONString();
+	}
+	
+	@RequestMapping("/delete.akcord")
+	public @ResponseBody String delete(@RequestParam("scheduleId") int scheduleId, @RequestParam("groupId") int groupId) {
+		int cnt = groupMainService.scheduleDelete(scheduleId);
+		JSONObject json = makeList(groupId);
+		return json.toJSONString();
+	}
 }

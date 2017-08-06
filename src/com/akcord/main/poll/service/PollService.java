@@ -12,7 +12,7 @@ public interface PollService {
 	int pollmakeContent(String content);
 	public PollDto pollmodify(int poll_id); // modify poll data
 	public int pollmodifydate(PollDto pollDto); // modify poll data
-	
+	public List<PollDto> pollresult(int poll_id);
 	public List<String> pollgetContent(int poll_id); // modify poll data
 	
 	int pollclose(int poll_id);

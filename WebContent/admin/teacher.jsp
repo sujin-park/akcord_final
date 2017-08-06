@@ -4,14 +4,11 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
-<html lang="en">
-<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>My Library</title>
-    <script src="${root}/js/lib/jquery.min.js"></script>
-    <script src="${root}/js/lib/bootstrap.min.js"></script>
+    <script src="${root }/admin/Chart.js"></script>
     <!-- <script src="/cafeproject/js/bootswatch.js"></script> -->
 
 	
@@ -22,6 +19,8 @@
 
 
 <%@ include file="/common/template/nav.jsp" %>
+<%@ include file="/common/public.jsp" %>
+
 <!-- Main Navigation ========================================================================================== -->
 <!-- <div class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -79,16 +78,22 @@
 </div>
  -->
 
+
 <!-- Container ======================================================================================= -->
+<section>
 <div class="container">
     <div class="row">
 
 <!-- Center ======================================================================================= -->
-        <div class="col-sm-12">     
-			<div class="page-header">
+        <div class="col-sm-12"></div>
+        <div class="col-sm-12"></div>
+        <div class="col-sm-12"></div>
+        
+        <div class="col-sm-12" style="padding-top: 20px;">     
+			
+			<div class="page-header" style="padding-top: 20px;">
 			    <h2 id="container">온라인투표</h2>
 			</div>
-			
 			<div class="pull-right">
 				<a class="pill" data-toggle="modal" data-target="#pollWriteModal" data-backdrop="static">
            		<button type="button" id="newBtn" class="btn btn-sm btn-default" data-backdrop="static">투표생성</button>
@@ -96,7 +101,7 @@
            	</div>
            	
            	<script type="text/javascript">
-    
+ 
             $(document).ready(function() {
             	//네비바 체크
             	/* $('#apoll').addClass('active'); */
@@ -113,84 +118,124 @@
             	 */
             	//결과보기
             	$('.btn.btn-xs.btn-primary').click(function() {
+							
             		var seq = $(this).parents('td').siblings().eq(0).text();
             		alert(seq + "번 투표 결과보기 이동!!!");
-            		$('#pollResultModal').on('show.bs.modal', function(event) {
-                		
+            		
+            		/* $('#pollResultModal').on('show.bs.modal', function(event) {
               		});          	
-              		$('#pollResultModal').modal();
-            	});
-            	
-            	//투표수정
-            	$('.btn.btn-xs.btn-info').click(function() {
-                   	var seq = $(this).parents('td').siblings().eq(0).text();
-
+              		$('#pollResultModal').modal(); */
             		$('#seq').attr('value', seq);
             		//$(location).attr('href','${root}/poll/modify.akcord?seq='+seq);
             		$.ajax({
        				 type: 'GET', 
        				 dataType: 'json',
-       				 url: '${root}/poll/modify.akcord?seq='+seq,
+       				 url: '${root}/poll/result.akcord?seq='+seq,
        				 //data : {'data', data},
        				 
        				 success : function(data){
-       					//getHidden(data);
-       				 	upModal(data);
-
-       				 }
+       				 	resultModal(data);
+       					 }
        				});
+              		
             	});
-            	
-        		
-        		function getHidden(data){
-        			var output = '<table>';
-        			var size = data.contlist.length;
-        			// 여긴 투표 정보
-        				output += '<tr>';
-        				output += '<td id="mdSubject">'+data.Subject+'</td>';
-        				output += '<td id="mdStartDate">'+data.StartDate+'</td>';
-        				output += '<td id="mdEndDate">'+data.EndDate+'</td>';
-        				output += '<td id="mdChartType">'+data.ChartType+'</td>';
-        				output += '<td id="contsize">'+size+'</td>';
-        				output += '</tr>';
-        				output += '<tr>';
-        				//얘들은 투표 항목들
-        			for (var i = 0; i < size; i++) {
-        				output += '<td id="content'+i+'">'+data.contlist[i]+'</td>';
-					}
-        				output += '</tr>';
-        				output += '</table>';
-        			$('#pollInfoHere').empty();
-        			alert(output);
-        			$('#pollInfoHere').append(output);
-        		}
-
-            	//투표종료
-            	$('.btn.btn-xs.btn-danger').click(function() {
-            		var seq = $(this).parents('td').siblings().eq(0).text();
-            		$(location).attr('href','${root}/poll/delete.akcord?seq='+seq);
-            		alert(seq + "번 투표 종료!!!");
-            	});
-            	
-            });
-            
-            function upModal(data){
-    			$('#pollModifyModal').on('show.bs.modal', function(event) {
+            	 
+           function resultModal(cdata){
+    			$('#pollResultModal').on('show.bs.modal', function(event) {
+    				var data=new Array('FFB6C1', 'FFCFDA ','FFD0CD','FAEB78 ','FFE650','FFC6A5','FF9696','6EE5A3','73E1E1',
+    						'96F56E','84FB84','52E252','8C8CFF','64AAFF','5AD2FF');
+    				//txt초기화
+    				//var len = data.pollresult.length;
         			var modal = $(this)
-          		  	modal.find('#startDay').val(data.StartDate);
-            		modal.find('#endDay').val(data.EndDate);
-            		modal.find('#charttype').val(data.ChartType);
-            		modal.find('#question').val(data.Subject);
-            		modal.find('#poll_id').val(data.poll_id);
-            		for(var i=0;i<data.contlist.length;i++) {
-            			var lab = $('<label class="col-sm-3"></label>');
-                		var inp = $('<div class="col-sm-8">')
-                					.append('<input type="text" name="answer" class="answerInp form-control" value="'+data.contlist[i]+'" readonly="readonly">');
-                		modal.find('#answerDivM').append(lab).append(inp);
-        			}
-          		});          	
-          		$('#pollModifyModal').modal();
-    		}
+
+        			var label = [];
+        			var value=[];
+        			var bgcolor=[];
+
+        			for(var i=0;i<cdata.pollresult.length;i++) {
+				        	label[i] = cdata.pollresult[i].content;
+				        	value[i] = cdata.pollresult[i].cnt;
+				        	bgcolor[i]= "#"+data[Math.floor(Math.random()*data.length)];
+				        	
+			     }
+        			var ctx = document.getElementById("myChart").getContext("2d");
+      				var myChart=new Chart(ctx, {
+      					type: 'bar',
+      				    data: {
+      				        labels: label,
+      				        datasets: [{
+      				            label: cdata.Subject,
+      				            data:value,
+      				            backgroundColor: bgcolor,
+      				            borderColor: bgcolor,
+      				            borderWidth: 1
+      				        }]
+      				    },
+      				    options: {
+      				        scales: {
+      				            yAxes: [{
+      				                ticks: {
+      				                    beginAtZero:true
+      				                }
+      				            }]
+      				        }
+      				    }
+      				});
+        			modal.find('#pollcontent').val(myChart);
+      				modal.find('#pollsubject').val(cdata.Subject);
+    		});
+    			
+    			$('#pollResultModal').modal();
+            }
+ 
+	//투표수정
+	$('.btn.btn-xs.btn-info').click(function() {
+    	var seq = $(this).parents('td').siblings().eq(0).text();
+
+		$('#seq').attr('value', seq);
+		//$(location).attr('href','${root}/poll/modify.akcord?seq='+seq);
+		$.ajax({
+		 type: 'GET', 
+		 dataType: 'json',
+		 url: '${root}/poll/modify.akcord?seq='+seq,
+		 //data : {'data', data},
+		 
+		 success : function(data){
+			//getHidden(data);
+			 upModal(data);
+
+		 }
+		});
+	});
+	
+          //투표종료
+        	$('.btn.btn-xs.btn-danger').click(function() {
+        		var seq = $(this).parents('td').siblings().eq(0).text();
+        		$(location).attr('href','${root}/poll/delete.akcord?seq='+seq);
+        		alert(seq + "번 투표 종료!!!");
+        	});
+        	
+        });
+        
+        function upModal(data){
+			$('#pollResultModal').on('show.bs.modal', function(event) {
+    			var modal = $(this)
+      		  	modal.find('#startDay').val(data.StartDate);
+        		modal.find('#endDay').val(data.EndDate);
+        		modal.find('#charttype').val(data.ChartType);
+        		modal.find('#question').val(data.Subject);
+        		modal.find('#poll_id').val(data.poll_id);
+        		for(var i=0;i<data.contlist.length;i++) {
+        			var lab = $('<label class="col-sm-3"></label>');
+            		var inp = $('<div class="col-sm-8">')
+            					.append('<input type="text" name="answer" class="answerInp form-control" value="'+data.contlist[i]+'" readonly="readonly">');
+            		modal.find('#answerDivM').append(lab).append(inp);
+    			}
+      		});          	
+      		$('#pollModifyModal').modal();
+		}
+        
+        
             </script>
             
 			<div class="col-sm-12">
@@ -300,7 +345,8 @@
 			    </li>
 			</ul>
        	</div>
-
+</div>
+</div>
 
 <!-- 공지사항 작성 Modal -->
 
@@ -410,7 +456,7 @@ $(document).ready(function() {
 	    </div>
 	</div>
 </div>
-
+</section>
 <!-- 공지사항 보기 Modal -->
 
 <div id="pollResultModal" class="modal fade" role="dialog">
@@ -425,6 +471,8 @@ $(document).ready(function() {
 		    	<div class="row">
 			    	<div class="col-sm-12" style="margin: 10px;">
 				    	<label class="col-sm-2 control-label">제목</label>
+		                        <input type="text" name="pollsubject" id="pollsubject" class="form-control" placeholder="주제"  value="">
+		                        
 	
 	                    <div class="col-sm-10">
 	                        <label id="subject" class="col-sm-12 control-label"></label>
@@ -432,7 +480,11 @@ $(document).ready(function() {
 	                </div>
 			        <div class="col-sm-12" style="margin: 10px;">
 				    	<label class="col-sm-2 control-label">내용</label>
-	
+							<div style="width:65%">
+      					  <div>
+        		    <canvas id="myChart" height="350" width="350"></canvas>
+        					</div>
+  					  </div>
 	                    <div class="col-sm-10">
 	                        <label id="content" class="col-sm-12 control-label"></label>
 	                    </div>

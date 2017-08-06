@@ -26,6 +26,66 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 and g.leader_id != #{myseq}
                 and to_char(g.reg_date, 'yymmdd') = to_char(sysdate, 'yymmdd')
     </select>
+    <select id="newNoticeListCount" resultType="int">
+        select count(notice_id)
+        from notice where to_char(reg_date,'yymmdd')=to_char(sysdate,'yymmdd')
+    </select>
+    <select id="totalNoticeListCount" parameterType="java.util.Map" resultType="int">
+        select count(notice_id) from notice
+        <if test="word!=''">
+            where subject like '%'||#{word}||'%'
+        </if>
+    </select>
+    <select id="totalUserListCount" parameterType="java.util.Map" resultType="int">
+        select count(user_id)
+        from users u,major m where m.major_id=u.major_id and is_block=0
+        <if test="key!=''and word!=''">
+            <if test="key=='snum'">
+                and u.tel3 like '%'||#{word}||'%'
+            </if>
+            <if test="key=='sname'">
+                and u.name like #{word}
+            </if>
+            <if test="key=='sid'">
+                and u.id like #{word}
+            </if>
+        </if>
+    </select>
+    <select id="totalBlackUserListCount" parameterType="java.util.Map" resultType="int">
+        select count(user_id)
+        from users u,major m where m.major_id=u.major_id and is_block=1
+        <if test="key!=''and word!=''">
+            <if test="key=='snum'">
+                and u.tel3 like '%'||#{word}||'%'
+            </if>
+            <if test="key=='sname'">
+                and u.name like #{word}
+            </if>
+            <if test="key=='sid'">
+                and u.id like #{word}
+            </if>
+        </if>
+    </select>
+    <select id="newUserListCount" resultType="int">
+        select count(user_id)
+        from users where to_char(reg_date,'yymmdd')=to_char(sysdate,'yymmdd')
+    </select>
+    
+    <select id="totalMyroomListCount" parameterType="java.util.Map" resultType="int">
+            select count(myroom_next_id)
+            from myroom_next
+        <choose>            
+        <when test="myroomId == null">
+            where user_id=#{user_id}
+        </when>
+        <when test="myroomId == ' '">
+                where user_id=#{user_id}
+        </when>
+        </choose>
+       <if test="myroomId != null">        
+            where user_id=#{user_id} and myroom_id=#{myroomId}        
+        </if>
+    </select>
     
     <select id="totalGroupWaitCount" parameterType="java.util.Map" resultType="int">
         select count(gl.user_id)

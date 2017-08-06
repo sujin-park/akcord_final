@@ -180,7 +180,7 @@ function joinGroup(seq) {
 													<p align="center" data-placement="top" data-toggle="tooltip" title="Edit">
 														<button type="button" id="joinGroup" class="btn btn-danger"
 														 onclick="javascript:joinGroup(${GroupRoomDto.groupId});">
-											    			<span class="glyphicon glyphicon-thumbs-up"></span>
+											    			<span class="fa fa-thumbs-o-up"></span>
 											    		</button>
 											    	</p>
 											    </td>

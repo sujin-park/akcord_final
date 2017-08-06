@@ -17,83 +17,63 @@ import com.akcord.admin.model.NoticeDto;
 import com.akcord.admin.model.UserManageDto;
 import com.akcord.admin.service.NoticeService;
 import com.akcord.admin.service.UserManagerService;
+import com.akcord.group.service.CommonService;
 import com.akcord.user.model.UserDto;
+import com.akcord.util.PageNavigation;
 
 @Controller
 @RequestMapping("/notice")
 public class NoticeController {
 	@Autowired
 	private NoticeService noticeService;
+
+	@Autowired
+	private CommonService commonService;
 	
 	@RequestMapping("/mvnoticelist.akcord")
-	public ModelAndView mvnoticelist(HttpSession session){
+	public ModelAndView mvnoticelist(HttpSession session,@RequestParam Map<String,String> query){
 		ModelAndView mav = new ModelAndView();
-		List<NoticeDto> list = noticeService.getNoticeList();
+		List<NoticeDto> list = noticeService.getNoticeList(query);
 		UserDto userDto = (UserDto) session.getAttribute("user");
+		query.put("type", "notice");
+		PageNavigation pageNavigation = commonService.makePageNavigation(query);
+		pageNavigation.setRoot("/akcord_project");
+		pageNavigation.setNavigator();
+		mav.addObject("navigator", pageNavigation);
 		mav.addObject("user",userDto);
 		mav.addObject("noticeList",list);
+		mav.addObject("query", query);
 		mav.setViewName("/admin/notice");
-		
 		return mav;
 	}
 	
 	@RequestMapping(value="/noticewrite.akcord",method=RequestMethod.GET)
-	public String noticeWrite(){
-	
+	public String noticeWrite(){																					
 		return "/admin/noticewrite";
 	}
 	@RequestMapping(value="/noticedelete.akcord",method=RequestMethod.GET)
-	public ModelAndView noticedelete(@RequestParam("str") String str){
-		ModelAndView mav = new ModelAndView();
-		String checkStr[] = str.split(",");
+	public String noticedelete(@RequestParam("str") String str){
+	String checkStr[] = str.split(",");
 		for (int i = 0; i < checkStr.length; i++) {
 			noticeService.delete(checkStr[i]);
 		}
-		List<NoticeDto> list = noticeService.getNoticeList();
-		mav.addObject("noticeList",list);
-		mav.setViewName("/admin/notice");
-		return mav;
+		return "redirect:/notice/mvnoticelist.akcord?word=&pg=1";
 	}
 	@RequestMapping(value="/noticepublic.akcord",method=RequestMethod.GET)
-	public ModelAndView noticepublic(@RequestParam("str") String str){
-		ModelAndView mav = new ModelAndView();
+	public String noticepublic(@RequestParam("str") String str){
 		String checkStr[] = str.split(",");
 		for (int i = 0; i < checkStr.length; i++) {
 			noticeService.noticePublic(checkStr[i]);
 		}
-		List<NoticeDto> list = noticeService.getNoticeList();
-		mav.addObject("noticeList",list);
-		mav.setViewName("/admin/notice");
-		return mav;
+		return "redirect:/notice/mvnoticelist.akcord?word=&pg=1";
 	}
-	@RequestMapping(value="/noticeorder.akcord",method=RequestMethod.GET)
-	public ModelAndView noticeOrder(@RequestParam Map<String,String> str){
-		ModelAndView mav = new ModelAndView();
-		System.out.println(str);
-		List<NoticeDto> list = noticeService.getNoticeOrder(str);
-		mav.addObject("noticeList",list);
-		mav.setViewName("/admin/notice");
-		return mav;
-	}
-/*	@RequestMapping(value="/noticeorder.akcord",method=RequestMethod.GET)
-	public ModelAndView noticeOrder(@RequestParam("str") String str){
-		ModelAndView mav = new ModelAndView();
-		System.out.println(str);
-		List<NoticeDto> list = noticeService.getNoticeOrder(str);
-		mav.addObject("noticeList",list);
-		mav.setViewName("/admin/notice");
-		return mav;
-	}
-*/	@RequestMapping(value="/noticewrite.akcord",method=RequestMethod.POST)
-	public ModelAndView noticeWrite(NoticeDto noticeDto){
-		ModelAndView mav = new ModelAndView();
+
+	@RequestMapping(value="/noticewrite.akcord",method=RequestMethod.POST)
+	public String noticeWrite(NoticeDto noticeDto){
 		int cnt = noticeService.noticeWrite(noticeDto);
-		mav.addObject("notice", noticeDto);		
-		List<NoticeDto> list = noticeService.getNoticeList();
-		mav.addObject("noticeList",list);
-		mav.setViewName("/admin/notice");
-		return mav;
+		return "redirect:/notice/mvnoticelist.akcord?word=&pg=1";
 	}
+	
 	@RequestMapping(value="/noticemodify.akcord",method=RequestMethod.GET)
 	public ModelAndView noticemodify(@RequestParam("nid") String nid){
 		ModelAndView mav = new ModelAndView();
@@ -103,13 +83,9 @@ public class NoticeController {
 		return mav;
 	}
 	@RequestMapping(value="/noticemodify.akcord",method=RequestMethod.POST)
-	public ModelAndView noticemodify(NoticeDto noticeDto){
-		ModelAndView mav = new ModelAndView();
+	public String noticemodify(NoticeDto noticeDto){
 		int cnt = noticeService.modify(noticeDto);
-		List<NoticeDto> list = noticeService.getNoticeList();
-		mav.addObject("noticeList",list);
-		mav.setViewName("/admin/notice");
-		return mav;
+		return "redirect:/notice/mvnoticelist.akcor?word=&pg=1";
 	}
 		
 }

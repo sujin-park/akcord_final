@@ -98,4 +98,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         insert into schedule values
         (seq_schedule_id.nextval, #{groupId}, #{scheduleName}, #{detail}, #{startDate}, #{startTime}, #{endDate}, #{endTime})
     </insert>
+    
+    <update id="scheduleModify" parameterType="scheduleDto">
+        update schedule
+        set schedule_name = #{scheduleName}, detail = #{detail}, start_date = #{startDate}, start_time = #{startTime},
+        end_date = #{endDate}, end_time = #{endTime}
+        where schedule_id = #{scheduleId}
+    </update>
+    
+    <delete id="scheduleDelete" parameterType="int">
+        delete schedule
+        where schedule_id = #{scheduleId}
+    </delete>
+    
+    <select id="groupArticleList" parameterType="int" resultType="groupHwDto">
+        select mnext.myroom_next_id myroomNextId, ghw.group_id groupId, 
+                  u.id id , u.name name, mnext.subject mysubject, mnext.content mycontent, mnext.reg_date regDate, m.major_name majorName
+                    from users u, myroom_next mnext, grouproom_hw ghw, major m
+                    where u.user_id = mnext.user_id
+                    and ghw.myroom_next_id = mnext.myroom_next_id
+                    and u.major_id = m.major_id
+                    and ghw.group_id = #{groupId}
+    </select>
 </mapper>
