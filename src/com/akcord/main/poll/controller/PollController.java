@@ -24,18 +24,17 @@ public class PollController {
 	@Autowired
 	private PollService pollService;
 	
+	
 	@RequestMapping(value="/make.akcord", method=RequestMethod.POST)
-	public ModelAndView pollmake(PollDto pollDto, @RequestParam List<String> answer){
-		ModelAndView mav = new ModelAndView();
+	public String pollmake(PollDto pollDto, @RequestParam List<String> answer){
 		int seq = pollService.getNextPollSeq();
 		int cnt = pollService.pollmake(pollDto);
 		for (int i = 0; i < answer.size()-1; i++) {
 			int text = pollService.pollmakeContent(answer.get(i));
 		}
-		mav.setViewName("/admin/teacher");
 		// 모달 창을 꺼야함!!!
 		// 뭘로 리턴할까!!!
-		return mav;
+		return "redirect:/poll//list.akcord";
 	}
 		@RequestMapping(value="/modify.akcord")
 		public @ResponseBody String pollmodify(@RequestParam("seq") int seq){
@@ -57,9 +56,7 @@ public class PollController {
 				//jsontmp.put("list", list.get(i));
 				jalist.add(text);
 			}
-
 			jsonObject.put("contlist", jalist);
-
 			// 모달 창이 유지되어야 한다!!
 		return jsonObject.toJSONString();
 	}
@@ -84,14 +81,15 @@ public class PollController {
 			jsonObject.put("pollresult", jarr);
 			// 모달 창이 유지되어야 한다!!
 		return jsonObject.toJSONString();
-	}
+		}
+		
+		
 		@RequestMapping(value="/modifydate.akcord", method=RequestMethod.POST)
-		public ModelAndView pollmodifydate(PollDto pollDto){
+		public String pollmodifydate(PollDto pollDto){
 			System.out.println("여긴 날짜를 수정합니다.");
-			ModelAndView mav = new ModelAndView();
 			int cnt = pollService.pollmodifydate(pollDto);
-			mav.setViewName("/admin/teacher");
-			return mav;
+		
+			return "redirect:/poll/list.akcord";
 		}
 		
 		@RequestMapping(value="/delete.akcord")
