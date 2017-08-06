@@ -15,6 +15,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         <typeAlias alias="inDto" type="com.akcord.in.model.InDto"/>
         <typeAlias alias="pollDto" type="com.akcord.main.poll.model.PollDto"/>
         <typeAlias alias="scheduleDto" type="com.akcord.group.model.ScheduleDto"/>
+        
     </typeAliases>
     <mappers>
         <mapper resource="com/akcord/config/mybatis/notice.xml"/>
