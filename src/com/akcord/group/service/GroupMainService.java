@@ -31,5 +31,7 @@ public interface GroupMainService {
 	
 	public int scheduleDelete(int scheduleId); // 일정삭제
 	
-	public List<GroupHwDto> groupArticleList(int groupId); // 그룹방 글목록 리스트
+	public List<GroupHwDto> groupArticleList(Map<String,String> map); // 그룹방 글목록 리스트
+	
+	public GroupHwDto articleView(Map<String, String> map);
 }

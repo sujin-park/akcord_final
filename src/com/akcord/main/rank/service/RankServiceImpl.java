@@ -18,7 +18,13 @@ public class RankServiceImpl implements RankService {
 
 	@Override
 	public RankDto getGroup() {
-		// TODO Auto-generated method stub
+		// TODO 그룹 멤버수 순위
+		return null;
+	}
+
+	@Override
+	public RankDto getMyroom() {
+		// TODO 마이룸 공유글 조회수
 		return null;
 	}
 

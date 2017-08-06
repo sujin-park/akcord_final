@@ -31,5 +31,7 @@ public interface GroupMainDao {
 	
 	public int scheduleDelete(int scheduleId);
 	
-	public List<GroupHwDto> groupArticleList(int groupId); 
+	public List<GroupHwDto> groupArticleList(Map<String,String> map); 
+	
+	public GroupHwDto articleView(Map<String, String> map);
 }

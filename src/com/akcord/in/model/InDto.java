@@ -10,6 +10,24 @@ public class InDto {
 	private String content;
 	private String reg_date;
 	private int hit;
+	private int category;
+	private String id;
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public int getCategory() {
+		return category;
+	}
+
+	public void setCategory(int category) {
+		this.category = category;
+	}
 
 	public int getQna_id() {
 		return qna_id;

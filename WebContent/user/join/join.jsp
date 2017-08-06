@@ -137,13 +137,12 @@ function appendDay(){
 </script>
 <!-- 회원가입 Modal-->
 <div class="modal fade" id="joinBtnModal" role="dialog" aria-hidden="true" >
-	<div class="modal-dialog" style="width: 33%;">
+	<div class="modal-dialog" style="width: 45%;">
 		
 		<div>
 		<!-- Modal content-->
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title"><img src="${root}/doc/img/join.jpg" style="width: 100%"></h4>
 			</div>
 			<div class="modal-body">

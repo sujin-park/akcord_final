@@ -4,6 +4,7 @@ public class GroupHwDto extends GroupRoomDto {
 	private int myroomNextId;
 	private int scheduleId;
 	private String mysubject;
+	private String mycontent;
 	public String getMysubject() {
 		return mysubject;
 	}
@@ -16,7 +17,7 @@ public class GroupHwDto extends GroupRoomDto {
 	public void setMycontent(String mycontent) {
 		this.mycontent = mycontent;
 	}
-	private String mycontent;
+
 	public int getMyroomNextId() {
 		return myroomNextId;
 	}

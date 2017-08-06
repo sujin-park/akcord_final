@@ -14,6 +14,15 @@ public class GroupRoomDto {
 	private int groupId;
 	private int nowCount;
 	private String id;
+	private int userid;
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+
 	public String getId() {
 		return id;
 	}

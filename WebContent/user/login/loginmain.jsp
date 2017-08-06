@@ -43,10 +43,10 @@ $(document).ready(function(){
 				
 				<div class="modal-content img-rounded" id="img01" style="position: absolute;" >
 								<img src="${root}/doc/img/loginview.jpg"
-									style="width: 700px; height: 600px;">
+									style="width: 600px; height: 500px;">
 
 
-				<div class="modal-body" style="position: absolute; top:63%; left: 38%;" >								
+				<div class="modal-body" style="position: absolute; top:60%; left: 35%;" >								
 					<button id="loginBtn" type="button" class="btn btn-danger" data-toggle="modal" data-target="#loginBtnModal" >&nbsp;로그인&nbsp;</button>
 					<button id="joinBtn" type="button" class="btn btn-danger" data-toggle="modal" data-target="#joinBtnModal">회원가입</button>		
 				</div>

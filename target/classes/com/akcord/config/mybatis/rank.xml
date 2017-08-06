@@ -24,7 +24,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where rownum &lt;= 10
     </select>
 
+    <select id="getGroup">
+        select group_id, count(user_id) hit
+        from
+            (select group_id from grouproom_list)
+        order by hit
+    </select>
 
+    <select id="getMyroom">
+        select subject, hit
+        from myroom_next
+        where is_share = 1
+        order by hit
+    </select>
     
 </mapper>
 
