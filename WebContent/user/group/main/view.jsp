@@ -3,7 +3,7 @@
 <%@include file="/common/template/head_include.jsp"%>
 <link rel="stylesheet" href="/akcord/user/group/css/list.css">
 <%@ include file="/common/template/nav.jsp" %>
-   <div class="container">
+   <div class="container" style="padding-top:60px;">
      <div class="container container-pad" id="property-listings">
        <div class="row">
          <div class="col-sm-12  style="padding-bottom:50px;">
@@ -17,7 +17,7 @@
 						<table class="table table-bordered">
 							<tr>
 								<th colspan="4">
-									<span class="title" style="font-size: 1.9rem;">JAVA 공부하기</span>&nbsp;&nbsp;
+									<span class="title" style="font-size: 1.9rem;">${groupHwDto.mysubject}</span>&nbsp;&nbsp;
 								</th>
 							</tr>
 							<tr align="center">
@@ -28,18 +28,17 @@
 							</tr>
 							<tr align="center">
 								<td><strong>아이디</strong></td>
-								<td colspan="2">tnwls0625</td>
+								<td colspan="2">${groupHwDto.id}</td>
 								<td></td>
 							</tr>
 							<tr align="center">
 								<td><strong>이름</strong></td>
-								<td colspan="2">박수진</td>
+								<td colspan="2">${groupHwDto.name}</td>
 								<td></td>
 							</tr>
 							<tr align="center">
 								<td><strong>내용</strong></td>
-								<td colspan="3">이번에는 java로 간단한 이미지속 방해 요소를 지워보는 방법을 알아보고자... 
-	                                	그럼 이러한 특징을 java에서 일어내려면 어떻게 하는 것이 좋을까요? 바로 타겟...</td>
+								<td colspan="3">${groupHwDto.mycontent}</td>
 	                            <td></td>
 							</tr>
 						</table>

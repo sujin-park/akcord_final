@@ -111,13 +111,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where schedule_id = #{scheduleId}
     </delete>
     
-    <select id="groupArticleList" parameterType="int" resultType="groupHwDto">
+    <select id="groupArticleList" parameterType="java.util.Map" resultType="groupHwDto">
         select mnext.myroom_next_id myroomNextId, ghw.group_id groupId, 
-                  u.id id , u.name name, mnext.subject mysubject, mnext.content mycontent, mnext.reg_date regDate, m.major_name majorName
+                  u.id id , u.user_id userid,  u.name name, mnext.subject mysubject, mnext.content mycontent, mnext.reg_date regDate, m.major_name majorName
                     from users u, myroom_next mnext, grouproom_hw ghw, major m
                     where u.user_id = mnext.user_id
                     and ghw.myroom_next_id = mnext.myroom_next_id
                     and u.major_id = m.major_id
                     and ghw.group_id = #{groupId}
+                    <if test="scheduleId != ''">
+                            and schedule_id = #{scheduleId}
+                    </if>
+    </select>
+    
+    <select id="articleView" parameterType="java.util.Map" resultType="groupHwDto">
+        select mnext.myroom_next_id myroomNextId, ghw.group_id groupId, 
+        u.id id , u.user_id userid, u.name name, mnext.subject mysubject, mnext.content mycontent, mnext.reg_date regDate, m.major_name majorName
+                    from users u, myroom_next mnext, grouproom_hw ghw, major m
+                    where u.user_id = mnext.user_id
+                    and ghw.myroom_next_id = mnext.myroom_next_id
+                    and u.major_id = m.major_id
+                    and ghw.group_id = #{groupId}
+                    and mnext.myroom_next_id = #{articleseq}
     </select>
 </mapper>

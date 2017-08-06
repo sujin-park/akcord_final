@@ -87,7 +87,7 @@ var obj;
 			},
 	
 			editable: true,
-
+	        eventLimit : true,
 		    eventClick : function(event, element) {
 	            if (event.title) {
 					var sday;
@@ -126,7 +126,6 @@ var obj;
 					}
 					var startTime = moment(event.start).format('YYYY/MM/DD ' + sday + ' hh:mm');
 					var endTime = moment(event.end).format('YYYY/MM/DD ' + eday +' hh:mm');
-				   alert(event.scheduleId);
 	               $("#scheduleModal").modal({"show" : true});
 	               $('#sModifyBtn').val(event.scheduleId);
 	               $('#sDeleteBtn').val(event.scheduleId);
@@ -139,7 +138,6 @@ var obj;
 	               $("#scheduleModal #startDate").val(startTime);
 	               $("#scheduleModal #endDate").val(endTime);
 					}
-	            
 		    }, 
 			events: 	JSON.parse(obj)
 				
@@ -181,7 +179,7 @@ var obj;
 							},
 							 success: function (data) {
 								obj =  JSON.stringify(data.schedule);
-								callback(obj);
+								//callback(obj);
 						}
 					});
 		
@@ -212,11 +210,11 @@ var obj;
 							},
 							 success: function (data) {
 								obj =  JSON.stringify(data.schedule);
-								callback(obj);
+								//callback(obj);
 						}
 					});
-		          $('#calendar').fullCalendar('renderEvent', eventData1, true);
 		          $("#scheduleModal").modal('hide');
+		          $('#calendar').fullCalendar('renderEvent', eventData1, true);
 		          $("#scheduleModal #scheduleName").val("");
 		          $("#scheduleModal #detail").val("");
 		          $('#calendar').fullCalendar('unselect');
@@ -233,8 +231,8 @@ var obj;
 								callback(obj);
 						}
 					});
-		          $('#calendar').fullCalendar('renderEvent', eventData1, true);
 		          $("#scheduleModal").modal('hide');
+		          //$('#calendar').fullCalendar('renderEvent', eventData1, true);
 		          $("#scheduleModal #scheduleName").val("");
 		          $("#scheduleModal #detail").val("");
 		          $('#calendar').fullCalendar('unselect');
@@ -245,13 +243,19 @@ var obj;
 		});
 	
 		$('#contentlist').on('click', function() {
-			$(location).attr('href', '${root}/groupmain/list.akcord?groupId=${gInfo.groupId}');
+			$(location).attr('href', '${root}/groupmain/list.akcord?groupId=${gInfo.groupId}&scheduleId=');
 		});
 		
 		$('#Gmemberlist').on('click', function() {
 			$(location).attr('href', '${root}/groupmain/group.akcord?groupId=${gInfo.groupId}&pg=1&key=&word=&order=');
 		});
 		
+		$('#scheduleListBtn').on('click', function(){
+			var scheduleId = $('#sModifyBtn').val();
+			var startDate = $("#scheduleModal #startDate").val();
+			var endDate = $("#scheduleModal #endDate").val();
+			$(location).attr('href', '${root}/groupmain/list.akcord?groupId=${gInfo.groupId}&scheduleId='+scheduleId +'&startDate=' +startDate + '&endDate=' + endDate);
+		});
 		
 	});
 	

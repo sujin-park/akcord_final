@@ -44,16 +44,22 @@ public class GroupMainController {
 		ModelAndView mav = new ModelAndView();
 		GroupRoomDto group = groupMainService.gMainInfo(groupId);
 		mav.addObject("gInfo", group);
+		//mav.addObject("groupId", groupId);
 		mav.setViewName("/user/group/main/groupcalender");
 		return mav;
 	}
 
 	@RequestMapping("/list.akcord") // 글목록
-	public ModelAndView groupMain(@RequestParam("groupId") int groupId) {
+	public ModelAndView groupMain(@RequestParam Map<String,String> map) {
 		ModelAndView mav = new ModelAndView();
-		List<GroupHwDto> list = groupMainService.groupArticleList(groupId);
-		System.out.println(list.size());
+		String startDate =map.get("startDate");
+		String endDate = map.get("endDate");
+		String groupId = map.get("groupId");
+		List<GroupHwDto> list = groupMainService.groupArticleList(map);
 		mav.addObject("alist", list);
+		mav.addObject("startDate", startDate);
+		mav.addObject("endDate", endDate);
+		mav.addObject("groupId", groupId);
 		mav.setViewName("/user/group/main/articlelist");
 		return mav;
 	}
@@ -130,6 +136,16 @@ public class GroupMainController {
 		return mav;
 	}
 
+	@RequestMapping("/view.akcord")
+	public ModelAndView articleview(@RequestParam Map<String, String> map){
+		ModelAndView mav = new ModelAndView();
+		GroupHwDto groupHwDto = groupMainService.articleView(map);
+		System.out.println(groupHwDto.getMysubject());
+		mav.addObject("groupHwDto", groupHwDto);
+		mav.setViewName("/user/group/main/view");
+		return mav;
+	}
+	
 	@RequestMapping("/schedule.akcord")
 	public @ResponseBody String scheduleInsert(ScheduleDto scheduleDto) {
 		String sdate = scheduleDto.getStartDate();
@@ -209,4 +225,6 @@ public class GroupMainController {
 		JSONObject json = makeList(groupId);
 		return json.toJSONString();
 	}
+	
+
 }

@@ -81,8 +81,13 @@ public class GroupMainServiceImpl  implements GroupMainService{
 	}
 
 	@Override
-	public List<GroupHwDto> groupArticleList(int groupId) {
-		return sqlSession.getMapper(GroupMainDao.class).groupArticleList(groupId);
+	public List<GroupHwDto> groupArticleList(Map<String,String> map) {
+		return sqlSession.getMapper(GroupMainDao.class).groupArticleList(map);
+	}
+
+	@Override
+	public GroupHwDto articleView(Map<String, String> map) {
+		return sqlSession.getMapper(GroupMainDao.class).articleView(map);
 	}
 
 }
