@@ -1,5 +1,7 @@
 package com.akcord.alarm.service;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -76,6 +78,24 @@ public class AlarmServiceImpl implements AlarmService {
 	@Override
 	public void alarmOn() {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<String> alarmMemberCall() {
+		// TODO Auto-generated method stub
+		return sqlSession.getMapper(AlarmDao.class).alarmMemberCall();
+	}
+
+	@Override
+	public void alarminsertNotice(String target_id) {
+		// TODO 모든 멤버에게 공지 사항 등록을 알린다.
+		List<String> list = sqlSession.getMapper(AlarmDao.class).alarmMemberCall();
+		
+		for (int i = 0; i < list.size(); i++) {
+			target_id = list.get(i);
+			sqlSession.getMapper(AlarmDao.class).alarminsertNotice(target_id);
+		}
 		
 	}
 
