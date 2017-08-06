@@ -17,7 +17,8 @@ public interface PollDao {
 	public int pollmodifydate(PollDto pollDto); // modify poll data
 	public List<String> pollgetContent(int poll_id); // modify poll data
 	public int pollclose(int poll_id);  // close poll
-	
+	public List<PollDto> pollresult(int poll_id);
+
 	// << poll function for users >>
 	public void pollshow();	// shows poll form for users
 	public void pollvote();	// insert user's choice data

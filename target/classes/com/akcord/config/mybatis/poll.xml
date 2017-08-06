@@ -34,6 +34,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where poll_id = #{poll_id} 
     </select>
     
+    <select id="pollresult" parameterType="Integer" resultType="pollDto">
+        select p.poll_id,p.subject,d.content,d.count,p.chart_type
+        from poll p,poll_detail d where p.poll_id=d.poll_id and p.poll_id=#{poll_id}
+    </select>
+    
+    
     <update id="pollmodifydate" parameterType="pollDto">
         update poll 
         set start_date = #{startDate}, end_date = #{endDate}

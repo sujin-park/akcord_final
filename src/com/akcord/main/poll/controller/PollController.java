@@ -63,7 +63,28 @@ public class PollController {
 			// 모달 창이 유지되어야 한다!!
 		return jsonObject.toJSONString();
 	}
-	
+		@RequestMapping(value="/result.akcord")
+		public @ResponseBody String pollresult(@RequestParam("seq") int seq){
+			int poll_id = seq;
+			// 먼저 제목과 날짜 먼저 호출하자
+			JSONObject jsonObject = new JSONObject();
+			JSONArray jarr = new JSONArray();
+			List<PollDto> plist=  pollService.pollresult(poll_id);	// 투표 정보를 불러온다
+			jsonObject.put("Subject", plist.get(0).getSubject());
+			jsonObject.put("ChartType", plist.get(0).getChartType());
+			jsonObject.put("poll_id", seq);
+			for (PollDto pollDto:plist) {
+				JSONObject jsontmp = new JSONObject();
+				//String text = plist.get(i);
+				jsontmp.put("content",pollDto.getContent());
+				jsontmp.put("cnt", pollDto.getCount());
+//				jalist.add(text);
+				jarr.add(jsontmp);
+			}
+			jsonObject.put("pollresult", jarr);
+			// 모달 창이 유지되어야 한다!!
+		return jsonObject.toJSONString();
+	}
 		@RequestMapping(value="/modifydate.akcord", method=RequestMethod.POST)
 		public ModelAndView pollmodifydate(PollDto pollDto){
 			System.out.println("여긴 날짜를 수정합니다.");

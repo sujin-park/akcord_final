@@ -14,6 +14,7 @@
 
     <meta name="description" content="Source code generated using layoutit.com">
     <meta name="author" content="LayoutIt!">
+<%@ include file="/common/public.jsp" %>
 
 <%@ include file="/common/template/nav.jsp" %>
 <script type="text/javascript">
@@ -35,10 +36,8 @@ $(document).ready(function (){
 			});
 			/* document.noticeform.action = "${root}/admin/noticedelete.akcord?str=checkList" */
 			$(location).attr('href','${root}/notice/noticedelete.akcord?str='+values);
-						
-			
-			
 		});	  
+	
 	  $('#publicBtn').click(function (){
 		 	 var str;
 			 var values = new Array();
@@ -66,9 +65,32 @@ $(document).ready(function (){
 		    
 		      $("#noticesort option:selected").each(function () {   
 		    	 var str =$(this).val();
-	     		 $(location).attr('href','${root}/notice/noticeorder.akcord?str='+str);
+	     		 $(location).attr('href','${root}/notice/mvnoticelist.akcord?str='+str+'&word=&pg=1');
  	      });
-	 }); 
+	 });
+		   $('#searchBtn').click(function(){
+				$('#pg').val('1');
+				$('#word').val($('#sword').val());
+				$('#commonForm').attr('action','${root}/notice/mvnoticelist.akcord').submit();		
+			});  	  
+		  
+			$('#firstBtn').click(function(){
+				$('#pg').val('1');
+				$('#word').val('${query.word}');
+				$('#commonForm').attr('action', '${root}/notice/mvnoticelist.akcord').submit();
+			});
+			
+			$('.pagemove').click(function(){
+				$('#pg').val($(this).attr('data-page'));
+				$('#word').val('${query.word}');
+				$('#commonForm').attr('action', '${root}/notice/mvnoticelist.akcord').submit();
+			});
+			
+			$('#lastBtn').click(function(){
+				$('#pg').val($(this).attr('data-last'));
+				$('#word').val('${query.word}');
+				$('#commonForm').attr('action', '${root}/notice/mvnoticelist.akcord').submit();
+			});
 	 
 });
 
@@ -80,35 +102,43 @@ $(document).ready(function (){
 	color: white;
 }
 </style>
-<section class="content page-top row">
-			<div class="col-sm-10 col-sm-push-1" style="padding-top: 60px;">
+<section class="content page-top row"  style="padding-top: 60px;">
+			<div class="container" style="padding-top: 60px;">
 			
 				<div class="col-sm-10 col-sm-push-1">
 					<h2>공지사항 목록</h2>
 				</div>
 				<form name ="noticeform" method="post" action="">
 				<div class="panel panel-default" style="padding:30px;">
-            <div class="btn-group" >  
-				
-					<select class="form-control" id="noticesort" name="noticesort">
-								<option>글정렬</option>
-                                <option id="str" value="1">등록일순</option>
-                                <option id="str" value="2">조회순</option>
-                    </select>
-			</div>
+				<div class="row">
+     			<div class="form-group form-inline">
+									<div class="col-sm-6 pull-right">
+										<div class="col-sm-1"></div>
+								
+										<div class="col-sm-11" align="left">
+											<select class="form-control"id="noticesort" name="noticesort">
+												<option>글정렬</option>
+												<option id=str value="1">등록일순</option>
+												<option id=str value="2">조회순</option>
+											</select>
+												<input type="text" class="form-control" id="sword" name="sword" placeholder="검색어 입력" size="20">
+												<button type="button" class="btn btn-sm btn-danger" id="searchBtn">SEARCH</button>
+										</div>
+									</div>
+								</div>	
+							</div>	
 			<table class="table">
 				<thead>
-				<tr>
-					<th>
+				<tr  align="center">
+					<th  width="5%" align="right">
 					<input type="checkbox" name="checkAll" id="checkAll" value="1">
 					</th>
-					<th>글번호</th>
-					<th>공지 제목</th>
-					<th>등록일</th>
-					<th>조회수</th>
-				<c:if test="${user.type!=1} ">
-					<th>공개여부${user.type }</th>
-					</c:if>
+					<th width="10%" align="center">글번호</th>
+					<th width="40%"  align="center">공지 제목</th>
+					<th width="15%"  align="center">등록일</th>
+					<th width="10%"  align="center">조회수</th>
+					<th width="15%" align="center">공개여부</th>
+			
 				</tr>
 				</thead>
 				<tbody>
@@ -117,20 +147,20 @@ $(document).ready(function (){
 				<c:forEach var="notice" items="${noticeList}">
 				<c:choose>
 				<c:when test="${notice.is_notice ==1 }">
-					<tr>
-						<td>
+					<tr align="center"> 
+						<td align="right" >
 							<input class="checkbox" type="checkbox" name="admincheckbox" id="checkbox" value="${notice.notice_id}">
 						</td>
-						<td>${notice.notice_id }</td>
-						<td><a href="${root }/notice/noticemodify.akcord?nid=${notice.notice_id}">${notice.subject }</a></td>
-						<td>${notice.reg_date }</td>
-						<td>${notice.hit }</td>
+						<td align="center">${notice.notice_id }</td>
+						<td align="center"><a href="${root }/notice/noticemodify.akcord?nid=${notice.notice_id}">${notice.subject }</a></td>
+						<td align="center">${notice.reg_date }</td>
+						<td align="center">${notice.hit }</td>
 						<c:choose>
    						 <c:when test="${notice.is_notice==0}">
-							<td>비공개</td>
+							<td align="center">비공개</td>
 						</c:when>
 						<c:otherwise>
-						<td>공개</td>
+						<td align="center">공개</td>
 						</c:otherwise>
 						</c:choose>
  						
@@ -175,28 +205,12 @@ $(document).ready(function (){
 			</div>
 			</div>
 			</form>
-		</div>
+			</div>
+		<div align="center" style="clear:both;">
+			${navigator.navigator}
+			</div>
+			<div class="col-md-6"></div>
 </section>
-<nav>
-			<div align="center">
-				  <ul class="pagination">
-				    <li>
-				      <a href="#" aria-label="Previous">
-				        <span aria-hidden="true">&laquo;</span>
-				      </a>
-				    </li>
-				    <li><a href="#">1</a></li>
-				    <li><a href="#">2</a></li>
-				    <li><a href="#">3</a></li>
-				    <li><a href="#">4</a></li>
-				    <li><a href="#">5</a></li>
-				    <li>
-				      <a href="#" aria-label="Next">
-				        <span aria-hidden="true">&raquo;</span>
-				      </a>
-				    </li>
-				  	</ul>
-			  </div>
-		</nav>
+		
   </body>
 </html>

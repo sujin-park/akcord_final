@@ -9,8 +9,10 @@ import com.akcord.user.model.UserDto;
 
 public interface UserManagerDao {
 	
-	List<UserManageDto> getUserList();	
-	UserDto getUser(String user_id);
+	List<UserManageDto> getUserList(Map<String, String> queryString);
+	List<UserManageDto> getBlackUserList(Map<String, String> queryString);	
+	void bUserOut(String user_id);
+	//UserDto getUser(String user_id);
 	int blackuserReg(String user_id);
 	int majorPlus(String mname);
 	List<MajorDto> getMajor();

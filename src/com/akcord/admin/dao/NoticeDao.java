@@ -7,8 +7,8 @@ import com.akcord.admin.model.NoticeDto;
 
 public interface NoticeDao {
 	
-	List<NoticeDto> getNoticeList();
-	List<NoticeDto> getNoticeOrder(Map<String,String> str);
+	List<NoticeDto> getNoticeList(Map<String,String> query);
+
 	int noticeWrite(NoticeDto noticeDto);
 	NoticeDto getNotice(String notice_id);
 	int modify(NoticeDto noticeDto);

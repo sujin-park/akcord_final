@@ -63,6 +63,11 @@ public class PollServiceImpl implements PollService {
 		return sqlSession.getMapper(PollDao.class).polllist();
 	}
 
+	@Override
+	public List<PollDto> pollresult(int poll_id) {
+		// TODO Auto-generated method stub
+		return sqlSession.getMapper(PollDao.class).pollresult(poll_id);
+	}
 
 
 }

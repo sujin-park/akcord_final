@@ -11,6 +11,7 @@ import com.akcord.admin.dao.UserManagerDao;
 import com.akcord.admin.model.UserManageDto;
 import com.akcord.user.model.MajorDto;
 import com.akcord.user.model.UserDto;
+import com.akcord.util.BoardConstant;
 @Service
 public class UserManagerServiceImpl implements UserManagerService {
 
@@ -18,15 +19,20 @@ public class UserManagerServiceImpl implements UserManagerService {
 	private SqlSession sqlSession;
 		
 	@Override
-	public List<UserManageDto> getUserList() {
-		return sqlSession.getMapper(UserManagerDao.class).getUserList();
+	public List<UserManageDto> getUserList(Map<String, String> query) {
+		int pg = Integer.parseInt(query.get("pg"));
+		int end = pg * BoardConstant.LIST_SIZE;
+		int start = end - BoardConstant.LIST_SIZE;
+		query.put("start", start+"");
+		query.put("end", end+"");
+		return sqlSession.getMapper(UserManagerDao.class).getUserList(query);
 	}
 
-	@Override
+/*	@Override
 	public UserDto getUser(String user_id) {
 		return null;
 	}
-
+*/
 	@Override
 	public int blackuserReg(String user_id) {
 		return sqlSession.getMapper(UserManagerDao.class).blackuserReg(user_id);
@@ -45,6 +51,21 @@ public class UserManagerServiceImpl implements UserManagerService {
 	@Override
 	public List<UserManageDto> getMemberOrder(Map<String, String> str) {
 		return sqlSession.getMapper(UserManagerDao.class).getMemberOrder(str);
+	}
+
+	@Override
+	public List<UserManageDto> getBlackUserList(Map<String, String> query) {
+		int pg = Integer.parseInt(query.get("pg"));
+		int end = pg * BoardConstant.LIST_SIZE;
+		int start = end - BoardConstant.LIST_SIZE;
+		query.put("start", start+"");
+		query.put("end", end+"");
+		return sqlSession.getMapper(UserManagerDao.class).getBlackUserList(query);
+	}
+
+	@Override
+	public void bUserOut(String user_id) {
+		sqlSession.getMapper(UserManagerDao.class).bUserOut(user_id);
 	}
 
 }

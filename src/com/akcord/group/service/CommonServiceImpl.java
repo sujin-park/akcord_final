@@ -29,7 +29,20 @@ public class CommonServiceImpl implements CommonService {
 			totalArticleCount = sqlSession.getMapper(CommonDao.class).totalGroupWaitCount(query);
 		} else if(type.equals("myroom")) {
 			totalArticleCount = sqlSession.getMapper(CommonDao.class).totalMyroomListCount(query);
+		}else if (type.equals("notice")) {
+
+			newArticleCount = sqlSession.getMapper(CommonDao.class).newNoticeListCount();
+			totalArticleCount = sqlSession.getMapper(CommonDao.class).totalNoticeListCount(query);
+		}else if (type.equals("usermanage")) {
+
+			newArticleCount = sqlSession.getMapper(CommonDao.class).newUserListCount();
+			totalArticleCount = sqlSession.getMapper(CommonDao.class).totalUserListCount(query);
+		}else if (type.equals("blackusermanage")) {
+			newArticleCount = sqlSession.getMapper(CommonDao.class).newUserListCount();
+			totalArticleCount = sqlSession.getMapper(CommonDao.class).totalBlackUserListCount(query);
 		}
+
+
 		
 		
 		
