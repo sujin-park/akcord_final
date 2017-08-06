@@ -37,6 +37,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         values (#{target_id}, 6, sysdate, alarm_seq.nextval, 0)
     </insert>
     
+    <select id="alarmMemberCall" resultType="java.util.List">
+        select user_id 
+        from users
+    </select>
+    
+    <insert id="alarminsertNotice">
+        insert 
+        into alarm (target_id, key, logtime, seqence_num, flag)
+        values (#{target_id}, 7, sysdate, alarm_seq.nextval, 0)
+    </insert>
+    
     <select id="alarmlist" parameterType="String" resultType="alarmDto">
         select target_id, key, logtime, seqence_num, flag
         from alarm
