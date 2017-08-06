@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.akcord.main.rank.dao.AlarmDao">
+    
+    <insert id="alarminsertGroupinvite">
+        insert 
+        into alarm (target_id, key, logtime, seqence_num, flag)
+        values (#{target_id}, 1, sysdate, alarm_seq.nextval, 0)
+    </insert>
+    <insert id="alarminsertGroupaccept">
+        insert 
+        into alarm (target_id, key, logtime, seqence_num, flag)
+        values (#{target_id}, 2, sysdate, alarm_seq.nextval, 0)
+    </insert>
+    <insert id="alarminsertQnareply">
+        insert 
+        into alarm (target_id, key, logtime, seqence_num, flag)
+        values (#{target_id}, 3, sysdate, alarm_seq.nextval, 0)
+    </insert>
+    <insert id="alarminsertQnacomment">
+        insert 
+        into alarm (target_id, key, logtime, seqence_num, flag)
+        values (#{target_id}, 4, sysdate, alarm_seq.nextval, 0)
+    </insert>
+    <insert id="alarminsertQnalike">
+        insert 
+        into alarm (target_id, key, logtime, seqence_num, flag)
+        values (#{target_id}, 5, sysdate, alarm_seq.nextval, 0)
+    </insert>
+    <insert id="alarminsertQnadislike">
+        insert 
+        into alarm (target_id, key, logtime, seqence_num, flag)
+        values (#{target_id}, 6, sysdate, alarm_seq.nextval, 0)
+    </insert>
+    
+    <select id="alarmlist" parameterType="String" resultType="alarmDto">
+        select target_id, key, logtime, seqence_num, flag
+        from alarm
+        where target_id like #{target_id}
+    </select>
+    
+    <select id="alarmNoneread" parameterType="String" resultType="int">
+        select count(flag)
+        from alarm
+        where target_id like #{target_id}
+    </select>
+    
+    <update id="alarmreadset" parameterType="int">
+        update alarm
+        set flag = 1
+        where seqence_num = #{seqence_num}
+    </update>
+
+
+    
+</mapper>
+

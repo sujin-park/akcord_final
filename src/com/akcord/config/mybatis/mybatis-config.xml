@@ -14,8 +14,14 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         <typeAlias alias="groupListDto" type="com.akcord.group.model.GroupListDto"/>
         <typeAlias alias="inDto" type="com.akcord.in.model.InDto"/>
         <typeAlias alias="pollDto" type="com.akcord.main.poll.model.PollDto"/>
+        <typeAlias alias="myroomDto" type="com.akcord.myroom.model.MyroomDto"/>
+        <typeAlias alias="myroomNextDto" type="com.akcord.myroom.model.MyroomNextDto"/>
         <typeAlias alias="scheduleDto" type="com.akcord.group.model.ScheduleDto"/>
         
+        <typeAlias alias="groupHwDto" type="com.akcord.group.model.GroupHwDto"/>
+        <typeAlias alias="mypageDto" type="com.akcord.mypage.model.MypageDto"/>
+        <typeAlias alias="alarmDto" type="com.akcord.alarm.model.AlarmDto"/>
+        <typeAlias alias="rankDto" type="com.akcord.main.rank.model.RankDto"/>
     </typeAliases>
     <mappers>
         <mapper resource="com/akcord/config/mybatis/notice.xml"/>
@@ -26,6 +32,10 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         <mapper resource="com/akcord/config/mybatis/in.xml"/>
         <mapper resource="com/akcord/config/mybatis/common.xml"/>
         <mapper resource="com/akcord/config/mybatis/poll.xml"/>
+        <mapper resource="com/akcord/config/mybatis/myroom.xml"/>
+        <mapper resource="com/akcord/config/mybatis/mypage.xml"/>
+        <mapper resource="com/akcord/config/mybatis/alarm.xml"/>
+        <mapper resource="com/akcord/config/mybatis/rank.xml"/>
     </mappers>
     
 </configuration>

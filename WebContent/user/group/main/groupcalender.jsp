@@ -9,26 +9,25 @@
 <%@ include file="/common/public.jsp" %>
 <script>
 var eventData;
-var eventallData;
-		$.ajax({
+var obj;
+	$.ajax({
 			type : 'GET',
 			dataType : 'json',
 			url : '${root}/groupmain/calendar.akcord',
 			data : {'groupId' : '${gInfo.groupId}'},
-			success : function(data) {
-				eventallData = data;
-			}
-		});
+			 success: function (data) {
+				obj =  JSON.stringify(data.schedule);
+				//alert(JSON.stringify(data.schedule2));
+		}
+	});
 		
-		$('#calendar').fullCalendar({
-		    events :  eventallData
-		});
+
 	$(document).ready(function() {
 		
 	      var eventData;
 	      var HOstart;
 	      var HOend;
-	      
+		
 		$('#calendar').fullCalendar({
 		
 			header: {
@@ -86,36 +85,79 @@ var eventallData;
 				$('#scheduleInsert #startDate').val(startTime);
 				$('#scheduleInsert #endDate').val(endTime);
 			},
-	/* 		
+	
 			editable: true,
-			eventLimit: true, // allow "more" link when too many events
 
 		    eventClick : function(event, element) {
 	            if (event.title) {
+					var sday;
+					var eday;
+					var d = new Date();
+					if (moment(event.start).format('dddd') == 'Monday') {
+						sday = '월';
+					} else if (moment(event.start).format('dddd') == 'Tuesday') {
+						sday = '화';
+					} else if (moment(event.start).format('dddd') == 'Wednesday') {
+						sday = '수';
+					} else if (moment(event.start).format('dddd') == 'Thursday') {
+						sday = '목';
+					} else if (moment(event.start).format('dddd') == 'Friday') {
+						sday = '금';
+					} else if (moment(event.start).format('dddd') == 'Saturday') {
+						sday = '토';
+					} else {
+						sday = '일';
+					}
+					
+					if (moment(event.end).format('dddd') == 'Monday') {
+						eday = '월';
+					} else if (moment(event.end).format('dddd') == 'Tuesday') {
+						eday = '화';
+					} else if (moment(event.end).format('dddd') == 'Wednesday') {
+						eday = '수';
+					} else if (moment(event.end).format('dddd') == 'Thursday') {
+						eday = '목';
+					} else if (moment(event.end).format('dddd') == 'Friday') {
+						eday = '금';
+					} else if (moment(event.end).format('dddd') == 'Saturday') {
+						eday = '토';
+					} else {
+						eday = '일';
+					}
+					var startTime = moment(event.start).format('YYYY/MM/DD ' + sday + ' hh:mm');
+					var endTime = moment(event.end).format('YYYY/MM/DD ' + eday +' hh:mm');
+				   alert(event.scheduleId);
 	               $("#scheduleModal").modal({"show" : true});
+	               $('#sModifyBtn').val(event.scheduleId);
+	               $('#sDeleteBtn').val(event.scheduleId);
 	               $("#scheduleModal #modalTitle").text(event.title);
 	               $("#scheduleModal #contenttext").text(event.content);
 	               $("#scheduleModal #startDate").text(event.start);
 	               $("#scheduleModal #endDate").text(event.end);
-	               $("#showForm #title").val(event.title);
-	               $("#showForm #content").val(event.content);
-	               $("#showForm #startDate").val(event.start);
-	               $("#showForm #endDate").val(event.end);
-				
+	               $("#scheduleModal #scheduleName").val(event.title);
+	               $("#scheduleModal #detail").val(event.content);
+	               $("#scheduleModal #startDate").val(startTime);
+	               $("#scheduleModal #endDate").val(endTime);
 					}
-		    }, */
-			events: [
-				 /* <c:forEach var="schedule" items='${slist}'>
+	            
+		    }, 
+			events: 	JSON.parse(obj)
+				
+	
+				
+	/* 			 [
+				 <c:forEach var="schedule" items='${slist}'>
 					{
      	                 start : '${schedule.startDate}',
 		                 end : '${schedule.endDate}',
    		                 title : '${schedule.scheduleName}',
 		                 content : '${schedule.detail}',
-		                 color : "#d34e4c"
 		                 },
+		                 
+		                 ]
 				</c:forEach>  */
 				
-			]
+			
 		    });
 		
 		
@@ -125,15 +167,77 @@ var eventallData;
 		             end : HOend,
 		             title : $("#scheduleInsert #scheduleName").val(),
 		             content : $("#scheduleInsert #detail").val(),
-		          
+		             color: "#d34e4c"
 		          };
+		     
+		          //$('form[name=sRegisterForm]').attr('action','${root}/groupmain/schedule.akcord').attr('method', 'post').submit();
+		          	$.ajax({
+							type : 'POST',
+							dataType : 'json',
+							url : '${root}/groupmain/schedule.akcord',
+							data : {'groupId' : '${gInfo.groupId}', 'startDate' : $("#scheduleInsert #startDate").val(),
+										'endDate' : $("#scheduleInsert #endDate").val(), 'scheduleName' : $("#scheduleInsert #scheduleName").val(),
+										'detail' : $("#scheduleInsert #detail").val()
+							},
+							 success: function (data) {
+								obj =  JSON.stringify(data.schedule);
+								callback(obj);
+						}
+					});
+		
 		          $('#calendar').fullCalendar('renderEvent', eventData1, true);
 		          $("#scheduleInsert").modal('hide');
-		          $('form[name=sRegisterForm]').attr('action','${root}/groupmain/schedule.akcord').attr('method', 'post').submit();
 		          $("#scheduleInsert #scheduleName").val("");
 		          $("#scheduleInsert #detail").val("");
 		          $('#calendar').fullCalendar('unselect');
 			
+		});
+		
+		$('#sModifyBtn').on('click', function(){
+		     var eventData1 = {
+		             start : HOstart,
+		             end : HOend,
+		             title : $("#scheduleModal #scheduleName").val(),
+		             content : $("#scheduleModal #detail").val(),
+		             color: "#d34e4c"
+		          };
+		     
+		          	$.ajax({
+							type : 'POST',
+							dataType : 'json',
+							url : '${root}/groupmain/modify.akcord',
+							data : {'groupId' : '${gInfo.groupId}', 'startDate' : $("#scheduleModal #startDate").val(),
+										'endDate' : $("#scheduleModal #endDate").val(), 'scheduleName' : $("#scheduleModal #scheduleName").val(),
+										'detail' : $("#scheduleModal #detail").val(), 'scheduleId' : $("#sModifyBtn").val()
+							},
+							 success: function (data) {
+								obj =  JSON.stringify(data.schedule);
+								callback(obj);
+						}
+					});
+		          $('#calendar').fullCalendar('renderEvent', eventData1, true);
+		          $("#scheduleModal").modal('hide');
+		          $("#scheduleModal #scheduleName").val("");
+		          $("#scheduleModal #detail").val("");
+		          $('#calendar').fullCalendar('unselect');
+		});
+		
+		$('#sDeleteBtn').on('click', function(){
+		          	$.ajax({
+							type : 'POST',
+							dataType : 'json',
+							url : '${root}/groupmain/delete.akcord',
+							data : { 'scheduleId' : $("#sDeleteBtn").val(), 'groupId' : '${gInfo.groupId}'},
+							 success: function (data) {
+								obj =  JSON.stringify(data.schedule);
+								callback(obj);
+						}
+					});
+		          $('#calendar').fullCalendar('renderEvent', eventData1, true);
+		          $("#scheduleModal").modal('hide');
+		          $("#scheduleModal #scheduleName").val("");
+		          $("#scheduleModal #detail").val("");
+		          $('#calendar').fullCalendar('unselect');
 		});
 		
 		$('#deletegroup').click(function(){
@@ -141,7 +245,7 @@ var eventallData;
 		});
 	
 		$('#contentlist').on('click', function() {
-			$(location).attr('href', '${root}/groupmain/list.akcord?groupId=${groupId}');
+			$(location).attr('href', '${root}/groupmain/list.akcord?groupId=${gInfo.groupId}');
 		});
 		
 		$('#Gmemberlist').on('click', function() {

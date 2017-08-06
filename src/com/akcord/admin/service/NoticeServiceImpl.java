@@ -9,14 +9,21 @@ import org.springframework.stereotype.Service;
 
 import com.akcord.admin.dao.NoticeDao;
 import com.akcord.admin.model.NoticeDto;
+import com.akcord.util.BoardConstant;
 @Service
 public class NoticeServiceImpl implements NoticeService {
 	
 	@Autowired
 	private SqlSession sqlSession;
+	
 	@Override
-	public List<NoticeDto> getNoticeList() {
-		return sqlSession.getMapper(NoticeDao.class).getNoticeList();
+	public List<NoticeDto> getNoticeList(Map<String,String> query) {
+		int pg = Integer.parseInt(query.get("pg"));
+		int end = pg * BoardConstant.LIST_SIZE;
+		int start = end - BoardConstant.LIST_SIZE;
+		query.put("start", start+"");
+		query.put("end", end+"");
+		return sqlSession.getMapper(NoticeDao.class).getNoticeList(query);
 	}
 	@Override
 	public int noticeWrite(NoticeDto noticeDto) {
@@ -38,9 +45,4 @@ public class NoticeServiceImpl implements NoticeService {
 	public int noticePublic(String notice_id) {
 		return sqlSession.getMapper(NoticeDao.class).noticePublic(notice_id);
 	}
-	@Override
-	public List<NoticeDto> getNoticeOrder(Map<String, String> str) {
-		return sqlSession.getMapper(NoticeDao.class).getNoticeOrder(str);
-	}
-	
 }

@@ -11,23 +11,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(seq_notice_id.nextval,#{subject},#{content},#{is_notice},sysdate,#{hit})       
 	</insert>
 	
-	<select id="getNoticeList" resultType="noticeDto">
-		select notice_id,subject,content,is_notice,reg_date,hit
-		from notice	order by notice_id desc
-	</select>
 	
-	<select id="getNoticeOrder" parameterType="String" resultType="noticeDto">
-		select rownum rn,a.* from (select notice_id,subject,content,is_notice,reg_date,hit 
-		from notice	
-		<choose>
-			<when test="str=='1'">
-			order by reg_date asc) a
-		</when>
-			<otherwise>
-				order by notice_id asc) a
-			</otherwise>
+	<select id="getNoticeList" parameterType="java.util.Map" resultType="noticeDto">
+		select b.*
+			from(select rownum rn,a.* from (select notice_id,subject,content,is_notice,reg_date,hit 
+				from notice	
+			<if test="word!=''">
+				where subject like '%'||#{word}||'%'
+			</if>
+			<choose>
+				<when test="str==1">
+					order by reg_date asc) a
+				</when>
+				<when test="str==2">
+					order by notice_id asc) a
+				</when>
+				<otherwise>
+					order by reg_date desc) a
+				</otherwise>
 		</choose>
-		
+			where rownum &lt;= #{end}
+		) b
+		where b.rn &gt; #{start}
 	</select>
 	
 	<delete id="delete" parameterType="String">
