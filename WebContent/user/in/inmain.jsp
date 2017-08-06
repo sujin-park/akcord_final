@@ -100,7 +100,7 @@ $(document).ready(function() {
 		</c:if>
 		<c:if test="${inlist == null}">
 		<div class="media" align="center">
-		<p class="media-body col-sm-10" style="height: 50px; width: 100%;">게시글이없습니다.</p>
+		<p class="media-body col-sm-10" style="height: 50px; width: 100%;">게시글이없습니다.~~</p>
 		<hr>
 		</div>
 		</c:if>
