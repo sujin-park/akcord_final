@@ -27,6 +27,8 @@ public class CommonServiceImpl implements CommonService {
 			totalArticleCount = sqlSession.getMapper(CommonDao.class).totalGroupListCount(query);
 		} else if (type.equals("wait")) { // 수진 - 그룹원 대기 리스트
 			totalArticleCount = sqlSession.getMapper(CommonDao.class).totalGroupWaitCount(query);
+		} else if(type.equals("myroom")) {
+			totalArticleCount = sqlSession.getMapper(CommonDao.class).totalMyroomListCount(query);
 		}
 		
 		

@@ -8,4 +8,9 @@
 	<input type="hidden" id="order" name="order">
 	
 	<input type="hidden" id="groupId" name="groupId">
+	
+	<input type="hidden" id="ch" name="ch">
+	<input type="hidden" id="num" name="num">
+	<input type="hidden" id="myroomId" name="myroomId">
+	<input type="hidden" id="myroomNextId" name="myroomNextId">
 </form>

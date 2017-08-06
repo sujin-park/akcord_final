@@ -7,7 +7,7 @@
     <title>카테고리별 장소 검색하기</title>
     <style>
 .map_wrap, .map_wrap * {margin:0; padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
-.map_wrap {position:relative;width:100%;height:500px;}
+.map_wrap {position:relative;width:100%;height:350px;}
 #category {position:absolute;top:10px;left:10px;border-radius: 5px; border:1px solid #909090;box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);background: #fff;overflow: hidden;z-index: 2;}
 #category li {float:left;list-style: none;width:50px;px;border-right:1px solid #acacac;padding:6px 0;text-align: center; cursor: pointer;}
 #category li.on {background: #eee;}
@@ -15,7 +15,12 @@
 #category li:last-child{margin-right:0;border-right:0;}
 #category li span {display: block;margin:0 auto 3px;width:27px;height: 28px;}
 #category li .category_bg {background:url(http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_category.png) no-repeat;}
+#category li .bank {background-position: -10px 0;}
+#category li .mart {background-position: -10px -36px;}
+#category li .pharmacy {background-position: -10px -72px;}
+#category li .oil {background-position: -10px -108px;}
 #category li .cafe {background-position: -10px -144px;}
+#category li .store {background-position: -10px -180px;}
 #category li.on .category_bg {background-position-x:-46px;}
 .placeinfo_wrap {position:absolute;bottom:28px;left:-150px;width:300px;}
 .placeinfo {position:relative;width:100%;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;padding-bottom: 10px;background: #fff;}
@@ -27,47 +32,57 @@
 .placeinfo .title {font-weight: bold; font-size:14px;border-radius: 6px 6px 0 0;margin: -1px -1px 0 -1px;padding:10px; color: #fff;background: #d95050;background: #d95050 url(http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;}
 .placeinfo .tel {color:#0f7833;}
 .placeinfo .jibun {color:#999;font-size:11px;margin-top:0;}
-ul{
-   list-style:none;
-   }
 </style>
 </head>
 <body>
-<div class="container-fluid" style="padding-top: 60px;">
-	<div class="col-sm-2"></div>
-	<div class="col-sm-7" align="center">
-		<div class="map_wrap">
-			<div id="map" style="width: 100%; height: 100%; position: relative; overflow: hidden;">
-				<input type="hidden" id="X" name="X" value="${X}">
-   				<input type="hidden" id="Y" name="Y" value="${Y}">
-			</div>
-		</div>
-	</div>
-	<div class="col-sm-3"></div>
-	<div class="map_wrap">
-    	<ul>
-    		<li id="CE7" data-order="4">
-				<button type="submit" id="searchBtn" class="category_bg cafe btn"></button>
-			</li>
-    	</ul>
-	</div>
+<p style="margin-top:-12px">
+    <em class="link">
+        <a href="../../documentation/#CategoryCode" target="_blank">카테고리 코드목록을 보시려면 여기를 클릭하세요!</a>
+    </em>
+</p>
+<div class="map_wrap">
+    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+    <ul id="category">
+        <li id="BK9" data-order="0"> 
+            <span class="category_bg bank"></span>
+            은행
+        </li>       
+        <li id="MT1" data-order="1"> 
+            <span class="category_bg mart"></span>
+            마트
+        </li>  
+        <li id="PM9" data-order="2"> 
+            <span class="category_bg pharmacy"></span>
+            약국
+        </li>  
+        <li id="OL7" data-order="3"> 
+            <span class="category_bg oil"></span>
+            주유소
+        </li>  
+        <li id="CE7" data-order="4"> 
+            <span class="category_bg cafe"></span>
+            카페
+        </li>  
+        <li id="CS2" data-order="5"> 
+            <span class="category_bg store"></span>
+            편의점
+        </li>      
+    </ul>
 </div>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ce7904fc14ee11cd832eb0acb92d2713&libraries=services"></script>
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=발급받은 APP KEY를 사용하세요&libraries=services"></script>
 <script>
-$(document).ready(function() {
-	onClickSearchBtn();
-});
 // 마커를 클릭했을 때 해당 장소의 상세정보를 보여줄 커스텀오버레이입니다
 var placeOverlay = new daum.maps.CustomOverlay({zIndex:1}), 
     contentNode = document.createElement('div'), // 커스텀 오버레이의 컨텐츠 엘리먼트 입니다 
     markers = [], // 마커를 담을 배열입니다
-    currCategory = "CE7"; // 현재 선택된 카테고리를 가지고 있을 변수입니다
+    currCategory = ''; // 현재 선택된 카테고리를 가지고 있을 변수입니다
  
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
-        center: new daum.maps.LatLng($('#Y').val(), $('#X').val()), // 지도의 중심좌표
+        center: new daum.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
         level: 5 // 지도의 확대 레벨
-    }; 
+    };  
 
 // 지도를 생성합니다    
 var map = new daum.maps.Map(mapContainer, mapOption); 
@@ -81,15 +96,16 @@ daum.maps.event.addListener(map, 'idle', searchPlaces);
 // 커스텀 오버레이의 컨텐츠 노드에 css class를 추가합니다 
 contentNode.className = 'placeinfo_wrap';
 
-// 커스텀 오버레이의 컨텐츠 노드에 mousedown 이벤트가 발생했을때
+// 커스텀 오버레이의 컨텐츠 노드에 mousedown, touchstart 이벤트가 발생했을때
 // 지도 객체에 이벤트가 전달되지 않도록 이벤트 핸들러로 daum.maps.event.preventMap 메소드를 등록합니다 
 addEventHandle(contentNode, 'mousedown', daum.maps.event.preventMap);
+addEventHandle(contentNode, 'touchstart', daum.maps.event.preventMap);
 
 // 커스텀 오버레이 컨텐츠를 설정합니다
 placeOverlay.setContent(contentNode);  
 
 // 각 카테고리에 클릭 이벤트를 등록합니다
-addSearchBtnClickEvent();
+addCategoryClickEvent();
 
 // 엘리먼트에 이벤트 핸들러를 등록하는 함수입니다
 function addEventHandle(target, type, callback) {
@@ -112,7 +128,7 @@ function searchPlaces() {
     // 지도에 표시되고 있는 마커를 제거합니다
     removeMarker();
     
-    ps.categorySearch('CE7', placesSearchCB, {useMapBounds:true}); 
+    ps.categorySearch(currCategory, placesSearchCB, {useMapBounds:true}); 
 }
 
 // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
@@ -135,7 +151,9 @@ function displayPlaces(places) {
 
     // 몇번째 카테고리가 선택되어 있는지 얻어옵니다
     // 이 순서는 스프라이트 이미지에서의 위치를 계산하는데 사용됩니다
-    var order = document.getElementById('CE7').getAttribute('data-order');
+    var order = document.getElementById(currCategory).getAttribute('data-order');
+
+    
 
     for ( var i=0; i<places.length; i++ ) {
 
@@ -199,28 +217,52 @@ function displayPlaceInfo (place) {
 
     contentNode.innerHTML = content;
     placeOverlay.setPosition(new daum.maps.LatLng(place.y, place.x));
-    placeOverlay.setMap(map);
+    placeOverlay.setMap(map);  
 }
 
 
-//클릭 이벤트를 등록합니다
-function addSearchBtnClickEvent() {
-    document.getElementById('searchBtn').onclick = onClickSearchBtn;
+// 각 카테고리에 클릭 이벤트를 등록합니다
+function addCategoryClickEvent() {
+    var category = document.getElementById('category'),
+        children = category.children;
+
+    for (var i=0; i<children.length; i++) {
+        children[i].onclick = onClickCategory;
+    }
 }
 
 // 카테고리를 클릭했을 때 호출되는 함수입니다
-function onClickSearchBtn() {
-    var id = "CE7",
-    	className = "category_bg cafe";
+function onClickCategory() {
+    var id = this.id,
+        className = this.className;
 
     placeOverlay.setMap(null);
 
     if (className === 'on') {
+        currCategory = '';
+        changeCategoryClass();
         removeMarker();
     } else {
+        currCategory = id;
+        changeCategoryClass(this);
         searchPlaces();
     }
 }
+
+// 클릭된 카테고리에만 클릭된 스타일을 적용하는 함수입니다
+function changeCategoryClass(el) {
+    var category = document.getElementById('category'),
+        children = category.children,
+        i;
+
+    for ( i=0; i<children.length; i++ ) {
+        children[i].className = '';
+    }
+
+    if (el) {
+        el.className = 'on';
+    } 
+} 
 </script>
 </body>
 </html>

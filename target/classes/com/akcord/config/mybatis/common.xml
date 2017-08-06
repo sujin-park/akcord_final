@@ -27,6 +27,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 and to_char(g.reg_date, 'yymmdd') = to_char(sysdate, 'yymmdd')
     </select>
     
+    <select id="totalMyroomListCount" parameterType="java.util.Map" resultType="int">
+            select count(myroom_next_id)
+            from myroom_next
+        <choose>            
+        <when test="myroomId == null">
+            where user_id=#{user_id}
+        </when>
+        <when test="myroomId == ' '">
+                where user_id=#{user_id}
+        </when>
+        </choose>
+       <if test="myroomId != null">        
+            where user_id=#{user_id} and myroom_id=#{myroomId}        
+        </if>
+    </select>
+    
     <select id="totalGroupWaitCount" parameterType="java.util.Map" resultType="int">
         select count(gl.user_id)
                 from grouproom_list gl, grouproom g, users u, major m
