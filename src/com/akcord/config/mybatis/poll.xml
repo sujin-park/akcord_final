@@ -48,7 +48,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <update id="pollclose" parameterType="Integer">
         update poll 
-        set end_date = 'sysdate'
+        set end_date = 'sysdate'-1
         where poll_id = #{poll_id}
     </update>
     

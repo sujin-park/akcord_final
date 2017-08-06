@@ -4,10 +4,11 @@ import com.akcord.main.rank.model.RankDto;
 
 public interface RankService {
 	
-	RankDto getQna();	// qna ·©Å· °¡Á®¿À±â
-	RankDto getQnaComment();	// qna ·©Å· °¡Á®¿À±â
+	RankDto getQna();	// qna ï¿½ï¿½Å· ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	RankDto getQnaComment();	// qna ï¿½ï¿½Å· ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
 	RankDto getGroup();	//
+	RankDto getMyroom();	// ë§ˆì´ë£¸ ì¡°íšŒìˆ˜ ë­í‚¹
 
 
 }
