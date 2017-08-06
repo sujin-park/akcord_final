@@ -36,7 +36,6 @@ $('#content').summernote({
 			$(this).attr("value","1");
 			document.noticeWriteform.action = "${root}/notice/noticewrite.akcord";
 			document.noticeWriteform.submit();
-		
 	});
 		
 		document.noticeWriteform.action = "${root}/notice/noticewrite.akcord";
@@ -45,7 +44,7 @@ $('#content').summernote({
 });
 </script>
 <%@ include file="/common/template/nav.jsp"%>
-<div class="container-fluid">
+<div class="container-fluid" style="padding-top: 60px;">
 	<div class="row">
 		<div class="col-sm-3"></div>
 		<div class="col-sm-6">

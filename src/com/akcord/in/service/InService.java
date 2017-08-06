@@ -1,14 +1,20 @@
 package com.akcord.in.service;
 
 import java.util.List;
+import java.util.Map;
 
+import com.akcord.group.model.MajorDto;
 import com.akcord.in.model.InDto;
 
 
 public interface InService {
-	public int answerroom(InDto inDto);
+   int answerroom(InDto inDto);
 
-	public List<InDto> answerlist();
+   List<InDto> answerlist(Map <String, String> queryString);
 
-	InDto getId(String string);
+   List<InDto> list(Map<String, String> queryString);
+   InDto getId(String string);
+   InDto getAnswer(int qna_id);
+
+   List<MajorDto> majorlist();
 }
