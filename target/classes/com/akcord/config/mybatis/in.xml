@@ -3,13 +3,35 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 <mapper namespace="com.akcord.in.dao.InDao">
+    
+    <!-- 질문등록 -->
     <insert id="answerroom" parameterType="inDto">
         insert into qna
         (qna_id,user_id,major_id,subject,content,reg_date,hit)
         values (seq_qna_id.nextval, #{user_id}, #{major_id}, #{subject}, #{content}, sysdate, 1)
     </insert>
-    <select id="answerlist" resultType="inDto">
-        select qna_id,user_id,major_id,subject,content,reg_date,hit
-        from qna
+   
+    <!-- 지식인 리스트목록 -->
+    <select id="answerlist" parameterType="java.util.Map" resultType="inDto" >
+        select q.qna_id, u.user_id, u.name, u.major_id, q.subject, q.content, q.reg_date, q.hit
+        from qna q, users u
+        where q.user_id = u.user_id
+        and u.major_id = #{major_id}
     </select>
+    
+    <!-- 지식인 리스트 클릭시 질문내용보기 -->
+    <select id="getAnswer" parameterType="int" resultType="inDto">
+        select q.qna_id, u.user_id, u.id, u.name, u.major_id, q.subject, q.content, q.reg_date, q.hit
+        from qna q, users u
+        where q.user_id = u.user_id
+        and q.qna_id = #{qna_id}
+    </select>
+    
+    <!-- 전공 리스트 출력 -->
+    <select id="majorlist" resultType="com.akcord.group.model.MajorDto">
+        select major_id, major_name
+        from major
+    </select>
+
+    
 </mapper>

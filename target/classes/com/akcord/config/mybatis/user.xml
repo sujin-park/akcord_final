@@ -14,7 +14,7 @@
 	
 	<!-- 로그인 -->
 	<select id="login" parameterType="java.util.Map" resultType="userDto">
-		select user_id, id, name, type
+		select user_id, id, name, type, major_id
 		from users
 		where not is_block = 1 and id=#{id} and password=#{password}   
 	</select>
