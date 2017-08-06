@@ -1,6 +1,7 @@
 package com.akcord.main.poll.model;
 
 public class PollDto {
+	
 	private int poll_id;
 	private String subject;
 	private String chartType;
@@ -8,20 +9,11 @@ public class PollDto {
 	private String startDate;
 	private String endDate;
 	private String userId;
-	private int count;
-	private String flag;
-
-	public String getFlag() {
-		return flag;
-	}
-	public void setFlag(String flag) {
-		this.flag = flag;
-	}
-
-	public int getpoll_id() {
+	
+	public int getPoll_id() {
 		return poll_id;
 	}
-	public void setpoll_id(int poll_id) {
+	public void setPoll_id(int poll_id) {
 		this.poll_id = poll_id;
 	}
 	public String getSubject() {
@@ -66,7 +58,14 @@ public class PollDto {
 	public void setCount(int count) {
 		this.count = count;
 	}
-	
+	public String getFlag() {
+		return flag;
+	}
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
+	private int count;
+	private String flag;
 	
 
 }

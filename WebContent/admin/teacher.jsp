@@ -189,7 +189,7 @@
             }
  
 	//투표수정
-	$('.btn.btn-xs.btn-info').click(function() {
+/* 	$('.btn.btn-xs.btn-info').click(function() {
     	var seq = $(this).parents('td').siblings().eq(0).text();
 
 		$('#seq').attr('value', seq);
@@ -206,7 +206,7 @@
 
 		 }
 		});
-	});
+	}); */
 	
           //투표종료
         	$('.btn.btn-xs.btn-danger').click(function() {
@@ -217,12 +217,13 @@
         	
         });
         
-        function upModal(data){
-			$('#pollResultModal').on('show.bs.modal', function(event) {
+        function upModal(data){        	
+        		$('#pollModifyModal').on('show.bs.modal', function(event) {
     			var modal = $(this)
-      		  	modal.find('#startDay').val(data.StartDate);
-        		modal.find('#endDay').val(data.EndDate);
-        		modal.find('#charttype').val(data.ChartType);
+    			alert(">>"+data.poll_id);
+      		  	modal.find('#startDate').val(data.StartDate);
+        		modal.find('#endDate').val(data.EndDate);
+        		modal.find('#chartType').val(data.ChartType);
         		modal.find('#question').val(data.Subject);
         		modal.find('#poll_id').val(data.poll_id);
         		for(var i=0;i<data.contlist.length;i++) {
@@ -382,6 +383,24 @@ $(document).ready(function() {
 		}
 	});
 });
+$(document).on('click','.btn.btn-xs.btn-info',function(){//동적으로 만든class들은 다시 다큐먼트로드해서 해야 이벤트가 먹음:   on(이벤트의종류,필터,기능)
+ 	var seq = $(this).parents('td').siblings().eq(0).text();
+
+	$('#seq').attr('value', seq);
+	//$(location).attr('href','${root}/poll/modify.akcord?seq='+seq);
+	$.ajax({
+	 type: 'GET', 
+	 dataType: 'json',
+	 url: '${root}/poll/modify.akcord?seq='+seq,
+	 //data : {'data', data},
+	 
+	 success : function(data){
+		//getHidden(data);
+		 upModal(data);
+
+	 }
+	});
+});
 
 </script>
 <div id="pollWriteModal" class="modal fade" role="dialog">
@@ -502,14 +521,14 @@ $(document).ready(function() {
 
 <script type="text/javascript">
 $(document).ready(function() {
-	$(document).on('click', '#modifyBtn', function() {
+	$(document).on('click', '#modifyPollBtn', function() {
 		if($('#startDay').val() > $('#endDay').val()) {
 			alert("투표기간 오류!!");
 			return;
 		} else {
 			alert("투표수정!!!");
         	//투표 기간 변경 ㄱㄱ
-			$('#dateForm').attr('method','post').attr('action','${root}/poll//modifydate.akcord').submit();
+			$('#dateForm').attr('method','post').attr('action','${root}/poll/modifydate.akcord').submit();
 		}
 	});
 });
@@ -523,22 +542,22 @@ $(document).ready(function() {
 	        	<h4 class="modal-title">투표수정</h4>
 	      	</div>
 	      	<div class="modal-body">
-			    <form class="form-horizontal" action="#" id="dateForm">
+			    <form class="form-horizontal" action="" id="dateForm" name="dateForm" >
 			    	<fieldset>
 			    	<div class="form-group">
-			    	    <div style="display:none" ><input type="text"  name="poll_id" id="poll_id" ></div>   
+			    	    <div style="display:none" ><input type="text"  name="poll_id" id="poll_id"  value=""></div>   
 				    	<label class="col-sm-3 control-label">투표기간</label>
 	
 	                    <div class="col-sm-8">
-	                        <input type="date" name="startDate" id="startDay" class="form-control" placeholder="시작일">
-	                        <input type="date" name="endDate" id="endDay" class="form-control" placeholder="종료일">
+	                        <input type="date" name="startDate" id="startDate" class="form-control" placeholder="시작일">
+	                        <input type="date" name="endDate" id="endDate" class="form-control" placeholder="종료일">
 	                    </div>
 	                </div>
 	                <div class="form-group">
 				    	<label class="col-sm-3 control-label">그래프형식</label>
 	
 	                    <div class="col-sm-8">
-	                        <select id="charttype" name="charttype" class="form-control">
+	                        <select id="chartType" name="chartType" class="form-control">
 	                        	<option value="1">바차트
 	                        	<option value="2">파이차트
 	                        	<option value="3">꺽은선차트
@@ -551,7 +570,7 @@ $(document).ready(function() {
 				    	<label class="col-sm-3 control-label">주제</label>
 	
 	                    <div class="col-sm-8">
-	                        <input type="text" name="subject" id="question" class="form-control" placeholder="주제" readonly="readonly">
+	                        <input type="text" name="subject" id="subject" class="form-control" placeholder="주제" readonly="readonly">
 	                    </div>
 	                </div>
 			        <div class="form-group">
@@ -562,7 +581,7 @@ $(document).ready(function() {
 			    </form>
 			</div>
 	      	<div class="modal-footer">
-	      		<button type="button" id="modifyBtn" class="btn btn-info">투표수정</button>
+	      		<button type="button" id="modifyPollBtn" class="btn btn-info">투표수정</button>
 	        	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 	      	</div>
 	    </div>

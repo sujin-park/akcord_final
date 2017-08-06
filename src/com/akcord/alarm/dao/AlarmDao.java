@@ -13,8 +13,8 @@ public interface AlarmDao {
 	void alarminsertQnalike(String target_id);			// 알람 DB 저장 - Qnalike
 	void alarminsertQnadislike(String target_id);		// 알람 DB 저장 - Qnadislike
 	
-	List<String> alarmMemberCall();	// 모든 멤버 호출
-	void alarminsertNotice(String target_id);// 공지사항 알림 전송
+	List<Integer> alarmMemberCall();	// 모든 멤버 호출
+	void alarminsertNotice(int target_id);// 공지사항 알림 전송
 	
 	
 	// << alarm pop-up >>

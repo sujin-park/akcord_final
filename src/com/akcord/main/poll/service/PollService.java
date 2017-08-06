@@ -1,6 +1,7 @@
 package com.akcord.main.poll.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.akcord.main.poll.model.PollDto;
 
@@ -11,7 +12,7 @@ public interface PollService {
 	public int pollmake(PollDto pollDto);
 	int pollmakeContent(String content);
 	public PollDto pollmodify(int poll_id); // modify poll data
-	public int pollmodifydate(PollDto pollDto); // modify poll data
+	public int pollmodifydate(Map<String,String> map); // modify poll data
 	public List<PollDto> pollresult(int poll_id);
 	public List<String> pollgetContent(int poll_id); // modify poll data
 	

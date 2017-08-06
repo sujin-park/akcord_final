@@ -1,12 +1,13 @@
 package com.akcord.main.poll.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.akcord.main.poll.model.PollDto;
 import com.akcord.main.poll.service.PollService;
-import com.akcord.util.Encoding;
 
 @Controller
 @RequestMapping("/poll")
@@ -34,7 +34,7 @@ public class PollController {
 		}
 		// 모달 창을 꺼야함!!!
 		// 뭘로 리턴할까!!!
-		return "redirect:/poll//list.akcord";
+		return "redirect:/poll/list.akcord";
 	}
 		@RequestMapping(value="/modify.akcord")
 		public @ResponseBody String pollmodify(@RequestParam("seq") int seq){
@@ -43,13 +43,14 @@ public class PollController {
 			JSONObject jsonObject = new JSONObject();
 			JSONArray jalist = new JSONArray();
 			PollDto pollDto =  pollService.pollmodify(poll_id);	// 투표 정보를 불러온다
-			List<String> list = pollService.pollgetContent(poll_id);	// 투표 본문을 불러온다
-			
+			List<String> list = new ArrayList<String>();
+			list = pollService.pollgetContent(poll_id);	// 투표 본문을 불러온다
 			jsonObject.put("Subject", pollDto.getSubject());
 			jsonObject.put("StartDate", pollDto.getStartDate());
 			jsonObject.put("EndDate", pollDto.getEndDate());
 			jsonObject.put("ChartType", pollDto.getChartType());
 			jsonObject.put("poll_id", seq);
+	
 			for (int i = 0; i < list.size(); i++) {
 				//JSONObject jsontmp = new JSONObject();
 				String text = list.get(i);
@@ -84,14 +85,27 @@ public class PollController {
 		}
 		
 		
-		@RequestMapping(value="/modifydate.akcord", method=RequestMethod.POST)
-		public String pollmodifydate(PollDto pollDto){
+		@RequestMapping("/modifydate.akcord")
+		public String pollmodifydate(@RequestParam Map<String,String> map){
 			System.out.println("여긴 날짜를 수정합니다.");
-			int cnt = pollService.pollmodifydate(pollDto);
-		
+	         System.out.println(map.get("startDate"));
+	         System.out.println(map.get("poll_id"));
+
+			int cnt = pollService.pollmodifydate(map);
 			return "redirect:/poll/list.akcord";
 		}
 		
+/*	      @RequestMapping("/modifydate.akcord")
+	      public ModelAndView pollmodifydate(@RequestParam Map<String,String> map){
+	         System.out.println("여긴 날짜를 수정합니다.");
+	         System.out.println(map.get("startDate"));
+	         System.out.println(map.get("poll_id"));
+	         ModelAndView mav = new ModelAndView();
+	        // int cnt = pollService.pollmodifydate(pollDto);
+	         mav.setViewName("/admin/teacher");
+	         return mav;
+	      }*/
+	      
 		@RequestMapping(value="/delete.akcord")
 		public ModelAndView pollclose(@RequestParam("seq") int seq){
 			int poll_id = seq;

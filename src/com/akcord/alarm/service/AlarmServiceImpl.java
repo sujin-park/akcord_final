@@ -82,18 +82,19 @@ public class AlarmServiceImpl implements AlarmService {
 	}
 
 	@Override
-	public List<String> alarmMemberCall() {
+	public List<Integer> alarmMemberCall() {
 		// TODO Auto-generated method stub
 		return sqlSession.getMapper(AlarmDao.class).alarmMemberCall();
 	}
 
 	@Override
-	public void alarminsertNotice(String target_id) {
+	public void alarminsertNotice(int target_id) {
 		// TODO 모든 멤버에게 공지 사항 등록을 알린다.
-		List<String> list = sqlSession.getMapper(AlarmDao.class).alarmMemberCall();
+		List<Integer> list = sqlSession.getMapper(AlarmDao.class).alarmMemberCall();
 		
 		for (int i = 0; i < list.size(); i++) {
 			target_id = list.get(i);
+			System.out.println("egg fri:::"+list.get(i));
 			sqlSession.getMapper(AlarmDao.class).alarminsertNotice(target_id);
 		}
 		
