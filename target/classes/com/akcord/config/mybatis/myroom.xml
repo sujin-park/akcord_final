@@ -42,13 +42,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             from(
                 select myroom_next_id myroomNextId, myroom_id myroomId, user_id, subject, content, reg_date, update_date, is_share isShare
                 from myroom_next
-                where user_id=#{user_id}
+                where user_id=#{user_id} n
         <if test="key != '' and word != ''">
             <if test="key == '전체'">
                 and content like '%' || #{word} ||'%'
             </if>
-            <if test="key != 'id'">
-                and m.major_name  like '%' || #{word} ||'%'
+            <if test="key != '전체'">
+                and myroom_id=#{key} and content like '%' || #{word} ||'%'
             </if>
         </if>
                 and myroom_id=#{myroomId}

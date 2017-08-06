@@ -33,7 +33,12 @@ from grouproom_hw gh, myroom_next my
 where gh.myroom_next_id = my.myroom_next_id
 and schedule_id = ?
 
-
+select u.id, u.name, mnext.subject, mnext.content, mnext.reg_date, mnext.myroom_next_id
+from grouproom g, grouproom_list gl, grouproom_hw ghw, myroom_next mnext, users u
+	where gl.group_id = g.group_id
+	and u.user_id = gl.user_id
+	and ghw.group_id = g.group_id
+	and mnext.myroom_next_id = ghw.myroom_next_id
 그룹방 리스트
 select g.reg_date, m.major_name, g.group_name,
 g.content, u.name from users u, grouproom g, major m

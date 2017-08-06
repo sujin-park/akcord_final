@@ -8,14 +8,31 @@
 <script src='/akcord_project/js/lib/fullcalendar.js' charset="utf-8"></script>
 <%@ include file="/common/public.jsp" %>
 <script>
+var eventData;
+var obj;
+	$.ajax({
+			type : 'GET',
+			dataType : 'json',
+			url : '${root}/groupmain/calendar.akcord',
+			data : {'groupId' : '${gInfo.groupId}'},
+			 success: function (data) {
+				obj =  JSON.stringify(data.schedule);
+				//alert(JSON.stringify(data.schedule2));
+		}
+	});
+		
+
 	$(document).ready(function() {
+		
+	      var eventData;
+	      var HOstart;
+	      var HOend;
 		
 		$('#calendar').fullCalendar({
 		
 			header: {
 				left: 'prev,next today',
 				center: 'title',
-				
 				right: 'month,agendaWeek,agendaDay'
 			},
 			defaultDate:  new Date().getTime(),
@@ -23,85 +40,222 @@
 			navLinks: true, // can click day/week names to navigate views
 			selectable: true,
 			selectHelper: true,
+			
 			select: function(start, end) {
-				var title = prompt('Event Title:');
-				var content = prompt('Event Content');
-				var eventData;
-				if (title) {
-					eventData = {
-						title: title,
-						content:content,
-						start: start,
-						end: end
-					};
-					$('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+				HOstart = start;
+				HOend = end;
+				var sday;
+				var eday;
+				var d = new Date();
+				if (moment(start).format('dddd') == 'Monday') {
+					sday = '월';
+				} else if (moment(start).format('dddd') == 'Tuesday') {
+					sday = '화';
+				} else if (moment(start).format('dddd') == 'Wednesday') {
+					sday = '수';
+				} else if (moment(start).format('dddd') == 'Thursday') {
+					sday = '목';
+				} else if (moment(start).format('dddd') == 'Friday') {
+					sday = '금';
+				} else if (moment(start).format('dddd') == 'Saturday') {
+					sday = '토';
+				} else {
+					sday = '일';
 				}
-				$('#calendar').fullCalendar('unselect');
+				
+				if (moment(end).format('dddd') == 'Monday') {
+					eday = '월';
+				} else if (moment(end).format('dddd') == 'Tuesday') {
+					eday = '화';
+				} else if (moment(end).format('dddd') == 'Wednesday') {
+					eday = '수';
+				} else if (moment(end).format('dddd') == 'Thursday') {
+					eday = '목';
+				} else if (moment(end).format('dddd') == 'Friday') {
+					eday = '금';
+				} else if (moment(end).format('dddd') == 'Saturday') {
+					eday = '토';
+				} else {
+					eday = '일';
+				}
+				var startTime = moment(start).format('YYYY/MM/DD ' + sday + ' hh:mm');
+				var endTime = moment(end).format('YYYY/MM/DD ' + eday +' hh:mm');
+				$('#scheduleInsert').modal({'show' : true});
+				
+				$('#scheduleInsert #startDate').val(startTime);
+				$('#scheduleInsert #endDate').val(endTime);
 			},
+	
 			editable: true,
-			eventLimit: true, // allow "more" link when too many events
-			events: [
-				{
-					title: 'All Day Event',
-					start: '2017-05-01'
-				},	
-				{
-					title: 'Long Event',
-					start: '2017-05-07',
-					end: '2017-05-10'
-				},
-				{
-					id: 999,
-					title: 'Repeating Event',
-					start: '2017-05-09T16:00:00'
-				},
-				{
-					id: 999,
-					title: 'Repeating Event',
-					start: '2017-05-16T16:00:00'
-				},
-				{
-					title: 'Conference',
-					start: '2017-05-11',
-					end: '2017-05-13'
-				},
-				{
-					title: 'Meeting',
-					start: '2017-05-12T10:30:00',
-					end: '2017-05-12T12:30:00'
-				},
-				{
-					title: 'Lunch',
-					start: '2017-05-12T12:00:00'
-				},
-				{
-					title: 'Meeting',
-					start: '2017-05-12T14:30:00'
-				},
-				{
-					title: 'Happy Hour',
-					start: '2017-05-12T17:30:00'
-				},
-				{
-					title: 'Dinner',
-					start: '2017-05-12T20:00:00'
-				},
-				{
-					title: 'Birthday Party',
-					start: '2017-05-13T07:00:00'
-				},
-				{
-					title: 'Click for Google',
-					url: 'http://google.com/',
-					start: '2017-05-28'
-				}
-			]
+
+		    eventClick : function(event, element) {
+	            if (event.title) {
+					var sday;
+					var eday;
+					var d = new Date();
+					if (moment(event.start).format('dddd') == 'Monday') {
+						sday = '월';
+					} else if (moment(event.start).format('dddd') == 'Tuesday') {
+						sday = '화';
+					} else if (moment(event.start).format('dddd') == 'Wednesday') {
+						sday = '수';
+					} else if (moment(event.start).format('dddd') == 'Thursday') {
+						sday = '목';
+					} else if (moment(event.start).format('dddd') == 'Friday') {
+						sday = '금';
+					} else if (moment(event.start).format('dddd') == 'Saturday') {
+						sday = '토';
+					} else {
+						sday = '일';
+					}
+					
+					if (moment(event.end).format('dddd') == 'Monday') {
+						eday = '월';
+					} else if (moment(event.end).format('dddd') == 'Tuesday') {
+						eday = '화';
+					} else if (moment(event.end).format('dddd') == 'Wednesday') {
+						eday = '수';
+					} else if (moment(event.end).format('dddd') == 'Thursday') {
+						eday = '목';
+					} else if (moment(event.end).format('dddd') == 'Friday') {
+						eday = '금';
+					} else if (moment(event.end).format('dddd') == 'Saturday') {
+						eday = '토';
+					} else {
+						eday = '일';
+					}
+					var startTime = moment(event.start).format('YYYY/MM/DD ' + sday + ' hh:mm');
+					var endTime = moment(event.end).format('YYYY/MM/DD ' + eday +' hh:mm');
+				   alert(event.scheduleId);
+	               $("#scheduleModal").modal({"show" : true});
+	               $('#sModifyBtn').val(event.scheduleId);
+	               $('#sDeleteBtn').val(event.scheduleId);
+	               $("#scheduleModal #modalTitle").text(event.title);
+	               $("#scheduleModal #contenttext").text(event.content);
+	               $("#scheduleModal #startDate").text(event.start);
+	               $("#scheduleModal #endDate").text(event.end);
+	               $("#scheduleModal #scheduleName").val(event.title);
+	               $("#scheduleModal #detail").val(event.content);
+	               $("#scheduleModal #startDate").val(startTime);
+	               $("#scheduleModal #endDate").val(endTime);
+					}
+	            
+		    }, 
+			events: 	JSON.parse(obj)
+				
+	
+				
+	/* 			 [
+				 <c:forEach var="schedule" items='${slist}'>
+					{
+     	                 start : '${schedule.startDate}',
+		                 end : '${schedule.endDate}',
+   		                 title : '${schedule.scheduleName}',
+		                 content : '${schedule.detail}',
+		                 },
+		                 
+		                 ]
+				</c:forEach>  */
+				
+			
+		    });
+		
+		
+		$('#scheduleBtn').on('click', function(){
+		     var eventData1 = {
+		             start : HOstart,
+		             end : HOend,
+		             title : $("#scheduleInsert #scheduleName").val(),
+		             content : $("#scheduleInsert #detail").val(),
+		             color: "#d34e4c"
+		          };
+		     
+		          //$('form[name=sRegisterForm]').attr('action','${root}/groupmain/schedule.akcord').attr('method', 'post').submit();
+		          	$.ajax({
+							type : 'POST',
+							dataType : 'json',
+							url : '${root}/groupmain/schedule.akcord',
+							data : {'groupId' : '${gInfo.groupId}', 'startDate' : $("#scheduleInsert #startDate").val(),
+										'endDate' : $("#scheduleInsert #endDate").val(), 'scheduleName' : $("#scheduleInsert #scheduleName").val(),
+										'detail' : $("#scheduleInsert #detail").val()
+							},
+							 success: function (data) {
+								obj =  JSON.stringify(data.schedule);
+								callback(obj);
+						}
+					});
+		
+		          $('#calendar').fullCalendar('renderEvent', eventData1, true);
+		          $("#scheduleInsert").modal('hide');
+		          $("#scheduleInsert #scheduleName").val("");
+		          $("#scheduleInsert #detail").val("");
+		          $('#calendar').fullCalendar('unselect');
+			
+		});
+		
+		$('#sModifyBtn').on('click', function(){
+		     var eventData1 = {
+		             start : HOstart,
+		             end : HOend,
+		             title : $("#scheduleModal #scheduleName").val(),
+		             content : $("#scheduleModal #detail").val(),
+		             color: "#d34e4c"
+		          };
+		     
+		          	$.ajax({
+							type : 'POST',
+							dataType : 'json',
+							url : '${root}/groupmain/modify.akcord',
+							data : {'groupId' : '${gInfo.groupId}', 'startDate' : $("#scheduleModal #startDate").val(),
+										'endDate' : $("#scheduleModal #endDate").val(), 'scheduleName' : $("#scheduleModal #scheduleName").val(),
+										'detail' : $("#scheduleModal #detail").val(), 'scheduleId' : $("#sModifyBtn").val()
+							},
+							 success: function (data) {
+								obj =  JSON.stringify(data.schedule);
+								callback(obj);
+						}
+					});
+		          $('#calendar').fullCalendar('renderEvent', eventData1, true);
+		          $("#scheduleModal").modal('hide');
+		          $("#scheduleModal #scheduleName").val("");
+		          $("#scheduleModal #detail").val("");
+		          $('#calendar').fullCalendar('unselect');
+		});
+		
+		$('#sDeleteBtn').on('click', function(){
+		          	$.ajax({
+							type : 'POST',
+							dataType : 'json',
+							url : '${root}/groupmain/delete.akcord',
+							data : { 'scheduleId' : $("#sDeleteBtn").val(), 'groupId' : '${gInfo.groupId}'},
+							 success: function (data) {
+								obj =  JSON.stringify(data.schedule);
+								callback(obj);
+						}
+					});
+		          $('#calendar').fullCalendar('renderEvent', eventData1, true);
+		          $("#scheduleModal").modal('hide');
+		          $("#scheduleModal #scheduleName").val("");
+		          $("#scheduleModal #detail").val("");
+		          $('#calendar').fullCalendar('unselect');
 		});
 		
 		$('#deletegroup').click(function(){
 			$('#groupD').modal();
 		});
+	
+		$('#contentlist').on('click', function() {
+			$(location).attr('href', '${root}/groupmain/list.akcord?groupId=${gInfo.groupId}');
+		});
+		
+		$('#Gmemberlist').on('click', function() {
+			$(location).attr('href', '${root}/groupmain/group.akcord?groupId=${gInfo.groupId}&pg=1&key=&word=&order=');
+		});
+		
+		
 	});
+	
+
 </script>
 <style>
 
@@ -120,32 +274,29 @@
 		width: 60%;
 		float:left;
 	}
+	.form-control{ box-shadow:none; border-color:#eee;}
+	.form-control:focus{ box-shadow:none; border-color:#d34e4c;}
 </style>
-<script>
-	$(document).ready(function() {
-		$('#contentlist').on('click', function() {
-			$(location).attr('href', '${root}/groupmain/list.akcord?groupId=${groupId}');
-		});
-		
-		$('#Gmemberlist').on('click', function() {
-			$(location).attr('href', '${root}/groupmain/group.akcord?groupId=${groupId}&pg=1&key=&word=&order=');
-		});
-		
-		$('#deletegroup').on('click', function() {
-			
-		});
-	});
-</script>
 <%@ include file="/common/template/nav.jsp" %>
 <div class="col-sm-10 col-sm-push-1">
 	<div class="container">
 		<div class="row">
+			<div class="row"></div>
+			<div style="padding-left:10px; border: 1px solid #ddd; margin-right:10%; margin-bottom:10px;">
+				<h2>${gInfo.groupName}</h2><h4>${gInfo.majorName}</h4>
+				<h4>리더 : ${gInfo.name}</h4>
+			</div>
 			<div class="col-sm-6" style="border:5px;">
 				<button type="button" class="btn btn-sm btn-danger" id="contentlist">그룹방 글 목록</button>
+			<c:if test="${gInfo.leaderId == user.user_id}">
 				<button type="button" class="btn btn-sm btn-danger" id="Gmemberlist">그룹원 관리</button>
-				<button type="button" class="btn btn-sm btn-default" id="deletegroup">그룹 탈퇴</button>
 				<button type="button" class="btn btn-sm btn-default" id="deletegroup">그룹 삭제</button>
+			</c:if>
+			<c:if test="${gInfo.leaderId != user.user_id}">
+				<button type="button" class="btn btn-sm btn-default" id="deletegroup">그룹 탈퇴</button>
+			</c:if>
 			</div>
+			
 		</div>
 		<div class="row" style="margin:30px;">
 			<div id='calendar' class="col-sm-8"></div>
@@ -153,7 +304,7 @@
 		</div>
 	</div>
 </div>
+<%@ include file="/user/group/main/schedule.jsp" %>
 <%@ include file="/user/group/delete.jsp" %>
 </body>
 </html>
-

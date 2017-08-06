@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="root" value="${pageContext.request.contextPath}" />
+<body>
 <div class="headline">
     
     <!-- nav -->
@@ -37,6 +38,7 @@
                   <div class="list-heading1">
                      <h4 class="list-title" style="padding-top:20px;">
                         <a href="${root}/myroom/myroomlist.akcord?ch=1&pg=1&key=&word=&order="><i class="fa fa-book fa-fw"></i>&nbsp;MY ROOM</a>
+                        <a href=""><i class="fa fa-book fa-fw"></i>&nbsp;MY ROOM</a>
                      </h4>
                   </div>
                   <div class="list-heading">
@@ -65,6 +67,7 @@
                	   <div class="list-heading">
                      <h4 class="list-title">
                         <a href="${root}/cafe/studycafe.akcord?pg=1&key=&word=&order="><i class="fa fa-coffee"></i>&nbsp;STUDY CAFE</a>
+                        <a href=""><i class="fa fa-coffee"></i>&nbsp;STUDY CAFE</a>
                      </h4>
                   </div>
                   <div class="list-heading1">

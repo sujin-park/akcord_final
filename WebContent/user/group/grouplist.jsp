@@ -41,6 +41,7 @@ $(document).ready(function(){
 		$('#pg').val('1');
 		$('#key').val($('#skey').val());
 		$('#word').val($('#sword').val());
+		$('#order').val('${query.order}');
 		$('#commonForm').attr('action', '${root}/group/list.akcord').submit();
 	});
 	
@@ -48,6 +49,7 @@ $(document).ready(function(){
 		$('#pg').val('1');
 		$('#key').val('${query.key}');
 		$('#word').val('${query.word}');
+		$('#order').val('${query.order}');
 		$('#commonForm').attr('action', '${root}/group/list.akcord').submit();
 	});
 	
@@ -55,6 +57,7 @@ $(document).ready(function(){
 		$('#pg').val($(this).attr('data-page'));
 		$('#key').val('${query.key}');
 		$('#word').val('${query.word}');
+		$('#order').val('${query.order}');
 		$('#commonForm').attr('action', '${root}/group/list.akcord').submit();
 	});
 	
@@ -62,8 +65,18 @@ $(document).ready(function(){
 		$('#pg').val($(this).attr('data-last'));
 		$('#key').val('${query.key}');
 		$('#word').val('${query.word}');
+		$('#order').val('${query.order}');
 		$('#commonForm').attr('action', '${root}/group/list.akcord').submit();
 	});
+	
+	$('.order').click(function(){
+		$('#pg').val('1');
+		$('#key').val('${query.key}');
+		$('#word').val('${query.word}');
+		$('#order').val($(this).attr('data-order'));
+		$('#commonForm').attr('action', '${root}/group/list.akcord').submit();
+	});
+	
 });
 
 function joinGroup(seq) {
@@ -85,20 +98,30 @@ function joinGroup(seq) {
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<div class="row" style="padding-bottom:10px;">
+							<div class="row">
+								<div class="form-group form-inline">
+									<div class="col-sm-6 pull-right"  style="padding-right:70px;">
+										<h6 class="order" data-order="gname" align="right">그룹방명순<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></h6>
+										<h6 class="order" data-order="major" align="right">전공순 <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></h6>
+										<h6 class="order" data-order="regdate" align="right">최신순 <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></h6>
+									</div>
+								</div>
+							</div>
 							<div class="col-sm-6 pull-left">
 								<button type="button" id="create" class="btn btn-sm btn-danger">그룹방 개설</button>
 								<button type="button" id="accept" class="btn btn-sm btn-default">승인 리스트</button>
 							</div>
 							<div class="row">
 								<div class="form-group form-inline">
-									<div class="col-sm-6 pull-right">
+									
+									<div class="col-sm-6">
 										<div class="col-sm-3"></div>
-										<div class="col-sm-9">
+										<div class="col-sm-9 pull-right">
 											<select class="form-control" name="skey" id="skey">
 												<option value="majorName">전공명</option>
 												<option value="groupName">그룹방명</option>
 											</select>
-												<input type="text" class="form-control" id="sword" name="sword" placeholder="검색어 입력" size="25">
+												<input type="text" class="form-control" id="sword" name="sword" placeholder="검색어 입력">
 												<button type="button" class="btn btn-sm btn-danger" id="searchBtn">SEARCH</button>
 										</div>
 									</div>
@@ -157,7 +180,7 @@ function joinGroup(seq) {
 													<p align="center" data-placement="top" data-toggle="tooltip" title="Edit">
 														<button type="button" id="joinGroup" class="btn btn-danger"
 														 onclick="javascript:joinGroup(${GroupRoomDto.groupId});">
-											    			<span class="glyphicon glyphicon-thumbs-up"></span>
+											    			<span class="fa fa-thumbs-o-up"></span>
 											    		</button>
 											    	</p>
 											    </td>
@@ -168,12 +191,12 @@ function joinGroup(seq) {
 								</div>
 							</div>
 					</div>
-				</div>
-			</div>
 			<div align="center" style="clear:both;">
 			${navigator.navigator}
 			</div>
 			<div class="col-md-6"></div>
+				</div>
+			</div>
 		</section>
 <%@include file="/user/group/create.jsp"%>
 <%@include file="/user/group/join.jsp"%>

@@ -13,6 +13,14 @@ public class GroupRoomDto {
 	private String waitingDate;
 	private int groupId;
 	private int nowCount;
+	private String id;
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	public int getNowCount() {
 		return nowCount;
