@@ -17,79 +17,67 @@
 <script type="text/javascript">
 $(document).ready(function(){
 
-	$('.black').find('#blackRegBtn').click(function(){
-		var str;
-		str =$(this).val();
-		$(location).attr('href','${root}/usermanager/blackuserReg.akcord?str='+str);
-		
-	});
+	
 	$('#majorPlusBtn').click(function (){
 		var mname= $('#major_name').val();
 	$(location).attr('href','${root}/usermanager/majorPlus.akcord?mname='+mname);	
 	});
 	
-/* 	$("#membersort").change(function () {
-	      $("#membersort option:selected").each(function () {
-	    	 var st = 1;
-	    	 var str =$(this).val();
-    		 $(location).attr('href','${root}/usermanager/memberOrder.akcord?str='+str+'&st='+st);
-      });
-	}); */
-	
-	$("#membersort").change(function () {
-	      $("#membersort option:selected").each(function () {
+	$("#membersortb").change(function () {
+	      $("#membersortb option:selected").each(function () {
 	    	$('#pg').val('1');
-	  		$('#key').val($('#skey').val());
-	  		$('#word').val($('#sword').val());	
-	  		$('#commonForm').attr('action','${root}/usermanager/mvmemberlist.akcord').submit();		
-   		 });
+		  	$('#key').val($('#skey').val());
+		  	$('#word').val($('#sword').val());	
+		 	$('#commonForm').attr('action','${root}/usermanager/blacklist.akcord').submit();		
+      });
+	});
+	$('.black').find('#bUserOutBtn').click(function(){
+		var user_id;
+		user_id =$(this).val();
+		$(location).attr('href','${root}/usermanager/blackuserOut.akcord?user_id='+user_id);	
 	});
 	
 	$('#searchBtn').click(function (){
 		$('#pg').val('1');
 		$('#key').val($('#skey').val());
 		$('#word').val($('#sword').val());	
-		$('#commonForm').attr('action','${root}/usermanager/mvmemberlist.akcord').submit();		
-	});
-	$('#blackul').click(function (){
-		//$(this).parent().attr('class','active');
-    	$('#pg').val('1');
-		$('#key').val($('#skey').val());
-		$('#word').val($('#sword').val());	
 		$('#commonForm').attr('action','${root}/usermanager/blacklist.akcord').submit();		
 	});
-	/* $('#ul').click(function (){
+	 $('#ul').click(function (){
 		//$(this).parent().attr('class','active');
+		$('#pg').val('1');
 		$('#key').val($('#skey').val());
 		$('#word').val($('#sword').val());	
 		$('#commonForm').attr('action','${root}/usermanager/mvmemberlist.akcord').submit();		
-	}); */
-	$('#firstBtn').click(function(){
-		$('#pg').val('1');
-		$('#key').val('${query.key}');
-		$('#word').val('${query.word}');
-		$('#commonForm').attr('action', '${root}/usermanager/mvmemberlist.akcord').submit();
 	});
 	
-	$('.pagemove').click(function(){
-		$('#pg').val($(this).attr('data-page'));
-		$('#key').val('${query.key}');
-		$('#word').val('${query.word}');
-		$('#commonForm').attr('action', '${root}/usermanager/mvmemberlist.akcord').submit();
-	});
+		$('#firstBtn').click(function(){
+			$('#pg').val('1');
+			$('#key').val('${query.key}');
+			$('#word').val('${query.word}');
+			$('#commonForm').attr('action', '${root}/usermanager/blacklist.akcord').submit();
+		});
+		
+		$('.pagemove').click(function(){
+			$('#pg').val($(this).attr('data-page'));
+			$('#key').val('${query.key}');
+			$('#word').val('${query.word}');
+			$('#commonForm').attr('action', '${root}/usermanager/blacklist.akcord').submit();
+		});
+		
+		$('#lastBtn').click(function(){
+			$('#pg').val($(this).attr('data-last'));
+			$('#key').val('${query.key}');
+			$('#word').val('${query.word}');
+			$('#commonForm').attr('action', '${root}/usermanager/blacklist.akcord').submit();
+		});
 	
-	$('#lastBtn').click(function(){
-		$('#pg').val($(this).attr('data-last'));
-		$('#key').val('${query.key}');
-		$('#word').val('${query.word}');
-		$('#commonForm').attr('action', '${root}/usermanager/mvmemberlist.akcord').submit();
-	});
 	
 });
 
 </script>
-<section class="content page-top row"style="padding-top: 60px;">
-   <div class="container" > 
+<section class="content page-top row" style="padding-top: 60px;">
+   <div class="container" >
 	<div class="row">
 		<div class="col-sm-10 col-sm-push-1">
 					<h3>회원 관리</h3>
@@ -108,18 +96,20 @@ $(document).ready(function(){
 					</li>
 				</ul>
 				<div class="tab-content">
-					<div class="tab-pane active" id="userList"> 
+<!-- 					<div class="tab-pane fade in active" id="userList">
+ -->					
+				<!-- 	</div>
+					<div class="tab-pane" id="panel-822061">
+					</div> -->
 				
-<!-- 					<div class="tab-pane fade in active" id="userList">-->					
-				<!-- 	</div><div class="tab-pane" id="panel-822061"></div> -->
-				
+				<div class="tab-pane active" id="blackList">
 			
 				<form class="navbar-form navbar-left" role="search">
 						<div class="form-group">
-							<select class="form-control" id="membersort" name="membersort">
-								<option >회원정렬</option>
-                                <option id="str" value="1">가입일</option>
-                                <option id="str" value="2">이름</option>
+							<select class="form-control" id="membersortb" name="membersortb">
+								<option>회원정렬</option>
+                                <option id="str" value="1">가입일2</option>
+                                <option id="str" value="2">이름2</option>
                              </select>
                      
 						<select class="form-control" id="skey" name="skey">
@@ -151,33 +141,34 @@ $(document).ready(function(){
 						<th>성별</th>
 						<th>전공</th>
                         <th>가입일</th>
-						<th>블랙회원등록</th>
+						<th>탈퇴처리</th>
 					</tr>
 				</thead>
 				<tbody>
-				<c:forEach var="user" items="${userList}">
-				<c:if test="${user.is_block==0 }">
+				<c:forEach var="blackuser" items="${blackuserList}">
+					<c:if test="${blackuser.is_block==1 }">
+				
 				<tr class="black">
-						<td>${user.user_id }</td>
-						<td>${user.id }</td>
-						<th>${user.name}</th>
-						<td>${user.tel1 }-${user.tel2}-${user.tel3 }</td>
-						<td>${user.gender }</td>
-						<td>${user.major_name }</td>
-                        <td>${user.reg_date }</td>
+						<td>${blackuser.user_id }</td>
+						<td>${blackuser.id }</td>
+						<th>${blackuser.name}</th>
+						<td>${blackuser.tel1 }-${blackuser.tel2}-${blackuser.tel3 }</td>
+						<td>${blackuser.gender }</td>
+						<td>${blackuser.major_name }</td>
+                        <td>${blackuser.reg_date }</td>
 						<td>
-						<button type="button" class="btn btn-sm" id="blackRegBtn" value="${user.user_id }">
-						등록
+						<button type="button" class="btn btn-sm" id="bUserOutBtn" value="${blackuser.user_id }">
+						확인
 						</button>
 						</td>
 					</tr>
-				</c:if>
+					</c:if>
 					</c:forEach>
 				</tbody>
 				</table>
 			
 			</div>
-
+			
 			</div>
 				</div>
 			
@@ -185,12 +176,11 @@ $(document).ready(function(){
 		</div>
 	</div>
 </div>
-
-
-		<div align="center" style="clear:both;">
+<div align="center" style="clear:both;">
 			${navigator.navigator}
 			</div>
 			<div class="col-md-6"></div>
+		
 </section>
 <div class="modal fade" id="modal-container-947726" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog" style="width:30%">

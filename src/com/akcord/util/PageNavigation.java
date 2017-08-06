@@ -102,7 +102,6 @@ public class PageNavigation {
 	         tmpNavigator.append("   <span aria-hidden=\"true\"><font color=\"#d34e4c\">&laquo;</font></span>\n");
 	         tmpNavigator.append("   </a></li> \n");
 	      } else {
-	    	  System.out.println("왜 여기 안와");
 		    	 tmpNavigator.append("  <li><a href='#'  id='firstBtn' aria-label=\"Previous\">");
 			     tmpNavigator.append("   <span aria-hidden=\"true\"><font color=\"#d34e4c\">최신</font></span>\n");
 			     tmpNavigator.append("   </a></li> \n");	

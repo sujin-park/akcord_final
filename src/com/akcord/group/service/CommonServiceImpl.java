@@ -22,10 +22,26 @@ public class CommonServiceImpl implements CommonService {
 		String type = query.get("type");
 		// 각자의 컨트롤러에서 query.put("type", "admin") 이런식으로 구분값을 보낸후
 		// 여기서 그 값을 꺼내서 구분하고, 각자 리스트 뿌렸던 쿼리를 count해서 글 갯수 구하기
-		if (type.equals("group")) {
-		newArticleCount = sqlSession.getMapper(CommonDao.class).newGroupListCount(query);
-		totalArticleCount = sqlSession.getMapper(CommonDao.class).totalGroupListCount(query);
+		if (type.equals("group")) { // 수진 - 그룹방 리스트
+			newArticleCount = sqlSession.getMapper(CommonDao.class).newGroupListCount(query);
+			totalArticleCount = sqlSession.getMapper(CommonDao.class).totalGroupListCount(query);
+		} else if (type.equals("wait")) { // 수진 - 그룹원 대기 리스트
+			totalArticleCount = sqlSession.getMapper(CommonDao.class).totalGroupWaitCount(query);
+		} else if(type.equals("myroom")) {
+			totalArticleCount = sqlSession.getMapper(CommonDao.class).totalMyroomListCount(query);
+		}else if (type.equals("notice")) {
+
+			newArticleCount = sqlSession.getMapper(CommonDao.class).newNoticeListCount();
+			totalArticleCount = sqlSession.getMapper(CommonDao.class).totalNoticeListCount(query);
+		}else if (type.equals("usermanage")) {
+
+			newArticleCount = sqlSession.getMapper(CommonDao.class).newUserListCount();
+			totalArticleCount = sqlSession.getMapper(CommonDao.class).totalUserListCount(query);
+		}else if (type.equals("blackusermanage")) {
+			newArticleCount = sqlSession.getMapper(CommonDao.class).newUserListCount();
+			totalArticleCount = sqlSession.getMapper(CommonDao.class).totalBlackUserListCount(query);
 		}
+
 
 		
 		

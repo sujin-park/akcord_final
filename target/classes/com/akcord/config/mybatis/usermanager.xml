@@ -4,33 +4,84 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 
 <mapper namespace="com.akcord.admin.dao.UserManagerDao">
-    <select id="getUserList" resultType="userManageDto">
-        select user_id,id,name,m.major_name,tel1,tel2,tel3,reg_date,is_block
-        from users u,major m where m.major_id=u.major_id 
-        order by user_id	
+    <select id="getUserList" parameterType="java.util.Map" resultType="userManageDto">
+        select b.*
+        from(select rownum rn,a.* from(select user_id,id,name,m.major_name,tel1,tel2,tel3,reg_date,is_block
+        from users u,major m where m.major_id=u.major_id and is_block=0
+        <if test="key!=''and word!=''">
+            <if test="key=='snum'">
+                and u.tel3 like '%'||#{word}||'%'
+            </if>
+            <if test="key=='sname'">
+                and u.name like #{word}
+            </if>
+            <if test="key=='sid'">
+                and u.id like #{word}
+            </if>
+       </if>
+           <choose>
+            <when test="str=='1'">
+                order by u.reg_date asc)a
+            </when>
+            <when test="str=='2'">
+                order by u.name desc)a
+            </when>
+            <otherwise>
+                order by u.reg_date desc)a
+            </otherwise>            
+        </choose>
+        where rownum &lt;= #{end}
+        ) b
+        where b.rn &gt; #{start}
     </select>
+    
+    
+    <select id="getBlackUserList" parameterType="java.util.Map" resultType="userManageDto">
+        select b.*
+        from(select rownum rn,a.* from(select user_id,id,name,m.major_name,tel1,tel2,tel3,reg_date,is_block
+        from users u,major m where m.major_id=u.major_id and is_block=1
+        <if test="key!=''and word!=''">
+            <if test="key=='snum'">
+                and u.tel3 like '%'||#{word}||'%'
+            </if>
+            <if test="key=='sname'">
+                and u.name like #{word}
+            </if>
+            <if test="key=='sid'">
+                and u.id like #{word}
+            </if>
+        </if>
+        <choose>
+            <when test="str=='1'">
+                order by u.reg_date asc)a
+            </when>
+            <when test="str=='2'">
+                order by u.name desc)a
+            </when>
+            <otherwise>
+                order by u.reg_date desc)a
+            </otherwise>            
+        </choose>
+        where rownum &lt;= #{end}
+        ) b
+        where b.rn &gt; #{start}
+    </select>
+    
     <update id="blackuserReg" parameterType="String">
         update users set is_block='1' where user_id=#{user_id}
-     </update>
+    </update>
+    
     <insert id="majorPlus" parameterType="String">
         insert into major(major_id,major_name)
         values(seq_major_id.nextval,#{major_name})
     </insert>
+    
     <select id="getMajor" resultType="majorDto">
         select major_name from major
     </select>
     
-    <select id="getMemberOrder" parameterType="String" resultType="userManageDto">
-        select rownum rn,a.* from (select user_id,id,name,m.major_name,tel1,tel2,tel3,reg_date,is_block
-        from users u,major m where m.major_id=u.major_id
-        <choose>
-            <when test="str=='1'">
-                order by reg_date asc) a
-            </when>
-            <otherwise>
-                order by name asc) a
-            </otherwise>
-            
-        </choose>
-     </select>
+    <delete id="bUserOut" parameterType="String">
+        delete from users where user_id=#{user_id}   
+    </delete>
+
 </mapper>
