@@ -1,0 +1,28 @@
+//1. 가입된 그룹 아이디 호출 여부
+		List<String> group_id = myPageService.groupcheck(user_id);
+		
+		
+		List<String> myroom_next_id = null;	// ** 여기에 공유된 글 번호들을 싸그리 담을꺼다
+		
+		// 2. 그룹 아이디 잘 가져왔으면 그 그룹에 공유된 글 목록을 쭉 뽑아라
+		if(group_id!=null){
+			for (int i = 0; i < group_id.size(); i++) {
+				System.out.println("THIS IS !!!!  "+group_id.get(i));
+			}
+
+			for (int i = 0; i < group_id.size(); i++) {
+				List<String> tmp_id = myPageService.groupshare(group_id.get(i));
+				for (int j = 0; j < tmp_id.size(); j++) {
+					myroom_next_id.add(tmp_id.get(j));
+				}
+				
+				//String group_name = myPageService.getgroupname(group_id.get(i));
+			}
+		} else {
+			System.out.println("네 다음 그룹없는 찐따");
+		}
+		
+		// 3. 글 목록들이 잘 담겼는지 한번 보자
+		for (int i = 0; i < myroom_next_id.size(); i++) {
+			System.out.println("내가 공유한 글 번호들입니다앙:::"+myroom_next_id.get(i));
+		}

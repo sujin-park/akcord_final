@@ -21,6 +21,7 @@
 </head>
 <body>
 
+
 <script type="text/javascript">
 $(document).ready(function(){
     // Show the Modal on load
@@ -31,7 +32,7 @@ $(document).ready(function(){
 </script>
 	<!-- 로그인 Modal-->
 	<div class="modal fade" id="loginmainModal" role="dialog" data-backdrop="static" data-keyboard="true">
-	<div class="modal-dialog" style="width: 50%;" >
+	<div class="modal-dialog" style="width: 50%;">
 
 			<!-- Modal content-->
 				

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.akcord.myroom.dao.MyroomDao">
+    <select id="sectionList" parameterType="String" resultType="myroomDto">
+        select myroom_id myroomId, subject from myroom where user_id=#{user_id} order by myroom_id
+    </select>
+    
+    <select id="myroomList" parameterType="hashmap" resultType="myroomNextDto">
+        select b.*
+        from(select rownum rn, a.*
+            from(
+                select myroom_next_id myroomNextId, myroom_id myroomId, user_id, subject, content, reg_date, update_date, is_share isShare
+                from myroom_next
+                where user_id=#{user_id}
+                order by update_date desc
+                ) a
+            where rownum &lt;= #{end}
+            ) b
+        where b.rn &gt; #{start}
+    </select>
+    
+    <select id="choiceSectionList" parameterType="hashmap" resultType="myroomNextDto">
+        select b.*
+        from(select rownum rn, a.*
+            from(
+                select myroom_next_id myroomNextId, myroom_id myroomId, user_id, subject, content, reg_date, update_date, is_share isShare
+                from myroom_next
+                where user_id=#{user_id} and myroom_id=#{myroomId}
+                order by update_date desc
+                ) a
+            where rownum &lt;= #{end}
+            ) b
+        where b.rn &gt; #{start}
+    </select>
+    
+    <select id="searchList" parameterType="hashmap" resultType="myroomNextDto">
+        select b.*
+        from(select rownum rn, a.*
+            from(
+                select myroom_next_id myroomNextId, myroom_id myroomId, user_id, subject, content, reg_date, update_date, is_share isShare
+                from myroom_next
+                where user_id=#{user_id} n
+        <if test="key != '' and word != ''">
+            <if test="key == '전체'">
+                and content like '%' || #{word} ||'%'
+            </if>
+            <if test="key != '전체'">
+                and myroom_id=#{key} and content like '%' || #{word} ||'%'
+            </if>
+        </if>
+                and myroom_id=#{myroomId}
+                order by update_date desc
+                ) a
+            where rownum &lt;= #{end}
+            ) b
+        where b.rn &gt; #{start}
+    </select>
+    
+    <select id="groupNameList" parameterType="String" resultType="groupRoomDto">
+        select g.group_id groupId, group_name groupName from grouproom_list l, grouproom g 
+        where l.group_id=g.group_id and l.user_id=#{user_id}
+    </select>
+    
+    <insert id="insertArticle" parameterType="myroomNextDto">
+        insert all
+        into myroom_next(myroom_next_id, myroom_id, user_id, subject, content, reg_date, update_date, is_share)
+        values(SEQ_MYROOM_NEXT_ID.nextval, #{myroomId}, #{user_id}, #{subject}, #{content}, sysdate, sysdate, #{isShare})
+        into grouproom_hw values(SEQ_MYROOM_NEXT_ID.currval, #{groupId}, null)
+        select * from dual
+        <selectKey  keyProperty="myroomNextId" resultType="Integer" order="AFTER"> SELECT SEQ_MYROOM_NEXT_ID.currval FROM dual </selectKey>
+    </insert>
+    
+    <select id="getMyroomNextId" resultType="int">
+        select SEQ_MYROOM_NEXT_ID.currval from myroom_next
+    </select>
+    
+    <select id="selectArticle" parameterType="String" resultType="myroomNextDto">
+        select m.myroom_next_id myroomNextId, myroom_id myroomId, user_id, subject, content, reg_date, update_date, is_share isShare, g.group_id groupId
+        from myroom_next m, grouproom_hw g
+        where m.myroom_next_id=g.myroom_next_id and m.myroom_next_id=#{myroomNextId}
+    </select>
+    
+    <update id="updateMyAtricle" parameterType="myroomNextDto">
+        update myroom_next set subject=#{subject}, content=#{content}, update_date=sysdate, is_share=#{isShare}
+        where myroom_next_id=#{myroomNextId}
+    </update>
+    
+    <update id="updateGroupAtricle" parameterType="myroomNextDto">
+        update grouproom_hw set group_id=#{groupId}
+        where myroom_next_id=#{myroomNextId}
+    </update>
+    
+    <delete id="deleteAtricle" parameterType="String">
+        delete from myroom_next where myroom_next_id=#{myroomNextId}
+    </delete>
+    
+    <insert id="createCategory" parameterType="myroomDto">
+        insert into myroom values(seq_myroom_id.nextval, #{user_id}, #{subject})
+        <selectKey  keyProperty="myroomId" resultType="Integer" order="AFTER"> SELECT SEQ_MYROOM_ID.currval FROM dual </selectKey>
+    </insert>
+    
+    <!--<update id="updateCategory" parameterType="myroomDto">
+        update myroom set subject=#{subject} where myroom_id=#{myroomId}
+    </update>-->
+    
+    <delete id="deleteCategory" parameterType="String">
+        delete from myroom where myroom_id=#{myroomId}
+    </delete>
+</mapper>
