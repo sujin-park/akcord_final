@@ -33,7 +33,6 @@
                	  <div class="list-heading">
                      <h4 class="list-title">
                         <a href="${root }/notice/mvnoticelist.akcord?pg=1&key=&word=&order="><i class="fa fa-bullhorn"></i>&nbsp;공지사항</a>
-                        <a href="${root }/notice/mvnoticelist.akcord"><i class="fa fa-bullhorn"></i>&nbsp;공지사항</a>
                      </h4>
                   </div> 
                   <div class="list-heading1">
