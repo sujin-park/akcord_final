@@ -9,7 +9,7 @@ $(document).ready(function() {
 	$.ajax({
 		type : 'GET',
 		dataType : 'json',
-		url : '${root}/rank/rank.akcord',
+		url : '${root}/rank/getrank.akcord',
 		//data : {'data', data},
 
 		success : function(data) {
