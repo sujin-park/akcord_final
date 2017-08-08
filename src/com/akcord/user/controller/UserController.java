@@ -77,4 +77,12 @@ public class UserController {
 		return mav;
 	}
 	
+	@RequestMapping("/logout.akcord")
+	public ModelAndView logout(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		session.invalidate();
+		mav.setViewName("/user/login/loginmain");
+		return mav;
+	}
+	
 }

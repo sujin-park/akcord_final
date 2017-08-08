@@ -21,4 +21,6 @@ public interface MyroomService {
 	void createCategory(MyroomDto myroomDto); //카테고리 추가
 	void updateCategory(MyroomDto myroomDto); //카테고리 수정
 	void deleteCategory(String myroomId); //카테고리 삭제
+	
+	int getScheduleId(int groupId);
 }

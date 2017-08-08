@@ -55,7 +55,7 @@ $(document).ready(function() {
 	
 	$('#resetBtn').click(function() {
 		var myroomId = $('.myroomId1').val();
-		$(location).attr('href', "${root}/myroom/myroomlist.akcord?ch=2&myroomId="+ myroomId + "&pg=1");
+		$(location).attr('href', "${root}/myroom/myroomlist.akcord?ch=2&myroomId=${query.myroomId1}&pg=1");
 	});
 		
 	$('#registerBtn').click(function() {

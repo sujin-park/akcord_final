@@ -27,15 +27,13 @@ public class CafeController {
 	}
 	
 	@RequestMapping("/map.akcord")
-	public ModelAndView myroomlistArticle(@RequestParam("placeY") String[] placeY, @RequestParam("placeX") String[] placeX, @RequestParam("i") int i, HttpSession session) {
+	public ModelAndView myroomlistArticle(@RequestParam("latitude") String latitude, @RequestParam("longitude") String longitude, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		String Y[] = placeY;
-		String X[] = placeX;
 		//System.out.println(Y[0]);
 		//System.out.println(X[0]);
 		//System.out.println(placeX);
-		mav.addObject("Y", Y[0]);
-		mav.addObject("X", X[0]);
+		mav.addObject("X", latitude);
+		mav.addObject("Y", longitude);
 		mav.setViewName("/user/studycafe/map");
 		return mav;
 	}
