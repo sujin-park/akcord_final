@@ -29,12 +29,8 @@ public class InController {
    @Autowired
    private InService inService;
    
-   @RequestMapping(value="/answer.akcord", method=RequestMethod.GET)
-   public ModelAndView qna(){
-      ModelAndView mav = new ModelAndView();
-      mav.setViewName("/user/in/answer");
-      return mav;
-   }
+
+   
    @RequestMapping(value="/qnaview.akcord", method=RequestMethod.GET)
    public ModelAndView list(@RequestParam Map<String, String> queryString, @RequestParam("qna_id") int qna_id){
       ModelAndView mav = new ModelAndView();
@@ -43,18 +39,17 @@ public class InController {
       mav.addObject("qna_id", inDto);
       mav.setViewName("/user/in/qna");
       return mav;
-   } //링크페이지
+   } 
    
-   @RequestMapping(value="/questionview.akcord", method=RequestMethod.POST)
-   public ModelAndView questionview(@RequestParam("qna_id") int qna_id){
-	   System.out.println("qna여기까진 오냐 list");
-      ModelAndView mav = new ModelAndView();
-      InDto inDto = null;
-      inDto = inService.getAnswer(qna_id);
-      mav.addObject("qna_id", inDto);
-      mav.setViewName("/user/in/qna");
-      return mav;
-   }
+//   @RequestMapping(value="/questionview.akcord", method=RequestMethod.POST)
+//   public ModelAndView questionview(@RequestParam("qna_id") int qna_id){
+//      ModelAndView mav = new ModelAndView();
+//      InDto inDto = null;
+//      inDto = inService.getAnswer(qna_id);
+//      mav.addObject("qna_id", inDto);
+//      mav.setViewName("/user/in/qna");
+//      return mav;
+//   }
 
    @RequestMapping(value="/question.akcord", method=RequestMethod.GET)
    public ModelAndView question(){
@@ -70,6 +65,7 @@ public class InController {
       mav.setViewName("/user/in/inmain");
       return mav;
    }
+   
    @RequestMapping(value="/inmain.akcord", method=RequestMethod.POST) 
    public String answer(InDto inDto, HttpSession session){//여기서는 리스트를 불러온다.
       
@@ -89,12 +85,25 @@ public class InController {
 
    @RequestMapping("/list.akcord")
    public ModelAndView list(HttpSession session, @RequestParam Map <String, String> queryString, @RequestParam("major_id") String major_id) {
-	   System.out.println("리스트까지 오남");
       ModelAndView mav = new ModelAndView();
       UserDto user = (UserDto) session.getAttribute("user");
+      queryString.put("major_id", major_id);
       List<InDto> inlist = inService.answerlist(queryString);
       List<MajorDto> majorlist = inService.majorlist();
-      queryString.put("major_id", major_id);
+      mav.addObject("majorlist", majorlist);
+      mav.addObject("inlist", inlist);
+      
+      mav.setViewName("/user/in/inmain"); //받아온걸 페이지로 준다.
+      return mav;
+   }
+   
+   @RequestMapping("/category.akcord")
+   public ModelAndView cetegory(HttpSession session, @RequestParam Map <String, String> category, String major_id) {
+      ModelAndView mav = new ModelAndView();
+      UserDto user = (UserDto) session.getAttribute("user");
+
+      List<InDto> inlist = inService.category(category);
+      List<MajorDto> majorlist = inService.majorlist();
       mav.addObject("majorlist", majorlist);
       mav.addObject("inlist", inlist);
       

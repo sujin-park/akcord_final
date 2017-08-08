@@ -7,7 +7,7 @@
 <script>
 	$(document).ready(function() {
 		$('#cancelBtn').click(function() {
-			$(location).attr('href', '${root}/in/qna.akcord');
+			$(location).attr('href', '${root}/comment/qna.akcord');
 
 		});
 	});
@@ -35,10 +35,10 @@
 	<div class="col-sm-1"></div>
 	<div class="col-sm-10" style="border: 1px solid; color: gray">
 		<br> <br> <label for="comment" class="col-sm-1">아이디
-			: </label> <label class="col-sm-1">id</label> <label for="comment"
-			class="col-sm-1">카테고리: </label> <label class="col-sm-1">category</label>
+			: </label> <label class="col-sm-1">${qna_id.id}</label> <label for="comment"
+			class="col-sm-1">카테고리: </label> <label class="col-sm-1">${qna_id.majorName}</label>
 		<label class="col-sm-6"></label> <label for="comment" class="col-sm-1">작성일:
-		</label> <label class="col-sm-1">sysdate</label>
+		</label> <label class="col-sm-1">${qna_id.reg_date}</label>
 
 
 		<div class="col-sm-12">
@@ -46,7 +46,7 @@
 		</div>
 
 		<div class="col-sm-12" row="25"
-			style="border: 1px solid; color: gray; height: 250px;"></div>
+			style="border: 1px solid; color: gray; height: 250px;">${qna_id.content}</div>
 		<label class="col-sm-11"></label>
 	
 	</div>
@@ -63,13 +63,13 @@
 	<div class="col-sm-1"></div>
 	<div class="col-sm-10" style="border: 1px solid; color: gray">
 		<br> <br> <label for="comment" class="col-sm-1">아이디
-			: </label> <label class="col-sm-1">id</label> <label class="col-sm-8">님 답변을 작성하세요</label> <label for="comment" class="col-sm-1">작성일: </label> <label
-			class="col-sm-1">sysdate</label> <label class="col-sm-12"><hr></label>
+			: </label> <label class="col-sm-1">${qna_id.id}</label> <label class="col-sm-8">님 답변을 작성하세요</label> <label for="comment" class="col-sm-1">작성일: </label> <label
+			class="col-sm-1">${qna_id.reg_date}</label> <label class="col-sm-12"><hr></label>
 
 
 		<label for="comment" class="col-sm-12">Answer : </label>
 		<textarea class="form-control" rows="15" id="comment"></textarea>
-
+		
 		<label class="col-sm-10"></label>
 		<button type="button" class="btn btn-danger col-sm-1 btn-md"
 			id="cancelBtn">Cancel</button>

@@ -22,6 +22,11 @@ $(document).ready(function() {
 		$('#qna_id').val($(this).attr('data-seq'));
 		$('#inmainform').attr('action', '${root}/in/qnaview.akcord').submit();
 	});
+		
+	//$('.category').click(function(){
+
+		//$(location).attr('href', '${root}/in/category.akcord');		
+	//});
 });
 </script>	
 
@@ -36,7 +41,8 @@ $(document).ready(function() {
 			<hr>
 		</div>
 		<c:forEach var="majorlist" items="${majorlist}">
-			<a id="${majorlist.major_id}" href="#">${majorlist.major_name}</a><hr>
+			<a id="${majorlist.majorId}" class="category" href="${root}/in/category.akcord?major_id=${majorlist.majorId}">${majorlist.majorName}</a>
+			<hr>
 		</c:forEach> 
  <!-- 		<a id="0" href="#">인문계열</a><hr>
 			<a id="1" href="#">사회계열</a><hr>
@@ -96,14 +102,17 @@ $(document).ready(function() {
 			</div>
 		<hr class="col-sm-11">
 		</a>
+
 		</c:forEach>
 		</c:if>
+		
 		<c:if test="${inlist == null}">
-		<div class="media" align="center">
-		<p class="media-body col-sm-10" style="height: 50px; width: 100%;">게시글이없습니다.~~</p>
-		<hr>
-		</div>
+			<div class="media" align="center">
+			<p class="media-body col-sm-10" style="height: 50px; width: 100%;">게시글이 없습니다.</p>
+			<hr>
+			</div>
 		</c:if>
+
   	</div>
 	</form>
 	
