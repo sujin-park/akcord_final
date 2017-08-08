@@ -4,7 +4,7 @@ public class RankDto {
 	
 	private String subject;
 	private String hit;
-	private String order;
+	private String id;
 	public String getSubject() {
 		return subject;
 	}
@@ -17,13 +17,13 @@ public class RankDto {
 	public void setHit(String hit) {
 		this.hit = hit;
 	}
-	public String getOrder() {
-		return order;
+	public String getId() {
+		return id;
 	}
-	public void setOrder(String order) {
-		this.order = order;
+	public void setId(String id) {
+		this.id = id;
 	}
-	
+
 	
 
 }
