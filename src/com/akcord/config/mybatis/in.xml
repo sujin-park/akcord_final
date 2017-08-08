@@ -21,16 +21,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <!-- 지식인 리스트 클릭시 질문내용보기 -->
     <select id="getAnswer" parameterType="int" resultType="inDto">
-        select q.qna_id, u.user_id, u.id, u.name, u.major_id, q.subject, q.content, q.reg_date, q.hit
-        from qna q, users u
+        select q.qna_id, u.user_id, u.id, u.name, q.major_id majorId, m.major_name majorName, q.subject, q.content, q.reg_date, q.hit
+        from qna q, users u, major m
         where q.user_id = u.user_id
+        and q.major_id = m.major_id
         and q.qna_id = #{qna_id}
     </select>
     
     <!-- 전공 리스트 출력 -->
     <select id="majorlist" resultType="com.akcord.group.model.MajorDto">
-        select major_id, major_name
+        select major_id majorId, major_name majorName
         from major
+    </select>
+    
+    <!-- 카테고리 클릭시 리시트출력 -->
+    <select id="category" parameterType="java.util.Map" resultType="inDto">
+        select q.qna_id, u.user_id, u.id, u.name, q.major_id majorId, q.subject, q.content, q.reg_date, q.hit
+        from qna q, users u
+        where q.user_id = u.user_id
+        and q.major_id = #{major_id}
     </select>
 
     

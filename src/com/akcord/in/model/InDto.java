@@ -1,8 +1,8 @@
 package com.akcord.in.model;
 
+import com.akcord.group.model.MajorDto;
 
-
-public class InDto {
+public class InDto  extends MajorDto{
 	private int qna_id;
 	private int user_id;
 	private int major_id;

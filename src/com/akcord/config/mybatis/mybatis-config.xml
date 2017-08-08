@@ -17,7 +17,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         <typeAlias alias="myroomDto" type="com.akcord.myroom.model.MyroomDto"/>
         <typeAlias alias="myroomNextDto" type="com.akcord.myroom.model.MyroomNextDto"/>
         <typeAlias alias="scheduleDto" type="com.akcord.group.model.ScheduleDto"/>
-        
+        <typeAlias alias="commentDto" type="com.akcord.in.model.CommentDto" />
+        <typeAlias alias="chooseDto" type="com.akcord.in.model.ChooseDto" />
         <typeAlias alias="groupHwDto" type="com.akcord.group.model.GroupHwDto"/>
         <typeAlias alias="mypageDto" type="com.akcord.mypage.model.MypageDto"/>
         <typeAlias alias="alarmDto" type="com.akcord.alarm.model.AlarmDto"/>
@@ -36,6 +37,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         <mapper resource="com/akcord/config/mybatis/mypage.xml"/>
         <mapper resource="com/akcord/config/mybatis/alarm.xml"/>
         <mapper resource="com/akcord/config/mybatis/rank.xml"/>
+        <mapper resource="com/akcord/config/mybatis/comment.xml"/>
+        <mapper resource="com/akcord/config/mybatis/choose.xml"/>
     </mappers>
     
 </configuration>
