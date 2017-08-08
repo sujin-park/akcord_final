@@ -18,7 +18,8 @@ public interface AlarmDao {
 	
 	
 	// << alarm pop-up >>
-	AlarmDto alarmlist(String target_id);	// 알람 리스트 호출
+	List<AlarmDto> alarmlist0(String target_id);	// 안읽은 알람 리스트 호출
+	List<AlarmDto> alarmlist1(String target_id);	// 읽은 알람 리스트 호출
 	int alarmNoneread(String target_id);	// 아직 안 읽은 알람
 	int alarmreadset(int seqence_num);		// 알람 읽음 설정
 	

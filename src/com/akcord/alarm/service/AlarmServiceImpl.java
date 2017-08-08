@@ -52,9 +52,14 @@ public class AlarmServiceImpl implements AlarmService {
 	}
 
 	@Override
-	public AlarmDto alarmlist(String target_id) {
+	public List<AlarmDto> alarmlist0(String target_id) {
 		// TODO 알람 리스트 가져오기
-		return sqlSession.getMapper(AlarmDao.class).alarmlist(target_id);
+		return sqlSession.getMapper(AlarmDao.class).alarmlist0(target_id);
+	}
+	@Override
+	public List<AlarmDto> alarmlist1(String target_id) {
+		// TODO 알람 리스트 가져오기
+		return sqlSession.getMapper(AlarmDao.class).alarmlist1(target_id);
 	}
 
 	@Override
