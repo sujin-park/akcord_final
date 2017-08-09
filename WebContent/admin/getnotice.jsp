@@ -18,17 +18,8 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
-	$('#modifyBtn').click(function(){
-		 var str= $('#content').val();
-			if($('#subject').val()==""){
-				alert("제목을입력해주세요");
-				return;
-			}if(str.length<=5){
-				alert("내용을입력해주세요");
-				return;
-			}
-		document.noticeModifyform.action = "${root}/notice/noticemodify.akcord";
-		document.noticeModifyform.submit();
+	$('#listBtn').click(function(){
+			 $(location).attr('href','${root }/notice/userNoticelist.akcord?pg=1&key=&word=&order=');
 	});
 });
 
@@ -37,9 +28,9 @@ $(document).ready(function(){
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-sm-3"></div>
-		<div class="col-sm-6"  style="padding-top: 60px;">
+		<div class="col-sm-6" style="padding-top: 60px;">
 			<div class="form-group">
-				<h2>공지사항 글수정하기</h2>
+				<h2>공지사항</h2>
 			</div>
 			<form name="noticeModifyform" method="post" action="">
 				<input type="hidden" name="notice_id" value="${notice.notice_id }">
@@ -47,18 +38,19 @@ $(document).ready(function(){
 				<input type="hidden" name="reg_date" value="${notice.reg_date }">
 				<input type="hidden" name="hit" value="${notice.hit }"> --%>
 				
-				<label for="title">SUBJECT</label> <input type="text" name="subject"
-					class="form-control" id="subject" value="${notice.subject }">
+				<label for="title">SUBJECT</label>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp; 
+			 	<span style="text-align: right">등록일 :${notice.reg_date }&nbsp; 조회수: ${notice.hit }</span>
+				<input type="text" name="subject"
+					class="form-control" id="subject" value="${notice.subject }" disabled="disabled">
 
 				<div class="form-group">
 					<label for="content">CONTENT</label>
 					<textarea name="content" id="content" cols="67" rows="25"
-						class="form-control" required>${notice.content }</textarea>
+						class="form-control" required disabled="disabled">${notice.content }</textarea>
 				</div>
 				<div align="center">
-					<button type="button" class="btn btn-sm" id="modifyBtn">
-						수정</button>
-					<button type="button" class="btn btn-sm">취소</button>
+					<button type="button" class="btn btn-sm" id="listBtn">
+						확인</button>
 				</div>
 			</form>
 		</div>

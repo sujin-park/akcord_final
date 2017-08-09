@@ -18,10 +18,9 @@ import com.akcord.user.model.UserDto;
 @Controller
 @RequestMapping("/alarm")
 public class AlarmController {
-	
-	@Autowired
-	private AlarmService alarmService;
-	
+   
+   @Autowired
+   private AlarmService alarmService;
 	@RequestMapping(value="/alarm.akcord")
 	public @ResponseBody String alarmcount(HttpSession sesstion){
 		UserDto userDto = (UserDto) sesstion.getAttribute("user");
@@ -39,36 +38,37 @@ public class AlarmController {
 		List<AlarmDto> list0 = alarmService.alarmlist0(user_id);
 		List<AlarmDto> list1 = alarmService.alarmlist1(user_id);
 
-		for (AlarmDto alarmDto:list0) {
-			JSONObject jsontmp = new JSONObject();
+	
+      for (AlarmDto alarmDto:list0) {
+         JSONObject jsontmp = new JSONObject();
 
-			jsontmp.put("target_id",alarmDto.getTarget_id());
-			jsontmp.put("logtime", alarmDto.getLogtime());
-			jsontmp.put("key", alarmDto.getKey());
-			jsontmp.put("seq", alarmDto.getAlarm_seq());
-			jsontmp.put("flag", alarmDto.getFlag());
+         jsontmp.put("target_id",alarmDto.getTarget_id());
+         jsontmp.put("logtime", alarmDto.getLogtime());
+         jsontmp.put("key", alarmDto.getKey());
+         jsontmp.put("seq", alarmDto.getAlarm_seq());
+         jsontmp.put("flag", alarmDto.getFlag());
 
-			jarr0.add(jsontmp);
-		}
-		for (AlarmDto alarmDto:list1) {
-			JSONObject jsontmp = new JSONObject();
+         jarr0.add(jsontmp);
+      }
+      for (AlarmDto alarmDto:list1) {
+         JSONObject jsontmp = new JSONObject();
 
-			jsontmp.put("target_id",alarmDto.getTarget_id());
-			jsontmp.put("logtime", alarmDto.getLogtime());
-			jsontmp.put("key", alarmDto.getKey());
-			jsontmp.put("seq", alarmDto.getAlarm_seq());
-			jsontmp.put("flag", alarmDto.getFlag());
+         jsontmp.put("target_id",alarmDto.getTarget_id());
+         jsontmp.put("logtime", alarmDto.getLogtime());
+         jsontmp.put("key", alarmDto.getKey());
+         jsontmp.put("seq", alarmDto.getAlarm_seq());
+         jsontmp.put("flag", alarmDto.getFlag());
 
-			jarr1.add(jsontmp);
-		}
-		
-		jsonObject.put("nr", noneRead);
-		jsonObject.put("name", name);
-		jsonObject.put("list0", jarr0);
-		jsonObject.put("list1", jarr1);
-		
+         jarr1.add(jsontmp);
+      }
+      
+      jsonObject.put("nr", noneRead);
+      jsonObject.put("name", name);
+      jsonObject.put("list0", jarr0);
+      jsonObject.put("list1", jarr1);
+      
 
-		return jsonObject.toJSONString();
-	}
+      return jsonObject.toJSONString();
+   }
 
 }

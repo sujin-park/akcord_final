@@ -5,16 +5,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.akcord.admin.dao.NoticeDao">
 	
+	<update id="updateHit" parameterType="int">
+		update notice
+		set hit = hit+1 
+		where notice_id = #{notice_id}
+	</update>
+	
+	
 	<insert id="noticeWrite" parameterType="noticeDto">
 		insert 
 		into notice(notice_id,subject,content,is_notice,reg_date,hit)
 		values(seq_notice_id.nextval,#{subject},#{content},#{is_notice},sysdate,#{hit})       
 	</insert>
 	
-	
 	<select id="getNoticeList" parameterType="java.util.Map" resultType="noticeDto">
 		select b.*
-			from(select rownum rn,a.* from (select notice_id,subject,content,is_notice,reg_date,hit 
+		from(select rownum rn,a.* from (select notice_id,subject,content,is_notice,to_char(reg_date,'yy-mm-dd') reg_date,hit 
 				from notice	
 			<if test="word!=''">
 				where subject like '%'||#{word}||'%'
@@ -35,12 +41,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where b.rn &gt; #{start}
 	</select>
 	
+	<select id="userNoticeList" parameterType="java.util.Map" resultType="noticeDto">
+		select b.*
+		from(select rownum rn,a.* from (select notice_id,subject,content,is_notice,to_char(reg_date,'yy-mm-dd') reg_date,hit 
+		from notice	where is_notice=1
+		<if test="word!=''">
+			and subject like '%'||#{word}||'%'
+		</if>
+		<choose>
+			<when test="str==1">
+				order by reg_date asc) a
+			</when>
+			<when test="str==2">
+				order by notice_id asc) a
+			</when>
+			<otherwise>
+				order by reg_date desc) a
+			</otherwise>
+		</choose>
+		where rownum &lt;= #{end}
+		) b
+		where b.rn &gt; #{start}
+	</select>
+	
 	<delete id="delete" parameterType="String">
 		delete from notice where notice_id=#{notice_id}
 	</delete>
 	
 	<select id="getNotice" parameterType="String" resultType="noticeDto">
-		select notice_id,subject,content,is_notice,reg_date,hit
+		select notice_id,subject,content,is_notice,to_char(reg_date,'yy-mm-dd') reg_date,hit
 		from notice where notice_id=#{notice_id}
 	</select>
 	
@@ -49,7 +78,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		set subject=#{subject},content=#{content},reg_date=sysdate
 		where notice_id=#{notice_id}	
 	</update>
-	
 	<update id="noticePublic">
 		update notice set is_notice='1' where notice_id=#{notice_id}		
 	</update>

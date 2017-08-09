@@ -14,35 +14,54 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <insert id="pollmake" parameterType="pollDto">
         insert
         into poll (subject, chart_type, start_date, end_date, poll_id)
-        values (#{subject}, #{chartType}, #{startDate}, #{endDate}, SEQ_POLL_ID.currval)
+        values (#{subject}, #{chart_type}, #{startDate}, #{endDate}, SEQ_POLL_ID.currval)
     </insert>
     <insert id="pollmakeContent" parameterType="pollDto">
         insert
-        into poll_detail (poll_id, content, count)
+        into poll_detail (poll_id, content, cnt)
         values (SEQ_POLL_ID.currval, #{content, jdbcType=VARCHAR}, 0)
     </insert>
     
-    <select id="polllist" parameterType="pollDto" resultType="pollDto">
+<!--    <select id="polllist" parameterType="pollDto" resultType="pollDto">
         select poll_id, subject, to_char(start_date, 'YY.MM.DD') startDate, to_char(end_date, 'YY.MM.DD') endDate, 
-        (select sum(count) from poll_detail where poll_id = 12) count
+        (select sum(cnt) from poll_detail where poll_id = 12) cnt
         from poll
+    </select>-->
+    
+    <select id="polllist" parameterType="pollDto" resultType="pollDto">
+        select b.*
+        from(select rownum rn,a.* from (select p.poll_id, subject, to_char(start_date, 'YY.MM.DD') startDate, to_char(end_date, 'YY.MM.DD') endDate,de.cnt
+    from poll p,(select sum(cnt) cnt,poll_id from poll_detail group by poll_id) de where de.poll_id=p.poll_id
+        <if test="word!=''">
+           and subject like '%'||#{word}||'%'
+        </if>
+        order by p.poll_id desc) a
+        where rownum &lt;= #{end}
+        ) b
+        where b.rn &gt; #{start}
     </select>
     
     <select id="pollmodify" parameterType="Integer" resultType="pollDto">
-        select poll_id, subject, to_char(start_date, 'YYYY-MM-DD') startDate, to_char(end_date, 'YYYY-MM-DD') endDate, chart_type ChartType
+        select poll_id, subject, to_char(start_date, 'YYYY-MM-DD') startDate, to_char(end_date, 'YYYY-MM-DD') endDate, chart_type chart_type
         from poll
         where poll_id = #{poll_id} 
     </select>
     
     <select id="pollresult" parameterType="Integer" resultType="pollDto">
-        select p.poll_id,p.subject,d.content,d.count,p.chart_type
+        select p.poll_id,p.subject,d.content,d.cnt,p.chart_type
         from poll p,poll_detail d where p.poll_id=d.poll_id and p.poll_id=#{poll_id}
     </select>
     
-    
+    <select id="mainpollget" resultType="pollDto">
+        select p.poll_id,p.subject,d.content,d.cnt,p.chart_type 
+        from poll p,poll_detail d where p.poll_id=d.poll_id and p.poll_id =
+            (select max(a.poll_id) from 
+                (select poll_id,subject ,to_char(start_date, 'YYYY-MM-DD')  
+                    from poll where to_char(start_date, 'YYYY-MM-DD') =to_char(sysdate, 'YYYY-MM-DD')) a)
+     </select>
     <update id="pollmodifydate" parameterType="java.util.Map">
         update poll 
-        set start_date = #{startDate}, end_date = #{endDate},chart_type=#{chartType}
+        set start_date = #{startDate}, end_date = #{endDate},chart_type=#{chart_type}
         where poll_id = #{poll_id}
     </update>
     
@@ -52,11 +71,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where poll_id = #{poll_id}
     </select>
     
+    <update id="pollupdate" parameterType="java.util.Map">
+        update poll_detail
+        set cnt = cnt+1
+        where poll_id=#{poll_id} and content=#{content}	
+        
+    </update>
+    <update id="pollYN" parameterType="java.util.Map">
+        insert into poll_yesno(poll_id,user_id)
+        values(#{poll_id},#{user_id})
+    </update>
+        
     <update id="pollclose" parameterType="Integer">
         update poll 
-        set end_date = 'sysdate'-1
+        set end_date = sysdate-1
         where poll_id = #{poll_id}
     </update>
+    
+    <select id="removeBtn"  parameterType="java.util.Map" resultType="pollDto">
+        select distinct yn.poll_id,yn.user_id
+        from poll_yesno yn,
+        (select distinct p.poll_id  from poll p,poll_detail d where p.poll_id=d.poll_id and p.poll_id = (select max(a.poll_id) from 
+        (select poll_id,subject ,to_char(start_date, 'YYYY-MM-DD')  from poll where to_char(start_date, 'YYYY-MM-DD') =to_char(sysdate, 'YYYY-MM-DD')) a)) b  where b.poll_id=yn.poll_id
+    </select>
+    
     
 </mapper>
 

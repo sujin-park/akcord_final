@@ -21,8 +21,8 @@ public class UserManagerServiceImpl implements UserManagerService {
 	@Override
 	public List<UserManageDto> getUserList(Map<String, String> query) {
 		int pg = Integer.parseInt(query.get("pg"));
-		int end = pg * BoardConstant.LIST_SIZE;
-		int start = end - BoardConstant.LIST_SIZE;
+		int end = pg * BoardConstant.ALIST_SIZE;
+		int start = end - BoardConstant.ALIST_SIZE;
 		query.put("start", start+"");
 		query.put("end", end+"");
 		return sqlSession.getMapper(UserManagerDao.class).getUserList(query);
