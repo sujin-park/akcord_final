@@ -51,6 +51,22 @@ public class NoticeController {
 		return mav;
 	}
 	
+	@RequestMapping("/userNoticelist.akcord")
+	public ModelAndView userNoticelist(HttpSession session,@RequestParam Map<String,String> query){
+		ModelAndView mav = new ModelAndView();
+		List<NoticeDto> list = noticeService.userNoticeList(query);
+		UserDto userDto = (UserDto) session.getAttribute("user");
+		query.put("type", "usernotice");
+		PageNavigation pageNavigation = commonService.makePageNavigation(query);
+		pageNavigation.setRoot("/akcord_project");
+		pageNavigation.setNavigator();
+		mav.addObject("navigator", pageNavigation);
+		mav.addObject("user",userDto);
+		mav.addObject("noticeList",list);
+		mav.addObject("query", query);
+		mav.setViewName("/admin/usernotice");
+		return mav;
+	}
 	@RequestMapping(value="/noticewrite.akcord",method=RequestMethod.GET)
 	public String noticeWrite(){																					
 		return "/admin/noticewrite";
@@ -84,17 +100,23 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value="/noticemodify.akcord",method=RequestMethod.GET)
-	public ModelAndView noticemodify(@RequestParam("nid") String nid){
+	public ModelAndView noticemodify(@RequestParam("nid") String nid,HttpSession session){
 		ModelAndView mav = new ModelAndView();
+		UserDto user=(UserDto) session.getAttribute("user");
+		int user_id=user.getUser_id();
 		NoticeDto noticeDto = noticeService.getNotice(nid);
 		mav.addObject("notice",noticeDto);
-		mav.setViewName("/admin/noticemodify");
+		if(user_id!=1)
+			mav.setViewName("/admin/noticemodify");
+		else
+			noticeService.updateHit(nid);
+			mav.setViewName("/admin/getnotice");
 		return mav;
 	}
 	@RequestMapping(value="/noticemodify.akcord",method=RequestMethod.POST)
 	public String noticemodify(NoticeDto noticeDto){
 		int cnt = noticeService.modify(noticeDto);
-		return "redirect:/notice/mvnoticelist.akcor?word=&pg=1";
+		return "redirect:/notice/mvnoticelist.akcord?word=&pg=1";
 	}
 		
 }

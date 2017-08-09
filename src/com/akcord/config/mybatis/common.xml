@@ -36,6 +36,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             where subject like '%'||#{word}||'%'
         </if>
     </select>
+    
+    <select id="totalUserNoticeListCount" parameterType="java.util.Map" resultType="int">
+        select count(notice_id) from notice where is_notice=1
+        <if test="word!=''">
+            and subject like '%'||#{word}||'%'
+        </if>
+    </select>
+    
+    
     <select id="totalUserListCount" parameterType="java.util.Map" resultType="int">
         select count(user_id)
         from users u,major m where m.major_id=u.major_id and is_block=0
@@ -66,6 +75,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             </if>
         </if>
     </select>
+    
+    <select id="totalPollListCount" parameterType="java.util.Map" resultType="int">
+    select count(poll_id) 
+        from poll 
+        <if test="word!=''">
+            where subject like '%'||#{word}||'%'
+        </if>
+        order by poll_id desc
+    </select>
+    
+    
     <select id="newUserListCount" resultType="int">
         select count(user_id)
         from users where to_char(reg_date,'yymmdd')=to_char(sysdate,'yymmdd')

@@ -38,10 +38,12 @@ $(document).ready(function(){
 	
 	$("#membersort").change(function () {
 	      $("#membersort option:selected").each(function () {
-	    	$('#pg').val('1');
-	  		$('#key').val($('#skey').val());
-	  		$('#word').val($('#sword').val());	
-	  		$('#commonForm').attr('action','${root}/usermanager/mvmemberlist.akcord').submit();		
+	    	var str = $(this).val();
+		$('#pg').val('1');
+	  	$('#key').val($('#skey').val());
+	  	$('#word').val($('#sword').val());
+	  	$('#memberskey').val(str);
+	 	$('#commonForm').attr('action','${root}/usermanager/mvmemberlist.akcord').submit();	
    		 });
 	});
 	
@@ -58,12 +60,7 @@ $(document).ready(function(){
 		$('#word').val($('#sword').val());	
 		$('#commonForm').attr('action','${root}/usermanager/blacklist.akcord').submit();		
 	});
-	/* $('#ul').click(function (){
-		//$(this).parent().attr('class','active');
-		$('#key').val($('#skey').val());
-		$('#word').val($('#sword').val());	
-		$('#commonForm').attr('action','${root}/usermanager/mvmemberlist.akcord').submit();		
-	}); */
+	
 	$('#firstBtn').click(function(){
 		$('#pg').val('1');
 		$('#key').val('${query.key}');
@@ -113,8 +110,7 @@ $(document).ready(function(){
 <!-- 					<div class="tab-pane fade in active" id="userList">-->					
 				<!-- 	</div><div class="tab-pane" id="panel-822061"></div> -->
 				
-			
-				<form class="navbar-form navbar-left" role="search">
+				<form class="navbar-form navbar-left" role="search" id="memberform">
 						<div class="form-group">
 							<select class="form-control" id="membersort" name="membersort">
 								<option >회원정렬</option>
@@ -123,7 +119,7 @@ $(document).ready(function(){
                              </select>
                      
 						<select class="form-control" id="skey" name="skey">
-                                <option value="search">회원검색</option>
+                                <option value="">회원검색</option>
                                 <option value="sname">이름검색</option>
                                 <option value="sid">아이디검색</option>
                                 <option value="snum">번호검색</option>
@@ -144,7 +140,7 @@ $(document).ready(function(){
 			<table class="table table-bordered table-hover table-condensed">
 				<thead>
 					<tr>
-						<th>1</th>
+						<th>번호</th>
 						<th>회원ID</th>
 						<th>이름</th>
 						<th>휴대폰번호</th>

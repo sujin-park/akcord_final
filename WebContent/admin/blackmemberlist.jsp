@@ -26,9 +26,11 @@ $(document).ready(function(){
 	
 	$("#membersortb").change(function () {
 	      $("#membersortb option:selected").each(function () {
+	    	  var str = $(this).val();
 	    	$('#pg').val('1');
 		  	$('#key').val($('#skey').val());
 		  	$('#word').val($('#sword').val());	
+		  	$('#memberskey').val(str);
 		 	$('#commonForm').attr('action','${root}/usermanager/blacklist.akcord').submit();		
       });
 	});
@@ -109,12 +111,12 @@ $(document).ready(function(){
 						<div class="form-group">
 							<select class="form-control" id="membersortb" name="membersortb">
 								<option>회원정렬</option>
-                                <option id="str" value="1">가입일2</option>
-                                <option id="str" value="2">이름2</option>
+                                <option id="str" value="1">가입일</option>
+                                <option id="str" value="2">이름</option>
                              </select>
                      
 						<select class="form-control" id="skey" name="skey">
-                                <option value="search">회원검색</option>
+                                <option value="">회원검색</option>
                                 <option value="sname">이름검색</option>
                                 <option value="sid">아이디검색</option>
                                 <option value="snum">번호검색</option>
@@ -135,7 +137,7 @@ $(document).ready(function(){
 			<table class="table table-bordered table-hover table-condensed">
 				<thead>
 					<tr>
-						<th>1</th>
+						<th>번호</th>
 						<th>회원ID</th>
 						<th>이름</th>
 						<th>휴대폰번호</th>

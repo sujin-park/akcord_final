@@ -47,7 +47,7 @@ $('#content').summernote({
 <div class="container-fluid" style="padding-top: 60px;">
 	<div class="row">
 		<div class="col-sm-3"></div>
-		<div class="col-sm-6">
+		<div class="col-sm-6" style="padding-top: 60px;">
 
 			<form name="noticeWriteform" method="post" action="">
 				<div class="form-group">
@@ -55,21 +55,18 @@ $('#content').summernote({
 				
 				<div class="form-group">
 					<div class="col-sm-8"><label for="title">SUBJECT</label> </div>
-					<div class="col-sm-4" align="right"><input type="checkbox" id="is_notice" name="is_notice" value="0">공개</div>
-				<input type="text" name="subject" class="form-control" id="subject" value="">
+				<input type="text" name="subject" class="form-control" id="subject" value="" disabled="disabled">
 				</div>
 				</div>
 				<div class="form-group">
 					<label for="content">CONTENT</label>
-					<textarea name="content" id="content" class="form-control" cols="67" rows="25">
+					<textarea name="content" id="content" class="form-control" cols="67" rows="25" disabled="disabled">
 					</textarea>                              
 				</div>
 				<div align="center">
-
-					<button type="button" class="btn btn-sm" id="registerBtn">
-						등록</button>
+					<button type="button" class="btn btn-sm" id="modifyBtn">
+						수정</button>
 					<button type="button" class="btn btn-sm">취소</button>
-
 				</div>
 			</form>
 		</div>

@@ -1,14 +1,110 @@
- <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="root" value="${pageContext.request.contextPath}" />
+<script>
+var output = "";
+var nr = 0;
+var name = "";
+	$(document).ready(function() {
+
+		$.ajax({
+			type : 'GET',
+			dataType : 'json',
+			url : '${root}/alarm/alarm.akcord',
+			//data : {'data', data},
+
+			success : function(data) {
+				//getHidden(data);
+
+				setVal(data);
+				listCall(data)
+			}
+
+		});
+
+	});
+
+	function setVal(data) {
+		nr = data.nr;
+		name = data.name;
+
+		$('.badge').text(nr);
+		$('#username').text(name);
+	}
+	
+	function listCall(data) {
+		var resultView = $('#collapse-alarm');
+		// 콜랩스 디브 시작부분
+		output += '<ul class="list-group">';
+		output += '<li class="list-group-item">';
+		output += '<div class="list-heading1">';
+		output += '<h4 class="list-title">';
+		output += '<a href="#">&nbsp;내용</a>';
+		output += '</h4></div>';
+		
+		for (var i = 0; i < data.list0.length; i++) {
+			if(data.list0[i].key == 1){
+				output += '<div class="list-heading1">';
+				output += '<h4 class="list-title">';
+				output += '<a href="#">&nbsp;';
+				output += '그룹에 초대되었습니다!';
+				output += '</a></h4></div>';
+			} else if(data.list0[i].key == 2){
+				output += '<div class="list-heading1">';
+				output += '<h4 class="list-title">';
+				output += '<a href="#">&nbsp;';
+				output += '그룹에 가입되었습니다!';
+				output += '</a></h4></div>';
+			} else if(data.list0[i].key == 3){
+				output += '<div class="list-heading1">';
+				output += '<h4 class="list-title">';
+				output += '<a href="#">&nbsp;';
+				output += '지식인에 답변이 달렸습니다!';
+				output += '</a></h4></div>';
+			} else if(data.list0[i].key == 4){
+				output += '<div class="list-heading1">';
+				output += '<h4 class="list-title">';
+				output += '<a href="#">&nbsp;';
+				output += '지식인에 덧글이 달렸습니다!';
+				output += '</a></h4></div>';
+			} else if(data.list0[i].key == 5){
+				output += '<div class="list-heading1">';
+				output += '<h4 class="list-title">';
+				output += '<a href="#">&nbsp;';
+				output += '지식인에 좋아요가 표시가 되었습니다!';
+				output += '</a></h4></div>';
+			} else if(data.list0[i].key == 6){
+				output += '<div class="list-heading1">';
+				output += '<h4 class="list-title">';
+				output += '<a href="#">&nbsp;';
+				output += '지식인에 싫어요 표시가 생겼습니다ㅠ';
+				output += '</a></h4></div>';
+			} else if(data.list0[i].key == 7){
+				output += '<div class="list-heading1">';
+				output += '<h4 class="list-title">';
+				output += '<a href="#">&nbsp;';
+				output += '공지사항이 등록되었습니다!';
+				output += '</a></h4></div>';
+			} else {
+				output += '<div class="list-heading1">';
+				output += '<h4 class="list-title">';
+				output += '<a href="#">&nbsp;';
+				output += '서버에 오류가 발생했습니다.';
+				output += '</a></h4></div>';
+			}
+		}
+		
+		output += '</li></ul>';
+		resultView.empty();
+		resultView.append(output);
+	}
+</script>
+
 <body>
 <div class="headline">
     
     <!-- nav -->
-
-   <!-- collapse -->
-   <div class="panel-group">
 
          <div class="panel-heading" style="padding-left:30%;">
             <h4 class="panel-title">
@@ -32,7 +128,12 @@
                <li class="list-group-item">
                	  <div class="list-heading">
                      <h4 class="list-title">
+                     <c:if test="${user.type !=0 }">
+                        <a href="${root }/notice/userNoticelist.akcord?pg=1&key=&word=&order="><i class="fa fa-bullhorn"></i>&nbsp;공지사항</a>
+                      </c:if>
+                      <c:if test="${user.type == 0 }">
                         <a href="${root }/notice/mvnoticelist.akcord?pg=1&key=&word=&order="><i class="fa fa-bullhorn"></i>&nbsp;공지사항</a>
+                      </c:if>
                      </h4>
                   </div> 
                   <div class="list-heading1">
@@ -81,7 +182,7 @@
                   <div id="collapse-3" class="panel-collapse collapse">
                      <ul>
                         <li><a href="${root }/usermanager/mvmemberlist.akcord?pg=1&key=&word=&order=">회원관리</a></li>
-                        <li><a href="${root }/poll/list.akcord">통계</a></li>
+                        <li><a href="${root }/poll/list.akcord?pg=1&key=&word=&order=">통계</a></li>
                      </ul>
                   </div> 
                </li>
@@ -106,4 +207,18 @@
               	박수진님 환영합니다
            </div>
 	    </div>       
-	</div>
+	</div><<<<<<< HEAD
+        <div class="login_info pull-right">
+					<div id="username"></div>
+					님 환영합니다
+				</div>
+			</div>
+		</div>
+=======
+				<div class="login_info pull-right">
+					<div id="username"></div>
+					님 환영합니다
+				</div>
+			</div>
+		</div>
+>>>>>>> branch 'master' of https://github.com/Sujin92/akcord_final.git

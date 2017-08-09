@@ -34,21 +34,20 @@ public class UserManagerController {
 		query.put("type", "usermanage");
 		List<UserManageDto> list = userManagerService.getUserList(query);
 		List<MajorDto> mlist = userManagerService.getMajor();
-		
 		PageNavigation pageNavigation = commonService.makePageNavigation(query);
 		pageNavigation.setRoot("/akcord_project");
 		pageNavigation.setNavigator();
 		mav.addObject("navigator", pageNavigation);
-		
 		mav.addObject("majorList",mlist);
 		mav.addObject("userList",list);
 		mav.addObject("query", query);
-
 		mav.setViewName("/admin/memberlist");
 		return mav;
 	}
+
+	
 	@RequestMapping("/blackuserReg.akcord")
-	   public ModelAndView blackuserReg(@RequestParam("str") String str,@RequestParam Map<String,String> query){
+	public ModelAndView blackuserReg(@RequestParam("str") String str,@RequestParam Map<String,String> query){
 	      ModelAndView mav = new ModelAndView();
 	      int cnt= userManagerService.blackuserReg(str);
 	      List<UserManageDto> list = userManagerService.getUserList(query);

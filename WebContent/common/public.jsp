@@ -12,4 +12,6 @@
 	<input type="hidden" id="num" name="num">
 	<input type="hidden" id="myroomId" name="myroomId">
 	<input type="hidden" id="myroomNextId" name="myroomNextId">
+	<input type="hidden" id="memberskey" name="memberskey">
+	
 </form>
