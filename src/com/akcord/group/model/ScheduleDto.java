@@ -9,6 +9,13 @@ public class ScheduleDto {
 	private String startTime;
 	private String endDate;
 	private String endTime;
+	private int deadline;
+	public int getDeadline() {
+		return deadline;
+	}
+	public void setDeadline(int deadline) {
+		this.deadline = deadline;
+	}
 	public int getScheduleId() {
 		return scheduleId;
 	}

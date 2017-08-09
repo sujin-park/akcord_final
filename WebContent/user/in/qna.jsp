@@ -76,7 +76,7 @@ $(document).ready(function() {
 	<br>
 
 	<c:if test="${comments != null }">
-		<c:forEach var="list" items="${comments}">
+		<c:forEach var="list" items="${comments}" varStatus="i">
 			<div class="col-sm-1"></div>
 			<div class="col-sm-10" style="border: 1px solid; color: gray">
 				<br> <br>
@@ -95,9 +95,9 @@ $(document).ready(function() {
 				</div>
 				<div class="col-sm-12">
 					<label class="col-sm-12" style="text-align: right;">
-						<span class="glyphicon glyphicon-thumbs-up gi-2x"></span>
+						<span class="glyphicon glyphicon-thumbs-up gi-2x good${i.index }" ></span>
 						&nbsp;&nbsp;&nbsp;
-						<span class="glyphicon glyphicon-thumbs-down gi-2x"></span>
+						<span class="glyphicon glyphicon-thumbs-down gi-2x bad${i.index }"></span>
 					</label>
 				</div>
 				<div class="col-sm-12 form-group" style="margin-left: -15px">

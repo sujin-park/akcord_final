@@ -1,0 +1,23 @@
+.round.hollow {
+    margin: 40px 0 0;
+    
+}
+.round.hollow a {
+    border: 2px solid #f07800;
+    border-radius: 35px;
+    color: red;
+    color: #f07800;
+    font-size: 23px;
+    padding: 10px 21px;
+    text-decoration: none;
+    font-family: 'Open Sans', sans-serif;
+}
+.round.hollow a:hover {
+    border: 2px solid #000;
+    border-radius: 35px;
+    color:red;
+    color: #000;
+    font-size: 23px;
+    padding: 10px 21px;
+    text-decoration: none;
+}

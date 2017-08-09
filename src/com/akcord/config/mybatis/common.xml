@@ -36,6 +36,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             where subject like '%'||#{word}||'%'
         </if>
     </select>
+    
+    <select id="totalUserNoticeListCount" parameterType="java.util.Map" resultType="int">
+        select count(notice_id) from notice where is_notice=1
+        <if test="word!=''">
+            and subject like '%'||#{word}||'%'
+        </if>
+    </select>
+    
+    
     <select id="totalUserListCount" parameterType="java.util.Map" resultType="int">
         select count(user_id)
         from users u,major m where m.major_id=u.major_id and is_block=0
@@ -66,6 +75,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             </if>
         </if>
     </select>
+    
+    <select id="totalPollListCount" parameterType="java.util.Map" resultType="int">
+    select count(poll_id) 
+        from poll 
+        <if test="word!=''">
+            where subject like '%'||#{word}||'%'
+        </if>
+        order by poll_id desc
+    </select>
+    
+    
     <select id="newUserListCount" resultType="int">
         select count(user_id)
         from users where to_char(reg_date,'yymmdd')=to_char(sysdate,'yymmdd')
@@ -104,5 +124,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                         and m.major_name  like '%' || #{word} ||'%'
                     </if>
                 </if>
+    </select>
+    
+    <select id="totalWaitCount" parameterType="java.util.Map" resultType="int">
+                select count(g.group_id)
+                from grouproom_list gl, grouproom g, major m, users u
+                where g.major_id = m.major_id
+                and gl.group_id = g.group_id
+                and g.leader_id = u.user_id
+                and gl.user_id = #{userId}
+                and g.leader_id != #{userId}
+                and gl.is_accept = 0
+    </select>
+    
+    <select id="totalOriginCount" parameterType="java.util.Map" resultType="int">
+        select count(gl.user_id)
+        from grouproom_list gl, grouproom g, users u, major m
+        where gl.group_id = g.group_id
+        and u.user_id = gl.user_id
+        and m.major_id = u.major_id
+        and g.group_id = #{groupId}
+        and gl.user_id != #{seq}
+        and gl.is_accept = 1
+        
+    </select>
+    
+    <select id="totalInListCount" parameterType="java.util.Map" resultType="int">
+        select count(*)
+        from (select q.qna_id, u.user_id, u.name, u.major_id, q.subject, q.content, q.reg_date, q.hit
+            from qna q, users u
+            where q.user_id = u.user_id and q.major_id = #{major_id}
+            order by reg_date desc
+            ) a
     </select>
 </mapper>

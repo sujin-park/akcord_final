@@ -15,7 +15,7 @@ public interface GroupMainDao {
 
 	public int acceptMember(Map<String, String> map);
 
-	public List<GroupListDto> searchlist(String sid);
+	public List<GroupListDto> searchlist(Map<String, String> map);
 	
 	public int invite(Map<String, String> map);
 	
@@ -34,4 +34,12 @@ public interface GroupMainDao {
 	public List<GroupHwDto> groupArticleList(Map<String,String> map); 
 	
 	public GroupHwDto articleView(Map<String, String> map);
+	
+	public int deletegroup(int groupId);
+	
+	public int outgroup(Map<String,String> map);
+	
+	public int countperson(int scheduleId);
+	
+	public int totalperson(int groupId);
 }

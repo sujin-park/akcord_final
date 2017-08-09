@@ -33,8 +33,13 @@ public class GroupServiceImpl implements GroupService{
 		return sqlSession.getMapper(GroupDao.class).grouplist(query);
 	}
 	
-	public List<GroupRoomDto> waitinglist(int seq) {
-		return sqlSession.getMapper(GroupDao.class).waitinglist(seq);
+	public List<GroupRoomDto> waitinglist(Map<String,String> query) {
+		int pg = Integer.parseInt(query.get("pg"));
+		int end = pg * BoardConstant.LIST_SIZE;
+		int start = end - BoardConstant.LIST_SIZE;
+		query.put("start", start+"");
+		query.put("end", end+"");
+		return sqlSession.getMapper(GroupDao.class).waitinglist(query);
 	}
 
 	@Override

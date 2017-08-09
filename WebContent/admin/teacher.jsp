@@ -21,64 +21,6 @@
 <%@ include file="/common/template/nav.jsp" %>
 <%@ include file="/common/public.jsp" %>
 
-<!-- Main Navigation ========================================================================================== -->
-<!-- <div class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">My Library</a>
-        </div>
-        <div class="navbar-collapse collapse navbar-responsive-collapse">
-            <ul class="nav navbar-nav">
-                <li id="amember">
-                	<a href="#" class="dropdown-toggle" data-toggle="dropdown">회원</a>
-                	<ul class="dropdown-menu">
-                        <li><a href="#">회원 리스트</a></li>
-                    </ul>
-                </li>
-                <li id="anotice">
-                	<a href="#" class="dropdown-toggle" data-toggle="dropdown">공지사항</a>
-                	<ul class="dropdown-menu">
-                        <li><a href="#">공지사항 리스트</a></li>
-                    </ul>
-                </li>
-                <li id="aboard">
-                	<a href="#" class="dropdown-toggle" data-toggle="dropdown">게시판</a>
-                	<ul class="dropdown-menu">
-                        <li><a href="#">게시판형식생성</a></li>
-                        <li><a href="#">카테고리생성</a></li>
-                        <li><a href="#">게시판생성</a></li>
-                    </ul>
-                </li>
-                <li id="apoll">
-                	<a href="#" class="dropdown-toggle" data-toggle="dropdown">POLL</a>
-                	<ul class="dropdown-menu">
-                        <li><a href="#">poll생성</a></li>
-                        <li><a href="#">이전 poll 리스트</a></li>
-                    </ul>
-                </li>
-                <li id="astats">
-                	<a href="#" class="dropdown-toggle" data-toggle="dropdown">통계</a>
-                	<ul class="dropdown-menu">
-                        <li><a href="#">회원 거주지 분포</a></li>
-                        <li><a href="#">게시판별 등록글</a></li>
-                        <li><a href="#">등록글별 댓글</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="/cafeproject/">로그아웃 (userId)</a></li>
-            </ul>
-        </div>
-    </div>
-</div>
- -->
-
-
 <!-- Container ======================================================================================= -->
 <section>
 <div class="container">
@@ -103,44 +45,58 @@
            	<script type="text/javascript">
  
             $(document).ready(function() {
-            	//네비바 체크
-            	/* $('#apoll').addClass('active'); */
-			
-				// Request Method :: GET 
-				/* 
-				$.ajax({
-				 type: 'GET', 
-				 dataType: 'json',
-				 url: '${root}/poll/list.akcord',
-				 data: “id=”+id.val()+”&password=”+password.val()+”&name=”+name.val(),
-				 
-				});
-            	 */
-            	//결과보기
+            	
+            	$('#searchBtn').click(function(){
+    				$('#pg').val('1');
+    				$('#word').val($('#sword').val());
+    				$('#commonForm').attr('action','${root}/poll/list.akcord').submit();		
+    			});  	  
+    		  
+    			$('#firstBtn').click(function(){
+    				$('#pg').val('1');
+    				$('#word').val('${query.word}');
+    				$('#commonForm').attr('action', '${root}/poll/list.akcord').submit();
+    			});
+    			
+    			$('.pagemove').click(function(){
+    				$('#pg').val($(this).attr('data-page'));
+    				$('#word').val('${query.word}');
+    				$('#commonForm').attr('action', '${root}/poll/list.akcord').submit();
+    			});
+    			
+    			$('#lastBtn').click(function(){
+    				$('#pg').val($(this).attr('data-last'));
+    				$('#word').val('${query.word}');
+    				$('#commonForm').attr('action', '${root}/poll/list.akcord').submit();
+    			});
+            	
+            	 
+                     	//결과보기
             	$('.btn.btn-xs.btn-primary').click(function() {
 							
-            		var seq = $(this).parents('td').siblings().eq(0).text();
-            		alert(seq + "번 투표 결과보기 이동!!!");
+            		var pseq = $(this).parents('td').siblings().eq(0).text();
             		
             		/* $('#pollResultModal').on('show.bs.modal', function(event) {
               		});          	
               		$('#pollResultModal').modal(); */
-            		$('#seq').attr('value', seq);
-            		//$(location).attr('href','${root}/poll/modify.akcord?seq='+seq);
+            		$('#pseq').attr('value', pseq);
+            		//$(location).attr('href','${root}/poll/modify.akcord?pseq='+pseq);
             		$.ajax({
        				 type: 'GET', 
        				 dataType: 'json',
-       				 url: '${root}/poll/result.akcord?seq='+seq,
+       				 url: '${root}/poll/result.akcord?pseq='+pseq,
        				 //data : {'data', data},
        				 
        				 success : function(data){
-       				 	resultModal(data);
-       					 }
+       				 
+       					 resultModal(data);
+       				 
+       				 }
        				});
               		
             	});
-            	 
            function resultModal(cdata){
+        	   var myChart;
     			$('#pollResultModal').on('show.bs.modal', function(event) {
     				var data=new Array('FFB6C1', 'FFCFDA ','FFD0CD','FAEB78 ','FFE650','FFC6A5','FF9696','6EE5A3','73E1E1',
     						'96F56E','84FB84','52E252','8C8CFF','64AAFF','5AD2FF');
@@ -158,9 +114,57 @@
 				        	bgcolor[i]= "#"+data[Math.floor(Math.random()*data.length)];
 				        	
 			     }
-        			var ctx = document.getElementById("myChart").getContext("2d");
-      				var myChart=new Chart(ctx, {
-      					type: 'bar',
+        	 
+        			 $('#myChart').remove(); // this is my <canvas> element
+        	      	  $('#graph-container').append('<canvas id="myChart"><canvas>');
+        	      
+        	      	
+                  var ctx = document.getElementById("myChart").getContext("2d");
+					if( cdata.ChartType == "pie"){
+						myChart=new Chart(ctx, {
+	      					type: 'pie',
+	      				    data: {
+	      				        labels: label,
+	      				        datasets: [{
+	      				            label: cdata.Subject,
+	      				            data:value,
+	      				          fillColor: bgcolor,
+	      				        strokeColor: bgcolor,
+	      				      pointColor: bgcolor,
+	      				    backgroundColor:bgcolor
+	      				        }]
+	      				    },
+	      				    options: {
+	      				    	responsive: true
+	      				    }
+	      				});
+					}
+					else if( cdata.ChartType == "line"){
+						myChart=new Chart(ctx, {
+	      					type: 'line',
+	      				    data: {
+	      				        labels: label,
+	      				        datasets: [{
+	      				            label: cdata.Subject,
+	      				        	data:value,
+	      				        	 backgroundColor: '#FFB6C1',
+	      		                    borderColor: '#FFB6C1',
+	      				          fill: false,
+	      				        }]
+	      				    },
+	      				  options: {
+	      			        scales: {
+	      			            yAxes: [{
+	      			                stacked: true
+	      			            }]
+	      			        }
+	      			    }
+	      					});
+						}
+					
+					else{
+					myChart=new Chart(ctx, {
+      					type: cdata.ChartType,
       				    data: {
       				        labels: label,
       				        datasets: [{
@@ -181,38 +185,20 @@
       				        }
       				    }
       				});
+					}
         			modal.find('#pollcontent').val(myChart);
       				modal.find('#pollsubject').val(cdata.Subject);
     		});
     			
     			$('#pollResultModal').modal();
+    			
             }
- 
-	//투표수정
-/* 	$('.btn.btn-xs.btn-info').click(function() {
-    	var seq = $(this).parents('td').siblings().eq(0).text();
 
-		$('#seq').attr('value', seq);
-		//$(location).attr('href','${root}/poll/modify.akcord?seq='+seq);
-		$.ajax({
-		 type: 'GET', 
-		 dataType: 'json',
-		 url: '${root}/poll/modify.akcord?seq='+seq,
-		 //data : {'data', data},
-		 
-		 success : function(data){
-			//getHidden(data);
-			 upModal(data);
-
-		 }
-		});
-	}); */
-	
           //투표종료
         	$('.btn.btn-xs.btn-danger').click(function() {
-        		var seq = $(this).parents('td').siblings().eq(0).text();
-        		$(location).attr('href','${root}/poll/delete.akcord?seq='+seq);
-        		alert(seq + "번 투표 종료!!!");
+        		var pseq = $(this).parents('td').siblings().eq(0).text();
+        		$(location).attr('href','${root}/poll/delete.akcord?pseq='+pseq);
+        		alert(pseq + "번 투표 종료!!!");
         	});
         	
         });
@@ -220,30 +206,46 @@
         function upModal(data){        	
         		$('#pollModifyModal').on('show.bs.modal', function(event) {
     			var modal = $(this)
-    			alert(">>"+data.poll_id);
       		  	modal.find('#startDate').val(data.StartDate);
         		modal.find('#endDate').val(data.EndDate);
-        		modal.find('#chartType').val(data.ChartType);
+        		modal.find('#chart_type').val(data.ChartType);
         		modal.find('#question').val(data.Subject);
         		modal.find('#poll_id').val(data.poll_id);
-        		for(var i=0;i<data.contlist.length;i++) {
+        		modal.find('#answerDivM').empty();
+        		for(var i=0;i<data.contlist.length;i++) {        			
         			var lab = $('<label class="col-sm-3"></label>');
             		var inp = $('<div class="col-sm-8">')
             					.append('<input type="text" name="answer" class="answerInp form-control" value="'+data.contlist[i]+'" readonly="readonly">');
             		modal.find('#answerDivM').append(lab).append(inp);
     			}
-      		});          	
+      		});
+        		
       		$('#pollModifyModal').modal();
+      		
 		}
-        
-        
+        $(document).on('click','.btn.btn-xs.btn-info',function(){
+         	var pseq = $(this).parents('td').siblings().eq(0).text();
+        	//$(location).attr('href','${root}/poll/modify.akcord?pseq='+pseq);
+        	$.ajax({
+        	 type: 'GET', 
+        	 dataType: 'json',
+        	 url: '${root}/poll/modify.akcord?pseq='+pseq,
+        	 //data : {'data', data},
+        	 
+        	 success : function(data){
+        		 upModal(data);
+
+        	 }
+        	});
+        });
+
             </script>
             
 			<div class="col-sm-12">
  				<div class="table-responsive">
  				   <form id="modifyForm" name="modifyForm">
  				<div id="attach_file_hdn"></div>	
-			    <input type="hidden" name="seq" value="" id="seq">
+			    <input type="hidden" name="pseq" value="" id="pseq">
 			    <input type="hidden" name="" value="">
 				<input type="hidden" name="" value="">
             		<table class="table table-hover">
@@ -268,29 +270,19 @@
                     <tbody class="notice_list">
                         <!--<tr><td colspan="5" class="text-center">가입한 회원이 없습니다.</td></tr>-->
                         <c:forEach var="list" items="${list}">
-                        <tr data-seq="2">
+                        <tr data-pseq="2">
                             <td class="text-center">${list.poll_id}</td>
                             <td class="subject">${list.subject}</td>
-                            <td class="text-center">${list.count}</td>
+                            <td class="text-center">${list.cnt}</td>
                             <td class="text-center">${list.startDate} ~ ${list.endDate}</td>
                             <td class="etc text-center">
                             	<button type="button" id="pollResultBtn" class="btn btn-xs btn-primary" data-backdrop="static">결과보기</button>
-            					<button type="button" id="pollModifyBtn" class="btn btn-xs btn-info" data-backdrop="static">기간변경</button>
+            					<button type="button" id="pollModifyBtn" class="btn btn-xs btn-info" data-pbtn="${list.poll_id}" data-backdrop="static">기간변경</button>
             					<button type="button" id="pollStopBtn" class="btn btn-xs btn-danger" data-backdrop="static">투표종료</button>
                             </td>
                         </tr>
                         </c:forEach>
-                        <tr data-seq="1">
-                            <td id="seq" class="text-center">13</td>
-                            <td class="subject">가장 좋아하는 과목은 무엇입니까??</td>
-                            <td class="text-center">1867</td>
-                            <td class="text-center">17.06.01 ~ 17.06.15</td>
-                            <td class="etc text-center">
-                            	<button type="button" id="pollResultBtn" class="btn btn-xs btn-primary" data-backdrop="static">결과보기</button>
-            					<button type="button" id="pollModifyBtn" class="btn btn-xs btn-info" data-backdrop="static">기간변경</button>
-            					<button type="button" id="pollStopBtn" class="btn btn-xs btn-danger" data-backdrop="static">투표종료</button>
-                            </td>
-                        </tr>
+                        
                         </tbody>
                         
                     </table>
@@ -304,48 +296,18 @@
         <div class="col-sm-12">
 	        <form class="form-search">
 	            <div class="input-group">
-	                <input type="text" class="form-control" placeholder="제목">
+	                <input type="text" class="form-control" placeholder="제목"  id="sword" name="sword">
 	                <span class="input-group-btn">
-	                    <button type="submit" class="btn btn-primary">검색</button>
+	                    <button type="button" class="btn btn-primary" id="searchBtn" data-pg="1">검색</button>
 	                </span>
 	            </div>
 	        </form>
 		</div>
 		
-        <div class="col-sm-12" style="text-align: center;">
-          	<ul class="pagination">
-          		<li class="firstpage">
-          			<a href="#" aria-label="Previous">
-          				<span aria-hidden="true">최신</span>
-          			</a>
-		    	</li>
-          		<li class="page" data-page="0">
-          			<a href="#" aria-label="Previous">
-          				<span aria-hidden="true">이전</span>
-          			</a>
-			    </li>
-				<li class="page" data-page="1"><a href="#">1</a></li>
-				<li class="page active" data-page="2"><a href="#">2</a></li>
-				<li class="page" data-page="3"><a href="#">3</a></li>
-				<li class="page" data-page="4"><a href="#">4</a></li>
-				<li class="page" data-page="5"><a href="#">5</a></li>
-				<li class="page" data-page="6"><a href="#">6</a></li>
-				<li class="page" data-page="7"><a href="#">7</a></li>
-				<li class="page" data-page="8"><a href="#">8</a></li>
-				<li class="page" data-page="9"><a href="#">9</a></li>
-				<li class="page" data-page="10"><a href="#">10</a></li>
-				<li class="page" data-page="11">
-	          		<a href="#" aria-label="Next">
-	          			<span aria-hidden="true">다음</span>
-	          		</a>
-			    </li>
-			    <li class="page" data-page="100">
-	          		<a href="#" aria-label="Next">
-	          			<span aria-hidden="true">마지막</span>
-	          		</a>
-			    </li>
-			</ul>
-       	</div>
+       
+       	<div align="center" style="clear:both;">
+			${navigator.navigator}
+		</div>
 </div>
 </div>
 
@@ -383,24 +345,7 @@ $(document).ready(function() {
 		}
 	});
 });
-$(document).on('click','.btn.btn-xs.btn-info',function(){//동적으로 만든class들은 다시 다큐먼트로드해서 해야 이벤트가 먹음:   on(이벤트의종류,필터,기능)
- 	var seq = $(this).parents('td').siblings().eq(0).text();
 
-	$('#seq').attr('value', seq);
-	//$(location).attr('href','${root}/poll/modify.akcord?seq='+seq);
-	$.ajax({
-	 type: 'GET', 
-	 dataType: 'json',
-	 url: '${root}/poll/modify.akcord?seq='+seq,
-	 //data : {'data', data},
-	 
-	 success : function(data){
-		//getHidden(data);
-		 upModal(data);
-
-	 }
-	});
-});
 
 </script>
 <div id="pollWriteModal" class="modal fade" role="dialog">
@@ -426,12 +371,12 @@ $(document).on('click','.btn.btn-xs.btn-info',function(){//동적으로 만든cl
 				    	<label class="col-sm-3 control-label">그래프형식</label>
 	
 	                    <div class="col-sm-8">
-	                        <select id="charttype" name="chartType" class="form-control">
-	                        	<option value="1">바차트
-	                        	<option value="2">파이차트
-	                        	<option value="3">꺽은선차트
-	                        	<option value="4">라인차트
-	                        	<option value="5">버블차트
+	                        <select id="chart_type" name="chart_type" class="form-control">
+	                        	<option value="1">막대그래프
+	                        	<option value="2">파이그래프
+	                        	<option value="3">라인그래프
+	                        <!-- 	<option value="4">라인차트
+	                             <option value="5">버블차트 -->
 	                        </select>
 	                    </div>
 	                </div>
@@ -499,9 +444,9 @@ $(document).on('click','.btn.btn-xs.btn-info',function(){//동적으로 만든cl
 	                </div>
 			        <div class="col-sm-12" style="margin: 10px;">
 				    	<label class="col-sm-2 control-label">내용</label>
-							<div style="width:65%">
-      					  <div>
-        		    <canvas id="myChart" height="350" width="350"></canvas>
+							<div style="width:100%">
+      					  <div id="graph-container" >
+        		    <canvas id="myChart" height="500" width="500"></canvas>
         					</div>
   					  </div>
 	                    <div class="col-sm-10">
@@ -557,12 +502,10 @@ $(document).ready(function() {
 				    	<label class="col-sm-3 control-label">그래프형식</label>
 	
 	                    <div class="col-sm-8">
-	                        <select id="chartType" name="chartType" class="form-control">
-	                        	<option value="1">바차트
-	                        	<option value="2">파이차트
-	                        	<option value="3">꺽은선차트
-	                        	<option value="4">라인차트
-	                        	<option value="5">버블차트
+	                        <select id="chart_type" name="chart_type" class="form-control">
+	                        	<option value="1">막대그래프
+	                        	<option value="2">파이그래프
+	                        	<option value="3">라인그래프
 	                        </select>
 	                    </div>
 	                </div>

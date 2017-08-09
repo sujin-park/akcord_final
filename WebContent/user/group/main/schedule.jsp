@@ -41,7 +41,7 @@
 			           </div>
 			           <div class="col-sm-6">
 			          			 <div class="pull-right" style="padding-top:30px;">
-						         	<span class="glyphicon glyphicon-time" aria-hidden="true" style="color:#d34e4c;"></span><span>마감 기한 : 3일전</span>
+						         	<span class="glyphicon glyphicon-time" aria-hidden="true" style="color:#d34e4c;"></span><span id="deadspan" value=""></span>
 					           		 <button type="button" class="btn btn-danger btn-block" id="scheduleListBtn"><span class="fa fa-list"></span>&nbsp;&nbsp;과제목록</button>
 					           		 <button type="button" class="btn btn-danger btn-block" id="sModifyBtn" value=""><span class="fa fa-cut"></span>&nbsp;&nbsp;  수정</button>
 					           		 <button type="button" class="btn btn-default btn-block" id="sDeleteBtn" value=""><span class="fa fa-pencil fa-fw"></span>&nbsp;&nbsp;  삭제</button>

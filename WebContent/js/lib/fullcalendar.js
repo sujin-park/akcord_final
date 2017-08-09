@@ -7404,14 +7404,14 @@
 			classes.unshift('fc-day-grid-event', 'fc-h-event');
 
 			// Only display a timed events time if it is the starting segment
-			if (seg.isStart) {
+/*			if (seg.isStart) {
 				timeText = this.getEventTimeText(event);
 				if (timeText) {
 				 
 					timeHtml = '<span class="fc-time">' + htmlEscape(timeText) + '</span>';
 				} else 
 					timeHtml = '<span class="fc-time"> all day </span>';
-			}
+			}*/
 
 			titleHtml = '<span class="fc-title">' +
 				(htmlEscape(event.title || '') || '&nbsp;') + // we always want one line of height
@@ -7434,8 +7434,8 @@
 				'>' +
 				'<div class="fc-content">' +
 				(this.isRTL ?
-					'제목 : ' + titleHtml + '<br>시간 : ' + timeHtml + ' <br>내용 : ' + contentHtml + schedule_seq: // put a natural space in between
-					'시간 : ' + timeHtml + '<br>제목 : ' + titleHtml + '<br>내용 : ' + contentHtml + schedule_seq
+					'과제 : ' + titleHtml +  ' <br>할일 : ' + contentHtml + schedule_seq: // put a natural space in between
+					'과제 : ' + titleHtml + '<br>할일 : ' + contentHtml + schedule_seq
 				//
 				) +
 				'</div>' +
@@ -8819,15 +8819,15 @@
 				) +
 				'>' +
 				'<div class="fc-content">' +
-				(timeText ?
-					'<div class="fc-time"' +
-					' data-start="' + htmlEscape(startTimeText) + '"' +
-					' data-full="' + htmlEscape(fullTimeText) + '"' +
-					'>시간 : ' +
-					'<span>' + htmlEscape(timeText) + '</span>' +
-					'</div>' :
-					''
-				) +
+				/*(timeText ?
+				'<div class="fc-time"' +
+				' data-start="' + htmlEscape(startTimeText) + '"' +
+				' data-full="' + htmlEscape(fullTimeText) + '"' +
+				'>시간 : ' +
+				'<span>' + htmlEscape(timeText) + '</span>' +
+				'</div>' :
+				''
+			) +*/
 				(event.title ?
 					'<div class="fc-title">제목 : ' +
 					htmlEscape(event.title) +

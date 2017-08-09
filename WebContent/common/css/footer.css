@@ -1,0 +1,36 @@
+.footer-container{
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	z-index: 100;
+	background-color: #d34e4c;
+	padding: 15px 13px 17px;
+}
+
+#footer{
+	color: #fff;
+	text-align: center;
+}
+
+#footer .footer-slogan{
+	display: none;
+}
+
+#footer-logo{
+	display: inline;
+	font-weight: bold;
+	margin-right: 5px;
+}
+
+#footer .copyright{
+}
+
+.team{
+	display: block;
+	margin-top: 15px;
+}
+
+.member{
+	display: block;
+	font-weight: bold;
+}

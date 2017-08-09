@@ -23,7 +23,6 @@ $(document).ready(function (){
 	$('#noticeWriteBtn').click(function (){
 		$(location).attr('href','${root}/notice/noticewrite.akcord');	
 	});
-
 	  $('#checkAll').click(function() {
 		    $('.checkbox').prop('checked', this.checked);
 		  });	
@@ -32,7 +31,6 @@ $(document).ready(function (){
 			 var values = new Array();
 			$('input:checkbox[name=admincheckbox]:checked').each(function () {
 				values.push($(this).val());
-		
 			});
 			/* document.noticeform.action = "${root}/admin/noticedelete.akcord?str=checkList" */
 			$(location).attr('href','${root}/notice/noticedelete.akcord?str='+values);
@@ -43,22 +41,8 @@ $(document).ready(function (){
 			 var values = new Array();
 			$('input:checkbox[name=admincheckbox]:checked').each(function () {
 				values.push($(this).val());
-			
 			});
-			
 			$(location).attr('href','${root}/notice/noticepublic.akcord?str='+values);
-		  
-	  });
-	  $('#publicBtn').click(function (){
-		 	 var str;
-			 var values = new Array();
-			$('input:checkbox[name=admincheckbox]:checked').each(function () {
-				values.push($(this).val());
-			
-			});
-			
-			$(location).attr('href','${root}/notice/noticepublic.akcord?str='+values);
-		  
 	  });
 	
 		   $("#noticesort").change(function () {   
@@ -85,7 +69,6 @@ $(document).ready(function (){
 				$('#word').val('${query.word}');
 				$('#commonForm').attr('action', '${root}/notice/mvnoticelist.akcord').submit();
 			});
-			
 			$('#lastBtn').click(function(){
 				$('#pg').val($(this).attr('data-last'));
 				$('#word').val('${query.word}');
@@ -93,18 +76,14 @@ $(document).ready(function (){
 			});
 	 
 });
-
-
 </script>
 <style>
-.btn {
-	background-color: ;
-	color: white;
+th.ct {
+	text-align:center !important;
 }
 </style>
 <section class="content page-top row"  style="padding-top: 60px;">
 			<div class="container" style="padding-top: 60px;">
-			
 				<div class="col-sm-10 col-sm-push-1">
 					<h2>공지사항 목록</h2>
 				</div>
@@ -129,56 +108,27 @@ $(document).ready(function (){
 							</div>	
 			<table class="table">
 				<thead>
-				<tr  align="center">
-					<th  width="5%" align="right">
+				<tr>
+					<th>
 					<input type="checkbox" name="checkAll" id="checkAll" value="1">
 					</th>
-					<th width="10%" align="center">글번호</th>
-					<th width="40%"  align="center">공지 제목</th>
-					<th width="15%"  align="center">등록일</th>
-					<th width="10%"  align="center">조회수</th>
-					<th width="15%" align="center">공개여부</th>
-			
+					<th class="ct">글번호</th>
+					<th class="ct">공지 제목</th>
+					<th class="ct">등록일</th>
+					<th class="ct">조회수</th>
+					<th>공개여부</th>
 				</tr>
 				</thead>
 				<tbody>
-				<c:if test="${user.type==1}">
-				<!--회원이면 공개글만보여야함....타입이 1이고 이즈노티스가 1인것만  -->
 				<c:forEach var="notice" items="${noticeList}">
-				<c:choose>
-				<c:when test="${notice.is_notice ==1 }">
-					<tr align="center"> 
-						<td align="right" >
+					<tr>
+						<td>
 							<input class="checkbox" type="checkbox" name="admincheckbox" id="checkbox" value="${notice.notice_id}">
 						</td>
 						<td align="center">${notice.notice_id }</td>
 						<td align="center"><a href="${root }/notice/noticemodify.akcord?nid=${notice.notice_id}">${notice.subject }</a></td>
 						<td align="center">${notice.reg_date }</td>
 						<td align="center">${notice.hit }</td>
-						<c:choose>
-   						 <c:when test="${notice.is_notice==0}">
-							<td align="center">비공개</td>
-						</c:when>
-						<c:otherwise>
-						<td align="center">공개</td>
-						</c:otherwise>
-						</c:choose>
- 						
-					</tr>
-					</c:when>  
-					</c:choose>
-					</c:forEach></c:if>
-				<c:if test="${user.type==0}">
-				<!--회원이면 공개글만보여야함....타입이 1이고 이즈노티스가 1인것만  -->
-				<c:forEach var="notice" items="${noticeList}">
-					<tr>
-						<td>
-							<input class="checkbox" type="checkbox" name="admincheckbox" id="checkbox" value="${notice.notice_id}">
-						</td>
-						<td>${notice.notice_id }</td>
-						<td><a href="${root }/notice/noticemodify.akcord?nid=${notice.notice_id}">${notice.subject }</a></td>
-						<td>${notice.reg_date }</td>
-						<td>${notice.hit }</td>
 						<c:choose>
    						 <c:when test="${notice.is_notice==0}">
 							<td>비공개</td>
@@ -189,7 +139,6 @@ $(document).ready(function (){
 						</c:choose>	
 					</tr>
 					</c:forEach>
-					</c:if>
 					</tbody>
 			</table> 
 			<div align="right">

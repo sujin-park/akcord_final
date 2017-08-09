@@ -35,7 +35,7 @@
  		if(selectname=="") {
  			alert("검색할 아이디를 입력하세요");
  		} else {
- 				$.get("${root}/groupmain/search.akcord?sid="+selectname, 
+ 				$.get("${root}/groupmain/search.akcord?sid="+selectname+"&groupId=${groupId}", 
  						function(data, status){
  						var div = document.getElementById("tbodyselect");
  						div.innerHTML=data;
@@ -53,7 +53,7 @@
 	
 	$(document).ready(function(){
 		$('#g').on('click', function(){
-			$.get("${root}/groupmain/grouplist.akcord?groupId=${groupId}", 
+			$.get("${root}/groupmain/grouplist.akcord?groupId=${groupId}&pg=1", 
 						function(data, status){
 						var div = document.getElementById('groupReal');
 						div.innerHTML=data;
@@ -61,6 +61,9 @@
 		});
 		
 		$('#searchBtn').click(function(){
+			if ($('#sword').val() == "") {
+				alert("검색어를 입력해주세요.");
+			} else {
 			$('#pg').val('1');
 			$('#key').val($('#skey').val());
 			$('#word').val($('#sword').val());
@@ -68,7 +71,8 @@
 			$('#order').val('${query.order}');
 			$('#groupId').val($('#sgroupid').val());
 			$('#commonForm').attr('action', '${root}/groupmain/group.akcord').submit();
-		});
+			}
+			});
 		
 		$('#firstBtn').click(function(){
 			$('#pg').val('1');
