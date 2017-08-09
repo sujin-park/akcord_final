@@ -7,9 +7,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.akcord.main.rank.dao.RankDao">
     
     <select id="getQna">
-        select rownum, subject
+        select rownum, subject, qna_id 
         from
-        (select subject, hit
+        (select subject, hit, qna_id
         from qna
         order by hit)
         where rownum &lt;= 10
@@ -25,14 +25,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <select id="getGroup">
-        select group_id, count(user_id) hit
+        select group_id, count(user_id) hit, group_name
         from
-            (select group_id from grouproom_list)
+            (select group_id, group_name from grouproom_list)
         order by hit
     </select>
 
     <select id="getMyroom">
-        select subject, hit
+        select subject, hit, myroom_id
         from myroom_next
         where is_share = 1
         order by hit

@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/common/template/head_include.jsp"%>
-<link rel="stylesheet" href="/akcord_project/user/group/css/list.css">
 <%@include file="/common/template/nav.jsp"%>
+<link rel="stylesheet" href="/akcord_project/user/group/css/list.css">
 <%@include file="/common/public.jsp" %>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -18,12 +18,17 @@
 		});
 	});
 </script>
+<style>
+.articleinfo{
+    color: #888;   
+}
+</style>
 <input type="hidden" id="groupInfo" value="${groupId}">
     <div class="container-fluid">
         <div class="container container-pad" id="property-listings">
             
             <div class="row">
-              <div class="col-sm-12  style="padding-bottom:10px;">
+              <div class="col-sm-12 articleinfo" style="padding-bottom:10px;">
                 <h1>GROUP HOMEWORK</h1>
                 <c:if test="${not empty startDate && not empty endDate}">
                 	<p>${startDate} ~ ${endDate}</p>
@@ -34,17 +39,20 @@
               </div>
             </div>
             <div class="row"  style="padding-bottom:10px;">
-				<div class="col-sm-10">
+				<div class="col-sm-6" style="padding-top:20px;">
 					<button type="button" class="btn btn-md btn-danger" id="listBtn_G">
 					<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>&nbsp;BACK
 					</button>
 				</div>
-	            <div class="col-sm-2">
-						<select class="form-control">
-							<option>글정렬</option>
-							<option>최신순</option>
-							<option>3</option>
-						</select>
+				<div class="col-sm-3"></div>
+	            <div class="col-sm-3">
+					<h5 align="right"><i class="fa fa-book"></i>&nbsp;과제 제출 현황</h5>
+					<div class="progress" >
+						  <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar"
+						  aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:${percent}%">
+						    ${percent}%
+						  </div>
+					</div>
 				</div>
 			</div>
 			 <c:forEach var="article" items="${alist}" varStatus="i">

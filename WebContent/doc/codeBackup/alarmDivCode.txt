@@ -1,0 +1,91 @@
+<div class="panel-group-alarm">
+			<div class="c_03 c pull-right" style="padding-right: 80px;">
+				<%-- <a href=""><img alt="" src="${root}/doc/img/bell-icon.png" width="20" height="20"><span class="badge">5</span></a> --%>
+
+
+					<a data-toggle="collapse" href="#collapse-alarm"><span
+						class="fa fa-bell fa-2x" style="color: #d34e4c;"></span><span
+						class="badge"></span></a>
+			</div>
+					<!-- 알람창 -->
+					<div id="collapse-alarm" class="panel-collapse collapse">
+
+						<ul class="list-group">
+							<li class="list-group-item">
+
+								<div class="list-heading1">
+									<h4 class="list-title">
+										<a href="#">&nbsp;내용</a>
+									</h4>
+								</div> <c:forEach items="${data.list0}" var="i">
+									<c:choose>
+										<c:when test="${data.list0[i].key} eq 1">
+											<div class="list-heading1">
+												<h4 class="list-title">
+													<strong> <a href="#">&nbsp;
+															그룹에 초대되었습니다! </a></strong>
+												</h4>
+											</div>
+										</c:when>
+
+										<c:when test="${data.list0[i].key} eq 2">
+											<div class="list-heading1">
+												<h4 class="list-title">
+													<strong> <a href="#">&nbsp;
+															그룹에 가입되었습니다! </a></strong>
+												</h4>
+											</div>
+										</c:when>
+
+										<c:when test="${data.list0[i].key} eq 3">
+											<div class="list-heading1">
+												<h4 class="list-title">
+													<strong> <a href="#">&nbsp;
+															지식인에 답변이 달렸습니다! </a></strong>
+												</h4>
+											</div>
+										</c:when>
+
+										<c:when test="${data.list0[i].key} eq 4">
+											<div class="list-heading1">
+												<h4 class="list-title">
+													<strong> <a href="#">&nbsp;
+															지식인에 덧글이 달렸습니다! </a></strong>
+												</h4>
+											</div>
+										</c:when>
+
+										<c:when test="${data.list0[i].key} eq 5">
+											<div class="list-heading1">
+												<h4 class="list-title">
+													<strong> <a href="#">&nbsp;
+															지식인에 좋아요가 표시가 되었습니다! </a></strong>
+												</h4>
+											</div>
+										</c:when>
+
+										<c:when test="${data.list0[i].key} eq 6">
+											<div class="list-heading1">
+												<h4 class="list-title">
+													<strong> <a href="#">&nbsp;
+															지식인에 싫어요 표시가 생겼습니다ㅠ </a></strong>
+												</h4>
+											</div>
+										</c:when>
+
+										<c:when test="${data.list0[i].key} eq 7">
+											<div class="list-heading1">
+												<h4 class="list-title">
+													<strong> <a href="#">>&nbsp;
+															공지사항이 등록되었습니다! </a></strong>
+												</h4>
+											</div>
+										</c:when>
+
+									</c:choose>
+
+								</c:forEach>
+							</li>
+						</ul>
+					</div>
+				</div>

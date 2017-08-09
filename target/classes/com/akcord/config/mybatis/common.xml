@@ -125,4 +125,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                     </if>
                 </if>
     </select>
+    
+    <select id="totalWaitCount" parameterType="java.util.Map" resultType="int">
+                select count(g.group_id)
+                from grouproom_list gl, grouproom g, major m, users u
+                where g.major_id = m.major_id
+                and gl.group_id = g.group_id
+                and g.leader_id = u.user_id
+                and gl.user_id = #{userId}
+                and g.leader_id != #{userId}
+                and gl.is_accept = 0
+    </select>
+    
+    <select id="totalOriginCount" parameterType="java.util.Map" resultType="int">
+        select count(gl.user_id)
+        from grouproom_list gl, grouproom g, users u, major m
+        where gl.group_id = g.group_id
+        and u.user_id = gl.user_id
+        and m.major_id = u.major_id
+        and g.group_id = #{groupId}
+        and gl.user_id != #{seq}
+        and gl.is_accept = 1
+        
+    </select>
 </mapper>

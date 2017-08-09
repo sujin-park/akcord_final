@@ -11,6 +11,33 @@
 	function accept(seq) {
 		document.location.href ="${root}/group/accept.akcord?seq="+seq;
 	}
+	
+	$(document).ready(function(){
+	$('#firstBtn').click(function(){
+		$('#pg').val('1');
+		$('#key').val('${query.key}');
+		$('#word').val('${query.word}');
+		$('#order').val('${query.order}');
+		$('#commonForm').attr('action', '${root}/group/list.akcord').submit();
+	});
+	
+	$('.pagemove').click(function(){
+		$('#pg').val($(this).attr('data-page'));
+		$('#key').val('${query.key}');
+		$('#word').val('${query.word}');
+		$('#order').val('${query.order}');
+		$('#commonForm').attr('action', '${root}/group/list.akcord').submit();
+	});
+	
+	$('#lastBtn').click(function(){
+		$('#pg').val($(this).attr('data-last'));
+		$('#key').val('${query.key}');
+		$('#word').val('${query.word}');
+		$('#order').val('${query.order}');
+		$('#commonForm').attr('action', '${root}/group/list.akcord').submit();
+	});
+	
+	});
 </script>
 <title>GROUP LIST</title>
 	<section class="content page-top row">
@@ -66,11 +93,11 @@
 											</div>
 										</td>
 										<td align="center">
-												<button class="btn-danger btn-sm" id="accept${WaitDto.groupId}" onclick="javascript:accept(${WaitDto.groupId});">
+												<button class="btn btn-danger" id="accept${WaitDto.groupId}" onclick="javascript:accept(${WaitDto.groupId});">
 													<span class="glyphicon glyphicon-heart">
 													</span>
 												</button>
-												<button class="btn-default btn-sm" id="cancel${WaitDto.groupId}" onclick="javascript:cancel(${WaitDto.groupId});">
+												<button class="btn btn-default" id="cancel${WaitDto.groupId}" onclick="javascript:cancel(${WaitDto.groupId});">
 													<span class="glyphicon glyphicon-remove">
 													</span>
 												</button>
@@ -84,6 +111,10 @@
 					</div>
 				</div>
 			</div>
+			<div align="center" style="clear:both;">
+				${navigator.navigator}
+			</div>
+			<div class="col-md-6"></div>
 		</div>
 	</section>
 </body>

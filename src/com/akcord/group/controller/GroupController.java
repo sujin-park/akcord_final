@@ -1,5 +1,6 @@
 package com.akcord.group.controller;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,80 +23,99 @@ import com.akcord.util.PageNavigation;
 @Controller
 @RequestMapping("/group")
 public class GroupController {
-	
+
 	@Autowired
 	private GroupService groupService;
-	
+
 	@Autowired
 	private CommonService commonService;
-	
+
 	@RequestMapping("/make.akcord")
-	public String makegroup(GroupRoomDto groupRoomDto, HttpSession session){
+	public String makegroup(GroupRoomDto groupRoomDto, HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
 		groupRoomDto.setLeaderId(user.getUser_id());
-		
-		System.out.println(user.getUser_id() + "유저 아이디");
 		int cnt = groupService.createG(groupRoomDto);
-		return "redirect:/group/list.akcord?pg=1&key=&word=&order=";
+		return "redirect:/group/list.akcord?pg=1&key=&word=&order=&state=100";
 	}
+
 	@RequestMapping("/list.akcord")
-	public ModelAndView list(HttpSession session, @RequestParam Map<String,String> query) {
+	public ModelAndView list(HttpSession session, @RequestParam Map<String, String> query) {
 		ModelAndView mav = new ModelAndView();
-		
 		UserDto userDto = (UserDto) session.getAttribute("user");
-		query.put("myseq", userDto.getUser_id()+"");
+		query.put("myseq", userDto.getUser_id() + "");
 		List<GroupRoomDto> list = groupService.grouplist(query);
 		List<MajorDto> majorlist = groupService.majorlist();
 		query.put("type", "group");
 		PageNavigation pageNavigation = commonService.makePageNavigation(query);
 		pageNavigation.setRoot("/akcord_project");
 		pageNavigation.setNavigator();
+
 		mav.addObject("navigator", pageNavigation);
 		mav.addObject("mList", majorlist);
 		mav.addObject("grouplist", list);
 		mav.addObject("query", query);
+		if (query.get("count") != null) {
+			mav.addObject("count", query.get("count") + "");
+		} else {
+			mav.addObject("count", 0);
+		}
+		if (query.get("state") != null) {
+			mav.addObject("state", query.get("state") + "");
+		} else {
+			mav.addObject("state", 0);
+		}
+
 		mav.setViewName("/user/group/grouplist");
 		return mav;
 	}
-	
+
 	@RequestMapping("/waitinglist.akcord")
-	public ModelAndView acceptlist(HttpSession session){
+	public ModelAndView acceptlist(HttpSession session, @RequestParam Map<String, String> query) {
 		ModelAndView mav = new ModelAndView();
 		UserDto user = (UserDto) session.getAttribute("user");
-		List<GroupRoomDto> waitinglist = groupService.waitinglist(user.getUser_id());
+		query.put("userId", user.getUser_id()+"");
+		List<GroupRoomDto> waitinglist = groupService.waitinglist(query);
+		query.put("type", "groupwait");
+		PageNavigation pageNavigation = commonService.makePageNavigation(query);
+		pageNavigation.setRoot("/akcord_project");
+		pageNavigation.setNavigator();
+
+		mav.addObject("navigator", pageNavigation);
 		mav.addObject("waitlist", waitinglist);
 		mav.setViewName("/user/group/waitinglist");
 		return mav;
 	}
+
 	@RequestMapping("/join.akcord")
-	public String join(@RequestParam("seq") String seq, HttpSession session){
+	public String join(@RequestParam("seq") String seq, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		UserDto user = (UserDto) session.getAttribute("user");
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("seq", seq);
-		map.put("userId", user.getUser_id()+"");
+		map.put("userId", user.getUser_id() + "");
 		int cnt = groupService.joinGroup(map);
-		return "redirect:/group/list.akcord?pg=1&key=&word=&order=";
+		return "redirect:/group/list.akcord?pg=1&key=&word=&order=&state=200";
 	}
+
 	@RequestMapping("/cancel.akcord")
-	public String cancel(@RequestParam("seq") String seq, HttpSession session) {
+	public String cancel(@RequestParam("seq") String seq,  HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		Map<String,String> map = new HashMap<String,String>();
+		Map<String, String> map = new HashMap<String, String>();
 		UserDto user = (UserDto) session.getAttribute("user");
 		map.put("seq", seq);
-		map.put("userId", user.getUser_id()+"");
+		map.put("userId", user.getUser_id() + "");
 		int cnt = groupService.cancel(map);
-		return "redirect:/group/waitinglist.akcord";
+		return "redirect:/group/waitinglist.akcord?pg=1";
 	}
-	
+
 	@RequestMapping("/accept.akcord")
-	public String accept(@RequestParam("seq") String seq, HttpSession session) {
+	public String accept(@RequestParam("seq") String seq,  HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		Map<String,String> map = new HashMap<String,String>();
+		Map<String, String> map = new HashMap<String, String>();
 		UserDto user = (UserDto) session.getAttribute("user");
 		map.put("seq", seq);
-		map.put("userId", user.getUser_id()+"");
+		map.put("userId", user.getUser_id() + "");
 		int cnt = groupService.accept(map);
-		return "redirect:/group/waitinglist.akcord";
+		return "redirect:/group/waitinglist.akcord?pg=1";
 	}
 }

@@ -48,5 +48,10 @@ public class InServiceImpl implements InService {
 		return sqlSession.getMapper(InDao.class).majorlist();
 	}
 
+	@Override
+	public List<InDto> category(Map<String, String>  category) {
+		return sqlSession.getMapper(InDao.class).category(category);
+	}
+
 
 }

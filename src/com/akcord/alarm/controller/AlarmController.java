@@ -21,24 +21,24 @@ public class AlarmController {
    
    @Autowired
    private AlarmService alarmService;
-   
-   @RequestMapping(value="/alarm.akcord")
-   public @ResponseBody String alarmcount(HttpSession sesstion){
-      UserDto userDto = (UserDto) sesstion.getAttribute("user");
-      //String user_id = userDto.getUser_id() + "";
-      //String name = userDto.getName();
-      String user_id = "1";
-      String name = "디제이 짱짱맨";
-      // 리스트와 숫자를 리턴해줘야한다.
-      JSONObject jsonObject = new JSONObject();
-      JSONArray jarr0 = new JSONArray();
-      JSONArray jarr1 = new JSONArray();
-      // 님들 알림 디비로 고고!
-      //AlarmDto alarmDto = new AlarmDto();
-      int noneRead = alarmService.alarmNoneread(user_id);
-      List<AlarmDto> list0 = alarmService.alarmlist0(user_id);
-      List<AlarmDto> list1 = alarmService.alarmlist1(user_id);
+	@RequestMapping(value="/alarm.akcord")
+	public @ResponseBody String alarmcount(HttpSession sesstion){
+		UserDto userDto = (UserDto) sesstion.getAttribute("user");
+		//String user_id = userDto.getUser_id() + "";
+		//String name = userDto.getName();
+		String user_id = "1";
+		String name = "디제이 짱짱맨";
+		// 리스트와 숫자를 리턴해줘야한다.
+		JSONObject jsonObject = new JSONObject();
+		JSONArray jarr0 = new JSONArray();
+		JSONArray jarr1 = new JSONArray();
+		// 님들 알림 디비로 고고!
+		//AlarmDto alarmDto = new AlarmDto();
+		int noneRead = alarmService.alarmNoneread(user_id);
+		List<AlarmDto> list0 = alarmService.alarmlist0(user_id);
+		List<AlarmDto> list1 = alarmService.alarmlist1(user_id);
 
+	
       for (AlarmDto alarmDto:list0) {
          JSONObject jsontmp = new JSONObject();
 

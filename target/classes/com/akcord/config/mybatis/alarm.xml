@@ -48,16 +48,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         values (#{target_id}, 7, sysdate, alarm_seq.nextval, 0)
     </insert>
     
-    <select id="alarmlist" parameterType="String" resultType="alarmDto">
+    <select id="alarmlist0" parameterType="String" resultType="alarmDto">
         select target_id, key, logtime, sequence_num, flag
         from alarm
         where target_id like #{target_id}
+        and flag = 0
+        order by sysdate
+    </select>
+    <select id="alarmlist1" parameterType="String" resultType="alarmDto">
+        select target_id, key, logtime, sequence_num, flag
+        from alarm
+        where target_id like #{target_id}
+        and flag = 1
+        order by sysdate
     </select>
     
     <select id="alarmNoneread" parameterType="String" resultType="int">
         select count(flag)
         from alarm
-        where target_id like #{target_id}
+        where target_id = #{target_id}
+        and flag = 0
     </select>
     
     <update id="alarmreadset" parameterType="int">

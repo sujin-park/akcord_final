@@ -11,7 +11,7 @@ public interface GroupDao {
 
 	public List<GroupRoomDto> grouplist(Map<String, String> query);
 
-	public List<GroupRoomDto> waitinglist(int seq);
+	public List<GroupRoomDto> waitinglist(Map<String,String> query);
 
 	public List<MajorDto> majorlist();
 

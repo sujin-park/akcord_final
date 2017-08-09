@@ -8,7 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select 
                 (select count(group_id) 
                 from grouproom_list gl where gl.group_id = g.group_id and gl.is_accept = 1) nowCount, 
-                g.group_id groupId, g.reg_date as regDate, m.major_name majorName, g.group_name groupName,
+                g.group_id groupId, decode(to_char(g.reg_date, 'yymmdd'), to_char(sysdate, 'yymmdd'), to_char(g.reg_date, 'hh24:mi:ss'),to_char(g.reg_date, 'yy.mm.dd')) as regDate, m.major_name majorName, g.group_name groupName,
                 g.content content, g.g_count gCount, u.name name, g.leader_id leaderId
                         from users u, grouproom g, major m
                             where u.user_id = g.leader_id and
@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select b.*
         from(select rownum rn, a.*
         from(        
-                select g.group_id groupId, u.name name, u.id userId, m.major_name majorName, gl.reg_date regDate, u.user_id seq
+        select g.group_id groupId, u.name name, u.id userId, m.major_name majorName, decode(to_char(gl.reg_date, 'yymmdd'), to_char(sysdate, 'yymmdd'), to_char(gl.reg_date, 'hh24:mi:ss'),to_char(gl.reg_date, 'yy.mm.dd')) as regDate, u.user_id seq
                         from grouproom_list gl, grouproom g, users u, major m
                         where gl.group_id = g.group_id
                         and u.user_id = gl.user_id
@@ -68,7 +68,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             from users u, major m
             where u.major_id = m.major_id
             and u.user_id not in (
-            select user_id from grouproom_list where group_id = 2)
+            select user_id from grouproom_list where group_id = #{groupId})
             and u.id like '%' || #{sid} || '%'
     </select>
     
@@ -78,7 +78,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </insert>
     
     <select id="originlist" parameterType="java.util.Map" resultType="groupListDto">
-        select g.group_id groupId, u.name name, u.id userId, m.major_name majorName, gl.reg_date regDate, u.user_id seq
+        select b.*
+        from(select rownum rn, a.*
+        from(        
+        select g.group_id groupId, u.name name, u.id userId, m.major_name majorName,  decode(to_char(gl.reg_date, 'yymmdd'), to_char(sysdate, 'yymmdd'), to_char(gl.reg_date, 'hh24:mi:ss'),to_char(gl.reg_date, 'yy.mm.dd')) as regDate, u.user_id seq
                 from grouproom_list gl, grouproom g, users u, major m
                 where gl.group_id = g.group_id
                 and u.user_id = gl.user_id
@@ -86,12 +89,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 and g.group_id = #{groupId}
                 and gl.user_id != #{seq}
                 and gl.is_accept = 1
+                
+                ) a
+                where rownum &lt;= #{end}
+                ) b
+                where b.rn &gt; #{start}                 
+                
     </select>
     
     <select id="schedulelist" parameterType="int" resultType="scheduleDto">
         select schedule_id scheduleId, group_id groupId, schedule_name scheduleName, detail, start_date startDate, start_time startTime,
-        end_date endDate, end_time endTime from schedule
-                where group_id = #{groupId}
+        end_date endDate, end_time endTime, 
+       (to_date(end_date) - to_date(sysdate)) deadline
+        from schedule
+        where group_id = #{groupId}
     </select>
     
     <insert id="scheduleInsert" parameterType="scheduleDto">
@@ -133,5 +144,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                     and u.major_id = m.major_id
                     and ghw.group_id = #{groupId}
                     and mnext.myroom_next_id = #{articleseq}
+    </select>
+    
+    <delete id="deletegroup" parameterType="int">
+        delete grouproom where group_id =#{groupId}
+    </delete>
+    
+    <delete id="outgroup" parameterType="java.util.Map">
+        delete grouproom_list where group_id =#{groupId} and user_id = #{userId}
+        
+    </delete> 
+    
+    <select id="countperson" parameterType="int" resultType="int">
+        select count(*) 
+                    from (
+                            select count(u.user_id) from grouproom_hw ghw, users u, myroom_next mnext
+                            where u.user_id = mnext.user_id
+                            and ghw.myroom_next_id = mnext.myroom_next_id
+                            and schedule_id = #{scheduleId}
+                            group by u.user_id
+                    )
+    </select>
+    
+    <select id="totalperson" parameterType="int" resultType="int">
+        select count(user_id), group_id from grouproom_list where group_id = #{groupId} group by group_id
     </select>
 </mapper>

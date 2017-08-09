@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/common/template/head_include.jsp" %>
-<script src='${root}/common/css/main.css' charset="utf-8"></script>
+<link rel="stylesheet" type="text/css" href="${root}/common/css/main.css">
 <%@ include file="/common/template/nav.jsp" %>
 <!-- 메인 페이지 꾸미고 include 해주면 될듯..ㅎ.. -->
-</div>
 <div class="jumbotron" style="height:150px;">
           <div class="col-sm-8 col-sm-offset-2">
 	            <h2 align="center">Akashic records</h2>
@@ -60,3 +59,4 @@
 		  </a>
 	</div>
  </div>
+ <%@include file="/common/template/footer.jsp"%>

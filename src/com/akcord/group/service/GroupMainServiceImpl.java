@@ -41,8 +41,8 @@ public class GroupMainServiceImpl  implements GroupMainService{
 	}
 
 	@Override
-	public List<GroupListDto> searchlist(String sid) {
-		return sqlSession.getMapper(GroupMainDao.class).searchlist(sid);
+	public List<GroupListDto> searchlist(Map<String, String> map) {
+		return sqlSession.getMapper(GroupMainDao.class).searchlist(map);
 	}
 
 	@Override
@@ -52,6 +52,11 @@ public class GroupMainServiceImpl  implements GroupMainService{
 
 	@Override
 	public List<GroupListDto> originlist(Map<String, String> map) {
+		int pg = Integer.parseInt(map.get("pg"));
+		int end = pg * BoardConstant.LIST_SIZE;
+		int start = end - BoardConstant.LIST_SIZE;
+		map.put("start", start+"");
+		map.put("end", end+"");
 		return sqlSession.getMapper(GroupMainDao.class).originlist(map);
 	}
 
@@ -88,6 +93,26 @@ public class GroupMainServiceImpl  implements GroupMainService{
 	@Override
 	public GroupHwDto articleView(Map<String, String> map) {
 		return sqlSession.getMapper(GroupMainDao.class).articleView(map);
+	}
+
+	@Override
+	public int deletegroup(int groupId) {
+		return sqlSession.getMapper(GroupMainDao.class).deletegroup(groupId);
+	}
+
+	@Override
+	public int outgroup(Map<String,String> map) {
+		return  sqlSession.getMapper(GroupMainDao.class).outgroup(map);
+	}
+
+	@Override
+	public int countperson(int scheduleId) {
+		return sqlSession.getMapper(GroupMainDao.class).countperson(scheduleId);
+	}
+
+	@Override
+	public int totalperson(int groupId) {
+		return sqlSession.getMapper(GroupMainDao.class).totalperson(groupId);
 	}
 
 }
