@@ -307,9 +307,7 @@ var obj;
 		font-size: 14px;
 	}
 	
-	.container {
-		padding-top:60px;
-	}
+
 	#calendar {
 		margin: 0 auto;
 		display: inline;
@@ -337,7 +335,7 @@ var obj;
 </style>
 <%@ include file="/common/template/nav.jsp" %>
 <div class="col-sm-10 col-sm-push-1">
-	<div class="container">
+	<div class="container akcord">
 		<div class="row" style="margin:30px;">
 					<div class="row"></div>
 						<div class="groupinfo">

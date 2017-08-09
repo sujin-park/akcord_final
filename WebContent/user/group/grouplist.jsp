@@ -129,9 +129,9 @@ function joinGroup(seq) {
 <input type="hidden" id="now" valule="">
 <input type="hidden" id="full" valule="">
 
-		<section class="content page-top row">
-		<div class="container">
-			<div class="col-sm-10 col-sm-push-1">
+<!-- 	<section class="content page-top row"> -->
+	<div class="container akcord">
+		<div class="col-sm-12">
 			<h2>GROUP LIST</h2>
 				<div class="panel panel-default">
 					<div class="panel-body">
@@ -236,7 +236,7 @@ function joinGroup(seq) {
 				</div>
 			</div>
 			</div>
-		</section>
+	<!-- </section> -->
 <%@include file="/user/group/create.jsp"%>
 <%@include file="/user/group/join.jsp"%>
 </body>

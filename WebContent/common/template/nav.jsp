@@ -99,6 +99,12 @@ var name = "";
 		resultView.empty();
 		resultView.append(output);
 	}
+
+$(function(){
+	$('#toggleSidebar').on('click', function(){
+		$('#sidebar').toggleClass('on');
+	})
+})
 </script>
 
 <body>
@@ -107,18 +113,17 @@ var name = "";
 		<!-- nav -->
 
 		<!-- collapse -->
-		<div class="panel-group">
+		<div class="panel-group" id="sidebar">
 
 			<div class="panel-heading" style="padding-left: 30%;">
 				<h4 class="panel-title">
 					<a data-toggle="collapse" href="#collapse-1"> <img alt=""
 						src="${root}/doc/img/icon.png" height="35" width="35">
-
 					</a>
 				</h4>
 			</div>
 
-			<div id="collapse-1" class="panel-collapse collapse">
+			<div id="collapse-1" class="panel-collapse collapse in">
 				<div class="input-group">
 					<input type="text" class="form-control" placeholder="단어를 입력해주세요">
 					<span class="input-group-btn">
@@ -129,9 +134,12 @@ var name = "";
 					<li class="list-group-item">
 						<div class="list-heading">
 							<h4 class="list-title">
-								<a
-									href="${root }/notice/mvnoticelist.akcord?pg=1&key=&word=&order="><i
-									class="fa fa-bullhorn"></i>&nbsp;공지사항</a>
+								<c:if test="${user.type !=0 }">
+                        			<a href="${root }/notice/userNoticelist.akcord?pg=1&key=&word=&order="><i class="fa fa-bullhorn"></i>&nbsp;공지사항</a>
+                      			</c:if>
+                      			<c:if test="${user.type == 0 }">
+                        			<a href="${root }/notice/mvnoticelist.akcord?pg=1&key=&word=&order="><i class="fa fa-bullhorn"></i>&nbsp;공지사항</a>
+                      			</c:if>
 							</h4>
 						</div>
 						<div class="list-heading1">
@@ -198,42 +206,30 @@ var name = "";
 				</ul>
 			</div>
 		</div>
+		<!-- //sidebar -->
+
 
 		<!-- HEAD -->
 		<div class="container-head">
-			<div class="panel-group-right pull-right">	
-			<div class="col-sm-6"></div>
-			<div class="c_01 c">
-				<h3 id="logo">
-					<a href="${root}/index.jsp">AKCORD</a>
-				</h3>
-			</div>
-
-		
-			<div class="c_03 c pull-right" style="padding-right: 80px;">
-				<%-- <a href=""><img alt="" src="${root}/doc/img/bell-icon.png" width="20" height="20"><span class="badge">5</span></a> --%>
-
-				
-					<a data-toggle="collapse" href="#collapse-alarm"><span
-						class="fa fa-bell fa-2x" style="color: #d34e4c;"></span><span
-						class="badge"></span></a>
-			</div>
-					<!-- 알람창 -->
-					<div id="collapse-alarm" class="panel-collapse collapse">
+			<div class="container">
+				<%-- <a href="#;" id="toggleSidebar"><img alt="" src="${root}/doc/img/icon.png" height="35" width="35"></a> --%>
+				<a href="#" id="toggleSidebar" style="text-decoration:none"><i class="fa fa-gear fa-2x" style="color:black;"></i></a>
+				<a href="${root}/index.jsp" class="logo" >AKcord</a>
+				<div class="c_03 c pull-right">
+					<%-- <a href=""><img alt="" src="${root}/doc/img/bell-icon.png" width="20" height="20"><span class="badge">5</span></a> --%>
+					<a data-toggle="collapse" href="#collapse-alarm">
+						<span class="fa fa-bell fa-2x" style="color: #d34e4c;"></span>
+						<span class="badge"></span>
+					</a>
 				</div>
+			
+				<!-- 알람창 -->
+				<div id="collapse-alarm" class="panel-collapse collapse"></div>
 
-<<<<<<< HEAD
-        <div class="login_info pull-right">
+        		<div class="login_info pull-right">
 					<div id="username"></div>
 					님 환영합니다
 				</div>
 			</div>
 		</div>
-=======
-				<div class="login_info pull-right">
-					<div id="username"></div>
-					님 환영합니다
-				</div>
-			</div>
-		</div>
->>>>>>> branch 'master' of https://github.com/Sujin92/akcord_final.git
+	</div>

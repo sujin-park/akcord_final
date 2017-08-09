@@ -116,6 +116,7 @@ public class GroupMainController {
 	public String accept(@RequestParam Map<String, String> map) {
 		int cnt = groupMainService.acceptMember(map);
 		int groupId = Integer.parseInt(map.get("groupId"));
+		alarmService.alarminsertGroupaccept(map.get("seq"));
 		return "redirect:/groupmain/group.akcord?groupId=" + groupId + "&pg=1&key=&word=&order=";
 	}
 

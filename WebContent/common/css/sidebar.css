@@ -7,12 +7,21 @@
     width:300px;
     height:auto;
     background-color:#f6f6f6;
-    z-index:210;
-    position:absolute;
-    float:left;
+    z-index:200;
     overflow:hidden;
     position:fixed;
+    left: -300px;
+    top: 5px;
     border-bottom: 1px solid #ccc;
+    -webkit-transition: left 0.45s ease;
+    -moz-transition: left 0.45s ease;
+    -ms-transition: left 0.45s ease;
+    -o-transition: left 0.45s ease;
+    transition: left 0.45s ease;
+}
+
+.panel-group.on{
+    left: 0;
 }
 
 .panel-group-right{
