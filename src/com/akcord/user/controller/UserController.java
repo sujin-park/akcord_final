@@ -3,7 +3,6 @@ package com.akcord.user.controller;
 import java.util.List;
 import java.util.Map;
 
-
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
@@ -16,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.akcord.group.model.GroupRoomDto;
+import com.akcord.main.poll.model.PollDto;
+import com.akcord.main.poll.service.PollService;
 import com.akcord.user.model.UserDto;
 import com.akcord.user.service.UserService;
 
@@ -25,6 +26,9 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private PollService pollService;
 	
 	@RequestMapping(value="/join.akcord", method=RequestMethod.GET)
 	public String join(){
@@ -63,25 +67,25 @@ public class UserController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/user/login/loginfail");
 		UserDto userDto = userService.login(map);
+		List<PollDto> plist = pollService.mainpollget();
 		List<GroupRoomDto> group_list = null;
-		if(userDto.getType()!=0) { 
+		/*if(userDto.getType()!=0) { 
 			group_list = userService.group(userDto.getUser_id()+"");
-		}
+		}*/
 		if( userDto != null){
+			if(plist.size()!=0){
+				session.setAttribute("plist", plist);
+				session.setAttribute("psubject",plist.get(0).getSubject());
+			}else if(plist.size()==0){			
+			mav.addObject("plist", 0);
+			}
+			session.setAttribute("user", userDto);
 			session.setAttribute("user", userDto);
 			session.setAttribute("group_list", group_list);
 			mav.setViewName("/index");
 			//redirect로 해도 상관없음. String으로 리턴을 해서 
 			//ModelAndView는 request와 같기때문에 한번 받아오면 그 다음 페이지부터 유지할수 없음.
 		}
-		return mav;
-	}
-	
-	@RequestMapping("/logout.akcord")
-	public ModelAndView logout(HttpSession session) {
-		ModelAndView mav = new ModelAndView();
-		session.invalidate();
-		mav.setViewName("/user/login/loginmain");
 		return mav;
 	}
 	
