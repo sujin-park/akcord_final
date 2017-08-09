@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -223,9 +222,18 @@ var name = "";
 					<div id="collapse-alarm" class="panel-collapse collapse">
 				</div>
 
+<<<<<<< HEAD
         <div class="login_info pull-right">
 					<div id="username"></div>
 					님 환영합니다
 				</div>
 			</div>
 		</div>
+=======
+				<div class="login_info pull-right">
+					<div id="username"></div>
+					님 환영합니다
+				</div>
+			</div>
+		</div>
+>>>>>>> branch 'master' of https://github.com/Sujin92/akcord_final.git

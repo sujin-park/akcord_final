@@ -17,4 +17,6 @@ public interface InService {
    InDto getAnswer(int qna_id);
 
    List<MajorDto> majorlist();
+   
+   List<InDto> category (Map <String, String>  category);
 }

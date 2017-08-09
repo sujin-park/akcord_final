@@ -35,7 +35,7 @@ $(document).ready(function(){
 	<div class="modal-dialog" style="width: 50%;">
 
 			<!-- Modal content-->
-				
+			
 				<div class="row">
 
 				<form class="form-horizontal" action="">

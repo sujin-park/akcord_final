@@ -7,8 +7,8 @@
 <script>
 	$(document).ready(function() {
 		$('#answerBtn').click(function() {
-
-			$(location).attr('href', '${root}/in/answer.akcord');
+			$('#qna_id').val($(this).attr('data-seq'));
+			$('form[name=answerform]').attr('href', '${root}/comment/comment.akcord').submit();
 		});
 	});
 </script>
@@ -32,6 +32,8 @@
 </style>
 
 
+<form class="answerform" id="answerform" name="answerform" action="" method="">
+<input type="hidden" id="qna_id" name="qna_id" data-seq="${qua_id.qna_id}">
 <div class="container col-sm-12 form-group">
 	<br>
 	<div class="col-sm-1"></div>
@@ -39,10 +41,9 @@
 	<div class="col-sm-10" style="border: 1px solid; color: gray">
 		<br> <br> <label for="comment" class="col-sm-1">아이디
 			: </label> <label class="col-sm-1">${qna_id.id}</label> <label for="comment"
-			class="col-sm-1">카테고리: </label> <label class="col-sm-1">category</label>
-		<label class="col-sm-6">${qna_id.subject}</label> <label for="comment" class="col-sm-1">작성일:
+			class="col-sm-1">카테고리: </label> <label class="col-sm-1">${qna_id.majorName}</label>
+		<label class="col-sm-6">제목 : ${qna_id.subject}</label> <label for="comment" class="col-sm-1">작성일:
 		</label> <label class="col-sm-1">${qna_id.reg_date}</label>
-
 
 		<div class="col-sm-12">
 			<hr>
@@ -115,5 +116,6 @@
 
 	</div>
 </div>
+</form>
 </body>
 </html>

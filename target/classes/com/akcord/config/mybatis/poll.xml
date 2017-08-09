@@ -40,9 +40,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     
-    <update id="pollmodifydate" parameterType="pollDto">
+    <update id="pollmodifydate" parameterType="java.util.Map">
         update poll 
-        set start_date = #{startDate}, end_date = #{endDate}
+        set start_date = #{startDate}, end_date = #{endDate},chart_type=#{chartType}
         where poll_id = #{poll_id}
     </update>
     

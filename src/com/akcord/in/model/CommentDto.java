@@ -1,6 +1,6 @@
 package com.akcord.in.model;
 
-public class CommentDto {
+public class CommentDto extends InDto{
 	private int qna_comment_id;
 	private int qna_id;
 	private int user_id;

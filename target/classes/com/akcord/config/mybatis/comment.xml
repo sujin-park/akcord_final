@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper     
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+<mapper namespace="com.akcord.in.dao.InCommentDao">
+    
+    <!-- 지식인 리스트 클릭시 질문내용보기 -->
+    <select id="getAnswer" parameterType="int" resultType="commentDto">
+        select qc.qna_comment_id, q.qna_id, u.user_id, u.id, u.name, q.major_id majorId, m.major_name majorName, q.subject, q.content, q.reg_date, q.hit
+        from qna q, users u, major m, qna_comment qc
+        where q.user_id = u.user_id
+        and q.major_id = m.major_id
+        and qc.qna_id = q.qna_id
+        and qc.qna_id = #{qna_id}
+    </select>
+    
+</mapper>

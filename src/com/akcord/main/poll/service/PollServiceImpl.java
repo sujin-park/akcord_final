@@ -1,6 +1,7 @@
 package com.akcord.main.poll.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +40,8 @@ public class PollServiceImpl implements PollService {
 		
 	}
 	@Override
-	public int pollmodifydate(PollDto pollDto) {
-		return sqlSession.getMapper(PollDao.class).pollmodifydate(pollDto);
+	public int pollmodifydate(Map<String,String> map) {
+		return sqlSession.getMapper(PollDao.class).pollmodifydate(map);
 		// TODO get detail poll info
 		
 	}

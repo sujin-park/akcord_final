@@ -1,5 +1,7 @@
 package com.akcord.alarm.service;
 
+import java.util.List;
+
 import com.akcord.alarm.model.AlarmDto;
 
 public interface AlarmService {
@@ -11,7 +13,11 @@ public interface AlarmService {
 	void alarminsertQnalike(String target_id);			// 알람 DB 저장 - Qnalike
 	void alarminsertQnadislike(String target_id);		// 알람 DB 저장 - Qnadislike
 	
-	AlarmDto alarmlist(String target_id);	// 알람 리스트 호출
+	List<Integer> alarmMemberCall();	// 모든 멤버 호출
+	void alarminsertNotice(int target_id);// 공지사항 알림 전송
+	
+	List<AlarmDto> alarmlist0(String target_id);	// 안읽은 알람 리스트 호출
+	List<AlarmDto> alarmlist1(String target_id);	// 읽은 알람 리스트 호출
 	int alarmNoneread(String target_id);	// 아직 안 읽은 알람
 	int alarmreadset(int seqence_num);		// 알람 읽음 설정
 	

@@ -17,6 +17,7 @@ import com.akcord.admin.model.NoticeDto;
 import com.akcord.admin.model.UserManageDto;
 import com.akcord.admin.service.NoticeService;
 import com.akcord.admin.service.UserManagerService;
+import com.akcord.alarm.service.AlarmService;
 import com.akcord.group.service.CommonService;
 import com.akcord.user.model.UserDto;
 import com.akcord.util.PageNavigation;
@@ -27,6 +28,9 @@ public class NoticeController {
 	@Autowired
 	private NoticeService noticeService;
 
+	@Autowired
+	private AlarmService alarmService;
+	
 	@Autowired
 	private CommonService commonService;
 	
@@ -71,6 +75,11 @@ public class NoticeController {
 	@RequestMapping(value="/noticewrite.akcord",method=RequestMethod.POST)
 	public String noticeWrite(NoticeDto noticeDto){
 		int cnt = noticeService.noticeWrite(noticeDto);
+		int is_notice= noticeDto.getIs_notice();
+		if(is_notice==1){
+			int target_id=0;
+			alarmService.alarminsertNotice(target_id);
+		}
 		return "redirect:/notice/mvnoticelist.akcord?word=&pg=1";
 	}
 	

@@ -15,6 +15,7 @@ public interface InDao {
    InDto getAnswer(int qna_id);//글번호 가져오기
    List<InDto> list(Map<String, String> queryString);
    List<MajorDto> majorlist();
+   List<InDto> category (Map <String, String> category);
    
    
 }
