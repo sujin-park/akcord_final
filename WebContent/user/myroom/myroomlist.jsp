@@ -60,14 +60,6 @@ $(document).ready(function() {
 		$('#commonForm').attr('action', '${root}/myroom/myroomlist.akcord').submit();
 	});
 	
-	$('#lastBtn').click(function(){
-		$('#pg').val($(this).attr('data-last'));
-		$('#key').val('${query.key}');
-		$('#word').val('${query.word}');
-		$('#myroomId').val('${query.myroomId}');
-		$('#commonForm').attr('action', '${root}/myroom/myroomlist.akcord').submit();
-	});
-	
 	$('.sectionBtn').click(function(){
 		var sBtn = $("ul > li");
 		sBtn.removeClass("active");

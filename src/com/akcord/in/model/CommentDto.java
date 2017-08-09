@@ -1,6 +1,6 @@
 package com.akcord.in.model;
 
-public class CommentDto extends InDto{
+public class CommentDto extends InDto {
 	private int qna_comment_id;
 	private int qna_id;
 	private int user_id;
@@ -8,6 +8,15 @@ public class CommentDto extends InDto{
 	private String qna_comment;
 	private String reg_date;
 	private int category;
+	private int comment_count;
+
+	public int getComment_count() {
+		return comment_count;
+	}
+
+	public void setComment_count(int comment_count) {
+		this.comment_count = comment_count;
+	}
 
 	public int getQna_comment_id() {
 		return qna_comment_id;

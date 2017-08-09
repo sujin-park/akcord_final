@@ -5,14 +5,60 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.akcord.in.dao.InCommentDao">
     
-    <!-- 지식인 리스트 클릭시 질문내용보기 -->
-    <select id="getAnswer" parameterType="int" resultType="commentDto">
-        select qc.qna_comment_id, q.qna_id, u.user_id, u.id, u.name, q.major_id majorId, m.major_name majorName, q.subject, q.content, q.reg_date, q.hit
-        from qna q, users u, major m, qna_comment qc
+    <!-- 지식인 리스트 클릭시 답내용보기 -->
+    <select id="getlist" parameterType="int" resultType="commentDto">
+        select qc.qna_comment_id, q.qna_id, u.user_id, u.id, u.name, qc.qna_subject, qc.qna_comment, qc.reg_date, q.major_id majorId, m.major_name majorName, q.subject, q.content, q.reg_date
+        from users u, major m, qna_comment qc, qna q
         where q.user_id = u.user_id
         and q.major_id = m.major_id
-        and qc.qna_id = q.qna_id
-        and qc.qna_id = #{qna_id}
+        and q.qna_id = qc.qna_id
+        and q.qna_id = #{qna_id}
     </select>
+    
+    <!-- 지식인 리스트 클릭시 질문내용보기 -->
+    <select id="getAnswer" parameterType="int" resultType="commentDto">
+        select a.*, (select count(qna_comment_id) from qna_comment where qna_id=a.qna_id) commentcnt
+        from (select q.qna_id, u.user_id, u.id, u.name, q.major_id majorId, m.major_name majorName, q.subject, q.content, q.reg_date, q.hit
+        from qna q, users u, major m
+        where q.user_id = u.user_id
+        and q.major_id = m.major_id
+        and q.qna_id = #{qna_id}) a
+    </select>
+    
+    <!-- 답변등록 -->
+    <insert id="answerSave" parameterType="commentDto">
+        insert into qna_comment
+        (qna_comment_id, qna_id, user_id, qna_subject, qna_comment, reg_date)
+        values (seq_qna_comment_id.nextval, #{qna_id}, #{user_id}, #{qna_subject}, #{qna_comment}, sysdate)
+    </insert>
+    
+    <!-- 답변 리스트목록 -->
+    <select id="list" parameterType="java.util.Map" resultType="commentDto" >
+        select qc.qna_comment_id, q.qna_id, u.user_id, u.id, u.name, qc.qna_subject, qc.qna_comment, qc.reg_date, q.major_id majorId, m.major_name majorName, q.subject, q.content, q.reg_date
+        from users u, major m, qna_comment qc, qna q
+        where q.user_id = u.user_id
+        and q.major_id = m.major_id
+        and q.qna_id = qc.qna_id
+        and q.qna_id = #{qna_id}
+    </select>
+    
+    <!-- 조회수 업데이트 -->
+    <update id="updateHit" parameterType="int">
+        update qna set hit = hit + 1 where qna_id =#{qna_id}
+    </update>
+    
+    <!-- 답변수정 -->
+    <update id="modify" parameterType="commentDto">
+        update qna_comment
+        set qna_comment = #{qna_comment},
+        qna_subject = #{qna_subject},
+        reg_date = sysdate
+        where user_id = #{user_id}
+        and qna_id = #{qna_id}
+        and qna_comment_id = #{qna_comment_id}     
+    </update>
+    
+    
+    <!-- 답변삭제 -->
     
 </mapper>
