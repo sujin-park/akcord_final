@@ -15,6 +15,19 @@
     border-bottom: 1px solid #ccc;
 }
 
+.panel-group-right{
+    width:300px;
+    height:auto;
+    background-color:#f6f6f6;
+    z-index:210;
+    position:absolute;
+    float:left;
+    overflow:hidden;
+    position:fixed;
+    border-bottom: 1px solid #ccc;
+    
+}
+
 #collapse-4 {
     background-color:#e3e3e3;
     margin-left:10px;
@@ -158,3 +171,14 @@
 	padding-right: 2.75em;
 }
 
+.panel-group-alarm{
+    width:100px;
+    height:auto;
+    background-color:#f6f6f6;
+    z-index:210;
+    position:absolute;
+    float:left;
+    overflow:hidden;
+    position:fixed;
+    border-bottom: 1px solid #ccc;
+}

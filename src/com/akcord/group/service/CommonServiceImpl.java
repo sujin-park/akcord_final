@@ -40,6 +40,10 @@ public class CommonServiceImpl implements CommonService {
 		}else if (type.equals("blackusermanage")) {
 			newArticleCount = sqlSession.getMapper(CommonDao.class).newUserListCount();
 			totalArticleCount = sqlSession.getMapper(CommonDao.class).totalBlackUserListCount(query);
+		} else if (type.equals("groupwait")) { // 승인 대기 리스트
+			totalArticleCount = sqlSession.getMapper(CommonDao.class).totalWaitCount(query);
+		} else if (type.equals("origin")) {
+			totalArticleCount = sqlSession.getMapper(CommonDao.class).totalOriginCount(query);
 		}
 
 

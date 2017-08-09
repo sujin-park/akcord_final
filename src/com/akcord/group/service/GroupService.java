@@ -12,7 +12,7 @@ public interface GroupService {
 	
 	public List<GroupRoomDto> grouplist(Map<String,String> query); // 처음 그룹 리스트
 	
-	public List<GroupRoomDto> waitinglist(int seq); // 승인 리스트
+	public List<GroupRoomDto> waitinglist(Map<String,String> query); // 승인 리스트
 	
 	public List<MajorDto> majorlist(); // 전공 셀렉트 박스 리스트
 	

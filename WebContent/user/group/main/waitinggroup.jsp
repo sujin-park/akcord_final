@@ -37,7 +37,7 @@
 								<div class="table-container table-responsive" style="margin-left: 20px; margin-right: 20px">
 									<table class="table table-filter" id="extable">
 										<tbody>
-											<tr class="primary" align="center">
+											<tr class="danger" align="center">
 												<td width="10%">
 													<div class="ckbox">
 														<input type="checkbox" id="checkedAll">
@@ -99,7 +99,7 @@
 								</div>
 							</div>
 					</div>
-								<div align="center" style="clear:both;">
+			<div align="center" style="clear:both;">
 			${navigator.navigator}
 			</div>
 			<div class="col-md-6"></div>

@@ -19,7 +19,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select b.*
             from(select rownum rn, a.*
                 from(
-                    select (select count(group_id) from grouproom_list gl where gl.group_id = g.group_id and gl.is_accept = 1) nowCount, g.group_id groupId, g.reg_date as regDate, m.major_name majorName, g.group_name groupName,
+                    select (select count(group_id) from grouproom_list gl where gl.group_id = g.group_id and gl.is_accept = 1) nowCount, g.group_id groupId, 
+                    decode(to_char(g.reg_date, 'yymmdd'), to_char(sysdate, 'yymmdd'), to_char(g.reg_date, 'hh24:mi:ss'),to_char(g.reg_date, 'yy.mm.dd')) as regDate, m.major_name majorName, g.group_name groupName,
                            g.content content, g.g_count gCount, u.name name from users u, grouproom g, major m
                            where u.user_id = g.leader_id and
                            g.major_id = m.major_id
@@ -50,8 +51,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
            where b.rn &gt; #{start}
     </select>
     
-    <select id="waitinglist" parameterType="int" resultType="groupRoomDto">
-        select gl.reg_date waitingDate, m.major_name majorName, g.group_name groupName, g.content content, u.name name,
+    <select id="waitinglist" parameterType="java.util.Map" resultType="groupRoomDto">
+        select b.*
+        from(select rownum rn, a.*
+        from(
+        select decode(to_char(gl.reg_date, 'yymmdd'), to_char(sysdate, 'yymmdd'), to_char(gl.reg_date, 'hh24:mi:ss'),to_char(gl.reg_date, 'yy.mm.dd')) as waitingDate, m.major_name majorName, g.group_name groupName, g.content content, u.name name,
                 g.group_id groupId
                 from grouproom_list gl, grouproom g, major m, users u
                 where g.major_id = m.major_id
@@ -60,6 +64,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 and gl.user_id = #{userId}
                 and g.leader_id != #{userId}
                 and gl.is_accept = 0
+                
+                ) a
+                where rownum &lt;= #{end}
+                ) b
+                where b.rn &gt; #{start}
     </select>
     
     <select id="majorlist" resultType="com.akcord.group.model.MajorDto">

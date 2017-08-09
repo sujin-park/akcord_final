@@ -15,7 +15,7 @@ public interface GroupMainService {
 	
 	public int acceptMember(Map<String, String> map); // 회원 승인
 	
-	public List<GroupListDto> searchlist(String sid); // 검색
+	public List<GroupListDto> searchlist(Map<String, String> map); // 검색
 	
 	public int invite(Map<String, String> map); // 그룹원초대
 	
@@ -33,5 +33,13 @@ public interface GroupMainService {
 	
 	public List<GroupHwDto> groupArticleList(Map<String,String> map); // 그룹방 글목록 리스트
 	
-	public GroupHwDto articleView(Map<String, String> map);
+	public GroupHwDto articleView(Map<String, String> map); // 그룹방 글 보기 
+	
+	public int deletegroup(int groupId); // 그룹 삭제 
+	
+	public int outgroup(Map<String,String> map); // 그룹 탈퇴
+	
+	public int countperson(int scheduleId);
+	
+	public int totalperson(int groupId);
 }

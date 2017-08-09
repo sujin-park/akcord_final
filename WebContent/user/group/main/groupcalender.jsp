@@ -8,6 +8,7 @@
 <script src='/akcord_project/js/lib/fullcalendar.js' charset="utf-8"></script>
 <%@ include file="/common/public.jsp" %>
 <script>
+
 var eventData;
 var obj;
 	$.ajax({
@@ -126,9 +127,12 @@ var obj;
 					}
 					var startTime = moment(event.start).format('YYYY/MM/DD ' + sday + ' hh:mm');
 					var endTime = moment(event.end).format('YYYY/MM/DD ' + eday +' hh:mm');
+					
 	               $("#scheduleModal").modal({"show" : true});
 	               $('#sModifyBtn').val(event.scheduleId);
 	               $('#sDeleteBtn').val(event.scheduleId);
+	               //$('#deadspan').val(event.deadline);
+	               $('#scheduleModal #deadspan').val(event.deadline);
 	               $("#scheduleModal #modalTitle").text(event.title);
 	               $("#scheduleModal #contenttext").text(event.content);
 	               $("#scheduleModal #startDate").text(event.start);
@@ -137,6 +141,18 @@ var obj;
 	               $("#scheduleModal #detail").val(event.content);
 	               $("#scheduleModal #startDate").val(startTime);
 	               $("#scheduleModal #endDate").val(endTime);
+	               $('#deadspan').empty();
+	               var dead = $('#deadspan').val();
+		       		var output = "";
+		       		if (dead > 0) {
+		       			output = "마감일 : " + dead + " 일 전";
+		       		} else if (dead == 0 ){
+		       			output = "당일 마감";
+		       		} else {
+		       			output = "일정 마감";
+		       		}
+		       		$('#deadspan').append(output);
+	               
 					}
 		    }, 
 			events: 	JSON.parse(obj)
@@ -218,6 +234,7 @@ var obj;
 		          $("#scheduleModal #scheduleName").val("");
 		          $("#scheduleModal #detail").val("");
 		          $('#calendar').fullCalendar('unselect');
+	
 		});
 		
 		$('#sDeleteBtn').on('click', function(){
@@ -242,6 +259,10 @@ var obj;
 			$('#groupD').modal();
 		});
 	
+		$('#outgroup').click(function(){
+			$('#groupO').modal();
+		});
+		
 		$('#contentlist').on('click', function() {
 			$(location).attr('href', '${root}/groupmain/list.akcord?groupId=${gInfo.groupId}&scheduleId=');
 		});
@@ -257,6 +278,23 @@ var obj;
 			$(location).attr('href', '${root}/groupmain/list.akcord?groupId=${gInfo.groupId}&scheduleId='+scheduleId +'&startDate=' +startDate + '&endDate=' + endDate);
 		});
 		
+		$('#groupDelete').on('click',function(){
+			
+			if(confirm("그룹방을 삭제하시겠습니까?")){
+				$(location).attr('href','${root}/groupmain/out.akcord?groupId=${gInfo.groupId}');
+			}
+		});
+		
+		$('#outgroup').on('click', function(){
+			
+			if (confirm("그룹방을 탈퇴하시겠습니까?")) {
+				$(location).attr('href', '${root}/groupmain/outgroup.akcord?groupId=${gInfo.groupId}')
+			}
+		});
+		
+		
+
+
 	});
 	
 
@@ -278,33 +316,56 @@ var obj;
 		width: 60%;
 		float:left;
 	}
+	.groupinfo {
+		padding-left:10px; 
+		border: 1px solid #ddd; 
+		margin-right:10%; 
+		margin-bottom:10px; 
+		height:100px;
+		background-color:#eee;
+	}
+	
+	.groupinfo>h3 {
+		text-align:center;
+	}
+	
+	.groupinfo>h4 {
+		text-align:center;	
+	}
 	.form-control{ box-shadow:none; border-color:#eee;}
 	.form-control:focus{ box-shadow:none; border-color:#d34e4c;}
 </style>
 <%@ include file="/common/template/nav.jsp" %>
 <div class="col-sm-10 col-sm-push-1">
 	<div class="container">
-		<div class="row">
-			<div class="row"></div>
-			<div style="padding-left:10px; border: 1px solid #ddd; margin-right:10%; margin-bottom:10px;">
-				<h2>${gInfo.groupName}</h2><h4>${gInfo.majorName}</h4>
-				<h4>리더 : ${gInfo.name}</h4>
-			</div>
-			<div class="col-sm-6" style="border:5px;">
-				<button type="button" class="btn btn-sm btn-danger" id="contentlist">그룹방 글 목록</button>
-			<c:if test="${gInfo.leaderId == user.user_id}">
-				<button type="button" class="btn btn-sm btn-danger" id="Gmemberlist">그룹원 관리</button>
-				<button type="button" class="btn btn-sm btn-default" id="deletegroup">그룹 삭제</button>
-			</c:if>
-			<c:if test="${gInfo.leaderId != user.user_id}">
-				<button type="button" class="btn btn-sm btn-default" id="deletegroup">그룹 탈퇴</button>
-			</c:if>
-			</div>
-			
-		</div>
 		<div class="row" style="margin:30px;">
-			<div id='calendar' class="col-sm-8"></div>
-			<div class="col-sm-4">채팅부분</div>
+					<div class="row"></div>
+						<div class="groupinfo">
+							<h3>${gInfo.groupName}</h3>
+							<h4>${gInfo.majorName}</h4>
+							<h4>리더 : ${gInfo.name}</h4>
+						</div>
+					<div class="row">
+						<div class="col-sm-6" style="border:5px; margin-bottom:20px;">
+							<button type="button" class="btn btn-sm btn-danger" id="contentlist">그룹방 글 목록</button>
+						<c:if test="${gInfo.leaderId == user.user_id}">
+							<button type="button" class="btn btn-sm btn-danger" id="Gmemberlist">그룹원 관리</button>
+							<button type="button" class="btn btn-sm btn-default" id="deletegroup">그룹 삭제</button>
+						</c:if>
+						<c:if test="${gInfo.leaderId != user.user_id}">
+							<button type="button" class="btn btn-sm btn-default" id="outgroup">그룹 탈퇴</button>
+						</c:if>
+						</div>
+					</div>
+
+			<div id='calendar' class="col-sm-8">
+			</div>
+			<div class="col-sm-4">
+				<div class="row">
+					<div class="userlist" style="background-color:#eee; height:150px; width:90%;"></div>
+					<%@ include file="/user/group/main/chatting.jsp" %>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

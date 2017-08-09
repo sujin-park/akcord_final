@@ -41,8 +41,7 @@
 							<td width="15%">전공</td>
 							<td width="20%">아이디</td>
 							<td width="20%">이름</td>
-							<td width="10%">ACCEPT</td>
-							<td width="10%">DELETE</td>
+							<td width="10%">강퇴</td>
 						</tr>
 					<c:forEach var="GlistDto" items="${oglist}">
 						<input type="hidden" id="groupid" value="${GlistDto.groupId}">
@@ -74,12 +73,6 @@
 								</div>
 							</td>
 							<td align="center">
-								<button type="button" class="btn btn-sm btn-danger" id="acceptG"
-								onclick="javascript:acceptM(${GlistDto.seq})">
-					    			<span class="glyphicon glyphicon-heart"></span>
-					    		</button>
-						    </td>
-							<td align="center">
 								<button type="button" class="btn btn-sm btn-default" id="exitM"
 								onclick="javascript:exitM(${GlistDto.seq})">
 					    			<span class="glyphicon glyphicon-remove"></span>
@@ -92,3 +85,7 @@
 			</div>
 		</div>
 </div>
+<div align="center" style="clear:both;">
+${navigator.navigator}
+</div>
+<div class="col-md-6"></div>

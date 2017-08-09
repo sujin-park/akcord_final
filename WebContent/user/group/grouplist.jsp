@@ -13,7 +13,7 @@ $(document).ready(function(){
 	});
 	
 	$('#accept').click(function(){
-		$(location).attr('href','${root}/group/waitinglist.akcord');
+		$(location).attr('href','${root}/group/waitinglist.akcord?pg=1');
 	});
 	
 	$('#creategroup').click(function(){
@@ -32,18 +32,19 @@ $(document).ready(function(){
 		}
 	});
 	
-	$('#joinG').click(function(){
-		var joinseq = $('#joinseq').val();
-		$(location).attr('href', '${root}/group/join.akcord?seq='+joinseq);
-	});
 	
 	$('#searchBtn').click(function(){
+		if ($('#sword').val() == "") {
+			alert("검색어를 입력해주세요.");
+		} else {
 		$('#pg').val('1');
 		$('#key').val($('#skey').val());
 		$('#word').val($('#sword').val());
 		$('#order').val('${query.order}');
 		$('#commonForm').attr('action', '${root}/group/list.akcord').submit();
-	});
+		}
+		
+		});
 	
 	$('#firstBtn').click(function(){
 		$('#pg').val('1');
@@ -77,6 +78,35 @@ $(document).ready(function(){
 		$('#commonForm').attr('action', '${root}/group/list.akcord').submit();
 	});
 	
+	var count = $("#count").val();
+	var countG = $("#countG").val();
+ 	if (count != 0) {
+		alert("그룹방이 삭제되었습니다. 새로운 그룹방을 개설해보세요.");
+	} 
+ 	
+ 	if (countG != 0) {
+		alert("그룹방을 탈퇴하였습니다. 새로운 그룹방을 찾아보세요.");
+	}
+ 	
+	var state = $('#create').attr('data-state');
+ 	if (state == 100) {
+ 		alert("그룹방이 개설되었습니다.");
+ 	} else if (state ==200) {
+ 		alert("그룹방 가입요청이 되었습니다.");
+ 	} else {}
+ 	
+	$('#joinG').click(function(){
+		var nowcount = $('#now').val();
+		var fullcount = $('#full').val();
+		if (nowcount == fullcount) {
+			alert("인원 초과이므로 다른 그룹방을 선택해주세요.");	
+		} else {
+			var joinseq = $('#joinseq').val();
+			$(location).attr('href', '${root}/group/join.akcord?seq='+joinseq);
+		}
+		});
+	
+	
 });
 
 function joinGroup(seq) {
@@ -87,12 +117,20 @@ function joinGroup(seq) {
 	$('#Jcontent').text($('#content'+seq).text());
 	$('#fullCount').text($('#gCount'+seq).val() + '명');
 	$('#nowCount').text($('#nowCount'+seq).val() + '  명/');
+	$('#now').val($('#nowCount'+seq).val());
+	$('#full').val($('#gCount'+seq).val());
 	$('#joingroupM').modal({
 		show : true
 	});
 }
 </script>
+<input type="hidden" id="count" value="${count}">
+<input type="hidden" id="countG" value="${countG}">
+<input type="hidden" id="now" valule="">
+<input type="hidden" id="full" valule="">
+
 		<section class="content page-top row">
+		<div class="container">
 			<div class="col-sm-10 col-sm-push-1">
 			<h2>GROUP LIST</h2>
 				<div class="panel panel-default">
@@ -108,7 +146,7 @@ function joinGroup(seq) {
 								</div>
 							</div>
 							<div class="col-sm-6 pull-left">
-								<button type="button" id="create" class="btn btn-sm btn-danger">그룹방 개설</button>
+								<button type="button" id="create" class="btn btn-sm btn-danger" data-state="${state}">그룹방 개설</button>
 								<button type="button" id="accept" class="btn btn-sm btn-default">승인 리스트</button>
 							</div>
 							<div class="row">
@@ -132,7 +170,7 @@ function joinGroup(seq) {
 								<div class="table-container table-responsive" style="margin-left: 20px; margin-right: 20px">
 									<table class="table table-filter" id="extable">
 										<tbody>
-											<tr class="primary" align="center">
+											<tr class="danger" align="center">
 												<td width="15%">생성일</td>
 												<td width="10%">전공</td>
 												<td width="15%">그룹방명</td>
@@ -196,6 +234,7 @@ function joinGroup(seq) {
 			</div>
 			<div class="col-md-6"></div>
 				</div>
+			</div>
 			</div>
 		</section>
 <%@include file="/user/group/create.jsp"%>
