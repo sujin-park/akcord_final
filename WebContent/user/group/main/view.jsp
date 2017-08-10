@@ -29,13 +29,11 @@
 							</tr>
 							<tr align="center">
 								<td><strong>아이디</strong></td>
-								<td colspan="2">${groupHwDto.id}</td>
-								<td></td>
+								<td colspan="3">${groupHwDto.id}</td>
 							</tr>
 							<tr align="center">
 								<td><strong>이름</strong></td>
-								<td colspan="2">${groupHwDto.name}</td>
-								<td></td>
+								<td colspan="3">${groupHwDto.name}</td>
 							</tr>
 							<tr align="center">
 								<td><strong>내용</strong></td>
@@ -44,10 +42,6 @@
 							</tr>
 						</table>
 					</div>
-				</div>
-				<div class="pull-right">
-					<button type="button" class="btn btn-md btn-danger">수정</button>
-					<button type="button" class="btn btn-md btn-default">삭제</button>
 				</div>
 			</div>
 		</div>

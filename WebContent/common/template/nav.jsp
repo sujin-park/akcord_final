@@ -194,7 +194,7 @@ $(function(){
 		<div class="container-head">
 			<div class="container">
 				<%-- <a href="#;" id="toggleSidebar"><img alt="" src="${root}/doc/img/icon.png" height="35" width="35"></a> --%>
-				<a href="#" id="toggleSidebar" style="text-decoration:none"><i class="fa fa-gear fa-2x" style="color:black;"></i></a>
+				<a href="#" id="toggleSidebar" style="text-decoration:none"><i class="fa fa-gear fa-2x" style="color:#888;"></i></a>
 				<a href="${root}/index.jsp" class="logo" >Akashic Records</a>
 				<div class="c_03 c pull-right">
 					<div class="dropdown" style="width:100px;">

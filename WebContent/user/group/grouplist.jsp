@@ -172,7 +172,7 @@ function joinGroup(seq) {
 								<div class="table-container table-responsive" style="margin-left: 20px; margin-right: 20px">
 									<table class="table table-filter" id="extable">
 										<tbody>
-											<tr class="danger" align="center">
+											<tr align="center">
 												<td width="15%">생성일</td>
 												<td width="10%">전공</td>
 												<td width="15%">그룹방명</td>

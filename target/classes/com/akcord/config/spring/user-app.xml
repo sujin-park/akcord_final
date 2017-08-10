@@ -7,6 +7,6 @@
 	
 	<context:annotation-config/>
 	<context:component-scan base-package="com.akcord.user.service"/>
-	
+	<context:component-scan base-package="com.akcord.main.rank.service"/>
 	
 </beans>

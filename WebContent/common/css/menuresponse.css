@@ -10,4 +10,12 @@
 		border-bottom: 1px solid #ccc;
 	}
 	
+	.logo {
+	color: #eee;
+	text-decoration:none;
+    }
+    
+    .logo.scrollActive {
+        color: #d34e4c;
+    }
 }
