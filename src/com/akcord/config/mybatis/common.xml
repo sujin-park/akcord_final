@@ -148,4 +148,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         and gl.is_accept = 1
         
     </select>
+    
+    <select id="totalInListCount" parameterType="java.util.Map" resultType="int">
+        select count(*)
+        from (select q.qna_id, u.user_id, u.name, u.major_id, q.subject, q.content, q.reg_date, q.hit
+            from qna q, users u
+            where q.user_id = u.user_id and q.major_id = #{major_id}
+            order by reg_date desc
+            ) a
+    </select>
 </mapper>

@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.akcord.in.dao.InDao">
     
     <!-- 질문등록 -->
-    <insert id="answerroom" parameterType="inDto">
+    <insert id="answerroom" parameterType="java.util.Map">
         insert into qna
         (qna_id,user_id,major_id,subject,content,reg_date,hit)
         values (seq_qna_id.nextval, #{user_id}, #{major_id}, #{subject}, #{content}, sysdate, 1)
@@ -13,19 +13,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    
     <!-- 지식인 리스트목록 -->
     <select id="answerlist" parameterType="java.util.Map" resultType="inDto" >
-        select q.qna_id, u.user_id, u.name, u.major_id, q.subject, q.content, q.reg_date, q.hit
-        from qna q, users u
-        where q.user_id = u.user_id
-        and u.major_id = #{major_id}
+        select c.*
+        from(select rownum rn, b.*
+            from(select a.*, (select count(qna_comment_id) from qna_comment where qna_id=a.qna_id) commentcnt
+                from (select q.qna_id, u.user_id, u.name, u.major_id, q.subject, q.content, q.reg_date, q.hit
+                        from qna q, users u
+                        where q.user_id = u.user_id and q.major_id = #{major_id}
+                        order by reg_date desc) a
+                ) b
+            where rownum &lt;= #{end}
+            ) c
+        where c.rn &gt; #{start}
     </select>
+    
+    <!-- 카테고리 클릭시 리스트출력
+    <select id="category" parameterType="java.util.Map" resultType="inDto">
+        select a.*, (select count(qna_comment_id) from qna_comment where qna_id=a.qna_id) commentcnt
+        from (select q.qna_id, u.user_id, u.id, u.name, q.major_id majorId, q.subject, q.content, q.reg_date, q.hit
+        from qna q, users u
+        where q.user_id = u.user_id and q.major_id = #{major_id}
+        order by reg_date desc) a
+    </select> -->
     
     <!-- 지식인 리스트 클릭시 질문내용보기 -->
     <select id="getAnswer" parameterType="int" resultType="inDto">
-        select q.qna_id, u.user_id, u.id, u.name, q.major_id majorId, m.major_name majorName, q.subject, q.content, q.reg_date, q.hit
-        from qna q, users u, major m
-        where q.user_id = u.user_id
-        and q.major_id = m.major_id
-        and q.qna_id = #{qna_id}
+        select a.*, (select count(qna_comment_id) from qna_comment where qna_id=a.qna_id) commentcnt
+        from (select q.qna_id, u.user_id, u.id, u.name, q.major_id majorId, m.major_name majorName, q.subject, q.content, q.reg_date, q.hit
+            from qna q, users u, major m
+            where q.user_id = u.user_id
+            and q.major_id = m.major_id
+            and q.qna_id = #{qna_id}) a
     </select>
     
     <!-- 전공 리스트 출력 -->
@@ -34,13 +51,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         from major
     </select>
     
-    <!-- 카테고리 클릭시 리시트출력 -->
-    <select id="category" parameterType="java.util.Map" resultType="inDto">
-        select q.qna_id, u.user_id, u.id, u.name, q.major_id majorId, q.subject, q.content, q.reg_date, q.hit
-        from qna q, users u
-        where q.user_id = u.user_id
-        and q.major_id = #{major_id}
-    </select>
-
+    <update id="updateAnswerroom" parameterType="java.util.Map">
+        update qna set subject=#{subject}, content=#{content}, major_id = #{major_id}
+        where qna_id=#{qna_id}
+    </update>
     
+    <delete id="deleteAnswerroom" parameterType="String">
+        delete qna where qna_id=#{qna_id}
+    </delete>
 </mapper>

@@ -2,7 +2,7 @@ package com.akcord.in.model;
 
 import com.akcord.group.model.MajorDto;
 
-public class InDto  extends MajorDto{
+public class InDto extends MajorDto {
 	private int qna_id;
 	private int user_id;
 	private int major_id;
@@ -12,7 +12,16 @@ public class InDto  extends MajorDto{
 	private int hit;
 	private int category;
 	private String id;
-	
+	private int commentcnt;
+
+	public int getCommentcnt() {
+		return commentcnt;
+	}
+
+	public void setCommentcnt(int commentcnt) {
+		this.commentcnt = commentcnt;
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -68,7 +77,6 @@ public class InDto  extends MajorDto{
 	public void setContent(String content) {
 		this.content = content;
 	}
-
 
 	public String getReg_date() {
 		return reg_date;

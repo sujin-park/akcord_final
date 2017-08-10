@@ -55,7 +55,7 @@ $(document).ready(function() {
 	
 	$('#resetBtn').click(function() {
 		var myroomId = $('.myroomId1').val();
-		$(location).attr('href', "${root}/myroom/myroomlist.akcord?ch=2&myroomId="+ myroomId + "&pg=1");
+		$(location).attr('href', "${root}/myroom/myroomlist.akcord?ch=2&myroomId=${query.myroomId1}&pg=1");
 	});
 		
 	$('#registerBtn').click(function() {
@@ -127,8 +127,8 @@ $(document).ready(function() {
 					<div class="row">
 						<div align="right">
 							<select id="isShare" name="isShare">
-								<option value="0" style="font-size: 14px;"  ${myroomNextDto.isShare == "0"?'selected="selected"':''}>비공개</option>
-								<option value="1" style="font-size: 14px;"  ${myroomNextDto.isShare == "1"?'selected="selected"':''}>공개</option>
+								<option value="0" style="font-size: 14px;" ${myroomNextDto.isShare == "0"?'selected="selected"':''}>비공개</option>
+								<option value="1" style="font-size: 14px;" ${myroomNextDto.isShare == "1"?'selected="selected"':''}>공개</option>
 							</select>
 							<select id="groupId" name="groupId">
 								<option value="0">----------</option>

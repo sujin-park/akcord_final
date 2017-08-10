@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.akcord.group.model.MajorDto;
 import com.akcord.in.dao.InDao;
 import com.akcord.in.model.InDto;
+import com.akcord.util.BoardConstant;
 
 @Service
 public class InServiceImpl implements InService {
@@ -18,12 +19,17 @@ public class InServiceImpl implements InService {
 	private SqlSession sqlSession;
 
 	@Override
-	public int answerroom(InDto inDto) {
-		return sqlSession.getMapper(InDao.class).answerroom(inDto);
+	public int answerroom(Map <String, String> queryString) {
+		return sqlSession.getMapper(InDao.class).answerroom(queryString);
 	}
 
 	@Override
 	public List<InDto> answerlist(Map <String, String> queryString) {
+		int pg = Integer.parseInt(queryString.get("pg"));
+		int end = pg * BoardConstant.LIST_SIZE;
+		int start = end - BoardConstant.LIST_SIZE;
+		queryString.put("start", start+"");
+		queryString.put("end", end+"");
 		return sqlSession.getMapper(InDao.class).answerlist(queryString);
 	}
 
@@ -34,7 +40,7 @@ public class InServiceImpl implements InService {
 
 	@Override
 	public InDto getAnswer(int qna_id) {
-		
+		System.out.println(qna_id);
 		return sqlSession.getMapper(InDao.class).getAnswer(qna_id);
 	}
 
@@ -48,10 +54,19 @@ public class InServiceImpl implements InService {
 		return sqlSession.getMapper(InDao.class).majorlist();
 	}
 
+//	@Override
+//	public List<InDto> category(Map<String, String>  category) {
+//		return sqlSession.getMapper(InDao.class).category(category);
+//	}
+
 	@Override
-	public List<InDto> category(Map<String, String>  category) {
-		return sqlSession.getMapper(InDao.class).category(category);
+	public int updateAnswerroom(Map <String, String> queryString) {
+		return sqlSession.getMapper(InDao.class).updateAnswerroom(queryString);
 	}
 
+	@Override
+	public int deleteAnswerroom(String qna_id) {
+		return sqlSession.getMapper(InDao.class).deleteAnswerroom(qna_id);
+	}
 
 }

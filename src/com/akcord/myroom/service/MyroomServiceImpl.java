@@ -100,4 +100,9 @@ public class MyroomServiceImpl implements MyroomService {
 		sqlSession.getMapper(MyroomDao.class).deleteCategory(myroomId);
 	}
 
+	@Override
+	public int getScheduleId(int groupId) {
+		return sqlSession.getMapper(MyroomDao.class).getScheduleId(groupId);
+	}
+
 }

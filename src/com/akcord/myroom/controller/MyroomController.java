@@ -82,7 +82,7 @@ public class MyroomController {
 		mav.setViewName("/user/myroom/myroomlist");
 		return mav;
 	}
-
+	
 	@RequestMapping(value="/write.akcord", method=RequestMethod.GET)
 	public ModelAndView myroomWriteArticle(@RequestParam Map<String, String> query, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
@@ -129,14 +129,18 @@ public class MyroomController {
 		myroomNextDto.setContent(query.get("content"));
 		myroomNextDto.setIsShare(Integer.parseInt(query.get("isShare")));
 		myroomNextDto.setGroupId(Integer.parseInt(query.get("groupId")));
-		
+		// 여기서 일정 가져오기 
+		int scheduleId = myroomService.getScheduleId(Integer.parseInt(query.get("groupId")));
+		myroomNextDto.setScheduleId(scheduleId);
 		if(num.equals("100")) {
 			myroomService.insertArticle(myroomNextDto);
 			int myroomNextId = myroomNextDto.getMyroomNextId();
+			mav.addObject("myroomId", query.get("myroomId"));
 			mav.addObject("myroomNextId", myroomNextId);
 		} else {
 			myroomNextDto.setMyroomNextId(Integer.parseInt(query.get("myroomNextId1")));
 			myroomService.updateAtricle(myroomNextDto);
+			mav.addObject("myroomId", query.get("myroomId1"));
 			mav.addObject("myroomNextId", myroomNextDto.getMyroomNextId());
 		}
 		query.put("num", "200");

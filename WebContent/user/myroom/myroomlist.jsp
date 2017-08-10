@@ -18,6 +18,8 @@ select {
 </style>
 <script>
 $(document).ready(function() {
+	$('.searchDiv').hide();
+	
 	$('#writeBtn').click(function() {
 		$('#pg').val('1');
 		$('#key').val('${query.key}');
@@ -58,15 +60,10 @@ $(document).ready(function() {
 		$('#commonForm').attr('action', '${root}/myroom/myroomlist.akcord').submit();
 	});
 	
-	$('#lastBtn').click(function(){
-		$('#pg').val($(this).attr('data-last'));
-		$('#key').val('${query.key}');
-		$('#word').val('${query.word}');
-		$('#myroomId').val('${query.myroomId}');
-		$('#commonForm').attr('action', '${root}/myroom/myroomlist.akcord').submit();
-	});
-	
 	$('.sectionBtn').click(function(){
+		var sBtn = $("ul > li");
+		sBtn.removeClass("active");
+		$(this).parent().addClass("active");
 		$('#pg').val('1');
 		$('#key').val('${query.key}');
 		$('#word').val('');
@@ -89,9 +86,12 @@ $(document).ready(function() {
 	$('#searchBtn').click(function() {
 		$('#pg').val('1');
 		$('#key').val($("#search option:selected").val());
-		$('#word').val($trim($('#searchText').val()));
+		$('#word').val($.trim($('#searchText').val()));
 		$('#ch').val('1');
 		$('#commonForm').attr('action', '${root}/myroom/searchlist.akcord').submit();
+		
+		$('.searchDiv').show();
+		//searchDiv.append('<font color="black">' + $.trim($('#searchText').val()) + '</font> 로 검색한 결과입니다.');
 	});
 });
 </script>
@@ -133,6 +133,7 @@ $(document).ready(function() {
 			<div class="col-sm-1"></div>
 			<div class="col-sm-10" style="padding-bottom: 10px;">
 				<h1>My Room List</h1>
+				<div class="searchDiv">'${query.word}'로 검색한 결과입니다.</div>
 				<div class="col-sm-12" align="right" style="padding-bottom: 10px;">
 					<c:if test="${query.ch != 1}">
 						<input type="button" id="writeBtn" name="writeBtn" class=" btn btn-danger" value="글작성">

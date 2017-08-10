@@ -42,16 +42,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             from(
                 select myroom_next_id myroomNextId, myroom_id myroomId, user_id, subject, content, reg_date, update_date, is_share isShare
                 from myroom_next
-                where user_id=#{user_id} n
-        <if test="key != '' and word != ''">
+                where user_id=#{user_id}
             <if test="key == '전체'">
                 and content like '%' || #{word} ||'%'
             </if>
             <if test="key != '전체'">
                 and myroom_id=#{key} and content like '%' || #{word} ||'%'
             </if>
-        </if>
-                and myroom_id=#{myroomId}
                 order by update_date desc
                 ) a
             where rownum &lt;= #{end}
@@ -68,7 +65,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         insert all
         into myroom_next(myroom_next_id, myroom_id, user_id, subject, content, reg_date, update_date, is_share)
         values(SEQ_MYROOM_NEXT_ID.nextval, #{myroomId}, #{user_id}, #{subject}, #{content}, sysdate, sysdate, #{isShare})
-        into grouproom_hw values(SEQ_MYROOM_NEXT_ID.currval, #{groupId}, null)
+        into grouproom_hw values(SEQ_MYROOM_NEXT_ID.currval, #{groupId}, #{scheduleId})
         select * from dual
         <selectKey  keyProperty="myroomNextId" resultType="Integer" order="AFTER"> SELECT SEQ_MYROOM_NEXT_ID.currval FROM dual </selectKey>
     </insert>
@@ -109,4 +106,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <delete id="deleteCategory" parameterType="String">
         delete from myroom where myroom_id=#{myroomId}
     </delete>
+    
+    <select id="getScheduleId" parameterType="int">
+        
+    </select>
 </mapper>

@@ -12,6 +12,14 @@ public class MyroomNextDto extends GroupRoomDto {
 	private String reg_date;
 	private String update_date;
 	private int isShare;
+	private int scheduleId;
+	public int getScheduleId() {
+		return scheduleId;
+	}
+
+	public void setScheduleId(int scheduleId) {
+		this.scheduleId = scheduleId;
+	}
 
 	public int getMyroomNextId() {
 		return myroomNextId;
