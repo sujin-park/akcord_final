@@ -7,7 +7,8 @@ var output = "";
 var nr = 0;
 var name = "";
 	$(document).ready(function() {
-
+	    
+	    
 		$.ajax({
 			type : 'GET',
 			dataType : 'json',
@@ -110,30 +111,19 @@ $(function(){
 <body>
 <div class="headline">
     
-    <!-- nav -->
-	<div class="headline">
+		<!-- collapse -->
+		<div class="panel-group" id="sidebar">
 
-		<!-- nav -->
-
-         <div class="panel-heading" style="padding-left:30%;">
-            <h4 class="panel-title">
-               <a data-toggle="collapse" href="#collapse-1">
-               <img alt=""   src="${root}/doc/img/icon.png" height="35" width="35">
-              	
-               </a>
-            </h4>
-         </div>
-         
-         <div id="collapse-1" class="panel-collapse collapse">
-				 <div class="input-group">
-				      <input type="text" class="form-control" placeholder="단어를 입력해주세요">
-				      <span class="input-group-btn">
-				        <button class="btn btn-danger" type="button">
-				        	SEARCH
-	                  	</button>
-				      </span>
-			    </div>
-            <ul class="list-group">
+ 			<div class="panel-heading" style="padding-left: 30%;">
+			</div>
+			<div id="collapse-1" class="panel-collapse collapse in">
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="단어를 입력해주세요">
+					<span class="input-group-btn">
+						<button class="btn btn-danger" type="button">SEARCH</button>
+					</span>
+				</div>
+				<ul class="list-group">
                <li class="list-group-item">
                	  <div class="list-heading">
                      <h4 class="list-title">
@@ -152,7 +142,7 @@ $(function(){
                   </div>
                   <div class="list-heading">
                      <h4 class="list-title">
-                        <a href="#collapse-2" a data-toggle="collapse"><i class="fa fa-group"></i>&nbsp;GROUP ROOM</a>
+                        <a href="#collapse-2" a data-toggle="collapse"><i class="fa fa-comments"></i>&nbsp;GROUP ROOM</a>
                      </h4>
                   </div> <!-- more menu for ONE -->
                   <div id="collapse-2" class="panel-collapse collapse">
@@ -170,7 +160,7 @@ $(function(){
                   	</div>
                   <div class="list-heading1">
                      <h4 class="list-title" style="padding-top:20px;">
-                        <a href="${root}/in/list.akcord?major_id=${user.major_id}"><i class="fa fa-question-circle-o"></i>&nbsp;지식인</a>
+                        <a href="${root}/in/list.akcord?major_id=${user.major_id}"><i class="fa fa-question-circle-o"></i>&nbsp;RECORDER</a>
                      </h4>
                   </div>
                	   <div class="list-heading">
@@ -191,109 +181,13 @@ $(function(){
                   <div id="collapse-3" class="panel-collapse collapse">
                      <ul>
                         <li><a href="${root }/usermanager/mvmemberlist.akcord?pg=1&key=&word=&order=">회원관리</a></li>
-                        <li><a href="${root }/poll/list.akcord?pg=1&key=&word=&order=">통계</a></li>
+                        <li><a href="${root }/poll/list.akcord?pg=1&key=&word=&order=">온라인 투표 관리</a></li>
                      </ul>
                   </div> 
                </li>
             </ul>
          </div>
       </div>
-    
-
-		<!-- collapse -->
-		<div class="panel-group" id="sidebar">
-
-			<div class="panel-heading" style="padding-left: 30%;">
-				<h4 class="panel-title">
-					<a data-toggle="collapse" href="#collapse-1"> <img alt=""
-						src="${root}/doc/img/icon.png" height="35" width="35">
-					</a>
-				</h4>
-			</div>
-
-			<div id="collapse-1" class="panel-collapse collapse in">
-				<div class="input-group">
-					<input type="text" class="form-control" placeholder="단어를 입력해주세요">
-					<span class="input-group-btn">
-						<button class="btn btn-danger" type="button">SEARCH</button>
-					</span>
-				</div>
-				<ul class="list-group">
-					<li class="list-group-item">
-						<div class="list-heading">
-							<h4 class="list-title">
-								<c:if test="${user.type !=0 }">
-                        			<a href="${root }/notice/userNoticelist.akcord?pg=1&key=&word=&order="><i class="fa fa-bullhorn"></i>&nbsp;공지사항</a>
-                      			</c:if>
-                      			<c:if test="${user.type == 0 }">
-                        			<a href="${root }/notice/mvnoticelist.akcord?pg=1&key=&word=&order="><i class="fa fa-bullhorn"></i>&nbsp;공지사항</a>
-                      			</c:if>
-							</h4>
-						</div>
-						<div class="list-heading1">
-							<h4 class="list-title" style="padding-top: 20px;">
-								<a
-									href="${root}/myroom/myroomlist.akcord?ch=1&pg=1&key=&word=&order="><i
-									class="fa fa-book fa-fw"></i>&nbsp;MY ROOM</a>
-							</h4>
-						</div>
-						<div class="list-heading">
-							<h4 class="list-title">
-								<a href="#collapse-2" data-toggle="collapse"><i
-									class="fa fa-group"></i>&nbsp;GROUP ROOM</a>
-							</h4>
-						</div> <!-- more menu for ONE -->
-						<div id="collapse-2" class="panel-collapse collapse">
-							<ul>
-								<li><a
-									href="${root}/group/list.akcord?pg=1&key=&word=&order=">전체
-										그룹방</a></li>
-								<li><a href="#collapse-4" data-toggle="collapse"> 내 그룹방</a></li>
-							</ul>
-						</div>
-						<div id="collapse-4" class="panel-collapse collapse">
-							<ul>
-								<c:forEach var="g_list" items="${group_list}">
-									<li><a
-										href="${root}/groupmain/main.akcord?groupId=${g_list.groupId}">
-											${g_list.majorName} : ${g_list.groupName}</a></li>
-								</c:forEach>
-							</ul>
-						</div>
-						<div class="list-heading1">
-							<h4 class="list-title" style="padding-top: 20px;">
-								<a href="${root}/in/list.akcord?major_id=${user.major_id}"><i
-									class="fa fa-question-circle-o"></i>&nbsp;지식인</a>
-							</h4>
-						</div>
-						<div class="list-heading">
-							<h4 class="list-title">
-								<a href="${root}/cafe/studycafe.akcord?pg=1&key=&word=&order="><i
-									class="fa fa-coffee"></i>&nbsp;STUDY CAFE</a>
-							</h4>
-						</div>
-						<div class="list-heading1">
-							<h4 class="list-title" style="padding-top: 20px;">
-								<a href=""><i class="fa fa-id-badge"></i>&nbsp; MY PAGE</a>
-							</h4>
-						</div>
-						<div class="list-heading">
-							<h4 class="list-title">
-								<a href="#collapse-3" data-toggle="collapse"><i
-									class="fa fa-cog fa-fw"></i>&nbsp;관리</a>
-							</h4>
-						</div>
-						<div id="collapse-3" class="panel-collapse collapse">
-							<ul>
-								<li><a
-									href="${root }/usermanager/mvmemberlist.akcord?pg=1&key=&word=&order=">회원관리</a></li>
-								<li><a href="${root }/poll/list.akcord">통계</a></li>
-							</ul>
-						</div>
-					</li>
-				</ul>
-			</div>
-		</div>
 		<!-- //sidebar -->
 
 
@@ -302,23 +196,27 @@ $(function(){
 			<div class="container">
 				<%-- <a href="#;" id="toggleSidebar"><img alt="" src="${root}/doc/img/icon.png" height="35" width="35"></a> --%>
 				<a href="#" id="toggleSidebar" style="text-decoration:none"><i class="fa fa-gear fa-2x" style="color:black;"></i></a>
-				<a href="${root}/index.jsp" class="logo" >AKcord</a>
+				<a href="${root}/index.jsp" class="logo" >Akashic Records</a>
 				<div class="c_03 c pull-right">
-					<%-- <a href=""><img alt="" src="${root}/doc/img/bell-icon.png" width="20" height="20"><span class="badge">5</span></a> --%>
-					<a data-toggle="collapse" href="#collapse-alarm">
-						<span class="fa fa-bell fa-2x" style="color: #d34e4c;"></span>
-						<span class="badge"></span>
-					</a>
+					<div class="dropdown">
+						<a href="#"  class="dropdown-toggle" data-toggle="dropdown">
+							<span class="fa fa-bell fa-2x" style="color: #d34e4c;"></span>
+							<span class="badge"></span>
+						</a>
+					    <ul class="dropdown-menu dropdown" style="right:0; left:unset;">
+					      <li><a href="#">HTML</a></li>
+					      <li><a href="#">CSS</a></li>
+					      <li><a href="#">JavaScript</a></li>
+					      <li class="divider"></li>
+					      <li><a href="#">About Us</a></li>
+					    </ul>
+				  	</div>
+						
+						
 				</div>
-			
-				<!-- 알람창 -->
-				<div id="collapse-alarm" class="panel-collapse collapse"></div>
 
-        		<div class="login_info pull-right">
-				<div class="login_info pull-right">
-					<div id="username"></div>
-					님 환영합니다
 				</div>
+				<!-- 알람창 -->
+				
 			</div>
 		</div>
-	</div>

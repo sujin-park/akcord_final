@@ -18,18 +18,13 @@
 		});
 	});
 </script>
-<style>
-.articleinfo{
-    color: #888;   
-}
-</style>
 <input type="hidden" id="groupInfo" value="${groupId}">
-    <div class="container-fluid">
-        <div class="container container-pad" id="property-listings">
+    <div class="container akcord">
+        <div id="property-listings">
             
             <div class="row">
-              <div class="col-sm-12 articleinfo" style="padding-bottom:10px;">
-                <h1>GROUP HOMEWORK</h1>
+              <div class="col-sm-12 titleinfo" style="padding-bottom:10px;">
+                <h2>GROUP HOMEWORK</h2>
                 <c:if test="${not empty startDate && not empty endDate}">
                 	<p>${startDate} ~ ${endDate}</p>
                 </c:if>
@@ -82,5 +77,4 @@
 				 </c:forEach>
                </div><!-- End Listing-->
           </div><!-- End Col -->
-</body>
-</html>
+ <%@include file="/common/template/footer.jsp"%>

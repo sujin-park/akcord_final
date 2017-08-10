@@ -51,5 +51,4 @@
 			</div>
 		</div>
 	</div>
-</body>
-</html>
+ <%@include file="/common/template/footer.jsp"%>

@@ -79,15 +79,14 @@ $(document).ready(function(){
 });
 
 </script>
-<section class="content page-top row" style="padding-top: 60px;">
-   <div class="container" >
-	<div class="row">
-		<div class="col-sm-10 col-sm-push-1">
-					<h3>회원 관리</h3>
-		</div>
-
-		<div class="col-sm-10 col-sm-push-1" style="padding-top: 20px;">
-	
+ 	<div class="container akcord">
+				<div class="col-sm-12">
+					<div class="page-header titleinfo">
+					    <h2 id="container">
+					    	<i class="fa fa-address-book"></i>  &nbsp;<b>블랙리스트 관리</b>
+					    </h2>
+					    <h5>블랙리스트 회원을 전체적으로 볼 수 있습니다.</h5>
+					</div>
 		<div class="panel panel-default">
 			<div class="tabbable" id="tabs-630325">
 				<ul class="nav nav-tabs">
@@ -178,13 +177,11 @@ $(document).ready(function(){
 			</div>
 		</div>
 	</div>
-</div>
 <div align="center" style="clear:both;">
 			${navigator.navigator}
 			</div>
 			<div class="col-md-6"></div>
 		
-</section>
 <div class="modal fade" id="modal-container-947726" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog" style="width:30%">
 					<div class="modal-content">
@@ -225,5 +222,4 @@ $(document).ready(function(){
    <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/scripts.js"></script>
-  </body>
-</html>
+ <%@include file="/common/template/footer.jsp"%>

@@ -113,12 +113,9 @@
 
 </script>
 <input type="hidden" id="sgroupid" name="sgroupid" value="${groupId}">
-		<section class="content page-top row">
-			<div class="col-sm-10 col-sm-push-1" style="padding-top: 60px;">
-				<div class="col-sm-10">
+			<div class="container akcord">
+				<div class="col-sm-12">
 					<h3>그룹원 관리</h3>
-				</div>
-				
 				<div class="panel panel-default">
 					<div class="tabbable" id="tabs-630325" align="left" style="width: 100%; clear:both;">
 						<ul class="nav nav-tabs">
@@ -137,7 +134,7 @@
 								<!-- <%@include file="/user/group/main/origingroup.jsp" %> -->
 							</div>
 						</div>
-		</section>
+					</div>
+			</div>
 <%@include file="/user/group/main/plusmember.jsp"%>
-	</body>
-</html>
+ <%@include file="/common/template/footer.jsp"%>

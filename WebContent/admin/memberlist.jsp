@@ -8,9 +8,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Source code generated using layoutit.com">
-<meta name="author" content="LayoutIt!">
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
 
 <%@ include file="/common/template/nav.jsp" %>
 <%@ include file="/common/public.jsp" %>
@@ -85,14 +82,14 @@ $(document).ready(function(){
 });
 
 </script>
-   <div class="container akcord" > 
-	<div class="row">
-		<div class="col-sm-10 col-sm-push-1">
-					<h3>회원 관리</h3>
-		</div>
-
-		<div class="col-sm-10 col-sm-push-1" style="padding-top: 20px;">
-	
+ 	<div class="container akcord">
+				<div class="col-sm-12">
+					<div class="page-header titleinfo">
+					    <h2 id="container">
+					    	<i class="fa fa-address-book"></i>  &nbsp;<b>회원관리</b>
+					    </h2>
+					    <h5>회원을 전체적으로 볼 수 있습니다.</h5>
+					</div>
 		<div class="panel panel-default">
 			<div class="tabbable" id="tabs-630325">
 				<ul class="nav nav-tabs">
@@ -226,5 +223,4 @@ $(document).ready(function(){
    <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/scripts.js"></script>
-  </body>
-</html>
+<%@include file="/common/template/footer.jsp"%>

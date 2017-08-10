@@ -23,19 +23,17 @@
 
 <!-- Container ======================================================================================= -->
 <section>
-<div class="container">
-    <div class="row">
 
 <!-- Center ======================================================================================= -->
         <div class="col-sm-12"></div>
         <div class="col-sm-12"></div>
         <div class="col-sm-12"></div>
         
-        <div class="col-sm-12" style="padding-top: 20px;">     
-			
-			<div class="page-header" style="padding-top: 20px;">
-			    <h2 id="container">온라인투표</h2>
-			</div>
+	<div class="container akcord">
+		<div class="col-sm-12">
+				<div class="page-header titleinfo">
+					    <h2 id="container"><i class="fa fa-line-chart"></i>  &nbsp;<b>온라인 투표 관리</b></h2><h5>회원들에게 보여지는 온라인 투표에 대한 관리게시판입니다.</h5>
+				</div>
 			<div class="pull-right">
 				<a class="pill" data-toggle="modal" data-target="#pollWriteModal" data-backdrop="static">
            		<button type="button" id="newBtn" class="btn btn-sm btn-default" data-backdrop="static">투표생성</button>
@@ -298,7 +296,7 @@
 	            <div class="input-group">
 	                <input type="text" class="form-control" placeholder="제목"  id="sword" name="sword">
 	                <span class="input-group-btn">
-	                    <button type="button" class="btn btn-primary" id="searchBtn" data-pg="1">검색</button>
+	                    <button type="button" class="btn btn-danger" id="searchBtn" data-pg="1">검색</button>
 	                </span>
 	            </div>
 	        </form>
@@ -310,7 +308,7 @@
 		</div>
 </div>
 </div>
-
+ <%@include file="/common/template/footer.jsp"%>
 <!-- 공지사항 작성 Modal -->
 
 <script type="text/javascript">
@@ -421,6 +419,7 @@ $(document).ready(function() {
 	</div>
 </div>
 </section>
+
 <!-- 공지사항 보기 Modal -->
 
 <div id="pollResultModal" class="modal fade" role="dialog">

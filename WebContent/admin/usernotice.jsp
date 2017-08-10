@@ -4,17 +4,14 @@
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 <%@include file="/common/template/head_include.jsp" %>
 <html lang="en">
-  <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Source code generated using layoutit.com">
     <meta name="author" content="LayoutIt!">
 <%@ include file="/common/public.jsp" %>
-
 <%@ include file="/common/template/nav.jsp" %>
 <script type="text/javascript">
-
 $(document).ready(function (){
 	
 	  $("#noticesort").change(function () {   
@@ -53,16 +50,19 @@ th {
 }
 
 </style>
-<section class="content page-top row"  style="padding-top: 60px;">
-			<div class="container" style="padding-top: 60px;">
-			
-				<div class="col-sm-10 col-sm-push-1">
-					<h2>공지사항 목록</h2>
-				</div>
+	<div class="container akcord">
+				<div class="col-sm-12">
+					<div class="page-header titleinfo">
+					    <h2 id="container">
+					    	<i class="fa fa-bullhorn"></i>  &nbsp;<b>공지사항</b>
+					    </h2>
+					    <h5>AKcord에 대한 공지를 확인할 수 있습니다.</h5>
+					</div>
 				<form name ="noticeform" method="post" action="">
 				<div class="panel panel-default" style="padding:30px;">
-				<div class="row">
-     			<div class="form-group form-inline">
+					<div class="panel-body">
+					<div class="row">
+     					<div class="form-group form-inline">
 									<div class="col-sm-6 pull-right">
 										<div class="col-sm-1"></div>
 								
@@ -99,13 +99,12 @@ th {
 					</tbody>
 			</table> 
 			</div>
+			</div>
 			</form>
 			</div>
 		<div align="center" style="clear:both;">
 			${navigator.navigator}
 			</div>
 			<div class="col-md-6"></div>
-</section>
-		
-  </body>
-</html>
+		</div>
+ <%@include file="/common/template/footer.jsp"%>

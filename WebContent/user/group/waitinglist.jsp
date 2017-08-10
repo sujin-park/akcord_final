@@ -39,9 +39,9 @@
 	
 	});
 </script>
-<title>GROUP LIST</title>
-	<section class="content page-top row">
-		<div class="col-sm-10 col-sm-push-1" style="padding-top: 60px;">
+	<div class="container akcord">
+		<div class="col-sm-12">
+		<h2>Waiting LIST</h2>
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<div class="row">
@@ -116,6 +116,5 @@
 			</div>
 			<div class="col-md-6"></div>
 		</div>
-	</section>
-</body>
-</html>
+	</div>
+ <%@include file="/common/template/footer.jsp"%>

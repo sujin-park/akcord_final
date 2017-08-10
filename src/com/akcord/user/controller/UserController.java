@@ -3,6 +3,7 @@ package com.akcord.user.controller;
 import java.util.List;
 import java.util.Map;
 
+
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
@@ -69,9 +70,9 @@ public class UserController {
 		UserDto userDto = userService.login(map);
 		List<PollDto> plist = pollService.mainpollget();
 		List<GroupRoomDto> group_list = null;
-		/*if(userDto.getType()!=0) { 
+		if(userDto.getType()!=0) { 
 			group_list = userService.group(userDto.getUser_id()+"");
-		}*/
+		}
 		if( userDto != null){
 			if(plist.size()!=0){
 				session.setAttribute("plist", plist);

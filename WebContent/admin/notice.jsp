@@ -82,11 +82,14 @@ th.ct {
 	text-align:center !important;
 }
 </style>
-<section class="content page-top row"  style="padding-top: 60px;">
-			<div class="container" style="padding-top: 60px;">
-				<div class="col-sm-10 col-sm-push-1">
-					<h2>공지사항 목록</h2>
-				</div>
+	<div class="container akcord">
+				<div class="col-sm-12">
+					<div class="page-header titleinfo">
+					    <h2 id="container">
+					    	<i class="fa fa-bullhorn"></i>  &nbsp;<b>공지사항</b>
+					    </h2>
+					    <h5>AKcord에 대한 공지를 확인할 수 있습니다.</h5>
+					</div>
 				<form name ="noticeform" method="post" action="">
 				<div class="panel panel-default" style="padding:30px;">
 				<div class="row">
@@ -159,7 +162,6 @@ th.ct {
 			${navigator.navigator}
 			</div>
 			<div class="col-md-6"></div>
-</section>
-		
+		</div>
   </body>
 </html>

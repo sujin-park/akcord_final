@@ -21,7 +21,6 @@ public class BroadSocket {
     
     @OnMessage
     public void onMessage(String message, Session session) throws IOException {
-        //System.out.println(message);
         synchronized(clients) {
             for(Session client : clients) {
                 if(!client.equals(session)) {
@@ -34,8 +33,6 @@ public class BroadSocket {
     
     @OnOpen
     public void onOpen(Session session) {
-        //System.out.println(session);
-    	//System.out.println(clients + "사람이름~~");
         clients.add(session);
     }
     
