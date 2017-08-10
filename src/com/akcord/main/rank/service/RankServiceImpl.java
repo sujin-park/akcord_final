@@ -28,14 +28,20 @@ public class RankServiceImpl implements RankService {
 
 	@Override
 	public List<RankDto> getGroup() {
-		// TODO 그룹 멤버수 순위
+		// TODO
 		return sqlSession.getMapper(RankDao.class).getGroup();
 	}
 
 	@Override
 	public List<RankDto> getMyroom() {
-		// TODO 마이룸 공유글 조회수
+		// TODO 
 		return sqlSession.getMapper(RankDao.class).getMyroom();
+	}
+
+	@Override
+	public String getGroupname(String id) {
+		// TODO Auto-generated method stub
+		return sqlSession.getMapper(RankDao.class).getGroupname(id);
 	}
 
 }

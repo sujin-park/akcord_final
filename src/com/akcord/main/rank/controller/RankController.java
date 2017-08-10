@@ -41,7 +41,9 @@ public class RankController {
 			JSONObject jtmp = new JSONObject();
 			jtmp.put("hit", listGroup.get(i).getHit());
 			jtmp.put("id", listGroup.get(i).getId());
-			jtmp.put("subject", listGroup.get(i).getSubject());
+			String id =  listGroup.get(i).getId();
+			String subject = rankService.getGroupname(id);
+			jtmp.put("subject", subject);
 			
 			jGroup.add(jtmp);
 		}
