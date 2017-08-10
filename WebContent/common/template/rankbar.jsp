@@ -31,8 +31,8 @@ function qnaRank(data) {
 	output1 += '</div>';
 	output1 += '<ul class="list-group list-group-flush">';
 	
-	for (var i = 0; i < data.jq.length(); i++) {
-		output1 += '<li class="list-group-item"><i class="mx-auto fa d-inline fa-clock-o"></i>&nbsp;1&nbsp;<b>'+i+'. '+data.jq[i].subject+'</b></li>';
+	for (var i = 0; i < data.jq.length; i++) {
+		output1 += '<li class="list-group-item"><i class="mx-auto fa d-inline fa-clock-o"></i>&nbsp;&nbsp;<b>'+(i+1)+'. '+data.jq[i].subject+'&nbsp;&nbsp;( 조회수 : '+data.jq[i].hit+')</b></li>';
 	}
 
 	output1 += '</ul>';
@@ -47,8 +47,8 @@ function groupRank(data) {
 	output2 += '</div>';
 	output2 += '<ul class="list-group list-group-flush">';
 	
-	for (var i = 0; i < data.jg.length(); i++) {
-		output1 += '<li class="list-group-item"><i class="mx-auto fa d-inline fa-clock-o"></i>&nbsp;1&nbsp;<b>'+i+'. '+data.jg[i].subject+'</b></li>';
+	for (var i = 0; i < data.jg.length; i++) {
+		output2 += '<li class="list-group-item"><i class="mx-auto fa d-inline fa-clock-o"></i>&nbsp;&nbsp;<b>'+(i+1)+'. '+data.jg[i].subject+'&nbsp;&nbsp;( 인원수 : '+data.jg[i].hit+')</b></li>';
 	}
 
 	output2 += '</ul>';
@@ -63,8 +63,8 @@ function myroomRank(data) {
 	output3 += '</div>';
 	output3 += '<ul class="list-group list-group-flush">';
 	
-	for (var i = 0; i < data.jm.length(); i++) {
-		output1 += '<li class="list-group-item"><i class="mx-auto fa d-inline fa-clock-o"></i>&nbsp;1&nbsp;<b>'+i+'. '+data.jm[i].subject+'</b></li>';
+	for (var i = 0; i < data.jm.length; i++) {
+		output3 += '<li class="list-group-item"><i class="mx-auto fa d-inline fa-clock-o"></i>&nbsp;&nbsp;<b>'+(i+1)+'. '+data.jm[i].subject+'&nbsp;&nbsp;( 조회수 : '+data.jm[i].hit+')</b></li>';
 	}
 
 	output3 += '</ul>';
@@ -90,10 +90,10 @@ function myroomRank(data) {
 	          </div>
 	        </div>
 	        <div class="col-md-3">
-
-	          <c:if test="${plist!=0} ">
+	 <c:if test="${plist!=0} ">
 	          <%@ include file="/admin/poll.jsp" %>
-				</c:if>
+				</c:if> 
+	         
 	        </div>
      </div>
 </body>

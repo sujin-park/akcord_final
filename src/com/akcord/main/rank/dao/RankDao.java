@@ -6,10 +6,11 @@ import com.akcord.main.rank.model.RankDto;
 
 public interface RankDao {
 	
-	List<RankDto> getQna();	// qna ï¿½ï¿½Å· ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-	List<RankDto> getQnaComment();	// qna ï¿½ï¿½Å· ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	List<RankDto> getQna();	// 
+	List<RankDto> getQnaComment();	// 
 	
 	List<RankDto> getGroup();	//
-	List<RankDto> getMyroom();	// ë§ˆì´ë£¸ ì¡°íšŒìˆ˜ ë­í‚¹
+	String getGroupname(String id);	// ±×·ìÀÌ¸§ ±¸ÇØ¿À±â
+	List<RankDto> getMyroom();	//
 
 }

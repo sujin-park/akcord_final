@@ -7,6 +7,7 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.akcord.main.rank.model.RankDto;
 import com.akcord.main.rank.service.RankService;
@@ -19,7 +20,7 @@ public class RankController {
 	private RankService rankService;
 
 	@RequestMapping(value="/getrank.akcord")
-	public String getRank(){
+	public @ResponseBody String getRank(){
 		JSONObject json = new JSONObject();
 		List<RankDto> listQna = rankService.getQna();
 		List<RankDto> listGroup = rankService.getGroup();
@@ -41,7 +42,9 @@ public class RankController {
 			JSONObject jtmp = new JSONObject();
 			jtmp.put("hit", listGroup.get(i).getHit());
 			jtmp.put("id", listGroup.get(i).getId());
-			jtmp.put("subject", listGroup.get(i).getSubject());
+			String id =  listGroup.get(i).getId();
+			String subject = rankService.getGroupname(id);
+			jtmp.put("subject", subject);
 			
 			jGroup.add(jtmp);
 		}

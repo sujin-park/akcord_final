@@ -34,68 +34,50 @@ var name = "";
 	}
 	
 	function listCall(data) {
-		var resultView = $('#collapse-alarm');
+		var resultView = $('.dropdown');
 		// 콜랩스 디브 시작부분
-		output += '<ul class="list-group">';
-		output += '<li class="list-group-item">';
-		output += '<div class="list-heading1">';
-		output += '<h4 class="list-title">';
-		output += '<a href="#">&nbsp;내용</a>';
-		output += '</h4></div>';
-		
+		output += '<ul class="dropdown-menu dropdown" style="right:0; left:unset;">';
+		output += '<li><a href="#">내용</a></li>';
+
 		for (var i = 0; i < data.list0.length; i++) {
 			if(data.list0[i].key == 1){
-				output += '<div class="list-heading1">';
-				output += '<h4 class="list-title">';
-				output += '<a href="#">&nbsp;';
-				output += '그룹에 초대되었습니다!';
-				output += '</a></h4></div>';
+				output += '<li><a href="#">';
+				output += '그룹에 초대되었습니다';
+				output += '</a></li>';
+				
 			} else if(data.list0[i].key == 2){
-				output += '<div class="list-heading1">';
-				output += '<h4 class="list-title">';
-				output += '<a href="#">&nbsp;';
+				output += '<li><a href="#">';
 				output += '그룹에 가입되었습니다!';
-				output += '</a></h4></div>';
+				output += '</a></li>';
 			} else if(data.list0[i].key == 3){
-				output += '<div class="list-heading1">';
-				output += '<h4 class="list-title">';
-				output += '<a href="#">&nbsp;';
-				output += '지식인에 답변이 달렸습니다!';
-				output += '</a></h4></div>';
+				output += '<li><a href="#">';
+				output += '레코더에 답변이 등록되었습니다!';
+				output += '</a></li>';
 			} else if(data.list0[i].key == 4){
-				output += '<div class="list-heading1">';
-				output += '<h4 class="list-title">';
-				output += '<a href="#">&nbsp;';
-				output += '지식인에 덧글이 달렸습니다!';
-				output += '</a></h4></div>';
+				output += '<li><a href="#">';
+				output += '레코더에 덧글이 달렸습니다.';
+				output += '</a></li>';
 			} else if(data.list0[i].key == 5){
-				output += '<div class="list-heading1">';
-				output += '<h4 class="list-title">';
-				output += '<a href="#">&nbsp;';
-				output += '지식인에 좋아요가 표시가 되었습니다!';
-				output += '</a></h4></div>';
+				output += '<li><a href="#">';
+				output += '레코더에 좋아요가 표시되었습니다';
+				output += '</a></li>';
 			} else if(data.list0[i].key == 6){
-				output += '<div class="list-heading1">';
-				output += '<h4 class="list-title">';
-				output += '<a href="#">&nbsp;';
-				output += '지식인에 싫어요 표시가 생겼습니다ㅠ';
-				output += '</a></h4></div>';
+				output += '<li><a href="#">';
+				output += '레코더에 싫어요가 표시되었습니다ㅠ';
+				output += '</a></li>';
 			} else if(data.list0[i].key == 7){
-				output += '<div class="list-heading1">';
-				output += '<h4 class="list-title">';
-				output += '<a href="#">&nbsp;';
-				output += '공지사항이 등록되었습니다!';
-				output += '</a></h4></div>';
+				output += '<li><a href="#">';
+				output += '공지사항이 등록되었습니다.';
+				output += '</a></li>';
 			} else {
-				output += '<div class="list-heading1">';
-				output += '<h4 class="list-title">';
-				output += '<a href="#">&nbsp;';
+				output += '<li><a href="#">';
 				output += '서버에 오류가 발생했습니다.';
-				output += '</a></h4></div>';
+				output += '</a></li>';
 			}
 		}
 		
-		output += '</li></ul>';
+		output += '<li><a href="#">About Us</a></li></ul>';
+
 		resultView.empty();
 		resultView.append(output);
 	}

@@ -17,9 +17,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <select id="getGroup" resultType="rankDto">
-        select group_id id, user_id hit
-        from grouproom_list
-        order by hit desc
+        select group_id ID, COUNT(user_id) hit
+            from grouproom_list
+            GROUP BY GROUP_ID
+            order by hit desc
     </select>
     
     <select id="getMyroom" resultType="rankDto">
