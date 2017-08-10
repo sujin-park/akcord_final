@@ -24,7 +24,7 @@
 		select g.group_name groupName, m.major_name majorName, g.group_id groupId from users u, grouproom g, grouproom_list gl, major m
 				where u.user_id = gl.user_id
 				and g.group_id = gl.group_id
-				and m.major_id = u.major_id
+				and m.major_id = g.major_id
 				and u.user_id = #{seq}
 				and gl.is_accept = 1 
 	</select>

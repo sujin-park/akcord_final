@@ -115,4 +115,9 @@ public class GroupMainServiceImpl  implements GroupMainService{
 		return sqlSession.getMapper(GroupMainDao.class).totalperson(groupId);
 	}
 
+	@Override
+	public int deleteArticle(Map<String, String> map) {
+		return sqlSession.getMapper(GroupMainDao.class).deleteArticle(map);
+	}
+
 }

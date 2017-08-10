@@ -9,6 +9,9 @@
         <input type="hidden" value='${user.name }' id='chat_id' />
     </c:if>
 
+      <div class="round hollow text-center">
+           <a href="#" class="chatting"><span class="glyphicon glyphicon-comment" data-state="open"></span></a>
+      </div>
 <%@include file="/user/group/main/chattingUI.jsp" %>
 <!--     <div id="_chatbox" style="display: none; height:80px;">
         <fieldset>
@@ -17,9 +20,6 @@
             <input type="submit" value="send" onclick="send()" />
         </fieldset>
     </div> -->
-      <div class="round hollow text-center">
-           <a href="#" class="chatting"><span class="glyphicon glyphicon-comment" data-state="open"></span></a>
-      </div>
 </body>
 <script>
 	$('.chatting').children().text('Open');

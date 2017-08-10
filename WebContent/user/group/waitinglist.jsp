@@ -39,9 +39,12 @@
 	
 	});
 </script>
-<title>GROUP LIST</title>
-	<section class="content page-top row">
-		<div class="col-sm-10 col-sm-push-1" style="padding-top: 60px;">
+
+	<div class="container akcord">
+		<div class="col-sm-12">
+				<div class="page-header titleinfo">
+					    <h2 id="container"><i class="fa fa-comments"></i>  &nbsp;<b>WAITING LIST</b></h2><h5>가입하기 전 대기중인 그룹 리스트입니다.</h5>
+				</div>
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<div class="row">
@@ -66,6 +69,7 @@
 								<c:if test="${waitlist.size() != 0}">
 								<c:forEach var="WaitDto" items="${waitlist}">
 									<input type="hidden" id="cancelSeq" value="${WaitDto.groupId}">
+									<input type="hidden" id="fromto" name="fromto" value="${WaitDto.fromto}">
 									<tr>
 										<td>
 											<div class="media">
@@ -93,14 +97,18 @@
 											</div>
 										</td>
 										<td align="center">
+										<c:if test="${WaitDto.fromto == 2}">
 												<button class="btn btn-danger" id="accept${WaitDto.groupId}" onclick="javascript:accept(${WaitDto.groupId});">
 													<span class="glyphicon glyphicon-heart">
 													</span>
 												</button>
+										</c:if>
+										<c:if test="${WaitDto.fromto == 1}">
 												<button class="btn btn-default" id="cancel${WaitDto.groupId}" onclick="javascript:cancel(${WaitDto.groupId});">
 													<span class="glyphicon glyphicon-remove">
 													</span>
 												</button>
+										</c:if>
 									    </td>
 									</tr>
 								</c:forEach>
@@ -116,6 +124,5 @@
 			</div>
 			<div class="col-md-6"></div>
 		</div>
-	</section>
-</body>
-</html>
+	</div>
+ <%@include file="/common/template/footer.jsp"%>

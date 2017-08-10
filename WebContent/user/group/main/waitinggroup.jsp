@@ -37,7 +37,7 @@
 								<div class="table-container table-responsive" style="margin-left: 20px; margin-right: 20px">
 									<table class="table table-filter" id="extable">
 										<tbody>
-											<tr class="danger" align="center">
+											<tr align="center">
 												<td width="10%">
 													<div class="ckbox">
 														<input type="checkbox" id="checkedAll">
@@ -81,16 +81,26 @@
 													</div>
 												</td>
 												<td align="center">
+												<c:if test="${listDto.fromto == 1}">
 													<button type="button" class="btn btn-sm btn-danger" id="acceptG"
 													onclick="javascript:acceptM(${listDto.seq})">
 										    			<span class="glyphicon glyphicon-heart"></span>
 										    		</button>
+										    	</c:if>
+										    	<c:if test="${listDto.fromto != 1}">
+										    		<span>대기중</span>
+										    	</c:if>
 											    </td>
 												<td align="center">
+												<c:if test="${listDto.fromto == 2}">
 													<button type="button" class="btn btn-sm btn-default" id="deleteM"
 													onclick="javascript:deleteM(${listDto.seq})">
 										    			<span class="glyphicon glyphicon-remove"></span>
 										    		</button>
+										    	</c:if>
+										    	<c:if test="${listDto.fromto != 2}">
+										    		<span>대기중</span>
+										    	</c:if>
 											    </td>
 											</tr>
 										</c:forEach>

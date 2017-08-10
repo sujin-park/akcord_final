@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
-
 <div class="modal fade" id="scheduleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
      <input type="hidden" name="title" id ="title" value="">
      <input type="hidden" name="content" id="content" value="">
@@ -32,11 +31,11 @@
 		           		  <div class="col-sm-6">
 					           	 <div class="input-group">
 					              <h3>과제명 </h3>
-					                 <input type="text" class="form-control" size="25" name="scheduleName"   id="scheduleName" value="">
+					                 <input type="text" class="form-control" size="30" name="scheduleName"   id="scheduleName" value="">
 					             </div>
 					            <div class="input-group">
 					              <h3>할일</h3>
-					              <textarea id="detail"  class="form-control" name="detail" cols="38"></textarea>
+					              <textarea id="detail"  class="form-control" name="detail" cols="40"></textarea>
 					           </div>
 			           </div>
 			           <div class="col-sm-6">
@@ -81,11 +80,11 @@
            
            <div id="modalBody" class="modal-body">
            <div class="input-group">
-              <h3>과제명 </h3>
-                 <input type="text" class="form-control" size="25" name="scheduleName"   id="scheduleName" value="">
+              <h4 id="container" class="titleinfo"><i class="fa fa-toggle-right"></i>&nbsp;  <b>과제명</b></h4>
+                 <input type="text" class="form-control" size="40" name="scheduleName"   id="scheduleName" value="">
              </div>
             <div class="input-group">
-              <h3>할일</h3>
+              <h4 id="container" class="titleinfo"><i class="fa fa-toggle-right"></i>&nbsp;  <b>과제 내용</b></h4>
               <textarea id="detail"  class="form-control" name="detail" cols="38"></textarea>
            </div>
 

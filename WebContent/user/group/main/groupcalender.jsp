@@ -306,42 +306,23 @@ var obj;
 		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
 		font-size: 14px;
 	}
-	
 
 	#calendar {
 		margin: 0 auto;
 		display: inline;
-		width: 60%;
+		width: 70;
 		float:left;
 	}
-	.groupinfo {
-		padding-left:10px; 
-		border: 1px solid #ddd; 
-		margin-right:10%; 
-		margin-bottom:10px; 
-		height:100px;
-		background-color:#eee;
-	}
 	
-	.groupinfo>h3 {
-		text-align:center;
-	}
-	
-	.groupinfo>h4 {
-		text-align:center;	
-	}
-	.form-control{ box-shadow:none; border-color:#eee;}
-	.form-control:focus{ box-shadow:none; border-color:#d34e4c;}
 </style>
 <%@ include file="/common/template/nav.jsp" %>
-<div class="col-sm-10 col-sm-push-1">
-	<div class="container akcord">
-		<div class="row" style="margin:30px;">
+ 	<div class="container akcord" style="margin-bottom:10px;">
+		<div class="col-sm-12">
 					<div class="row"></div>
-						<div class="groupinfo">
-							<h3>${gInfo.groupName}</h3>
-							<h4>${gInfo.majorName}</h4>
+						<div class="page-header titleinfo">
+							<h2 id="container"><i class="fa fa-comments-o"></i>&nbsp;  <b>${gInfo.groupName}</b></h2><h4>${gInfo.majorName}</h4>
 							<h4>리더 : ${gInfo.name}</h4>
+						</div>
 						</div>
 					<div class="row">
 						<div class="col-sm-6" style="border:5px; margin-bottom:20px;">
@@ -359,15 +340,11 @@ var obj;
 			<div id='calendar' class="col-sm-8">
 			</div>
 			<div class="col-sm-4">
-				<div class="row">
-					<div class="userlist" style="background-color:#eee; height:150px; width:90%;"></div>
+					&nbsp; <h3 style="color: #888;"><i class="fa fa-quote-left"></i>&nbsp; <b>CHATTING LIST</b>  &nbsp;<i class="fa fa-quote-right"></i></h3>
+					<div class="userlist" style="background-color:#eee; height:100px; width:100%; overflow:scroll;"></div>
 					<%@ include file="/user/group/main/chatting.jsp" %>
 				</div>
-			</div>
 		</div>
-	</div>
-</div>
 <%@ include file="/user/group/main/schedule.jsp" %>
 <%@ include file="/user/group/delete.jsp" %>
-</body>
-</html>
+ <%@include file="/common/template/footer.jsp"%>

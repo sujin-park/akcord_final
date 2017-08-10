@@ -8,21 +8,21 @@ import com.akcord.user.model.UserDto;
 
 public interface MyPageService {
 	
-	UserDto mypage(String id);	// ³» Á¤º¸ º¸±â
-	int mypagemodify(Map<String, String> map);	// ³» Á¤º¸ modify
+	UserDto mypage(String id);	// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	int mypagemodify(Map<String, String> map);	// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ modify
 	
-	MypageDto myArticle(String user_id);			// ³» ±Ûµé È£Ãâ
+	MypageDto myArticle(String user_id);			// ï¿½ï¿½ ï¿½Ûµï¿½ È£ï¿½ï¿½
 	
-	List<String> groupcheck(int user_id);	// ±×·ì °¡ÀÔ Ã¼Å©
-	List<String> groupshare(String group_id);	// ±×·ì °øÀ¯ È®ÀÎ ¹× °øÀ¯ ±Û ¹øÈ£
-	Map<String, String> getgroupname(String group_id);	// ±×·ì ÀÌ¸§ È£Ãâ
+	List<String> groupcheck(int user_id);	// ï¿½×·ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã¼Å©
+	List<String> groupshare(String group_id);	// ï¿½×·ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½È£
+	Map<String, String> getgroupname(String group_id);	// ï¿½×·ï¿½ ï¿½Ì¸ï¿½ È£ï¿½ï¿½
 	
-	MypageDto myArticleSearch(String word);			// ³» ±Û Áß¿¡ °Ë»ö
-	MypageDto myArticleGo(Map<String, String> map);	// ³» ±ÛÀÌ ÀÖ´Â °Ô½ÃÆÇÀ¸·Î ÀÌµ¿
+	List<MypageDto> myArticleSearch(String user_id);			// ï¿½ï¿½ ï¿½ï¿½ ï¿½ß¿ï¿½ ï¿½Ë»ï¿½
+	MypageDto myArticleGo(Map<String, String> map);	// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½Ô½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 	
-	int myArticleDeleteReply(int seq);		// ³» ±Û ¹Ù·Î »èÁ¦ - ´äº¯
-	int myArticleDeleteQna(int seq);		// ³» ±Û ¹Ù·Î »èÁ¦ - Áö½ÄÀÎ
-	int myArticleDeleteShare(int seq, int group_id);		// ³» ±Û ¹Ù·Î »èÁ¦ - °øÀ¯±Û
+	int myArticleDeleteReply(int seq);		// ï¿½ï¿½ ï¿½ï¿½ ï¿½Ù·ï¿½ ï¿½ï¿½ï¿½ï¿½ - ï¿½äº¯
+	int myArticleDeleteQna(int seq);		// ï¿½ï¿½ ï¿½ï¿½ ï¿½Ù·ï¿½ ï¿½ï¿½ï¿½ï¿½ - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	int myArticleDeleteShare(int seq, int group_id);		// ï¿½ï¿½ ï¿½ï¿½ ï¿½Ù·ï¿½ ï¿½ï¿½ï¿½ï¿½ - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
 
 }

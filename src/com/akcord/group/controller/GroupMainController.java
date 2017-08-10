@@ -41,31 +41,30 @@ public class GroupMainController {
 
 	@Autowired
 	private AlarmService alarmService;
-	
+
 	@RequestMapping("/main.akcord") // 캘린더로 들어가기
 	public ModelAndView main(@RequestParam("groupId") int groupId) {
 		ModelAndView mav = new ModelAndView();
 		GroupRoomDto group = groupMainService.gMainInfo(groupId);
 		mav.addObject("gInfo", group);
-		System.out.println(group.getName());
-		//mav.addObject("groupId", groupId);
+		// mav.addObject("groupId", groupId);
 		mav.setViewName("/user/group/main/groupcalender");
 		return mav;
 	}
 
 	@RequestMapping("/list.akcord") // 글목록
-	public ModelAndView groupMain(@RequestParam Map<String,String> map) {
+	public ModelAndView groupMain(@RequestParam Map<String, String> map) {
 		ModelAndView mav = new ModelAndView();
-		String startDate =map.get("startDate");
+		String startDate = map.get("startDate");
 		String endDate = map.get("endDate");
 		int groupId = Integer.parseInt(map.get("groupId"));
 		List<GroupHwDto> list = groupMainService.groupArticleList(map);
-		
+
 		if (startDate != null) {
-		int totalperson = groupMainService.totalperson(groupId);
-		int countperson = groupMainService.countperson(Integer.parseInt(map.get("scheduleId")+""));
-		int percent = (countperson / totalperson) * 100;
-		mav.addObject("percent", percent);
+			int totalperson = groupMainService.totalperson(groupId);
+			int countperson = groupMainService.countperson(Integer.parseInt(map.get("scheduleId") + ""));
+			int percent = (countperson / totalperson) * 100;
+			mav.addObject("percent", percent);
 		} else {
 			mav.addObject("percent", 100);
 		}
@@ -73,6 +72,7 @@ public class GroupMainController {
 		mav.addObject("startDate", startDate);
 		mav.addObject("endDate", endDate);
 		mav.addObject("groupId", groupId);
+		mav.addObject("scheduleId", map.get("scheduleId"));
 		mav.setViewName("/user/group/main/articlelist");
 		return mav;
 	}
@@ -142,12 +142,12 @@ public class GroupMainController {
 	}
 
 	@RequestMapping("/grouplist.akcord") // 그룹원 보기
-	public ModelAndView grouplist(@RequestParam Map<String,String> query, HttpSession session) {
+	public ModelAndView grouplist(@RequestParam Map<String, String> query, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		UserDto user = (UserDto) session.getAttribute("user");
 		query.put("seq", user.getUser_id() + "");
 		List<GroupListDto> grouplist = groupMainService.originlist(query);
-		
+
 		query.put("type", "origin");
 		PageNavigation pageNavigation = commonService.makePageNavigation(query);
 		pageNavigation.setRoot("/akcord_project");
@@ -161,15 +161,15 @@ public class GroupMainController {
 	}
 
 	@RequestMapping("/view.akcord") // 과제 글 보기
-	public ModelAndView articleview(@RequestParam Map<String, String> map){
+	public ModelAndView articleview(@RequestParam Map<String, String> map) {
 		ModelAndView mav = new ModelAndView();
 		GroupHwDto groupHwDto = groupMainService.articleView(map);
-		System.out.println(groupHwDto.getMysubject());
+		// System.out.println(groupHwDto.getMysubject());
 		mav.addObject("groupHwDto", groupHwDto);
 		mav.setViewName("/user/group/main/view");
 		return mav;
 	}
-	
+
 	@RequestMapping("/schedule.akcord") // 일정보기
 	public @ResponseBody String scheduleInsert(ScheduleDto scheduleDto) {
 		String sdate = scheduleDto.getStartDate();
@@ -184,19 +184,18 @@ public class GroupMainController {
 		JSONObject json = makeList(groupId);
 		return json.toJSONString();
 	}
-	
+
 	private JSONObject makeList(int groupId) {
-		
+
 		List<ScheduleDto> slist = groupMainService.schedulelist(groupId);
-		
+
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		String nowdate = df.format(new Date());
-		
-		
+
 		JSONObject json = new JSONObject(); // 최종적으로 반환되는 json
 		JSONArray jarr = new JSONArray();
 		JSONArray jarr1 = new JSONArray();
-		
+
 		for (ScheduleDto scheduleDto : slist) {
 			JSONObject jsonaddr = new JSONObject();
 			JSONObject jsonaddr2 = new JSONObject();
@@ -211,37 +210,35 @@ public class GroupMainController {
 			} else {
 				jsonaddr.put("color", "#d34e4c");
 			}
-			
-			
+
 			jsonaddr.put("scheduleId", scheduleDto.getScheduleId());
-			
+
 			int deadline = scheduleDto.getDeadline();
 			if (deadline > 0) {
 				jsonaddr.put("deadline", deadline);
-			} else  if (deadline == 0) {
+			} else if (deadline == 0) {
 				jsonaddr.put("deadline", 0);
 			} else {
 				jsonaddr.put("deadline", -1);
 			}
-			
-			//jarr1.add(jsonaddr2);
+
+			// jarr1.add(jsonaddr2);
 			jarr.add(jsonaddr);
 		}
 
-		 json.put("schedule", jarr);
+		json.put("schedule", jarr);
 		// json.put("schedule2", jarr1);
 
 		return json;
 	}
-	
-	
+
 	@RequestMapping(value = "/calendar.akcord", method = RequestMethod.GET)
 	public @ResponseBody String list(@RequestParam("groupId") int groupId) {
 		JSONObject json = makeList(groupId);
 		return json.toJSONString();
 	}
-	
-	@RequestMapping("/modify.akcord") // 일정 수정 
+
+	@RequestMapping("/modify.akcord") // 일정 수정
 	public @ResponseBody String modify(ScheduleDto scheduleDto) {
 		String sdate = scheduleDto.getStartDate();
 		String edate = scheduleDto.getEndDate();
@@ -254,30 +251,43 @@ public class GroupMainController {
 		JSONObject json = makeList(groupId);
 		return json.toJSONString();
 	}
-	
+
 	@RequestMapping("/delete.akcord") // 일정 삭제
-	public @ResponseBody String delete(@RequestParam("scheduleId") int scheduleId, @RequestParam("groupId") int groupId) {
+	public @ResponseBody String delete(@RequestParam("scheduleId") int scheduleId,
+			@RequestParam("groupId") int groupId) {
 		int cnt = groupMainService.scheduleDelete(scheduleId);
 		JSONObject json = makeList(groupId);
 		return json.toJSONString();
 	}
-	
+
 	@RequestMapping("/out.akcord")
-	public String deletegroup(@RequestParam int groupId){
+	public String deletegroup(@RequestParam int groupId) {
 		ModelAndView mav = new ModelAndView();
 		int cnt = groupMainService.deletegroup(groupId);
-		return "redirect:/group/list.akcord?pg=1&key=&word=&order=&count="+cnt;
+		return "redirect:/group/list.akcord?pg=1&key=&word=&order=&count=" + cnt;
 	}
-	
+
 	@RequestMapping("/outgroup.akcord")
-	public String outgroup(@RequestParam int groupId, HttpSession session){
+	public String outgroup(@RequestParam int groupId, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		UserDto user = (UserDto) session.getAttribute("user");
-		Map<String, String> map = new HashMap<String,String>();
-		map.put("groupId", groupId+"");
-		map.put("userId", user.getUser_id()+"");
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("groupId", groupId + "");
+		map.put("userId", user.getUser_id() + "");
 		int cnt = groupMainService.outgroup(map);
-		
-		return "redirect:/group/list.akcord?pg=1&key=&word=&order=&countG="+cnt;
+
+		return "redirect:/group/list.akcord?pg=1&key=&word=&order=&countG=" + cnt;
+	}
+
+	@RequestMapping("/deleteA.akcord") // 글 공유 취소
+	public String deleteA(@RequestParam Map<String, String> map) {
+		ModelAndView mav = new ModelAndView();
+		int cnt = groupMainService.deleteArticle(map);
+		String scheduleId = "";
+		if (map.get("scheduleId") != null) {
+			scheduleId = map.get("scheduleId")+"";
+		}
+		int groupId = Integer.parseInt(map.get("groupId"));
+		return "redirect:/groupmain/list.akcord?groupId=" + groupId + "&scheduleId=" + scheduleId;
 	}
 }

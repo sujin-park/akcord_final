@@ -1,0 +1,21 @@
+@media screen {
+
+    .container-head{
+		border-bottom: none;
+		background-color: transparent;
+	}
+	
+	.container-head.scrollActive{
+		background-color: #f6f6f6;
+		border-bottom: 1px solid #ccc;
+	}
+	
+	.logo {
+	color: #eee;
+	text-decoration:none;
+    }
+    
+    .logo.scrollActive {
+        color: #d34e4c;
+    }
+}

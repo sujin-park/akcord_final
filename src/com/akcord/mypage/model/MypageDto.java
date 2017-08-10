@@ -6,7 +6,7 @@ public class MypageDto {
 	private String subject;
 	private String content;
 	private String reg_date;
-	private int seq;	// °Ô½Ã±ÛÀÇ °íÀ¯¹øÈ£
+	private int seq;	// ê²Œì‹œê¸€ì˜ ê³ ìœ ë²ˆí˜¸
 
 
 	public String getCategory() {

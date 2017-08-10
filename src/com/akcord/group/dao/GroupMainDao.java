@@ -3,6 +3,8 @@ package com.akcord.group.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.akcord.group.model.GroupHwDto;
 import com.akcord.group.model.GroupListDto;
 import com.akcord.group.model.GroupRoomDto;
@@ -42,4 +44,6 @@ public interface GroupMainDao {
 	public int countperson(int scheduleId);
 	
 	public int totalperson(int groupId);
+	
+	public int deleteArticle(Map<String, String> map);
 }

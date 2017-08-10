@@ -39,7 +39,9 @@ public interface GroupMainService {
 	
 	public int outgroup(Map<String,String> map); // 그룹 탈퇴
 	
-	public int countperson(int scheduleId);
+	public int countperson(int scheduleId); // 과제 낸 인원 수
 	
-	public int totalperson(int groupId);
+	public int totalperson(int groupId); // 전체 인원 수
+	
+	public int deleteArticle(Map<String, String> map);
 }

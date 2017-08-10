@@ -26,5 +26,4 @@
 			
 			</div>
 			</section>
-  </body>
-</html>
+  <%@include file="/common/template/footer.jsp"%>

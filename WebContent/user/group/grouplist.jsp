@@ -132,7 +132,9 @@ function joinGroup(seq) {
 <!-- 	<section class="content page-top row"> -->
 	<div class="container akcord">
 		<div class="col-sm-12">
-			<h2>GROUP LIST</h2>
+				<div class="page-header titleinfo">
+					    <h2 id="container"><i class="fa fa-comments"></i>  &nbsp;<b>GROUP LIST</b></h2><h5>그룹원들과 소통하며 일정을 효율적으로 관리할 수 있습니다.</h5>
+				</div>
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<div class="row" style="padding-bottom:10px;">
@@ -170,7 +172,7 @@ function joinGroup(seq) {
 								<div class="table-container table-responsive" style="margin-left: 20px; margin-right: 20px">
 									<table class="table table-filter" id="extable">
 										<tbody>
-											<tr class="danger" align="center">
+											<tr align="center">
 												<td width="15%">생성일</td>
 												<td width="10%">전공</td>
 												<td width="15%">그룹방명</td>
@@ -239,5 +241,4 @@ function joinGroup(seq) {
 	<!-- </section> -->
 <%@include file="/user/group/create.jsp"%>
 <%@include file="/user/group/join.jsp"%>
-</body>
-</html>
+<%@include file="/common/template/footer.jsp"%>

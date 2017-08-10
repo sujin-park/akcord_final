@@ -19,25 +19,25 @@ public class MyPageServiceImpl implements MyPageService {
 
 	@Override
 	public UserDto mypage(String id) {
-		// TODO ³» Á¤º¸¸¦ ºÒ·¯¿Íº¸¾Æ¿ä
+		// TODO ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½Íºï¿½ï¿½Æ¿ï¿½
 		return sqlSession.getMapper(MyPageDao.class).mypage(id);
 	}
 	@Override
 	public int mypagemodify(Map<String, String> map) {
-		// TODO ³» Á¤º¸¸¦ ºÒ·¯¿Íº¸¾Æ¿ä
+		// TODO ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½Íºï¿½ï¿½Æ¿ï¿½
 		return sqlSession.getMapper(MyPageDao.class).mypagemodify(map);
 	}
 
 	@Override
 	public MypageDto myArticle(String user_id) {
-		// TODO ³» ±ÛÀ» ºÒ·¯¿Íº¸ÀÚ
+		// TODO ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½Íºï¿½ï¿½ï¿½
 		return sqlSession.getMapper(MyPageDao.class).myArticle(user_id);
 	}
 
 	@Override
-	public MypageDto myArticleSearch(String word) {
+	public List<MypageDto> myArticleSearch(String user_id) {
 		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.getMapper(MyPageDao.class).myArticleSearch(user_id);
 	}
 
 	@Override
@@ -48,34 +48,34 @@ public class MyPageServiceImpl implements MyPageService {
 
 	@Override
 	public List<String> groupcheck(int user_id) {
-		// TODO ±×·ì °¡ÀÔ ¿©ºÎ È®ÀÎ
+		// TODO ï¿½×·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
 		return sqlSession.getMapper(MyPageDao.class).groupcheck(user_id);
 	}
 	@Override
 	public List<String> groupshare(String group_id) {
-		// TODO ±×·ì¹æ¿¡ ±Û °øÀ¯ ¿©ºÎ È®ÀÎ
+		// TODO ï¿½×·ï¿½æ¿¡ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
 		return sqlSession.getMapper(MyPageDao.class).groupshare(group_id);
 	}
 	@Override
 	public Map<String, String> getgroupname(String group_id) {
-		// TODO ¸¶ÀÌÆäÀÌÁö ³ëÃâÀ» À§ÇÑ ±×·ì¸í °¡Á®¿À±â
+		// TODO ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×·ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		return sqlSession.getMapper(MyPageDao.class).getgroupname(group_id);
 	}
 	@Override
 	public int myArticleDeleteReply(int seq) {
-		// TODO ³» ´ä±Û »èÁ¦
+		// TODO ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		int qna_comment_id = seq;
 		return sqlSession.getMapper(MyPageDao.class).myArticleDeleteReply(qna_comment_id);
 	}
 	@Override
 	public int myArticleDeleteQna(int seq) {
-		// TODO ³» Áö½ÄÀÎ ±Û »èÁ¦
+		// TODO ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		int qna_id = seq;
 		return sqlSession.getMapper(MyPageDao.class).myArticleDeleteQna(qna_id);
 	}
 	@Override
 	public int myArticleDeleteShare(int seq, int group_id) {
-		// TODO ³» °øÀ¯±Û »èÁ¦
+		// TODO ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		int myroom_next_id = seq;
 		return sqlSession.getMapper(MyPageDao.class).myArticleDeleteShare(myroom_next_id, group_id);
 	}

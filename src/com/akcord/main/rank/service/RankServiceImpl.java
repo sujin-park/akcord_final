@@ -4,10 +4,11 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.akcord.main.rank.dao.RankDao;
 import com.akcord.main.rank.model.RankDto;
-
+@Service
 public class RankServiceImpl implements RankService {
 	
 	@Autowired

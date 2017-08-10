@@ -15,6 +15,15 @@ public class GroupRoomDto {
 	private int nowCount;
 	private String id;
 	private int userid;
+	private int fromto;
+	public int getFromto() {
+		return fromto;
+	}
+
+	public void setFromto(int fromto) {
+		this.fromto = fromto;
+	}
+
 	public int getUserid() {
 		return userid;
 	}

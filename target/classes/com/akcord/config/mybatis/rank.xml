@@ -6,37 +6,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.akcord.main.rank.dao.RankDao">
     
-    <select id="getQna">
-        select rownum, subject, qna_id 
-        from
-        (select subject, hit, qna_id
+    <select id="getQna" resultType="rankDto">
+        select subject, hit, qna_id id
         from qna
-        order by hit)
-        where rownum &lt;= 10
+        order by hit desc
     </select>
     
-    <select id="getQnaComment">
-        select rownum, subject
-        from
-        (select subject, hit
-        from qna
-        order by hit)
-        where rownum &lt;= 10
+    <select id="getQnaComment" resultType="rankDto">
+        
     </select>
-
-    <select id="getGroup">
-        select group_id, count(user_id) hit, group_name
-        from
-            (select group_id, group_name from grouproom_list)
-        order by hit
+    
+    <select id="getGroup" resultType="rankDto">
+        select group_id id, user_id hit
+        from grouproom_list
+        order by hit desc
     </select>
-
-    <select id="getMyroom">
-        select subject, hit, myroom_id
+    
+    <select id="getMyroom" resultType="rankDto">
+        select subject, hit, myroom_id id
         from myroom_next
         where is_share = 1
-        order by hit
+        order by hit desc
+    </select>
+    
+    <select id="getGroupname" parameterType="String" resultType="String">
+        select group_name subject
+        from grouproom
+        where group_id = #{id}
     </select>
     
 </mapper>
-
