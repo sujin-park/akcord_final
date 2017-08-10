@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.akcord.group.model.MajorDto;
-import com.akcord.in.model.InDto;
+import com.akcord.in.model.*;
 
 
 public interface InService {
@@ -19,4 +19,10 @@ public interface InService {
 
    List<InDto> list(Map<String, String> queryString);
    InDto getId(String string);
+   
+   void good_or_badUpdate(Map<String, String> queryString); //좋아요 싫어요 증가
+   ChooseDto good_or_badSelect(String qna_comment_id); //좋아요 싫어요 조회
+   
+   List<ReplyDto> replyList(int qna_id);
+   void replyWrite(ReplyDto replyDto);
 }

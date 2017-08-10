@@ -7,22 +7,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <!-- 질문등록 -->
     <insert id="answerroom" parameterType="java.util.Map">
         insert into qna
-        (qna_id,user_id,major_id,subject,content,reg_date,hit)
-        values (seq_qna_id.nextval, #{user_id}, #{major_id}, #{subject}, #{content}, sysdate, 1)
+        (qna_id,user_id,major_id,subject,content,reg_date,hit, category)
+        values (seq_qna_id.nextval, #{user_id}, #{major_id}, #{subject}, #{content}, sysdate, 1, 3)
     </insert>
-   
+    
     <!-- 지식인 리스트목록 -->
     <select id="answerlist" parameterType="java.util.Map" resultType="inDto" >
         select c.*
         from(select rownum rn, b.*
-            from(select a.*, (select count(qna_comment_id) from qna_comment where qna_id=a.qna_id) commentcnt
-                from (select q.qna_id, u.user_id, u.name, u.major_id, q.subject, q.content, q.reg_date, q.hit
-                        from qna q, users u
-                        where q.user_id = u.user_id and q.major_id = #{major_id}
-                        order by reg_date desc) a
-                ) b
-            where rownum &lt;= #{end}
-            ) c
+        from(select a.*, (select count(qna_comment_id) from qna_comment where qna_id=a.qna_id) commentcnt
+        from (select q.qna_id, u.user_id, u.name, u.major_id, q.subject, q.content, q.reg_date, q.hit
+        from qna q, users u
+        where q.user_id = u.user_id and q.major_id = #{major_id}
+        order by reg_date desc) a
+        ) b
+        where rownum &lt;= #{end}
+        ) c
         where c.rn &gt; #{start}
     </select>
     
@@ -39,10 +39,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="getAnswer" parameterType="int" resultType="inDto">
         select a.*, (select count(qna_comment_id) from qna_comment where qna_id=a.qna_id) commentcnt
         from (select q.qna_id, u.user_id, u.id, u.name, q.major_id majorId, m.major_name majorName, q.subject, q.content, q.reg_date, q.hit
-            from qna q, users u, major m
-            where q.user_id = u.user_id
-            and q.major_id = m.major_id
-            and q.qna_id = #{qna_id}) a
+        from qna q, users u, major m
+        where q.user_id = u.user_id
+        and q.major_id = m.major_id
+        and q.qna_id = #{qna_id}) a
     </select>
     
     <!-- 전공 리스트 출력 -->
@@ -59,4 +59,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <delete id="deleteAnswerroom" parameterType="String">
         delete qna where qna_id=#{qna_id}
     </delete>
+    
+    <update id="good_or_badUpdate" parameterType="java.util.Map">
+        <if test="gob == 1">
+            update qna_choose set goodcount = goodcount + 1
+        </if>
+        <if test="gob == 2">
+            update qna_choose set badcount = badcount + 1
+        </if>
+            where qna_comment_id=#{qna_comment_id}
+    </update>
+    
+    <select id="good_or_badSelect" parameterType="String" resultType="chooseDto">
+        select qna_comment_id, goodcount goodCount, badcount badCount from qna_choose
+        where qna_comment_id=#{qna_comment_id}
+    </select>
+    
+    <select id="replyList" parameterType="int" resultType="replyDto">
+        select c.*, id
+        from (select b.user_id user_id, b.qna_comment_id qna_comment_id, qna_re_id, re_comment, b.reg_date
+            from (select qna_comment_id
+                from qna_comment
+                where qna_id=#{qna_id}) a, qna_comment_re b
+            where a.qna_comment_id=b.qna_comment_id
+            order by b.reg_date) c, users u
+        where c.user_id=u.user_id
+    </select>
+    
+    <insert id="replyWrite" parameterType="replyDto">
+        insert into QNA_COMMENT_RE
+        values(SEQ_QNA_RE_ID.nextval, #{qna_comment_id}, #{user_id}, #{re_comment}, sysdate)
+    </insert>
 </mapper>

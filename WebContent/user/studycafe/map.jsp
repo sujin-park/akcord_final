@@ -4,10 +4,8 @@
 <%@include file="/common/template/nav.jsp"%>
 <%@include file="/user/studycafe/searchForm.jsp"%>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ce7904fc14ee11cd832eb0acb92d2713&libraries=services"></script>
-</head>
-<body>
-<div class="container-fluid" style="padding-top: 60px;">
-	<div class="col-sm-2"></div>
+<div class="container akcord" style="padding-bottom:30px;">
+	<div class="col-sm-1"></div>
 	<div class="col-sm-7" align="center">
 		<div class="map_wrap">
 			<div id="map" style="width: 100%; height: 100%; position: relative; overflow: hidden;">
@@ -16,7 +14,6 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-sm-3"></div>
 	<div class="map_wrap">
     	<ul>
     		<li id="CE7" data-order="4">
@@ -335,5 +332,4 @@ var infowindow = new daum.maps.InfoWindow({
 	zIndex : 1
 });
 </script>
-</body>
-</html>
+<%@include file="/common/template/footer.jsp"%>

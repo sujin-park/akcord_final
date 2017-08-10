@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.akcord.group.model.MajorDto;
 import com.akcord.in.dao.InDao;
-import com.akcord.in.model.InDto;
+import com.akcord.in.model.*;
 import com.akcord.util.BoardConstant;
 
 @Service
@@ -67,6 +67,26 @@ public class InServiceImpl implements InService {
 	@Override
 	public int deleteAnswerroom(String qna_id) {
 		return sqlSession.getMapper(InDao.class).deleteAnswerroom(qna_id);
+	}
+
+	@Override
+	public void good_or_badUpdate(Map<String, String> queryString) {
+		sqlSession.getMapper(InDao.class).good_or_badUpdate(queryString);
+	}
+
+	@Override
+	public ChooseDto good_or_badSelect(String qna_comment_id) {
+		return sqlSession.getMapper(InDao.class).good_or_badSelect(qna_comment_id);
+	}
+
+	@Override
+	public List<ReplyDto> replyList(int qna_id) {
+		return sqlSession.getMapper(InDao.class).replyList(qna_id);
+	}
+
+	@Override
+	public void replyWrite(ReplyDto replyDto) {
+		sqlSession.getMapper(InDao.class).replyWrite(replyDto);
 	}
 
 }

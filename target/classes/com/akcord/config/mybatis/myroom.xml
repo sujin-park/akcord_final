@@ -107,7 +107,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         delete from myroom where myroom_id=#{myroomId}
     </delete>
     
-    <select id="getScheduleId" parameterType="int">
-        
+    <select id="getScheduleId" parameterType="int" resultType="int">
+        select min(schedule_id) from schedule where sysdate &gt;= start_date and sysdate &lt;= end_date and group_id=#{groupId}
     </select>
 </mapper>

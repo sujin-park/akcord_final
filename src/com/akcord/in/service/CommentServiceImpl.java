@@ -8,8 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.akcord.in.dao.InCommentDao;
-import com.akcord.in.model.CommentDto;
-import com.akcord.in.model.InDto;
+import com.akcord.in.model.*;
 
 @Service
 public class CommentServiceImpl implements CommentService{
@@ -33,7 +32,7 @@ public class CommentServiceImpl implements CommentService{
 	}
 
 	@Override
-	public List<CommentDto> getlist(int qna_id) {
+	public List<ChooseDto> getlist(int qna_id) {
 		return sqlSession.getMapper(InCommentDao.class).getlist(qna_id);
 	}
 

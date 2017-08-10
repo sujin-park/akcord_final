@@ -213,14 +213,10 @@ ul{
    list-style:none;
    }
 </style>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<div class="container-fluid" style="padding-top: 60px;">
-	<div class="col-sm-9"></div>
+<div class="container akcord">
+	<div class="col-sm-8"></div>
 	<div class="col-sm-3">
-		<div id="menu_wrap" class="bg_white" style="height: 550px;">
+		<div id="menu_wrap" class="bg_white" style="height: 550px; margin-top:80px;">
 			<div class="option">
 				<div>
 					<form onsubmit="searchPlaces(); return false;">
@@ -235,4 +231,3 @@ ul{
 		</div>
 	</div>
 </div>
-</html>
