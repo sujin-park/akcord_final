@@ -8,6 +8,14 @@ public class GroupListDto {
 	private String userId;
 	private String majorName;
 	private String regDate;
+	private int fromto;
+	public int getFromto() {
+		return fromto;
+	}
+
+	public void setFromto(int fromto) {
+		this.fromto = fromto;
+	}
 
 	public int getSeq() {
 		return seq;

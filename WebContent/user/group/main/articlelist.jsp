@@ -16,15 +16,21 @@
 			
 			$(location).attr('href', '${root}/groupmain/view.akcord?groupId='+groupId+'&articleseq='+num);
 		});
+		
+		$('.deleteMyroom').on('click', function() {
+			var number = $(this).attr('data-number');
+			var scheduleId = $(this).attr('data-sc');
+			$(location).attr('href', '${root}/groupmain/deleteA.akcord?groupId='+groupId+'&articleseq='+number + '&scheduleId=' + scheduleId);
+		})
 	});
 </script>
 <input type="hidden" id="groupInfo" value="${groupId}">
     <div class="container akcord">
+    	<div class="col-sm-12">
         <div id="property-listings">
-            
             <div class="row">
-              <div class="col-sm-12 titleinfo" style="padding-bottom:10px;">
-                <h2>GROUP HOMEWORK</h2>
+              <div class="page-header titleinfo" style="padding-bottom:10px;">
+                <h2 id="container"><i class="fa fa-edit"></i>&nbsp; <b>GROUP HOMEWORK</b></h2>
                 <c:if test="${not empty startDate && not empty endDate}">
                 	<p>${startDate} ~ ${endDate}</p>
                 </c:if>
@@ -65,7 +71,7 @@
 										<span class="list-inline mrg-0 btm-mrg-10 clr-535353">${article.name}</span>
 		                                <p class="hidden-xs">${article.mycontent}</p>
 		                                <c:if test="${user.user_id == article.userid}">
-		                               	 	<span class="glyphicon glyphicon-remove pull-right" aria-hidden="true" value=""></span>
+		                               	 	<a href="#" class="deleteMyroom"  data-number="${article.myroomNextId}" data-sc="${scheduleId}"><span class="glyphicon glyphicon-remove pull-right" aria-hidden="true" value=""></span></a>
 		                                </c:if>
 		                        	</div>
 		                       </div>

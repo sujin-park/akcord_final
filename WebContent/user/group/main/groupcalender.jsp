@@ -316,7 +316,7 @@ var obj;
 	
 </style>
 <%@ include file="/common/template/nav.jsp" %>
- 	<div class="container akcord">
+ 	<div class="container akcord" style="margin-bottom:10px;">
 		<div class="col-sm-12">
 					<div class="row"></div>
 						<div class="page-header titleinfo">
@@ -324,11 +324,6 @@ var obj;
 							<h4>리더 : ${gInfo.name}</h4>
 						</div>
 						</div>
-						
-						   
-						    	
-						    
-						
 					<div class="row">
 						<div class="col-sm-6" style="border:5px; margin-bottom:20px;">
 							<button type="button" class="btn btn-sm btn-danger" id="contentlist">그룹방 글 목록</button>
@@ -345,13 +340,11 @@ var obj;
 			<div id='calendar' class="col-sm-8">
 			</div>
 			<div class="col-sm-4">
-				<div class="row">
-					<div class="userlist" style="background-color:#eee; height:150px; width:100%;"></div>
+					&nbsp; <h3 style="color: #888;"><i class="fa fa-quote-left"></i>&nbsp; <b>CHATTING LIST</b>  &nbsp;<i class="fa fa-quote-right"></i></h3>
+					<div class="userlist" style="background-color:#eee; height:100px; width:100%; overflow:scroll;"></div>
 					<%@ include file="/user/group/main/chatting.jsp" %>
 				</div>
-			</div>
 		</div>
-	</div>
 <%@ include file="/user/group/main/schedule.jsp" %>
 <%@ include file="/user/group/delete.jsp" %>
  <%@include file="/common/template/footer.jsp"%>

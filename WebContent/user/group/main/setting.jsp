@@ -113,9 +113,11 @@
 
 </script>
 <input type="hidden" id="sgroupid" name="sgroupid" value="${groupId}">
-			<div class="container akcord">
-				<div class="col-sm-12">
-					<h3>그룹원 관리</h3>
+	<div class="container akcord">
+		<div class="col-sm-12">
+				<div class="page-header titleinfo">
+					    <h2 id="container"><i class="fa fa-comments"></i>  &nbsp;<b>그룹 관리</b></h2><h5>가입 대기중인 회원과 그룹원에 대한 리스트입니다.</h5>
+				</div>
 				<div class="panel panel-default">
 					<div class="tabbable" id="tabs-630325" align="left" style="width: 100%; clear:both;">
 						<ul class="nav nav-tabs">
@@ -135,6 +137,8 @@
 							</div>
 						</div>
 					</div>
+			</div>
+			</div>
 			</div>
 <%@include file="/user/group/main/plusmember.jsp"%>
  <%@include file="/common/template/footer.jsp"%>

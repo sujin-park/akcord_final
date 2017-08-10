@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
+<c:if test="${slist != null}">
 <c:forEach var="searchDto" items="${slist}">
 	<tr class="invite">
 		<td>
@@ -26,3 +27,4 @@
 		</td>
 	</tr>
 </c:forEach>
+</c:if>

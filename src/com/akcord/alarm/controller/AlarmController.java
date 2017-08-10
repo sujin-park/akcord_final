@@ -24,10 +24,10 @@ public class AlarmController {
 	@RequestMapping(value="/alarm.akcord")
 	public @ResponseBody String alarmcount(HttpSession sesstion){
 		UserDto userDto = (UserDto) sesstion.getAttribute("user");
-		//String user_id = userDto.getUser_id() + "";
-		//String name = userDto.getName();
-		String user_id = "1";
-		String name = "디제이 짱짱맨";
+		String user_id = userDto.getUser_id() + "";
+		String name = userDto.getName();
+		//String user_id = "1";
+		//String name = "디제이 짱짱맨";
 		// 리스트와 숫자를 리턴해줘야한다.
 		JSONObject jsonObject = new JSONObject();
 		JSONArray jarr0 = new JSONArray();

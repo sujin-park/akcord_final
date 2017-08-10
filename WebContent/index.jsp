@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/common/template/searchbar.jsp" %>
+<link rel="stylesheet" type="text/css" href="${root}/common/css/menuresponse.css">
 <div class="container">
 	<div class="rank">
 		<div class="row">
@@ -69,3 +70,4 @@
 	</div>
  </div>
  <%@include file="/common/template/footer.jsp"%>
+ <script src="${root}/common/js/common.js"></script>

@@ -3,12 +3,13 @@
 <%@include file="/common/template/head_include.jsp"%>
 <link rel="stylesheet" href="/akcord/user/group/css/list.css">
 <%@ include file="/common/template/nav.jsp" %>
-   <div class="container" style="padding-top:60px;">
-     <div class="container container-pad" id="property-listings">
+   <div class="container akcord" style="padding-top:60px;">
+     <div class="col-sm-12">
+     <div id="property-listings">
        <div class="row">
-         <div class="col-sm-12  style="padding-bottom:50px;">
-           <h1>GROUP HOMEWORK</h1>
-                <p>2017/07/19 ~ 2017/07/26</p>
+          <div class="page-header titleinfo" style="padding-bottom:10px;">
+           <h2 id="container"><i class="fa fa-edit"></i>&nbsp; <b>GROUP HOMEWORK</b></h2>
+                <p>그룹방에 공유 된 과제입니다.</p>
          </div>
        </div>
 		<div class="panel-body" style="border:1px solid #ededed;">
@@ -50,5 +51,6 @@
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
  <%@include file="/common/template/footer.jsp"%>

@@ -101,3 +101,13 @@ color: #353535;
 .carousel-control {
 	background-image: none;
 }
+
+.jumbotron{
+	margin-bottom: 0px;
+    background-image: url(http://localhost/akcord_project/doc/img/searchbar.png);
+    background-position: 0% 25%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+}
+

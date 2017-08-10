@@ -29,7 +29,6 @@ var name = "";
 	function setVal(data) {
 		nr = data.nr;
 		name = data.name;
-
 		$('.badge').text(nr);
 		$('#username').text(name);
 	}
@@ -160,17 +159,17 @@ $(function(){
                   	</div>
                   <div class="list-heading1">
                      <h4 class="list-title" style="padding-top:20px;">
-                        <a href="${root}/in/list.akcord?major_id=${user.major_id}"><i class="fa fa-question-circle-o"></i>&nbsp;RECORDER</a>
+                        <a href="${root}/in/list.akcord?major_id=${user.major_id}&pg=1"><i class="fa fa-question-circle-o"></i>&nbsp;RECORDER</a>
                      </h4>
                   </div>
                	   <div class="list-heading">
                      <h4 class="list-title">
-                        <a href="${root}/cafe/studycafe.akcord?pg=1&key=&word=&order="><i class="fa fa-coffee"></i>&nbsp;STUDY CAFE</a>
+                       <a href="${root}/cafe/studycafe.akcord?pg=1&key=&word=&order="><i class="fa fa-coffee"></i>&nbsp;STUDY CAFE</a>
                      </h4>
                   </div>
                   <div class="list-heading1">
                      <h4 class="list-title" style="padding-top:20px;"> 
-                        <a href=""><i class="fa fa-id-badge"></i>&nbsp; MY PAGE</a>
+                        <a href="${root}/mypage/mypage.akcord?id="${user.id}><i class="fa fa-id-badge"></i>&nbsp; MY PAGE</a>
                      </h4>
                   </div> 
                   <div class="list-heading">
@@ -198,7 +197,7 @@ $(function(){
 				<a href="#" id="toggleSidebar" style="text-decoration:none"><i class="fa fa-gear fa-2x" style="color:black;"></i></a>
 				<a href="${root}/index.jsp" class="logo" >Akashic Records</a>
 				<div class="c_03 c pull-right">
-					<div class="dropdown">
+					<div class="dropdown" style="width:100px;">
 						<a href="#"  class="dropdown-toggle" data-toggle="dropdown">
 							<span class="fa fa-bell fa-2x" style="color: #d34e4c;"></span>
 							<span class="badge"></span>

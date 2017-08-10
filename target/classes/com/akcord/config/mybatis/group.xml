@@ -56,7 +56,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         from(select rownum rn, a.*
         from(
         select decode(to_char(gl.reg_date, 'yymmdd'), to_char(sysdate, 'yymmdd'), to_char(gl.reg_date, 'hh24:mi:ss'),to_char(gl.reg_date, 'yy.mm.dd')) as waitingDate, m.major_name majorName, g.group_name groupName, g.content content, u.name name,
-                g.group_id groupId
+                g.group_id groupId, gl.fromto
                 from grouproom_list gl, grouproom g, major m, users u
                 where g.major_id = m.major_id
                 and gl.group_id = g.group_id
@@ -77,7 +77,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <insert id="joinGroup" parameterType="java.util.Map">
-        insert into grouproom_list values (#{seq}, #{userId}, 0,sysdate)
+        insert into grouproom_list values (#{seq}, #{userId}, 0,sysdate, 1)
     </insert>
     
     <delete id="cancel" parameterType="java.util.Map">

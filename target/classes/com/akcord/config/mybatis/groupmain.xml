@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="gMainInfo" parameterType="int" resultType="groupRoomDto">
         select 
                 (select count(group_id) 
-                from grouproom_list gl where gl.group_id = g.group_id and gl.is_accept = 1) nowCount, 
+                from grouproom_list gl where gl.group_id = g.group_id and gl.is_accept = 1) nowCount,
                 g.group_id groupId, decode(to_char(g.reg_date, 'yymmdd'), to_char(sysdate, 'yymmdd'), to_char(g.reg_date, 'hh24:mi:ss'),to_char(g.reg_date, 'yy.mm.dd')) as regDate, m.major_name majorName, g.group_name groupName,
                 g.content content, g.g_count gCount, u.name name, g.leader_id leaderId
                         from users u, grouproom g, major m
@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select b.*
         from(select rownum rn, a.*
         from(        
-        select g.group_id groupId, u.name name, u.id userId, m.major_name majorName, decode(to_char(gl.reg_date, 'yymmdd'), to_char(sysdate, 'yymmdd'), to_char(gl.reg_date, 'hh24:mi:ss'),to_char(gl.reg_date, 'yy.mm.dd')) as regDate, u.user_id seq
+        select gl.fromto, g.group_id groupId, u.name name, u.id userId, m.major_name majorName, decode(to_char(gl.reg_date, 'yymmdd'), to_char(sysdate, 'yymmdd'), to_char(gl.reg_date, 'hh24:mi:ss'),to_char(gl.reg_date, 'yy.mm.dd')) as regDate, u.user_id seq
                         from grouproom_list gl, grouproom g, users u, major m
                         where gl.group_id = g.group_id
                         and u.user_id = gl.user_id
@@ -73,8 +73,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <insert id="invite" parameterType="java.util.Map">
-        insert into grouproom_list (group_id, user_id, is_accept, reg_date)
-        values (#{groupId}, #{seq}, 0, sysdate)
+        insert into grouproom_list (group_id, user_id, is_accept, reg_date, fromto)
+        values (#{groupId}, #{seq}, 0, sysdate,2)
     </insert>
     
     <select id="originlist" parameterType="java.util.Map" resultType="groupListDto">
@@ -169,4 +169,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="totalperson" parameterType="int" resultType="int">
         select count(user_id), group_id from grouproom_list where group_id = #{groupId} group by group_id
     </select>
+    
+    <delete id="deleteArticle" parameterType="java.util.Map">
+        delete grouproom_hw where myroom_next_id = #{articleseq} and group_id = #{groupId}
+    </delete>
 </mapper>

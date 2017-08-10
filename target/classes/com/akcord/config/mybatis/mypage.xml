@@ -8,42 +8,47 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <select id="mypage" parameterType="String" resultType="userDto">
         select major_id, id, password, name, gender, 
-                birth1, birth2, birth3,
-                reg_date,
-                tel1, tel2, tel3,
-                zipcode, addr1, addr2,
-                is_block
+        birth1, birth2, birth3,
+        reg_date,
+        tel1, tel2, tel3,
+        zipcode, addr1, addr2,
+        is_block
         from users
         where id = #{id}
     </select>
     
     <update id="mypagemodify" parameterType="java.util.Map">
-            update users
-            set major_id = #{major_id}, password = #{password}, name = #{name}, type = #{gender}, 
-            birth1 =  #{birth1}, birth2 =  #{birth2}, birth3 =  #{birth3},
-            tel1 =  #{tel1}, tel2 =  #{tel2}, tel3 =  #{tel3},
-            zipcode = #{zipcode}, addr1 = #{addr1}, addr2 = #{addr2}
-            where id =  #{id}
+        update users
+        set major_id = #{major_id}, password = #{password}, name = #{name}, type = #{gender}, 
+        birth1 =  #{birth1}, birth2 =  #{birth2}, birth3 =  #{birth3},
+        tel1 =  #{tel1}, tel2 =  #{tel2}, tel3 =  #{tel3},
+        zipcode = #{zipcode}, addr1 = #{addr1}, addr2 = #{addr2}
+        where id =  #{id}
     </update>
     
-    <select id="myarticle" parameterType="String" resultType="mypageDto">
-        select
-            q.qna_id seq, q.subject, q.content, to_char(q.reg_date, 'yyyy/mm/dd'), q.category
-            mn.myroomnext_id seq, mn.subject, mn.content, to_char(mn.reg_date, 'yyyy/mm/dd'), mn.category
-            qc.qna_comment_id seq, qc.subject, qc.qna_comment content, to_char(qc.reg_date, 'yyyy/mm/dd'), qc.category   
-        from qna q, myroom_next mn, qna_comment qc
+    <select id="myArticleSearch" parameterType="String" resultType="mypageDto">
+        SELECT 
+        q.qna_id seq, q.subject subject,to_char(q.reg_date, 'yyyy/mm/dd') reg_date, q.category
+        from qna q
         where q.user_id = #{user_id}
-            and q.user_id = mn.user_id
-            and mn.user_id = qc.user_id
-            and mn.myroom_next_id = gh.myroom_next_id
-            order by q.reg_date, mn.reg_date, qc.reg_date
+        union
+        SELECT 
+        mn.myroom_next_id seq, mn.subject subject,to_char(mn.reg_date, 'yyyy/mm/dd') reg_date, mn.category
+        from myroom_next mn
+        WHERE mn.user_id = #{user_id}
+        union
+        select 
+        qc.qna_comment_id seq, qc.qna_subject, to_char(qc.reg_date, 'yyyy/mm/dd') reg_date, qc.category 
+        from qna_comment qc
+        where qc.user_id = #{user_id}
+        order by reg_date desc
     </select>
     
     <select id="groupcheck" parameterType="String" resultType="java.util.List">
         select group_id groupId 
         from grouproom_list
         where is_accept = 1 
-            and user_id = #{user_id}
+        and user_id = #{user_id}
     </select>
     
     <select id="groupshare" parameterType="String" resultType="java.util.List">
@@ -54,11 +59,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <select id="getgroupname" parameterType="String" resultType="java.util.Map">
         select group_id, group_name
-            from (select group_id from 
-                    (select myroom_next_id, group_id from 
-                        (select myroom_next_id 
-                        from grouproom_hw 
-                        where user_id = #{user_id}))
+        from grouproom
+        where group_id =  (select gh.group_id
+        from grouproom_hw gh, schedule sc
+        where gh.schedule_id = sc.schedule_id
+        and myroom_next_id = #{seq})
     </select>
     
     <delete id="myArticleDeleteReply" parameterType="int">
@@ -78,4 +83,3 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
     
 </mapper>
-
