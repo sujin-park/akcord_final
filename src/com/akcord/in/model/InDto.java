@@ -13,7 +13,15 @@ public class InDto extends MajorDto {
 	private int category;
 	private String id;
 	private int commentcnt;
+	private int count;
 
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
 	public int getCommentcnt() {
 		return commentcnt;
 	}

@@ -1,6 +1,6 @@
 package com.akcord.search.model;
 
-public class SearchDto {
+public class SearchJisicDto {
 
 	private String postdate;
 	private String total;
@@ -9,12 +9,14 @@ public class SearchDto {
 	private String title;
 	private String link;
 	private String description;
-	private String bloggername;
-	private String bloggerlink;
+
+	
 	private int count;
-	public int getCount() {
+	public int getCount() {	
 		return count;
 	}
+
+
 
 	public void setCount(int count) {
 		this.count = count;
@@ -76,25 +78,12 @@ public class SearchDto {
 		this.description = description;
 	}
 
-	public String getBloggername() {
-		return bloggername;
-	}
 
-	public void setBloggername(String bloggername) {
-		this.bloggername = bloggername;
-	}
 
-	public String getBloggerlink() {
-		return bloggerlink;
-	}
-
-	public void setBloggerlink(String bloggerlink) {
-		this.bloggerlink = bloggerlink;
-	}
 	@Override
     public String toString() {
         return "blog [postdate=" + postdate + ", total=" + total + ", start=" + start + ", display=" + display + ", title=" + title
-                + ", link=" + link + ", description=" + description + ", bloggername=" + bloggername + ", bloggerlink=" + bloggerlink
+                + ", link=" + link + ", description=" + description
                 +  "]";
     }
 

@@ -13,6 +13,14 @@ public class MyroomNextDto extends GroupRoomDto {
 	private String update_date;
 	private int isShare;
 	private int scheduleId;
+	private int count;
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
 	public int getScheduleId() {
 		return scheduleId;
 	}

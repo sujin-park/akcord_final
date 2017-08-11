@@ -24,6 +24,13 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         <typeAlias alias="alarmDto" type="com.akcord.alarm.model.AlarmDto"/>
         <typeAlias alias="rankDto" type="com.akcord.main.rank.model.RankDto"/>
         <typeAlias alias="replyDto" type="com.akcord.in.model.ReplyDto"/>
+        <typeAlias alias="SearchdaumDto" type="com.akcord.search.model.SearchdaumDto"/>
+        <typeAlias alias="SearchDto" type="com.akcord.search.model.SearchDto"/>
+        <typeAlias alias="SearchTotalDto" type="com.akcord.search.model.SearchTotalDto"/>
+        <typeAlias alias="SearchCafeDto" type="com.akcord.search.model.SearchCafeDto"/>
+        <typeAlias alias="SearchCafedaumDto" type="com.akcord.search.model.SearchCafedaumDto"/>
+        <typeAlias alias="SearchJisicDto" type="com.akcord.search.model.SearchJisicDto"/>
+        <typeAlias alias="SearchJisicdaumDto" type="com.akcord.search.model.SearchJisicdaumDto"/>
     </typeAliases>
     <mappers>
         <mapper resource="com/akcord/config/mybatis/notice.xml"/>
@@ -40,6 +47,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         <mapper resource="com/akcord/config/mybatis/rank.xml"/>
         <mapper resource="com/akcord/config/mybatis/comment.xml"/>
         <mapper resource="com/akcord/config/mybatis/choose.xml"/>
+        <mapper resource="com/akcord/config/mybatis/search.xml"/>
     </mappers>
     
 </configuration>
