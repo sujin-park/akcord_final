@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         zipcode, addr1, addr2,
         is_block
         from users
-        where id = #{id}
+        where user_id = #{id}
     </select>
     
     <update id="mypagemodify" parameterType="java.util.Map">
@@ -23,7 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         birth1 =  #{birth1}, birth2 =  #{birth2}, birth3 =  #{birth3},
         tel1 =  #{tel1}, tel2 =  #{tel2}, tel3 =  #{tel3},
         zipcode = #{zipcode}, addr1 = #{addr1}, addr2 = #{addr2}
-        where id =  #{id}
+        where user_id =  #{id}
     </update>
     
     <select id="myArticleSearch" parameterType="String" resultType="mypageDto">

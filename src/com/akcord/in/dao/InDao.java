@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.akcord.group.model.MajorDto;
-import com.akcord.in.model.InDto;
+import com.akcord.in.model.*;
 
 public interface InDao {
    List<InDto> answerlist(Map <String, String> queryString); 
@@ -17,4 +17,10 @@ public interface InDao {
    int deleteAnswerroom(String qna_id);
    
    List<InDto> list(Map<String, String> queryString);
+   
+   void good_or_badUpdate(Map<String, String> queryString);
+   ChooseDto good_or_badSelect(String qna_comment_id);
+   
+   List<ReplyDto> replyList(int qna_id);
+   void replyWrite(ReplyDto replyDto);
 }

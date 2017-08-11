@@ -57,7 +57,6 @@
 				</div>
 			</div>
 			 <c:forEach var="article" items="${alist}" varStatus="i">
-			 <input type="hidden" id="">
 					 <c:if test="${i.index%2 != 1}">
 		            <div class="row">
 					 </c:if>
@@ -77,10 +76,10 @@
 		                       </div>
 		                   </div>
 		                </div><!-- End Listing-->
+         			</div>
 						<c:if test="${i.index%2 == 1}">
 		                 </div>
 		                 </c:if>
 				 </c:forEach>
                </div><!-- End Listing-->
           </div><!-- End Col -->
- <%@include file="/common/template/footer.jsp"%>

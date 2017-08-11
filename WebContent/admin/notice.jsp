@@ -163,5 +163,4 @@ th.ct {
 			</div>
 			<div class="col-md-6"></div>
 		</div>
-  </body>
-</html>
+  <%@include file="/common/template/footer.jsp"%>

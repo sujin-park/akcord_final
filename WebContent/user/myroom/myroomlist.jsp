@@ -132,7 +132,9 @@ $(document).ready(function() {
 		<div class="col-sm-9">
 			<div class="col-sm-1"></div>
 			<div class="col-sm-10" style="padding-bottom: 10px;">
-				<h1>My Room List</h1>
+				<div class="page-header titleinfo">
+					    <h2 id="container"><i class="fa fa-book fa-fw"></i>  &nbsp;<b>MY ROOM</b></h2><h5>자유롭게 공부하며 속해있는 그룹에 공유 또한 할 수 있습니다.</h5>
+				</div>
 				<div class="searchDiv">'${query.word}'로 검색한 결과입니다.</div>
 				<div class="col-sm-12" align="right" style="padding-bottom: 10px;">
 					<c:if test="${query.ch != 1}">
@@ -144,7 +146,7 @@ $(document).ready(function() {
 						<div class="row">
 					</c:if>
 					<div class="col-sm-6">
-						<div class="brdr bgc-fff pad-10 box-shad btm-mrg-20 property-listing">
+						<div class="brdr bgc-fff pad-10 box-shad btm-mrg-20 property-listing ">
 							<div class="media">
 								<div class="media-body fnt-smaller">
 									<a href="#" target="_parent"></a>
@@ -154,7 +156,7 @@ $(document).ready(function() {
 											<small class="pull-right">${myroomNextDto.update_date}</small>
 										</a>
 									</h4>
-									<p class="hidden-xs">${myroomNextDto.content}</p>
+									<p class="hidden-xs  content-myroom">${myroomNextDto.content}</p>
 								</div>
 							</div>
 						</div>

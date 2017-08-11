@@ -12,8 +12,14 @@
     background-color:#f6f6f6;
 }
 
+body {
+	font-family: 'Open Sans', sans-serif;
+	color: #353535;
+}
+
 .logo{
     position: absolute;
+     color: #d34e4c;
     left: 50%;
     top: 10px;
 	font-size: 25px;
@@ -102,7 +108,7 @@ color: #353535;
 
 .jumbotron{
 	margin-bottom: 0px;
-    background-image: url(http://localhost/akcord_project/doc/img/mainbar_test.jpg);
+    background-image: url(http://localhost/akcord_project/doc/img/main_test4.png);
     background-position: 0% 25%;
     background-size: cover;
     background-repeat: no-repeat;
@@ -111,5 +117,19 @@ color: #353535;
 
 .dropdown-menu {
     width: 300px !important;
-    height: 400px !important;
+    overflow: auto;
+}
+
+.content-main {
+	white-space: nowrap; 
+    width: 12em; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+
+.content-myroom { 
+	display: inline-block; 
+	height: 100px;
+	overflow: hidden; 
+	text-overflow: ellipsis;
 }

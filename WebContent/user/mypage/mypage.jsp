@@ -3,17 +3,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="root" value="${pageContext.request.contextPath}" />
 <%@include file="/common/template/head_include.jsp" %>
-<%@ include file="/common/template/nav.jsp" %>	
+<%@ include file="/common/template/nav.jsp" %>   
 <script>
 $(document).ready(function() {
 $(document).on('click', '#mymodify', function() {
-		var id = document.getElementById("id").value;
-		$(location).attr('href','${root}/mypage/mypagemodify.akcord?id='+id);
-	});
+      var id = document.getElementById("id").value;
+      $(location).attr('href','${root}/mypage/mypagemodify.akcord?id='+id);
+   });
 $(document).on('click', '#myArticleBtn', function() {
 
-		$(location).attr('href','${root}/poll/make.akcord');
-	});
+   $(location).attr('href','${root}/mypage//myarticle.akcord');
+   });
 });
 
 </script>
@@ -22,13 +22,28 @@ $(document).on('click', '#myArticleBtn', function() {
    <div style="width: 33%;" class="container">
       
       <div>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      
       <!-- Modal content-->
       <div>
          <div>
-            <h4 ><img src="${root}/doc/img/join.jpg" style="width: 100%"></h4>
+            <h4 ><img src="${root}/doc/img/mypage.png" style="width: 100%"></h4>
          </div>
+         <br>
+      
          <div>
             <form class="form-horizontal" id="joinForm" name="joinForm" method="post" action="">
+            <input type="hidden" name="name" value="${user.name}">
+            <input type="hidden" name="id" value="${user.id}">
+            <input type="hidden" name="pg" value="1">
+            <input type="hidden" name="key" value="">
+            <input type="hidden" name="word" value="">
+            <input type="hidden" name="" value="">
+
                <fieldset>
                   <div class="form-group">
                      <label class="col-sm-3 control-label">이름</label>
@@ -40,14 +55,13 @@ $(document).on('click', '#myArticleBtn', function() {
                      <label class="col-sm-2 control-label">성별</label>
                   <div>
                   <c:choose>
-
-                  	<c:when test="${user.gender eq 0}">
-                  		<input type="radio" id="gender" name="gender" value="" checked="checked" readonly="readonly">남성
-                  	</c:when>
-                  	<c:when test="${user.gender eq 1}">
-                  		<input type="radio" id="gender" name="gender" value="" checked="checked" readonly="readonly">여성
-                  	</c:when>
-                  	
+                     <c:when test="${user.gender eq 0}">
+                        <input type="radio" id="gender" name="gender" value="" checked="checked" readonly="readonly">남성
+                     </c:when>
+                     <c:when test="${user.gender eq 1}">
+                        <input type="radio" id="gender" name="gender" value="" checked="checked" readonly="readonly">여성
+                     </c:when>
+                     
                   </c:choose>
 
                   </div>
@@ -106,15 +120,15 @@ $(document).on('click', '#myArticleBtn', function() {
                      <label class="col-sm-3 control-label">생년월일</label>
                      <div class="col-sm-3">
                         <input type="text" id="birth1" name="birth1" maxlength="4" value="${user.birth1}" 
-                        		class="form-control" maxlength="4" readonly="readonly">
+                              class="form-control" maxlength="4" readonly="readonly">
                      </div>
                      <div class="col-sm-2">
-             			<input type="text" id="birth2" name="birth2" maxlength="4" value="${user.birth2}" 
-             					class="form-control" maxlength="3" readonly="readonly">
+                      <input type="text" id="birth2" name="birth2" maxlength="4" value="${user.birth2}" 
+                            class="form-control" maxlength="3" readonly="readonly">
                      </div>   
                      <div class="col-sm-3">
                         <input type="text" id="birth3" name="birth3" maxlength="4" value="${user.birth3}" 
-                        		class="form-control" maxlength="3" readonly="readonly">
+                              class="form-control" maxlength="3" readonly="readonly">
                      </div>                  
                   </div>
                   
@@ -138,7 +152,7 @@ $(document).on('click', '#myArticleBtn', function() {
                      <label class="col-sm-3 control-label">우편번호</label>
                      <div class="col-sm-5">
                         <input type="text" id="sample6_postcode" name="zipcode" value="${user.zipcode}"
-                       			 placeholder="우편번호" readonly="readonly" class="form-control">
+                                 placeholder="우편번호" readonly="readonly" class="form-control">
                      </div>
                   </div>
                   
@@ -146,7 +160,7 @@ $(document).on('click', '#myArticleBtn', function() {
                      <label class="col-sm-3 control-label">주소</label>
                      <div class="col-sm-8">
                         <input type="text" id="sample6_address" name="addr1" placeholder="주소" value="${user.addr1}"
-                        		class="form-control" readonly="readonly">
+                              class="form-control" readonly="readonly">
                      </div>
                   </div>
                   
@@ -154,7 +168,7 @@ $(document).on('click', '#myArticleBtn', function() {
                      <label class="col-sm-3 control-label"></label>
                      <div class="col-sm-8">
                         <input type="text" id="sample6_address2" name="addr2" class="form-control"  value="${user.addr2}"
-                        		placeholder="상세주소" readonly="readonly">
+                              placeholder="상세주소" readonly="readonly">
                      </div>
                   </div>
          <div align="right">

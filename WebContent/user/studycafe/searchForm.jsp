@@ -216,7 +216,7 @@ ul{
 <div class="container akcord">
 	<div class="col-sm-8"></div>
 	<div class="col-sm-3">
-		<div id="menu_wrap" class="bg_white" style="height: 550px; margin-top:80px;">
+		<div id="menu_wrap" class="bg_white" style="height: 500px; margin-top:130px;">
 			<div class="option">
 				<div>
 					<form onsubmit="searchPlaces(); return false;">

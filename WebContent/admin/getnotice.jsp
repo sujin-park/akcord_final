@@ -25,12 +25,13 @@ $(document).ready(function(){
 
 
 </script>
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-sm-3"></div>
-		<div class="col-sm-6" style="padding-top: 60px;">
+	<div class="container akcord">
+		<div class="col-sm-12">
+				<div class="page-header titleinfo">
+					    <h2 id="container"><i class="fa fa-comments"></i>  &nbsp;<b>공지사항</b></h2><h5>AKCORD 공지사항입니다.</h5>
+				</div>
+			<div class="col-sm-12">
 			<div class="form-group">
-				<h2>공지사항</h2>
 			</div>
 			<form name="noticeModifyform" method="post" action="">
 				<input type="hidden" name="notice_id" value="${notice.notice_id }">
@@ -38,13 +39,13 @@ $(document).ready(function(){
 				<input type="hidden" name="reg_date" value="${notice.reg_date }">
 				<input type="hidden" name="hit" value="${notice.hit }"> --%>
 				
-				<label for="title">SUBJECT</label>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp; 
+				<label for="title">글 제목</label>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp; 
 			 	<span style="text-align: right">등록일 :${notice.reg_date }&nbsp; 조회수: ${notice.hit }</span>
 				<input type="text" name="subject"
 					class="form-control" id="subject" value="${notice.subject }" disabled="disabled">
 
 				<div class="form-group">
-					<label for="content">CONTENT</label>
+					<label for="content">글 내용</label>
 					<textarea name="content" id="content" cols="67" rows="25"
 						class="form-control" required disabled="disabled">${notice.content }</textarea>
 				</div>
@@ -54,10 +55,6 @@ $(document).ready(function(){
 				</div>
 			</form>
 		</div>
-		<div class="col-sm-3"></div>
-
+		</div>
 	</div>
-
-</div>
-</body>
-</html>
+<%@include file="/common/template/footer.jsp"%>

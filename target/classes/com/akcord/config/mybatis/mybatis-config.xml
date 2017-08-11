@@ -23,6 +23,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         <typeAlias alias="mypageDto" type="com.akcord.mypage.model.MypageDto"/>
         <typeAlias alias="alarmDto" type="com.akcord.alarm.model.AlarmDto"/>
         <typeAlias alias="rankDto" type="com.akcord.main.rank.model.RankDto"/>
+        <typeAlias alias="replyDto" type="com.akcord.in.model.ReplyDto"/>
     </typeAliases>
     <mappers>
         <mapper resource="com/akcord/config/mybatis/notice.xml"/>

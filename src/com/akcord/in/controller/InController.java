@@ -5,19 +5,16 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.akcord.group.model.GroupRoomDto;
 import com.akcord.group.model.MajorDto;
 import com.akcord.group.service.CommonService;
-import com.akcord.group.service.GroupService;
-import com.akcord.in.model.CommentDto;
-import com.akcord.in.model.InDto;
+import com.akcord.in.model.*;
 import com.akcord.in.service.CommentService;
 import com.akcord.in.service.InService;
 import com.akcord.user.model.UserDto;
@@ -92,14 +89,16 @@ public class InController {
 	public ModelAndView clicklist(@RequestParam Map<String, String> queryString, @RequestParam("qna_id") int qna_id, HttpSession session){
 		ModelAndView mav = new ModelAndView();
 		UserDto userDto = (UserDto) session.getAttribute("user");
-		List<CommentDto> commentDto = null;
+		List<ChooseDto> list = null;
 		if(userDto != null){
 			int cnt = commentService.updateHit(qna_id); //조회수 증가
-			commentDto = commentService.getlist(qna_id); //
-			CommentDto commentDto2 = commentService.getAnswer(qna_id);
+			CommentDto commentDto2 = commentService.getAnswer(qna_id); //질문뷰
+			list = commentService.getlist(qna_id); //답변 리스트
+			List<ReplyDto> replyList = inService.replyList(qna_id); //댓글 리스트
 			mav.addObject("hit", cnt);
-			mav.addObject("comments", commentDto);
+			mav.addObject("comments", list);
 			mav.addObject("qnaview", commentDto2);
+			mav.addObject("replyList", replyList);
 		}
 		mav.setViewName("/user/in/qna");
 		return mav;
@@ -162,8 +161,101 @@ public class InController {
 			int cnt = commentService.answerSave(commentDto);
 			mav.addObject("comment", commentDto);
 		}
-		return "redirect:/comment/list.akcord?major_id="+ major_id + "&qna_id=" + qna_id; 	 
+		return "redirect:/in/clicklist.akcord?major_id="+ major_id + "&qna_id=" + qna_id; 	 
 	}
+	
+	@RequestMapping(value = "/good_or_bad.akcord", method = RequestMethod.POST)
+	public @ResponseBody String good_or_bad(@RequestParam Map<String, String> queryString, HttpSession session){
+		UserDto userDto = (UserDto) session.getAttribute("user");
+			inService.good_or_badUpdate(queryString);
+			ChooseDto chooseDto = inService.good_or_badSelect(queryString.get("qna_comment_id"));
+			JSONObject json = new JSONObject();
+			json.put("list", chooseDto);
+		return json.toJSONString();
+	}
+	
+	private JSONObject makeRelpyList(int qna_id) {
+		List<ReplyDto> list = inService.replyList(qna_id);
+		JSONObject json = new JSONObject();
+		JSONArray jarr = new JSONArray(); //json을 배열로 변환
+		for(ReplyDto replyDto : list) {
+			JSONObject jobj = new JSONObject();
+			jobj.put("id", replyDto.getId());
+			jobj.put("qna_comment_id", replyDto.getQna_comment_id());
+			jobj.put("re_comment", replyDto.getRe_comment());
+			jobj.put("reg_date", replyDto.getReg_date());
+			jarr.add(jobj);
+		}
+		json.put("replyList", jarr); //{"memolist" : [{"mseq" : 1200, "seq" : 100, ...}]}
+		return json;
+	}
+	
+	@RequestMapping(value="/replyList.akcord", method=RequestMethod.GET)
+	public @ResponseBody String replyList(@RequestParam("qna_id") int qna_id) {
+		JSONObject json = makeRelpyList(qna_id);
+		return json.toJSONString();
+	}
+	
+	@RequestMapping(value = "/replyWrite.akcord", method = RequestMethod.POST)
+	public @ResponseBody String replyWrite(ReplyDto replyDto, HttpSession session){
+		UserDto userDto = (UserDto) session.getAttribute("user");
+		replyDto.setUser_id(userDto.getUser_id());
+		replyDto.setId(userDto.getId());
+		inService.replyWrite(replyDto);
+		JSONObject json = new JSONObject();
+		json.put("replyDto", replyDto);
+		return json.toJSONString();
+	}
+	
+	@RequestMapping(value = "/qnaAnswerdelete.akcord" ,method = RequestMethod.GET)
+	   public String qnamodify(@RequestParam Map<String,String> query, HttpSession session) {
+	      ModelAndView mav = new ModelAndView();
+	      UserDto userDto = (UserDto) session.getAttribute("user");
+	      int qna_comment_id = Integer.parseInt(query.get("comment_id"));
+	      int major_id;
+	      int qna_id = Integer.parseInt(query.get("qna_id"));
+	        if(userDto.getType()==0)
+	           major_id=0;
+	        else
+	           major_id = userDto.getMajor_id();
+	      commentService.deleteQnaAnswer(qna_comment_id);
+	      commentService.deleteAnswerRe(qna_comment_id);
+	      mav.setViewName("/user/in/qnaAnswerModify");
+	      return "redirect:/comment/list.akcord?major_id="+ major_id + "&qna_id=" + qna_id;     
+	   }
+	   
+	   @RequestMapping(value="/answerModify.akcord", method=RequestMethod.POST) 
+	   public String answerModify(CommentDto commentDto, HttpSession session){//여기서는 리스트를 불러온다.
+	      UserDto userDto = (UserDto) session.getAttribute("user");
+	      int major_id;
+	      int qna_id = commentDto.getQna_id();
+	        if(userDto.getType()==0)
+	           major_id=0;
+	        else
+	           major_id = userDto.getMajor_id();
+	      if(userDto != null) {
+	         int cnt = commentService.modify(commentDto);
+	      }
+	      return "redirect:/comment/list.akcord?major_id="+ major_id + "&qna_id=" + qna_id;     
+	   }
+	
+	/*@RequestMapping(value = "/replyWrite.akcord", method = RequestMethod.POST)
+	public @ResponseBody String replyWrite(ReplyDto replyDto, HttpSession session){
+		UserDto userDto = (UserDto) session.getAttribute("user");
+		replyDto.setUser_id(userDto.getUser_id());
+		inService.replyWrite(replyDto);
+		JSONObject json = makeRelpyList(replyDto.getQna_comment_id());
+		return json.toJSONString();
+	}*/
+	
+//	@RequestMapping(value = "/good_or_bad.akcord", method = RequestMethod.GET)
+//	public String good_or_bad(@RequestParam Map<String, String> queryString){//@RequestParam("qna_comment_id") String qna_comment_id, @RequestParam("gob") String gob) {
+//		ModelAndView mav = new ModelAndView();
+//		String qna_id = queryString.get("qna_id");
+//		inService.good_or_badUpdate(queryString);
+//		mav.addObject("list", queryString);
+//		return "redirect:/in/clicklist.akcord?qna_id=" + qna_id;
+//	}
 	
 	@RequestMapping(value = "/inmain.akcord", method = RequestMethod.GET)
 	public ModelAndView inmain() {

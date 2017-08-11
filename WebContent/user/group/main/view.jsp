@@ -47,4 +47,3 @@
 		</div>
 	</div>
 	</div>
- <%@include file="/common/template/footer.jsp"%>

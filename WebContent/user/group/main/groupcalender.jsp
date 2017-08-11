@@ -301,12 +301,6 @@ var obj;
 </script>
 <style>
 
-	body {
-		padding: 0;
-		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
-		font-size: 14px;
-	}
-
 	#calendar {
 		margin: 0 auto;
 		display: inline;

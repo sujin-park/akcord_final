@@ -44,22 +44,22 @@ $('#content').summernote({
 });
 </script>
 <%@ include file="/common/template/nav.jsp"%>
-<div class="container-fluid" style="padding-top: 60px;">
-	<div class="row">
-		<div class="col-sm-3"></div>
-		<div class="col-sm-6" style="padding-top: 60px;">
+	<div class="container akcord">
+		<div class="col-sm-12">
+				<div class="page-header titleinfo">
+					    <h2 id="container"><i class="fa fa-comments"></i>  &nbsp;<b>공지사항 작성</b></h2>
+				</div>
+		<div class="col-sm-12"></div>
 
 			<form name="noticeWriteform" method="post" action="">
 				<div class="form-group">
-					<h2>공지사항 글쓰기</h2>
-				
 				<div class="form-group">
-					<div class="col-sm-8"><label for="title">SUBJECT</label> </div>
+					<label for="title">글 제목</label>
 				<input type="text" name="subject" class="form-control" id="subject" value="" disabled="disabled">
 				</div>
 				</div>
 				<div class="form-group">
-					<label for="content">CONTENT</label>
+					<label for="content">글 내용</label>
 					<textarea name="content" id="content" class="form-control" cols="67" rows="25" disabled="disabled">
 					</textarea>                              
 				</div>
@@ -69,8 +69,6 @@ $('#content').summernote({
 					<button type="button" class="btn btn-sm">취소</button>
 				</div>
 			</form>
-		</div>
-		<div class="col-sm-3"></div>
 
 	</div>
 

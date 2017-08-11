@@ -202,7 +202,7 @@ function joinGroup(seq) {
 													</div>
 												</td>
 												<td>
-													<div class="media">
+													<div class="media content-main">
 														<span class="media-meta" id="content${GroupRoomDto.groupId}">${GroupRoomDto.content}</span>
 													</div>
 												</td>
