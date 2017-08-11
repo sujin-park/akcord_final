@@ -45,7 +45,6 @@ public class SearchController {
 			for (int j = 0; j < list5.size(); j++) {
 				totallist.add(list5.get(j));
 			}
-			// System.out.println("여긴오냐");
 
 			Collections.sort(totallist);
 
@@ -73,7 +72,6 @@ public class SearchController {
 			for (int j = 0; j < list7.size(); j++) {
 				totallist.add(list7.get(j));
 			}
-			// System.out.println("여긴오냐");
 
 			Collections.sort(totallist);
 
@@ -101,7 +99,6 @@ public class SearchController {
 			for (int j = 0; j < list1.size(); j++) {
 				totallist.add(list1.get(j));
 			}
-			// System.out.println("여긴오냐");
 
 			Collections.sort(totallist);
 
@@ -145,7 +142,6 @@ public class SearchController {
 				totallist.add(std1);
 			}
 		
-			// System.out.println("여긴오냐");
 
 			Collections.sort(totallist);
 
@@ -161,11 +157,9 @@ public class SearchController {
 	public ModelAndView Searchreturn(@RequestParam Map<String, String> map) {
 		List<SearchTotalDto> totallist = new ArrayList<SearchTotalDto>();
 
-		// System.out.println("여긴오냐");
 		ModelAndView mav = new ModelAndView();
 
 		if (map.get("usr") != null) {
-			System.out.println(map.get("usr"));
 			List<SearchTotalDto> list = searchService.Searchreturn(map.get("usr"), 10, 1);
 			List<SearchTotalDto> list1 = searchService.Searchdaumreturn(map.get("usr"), 1, 10);
 			List<SearchTotalDto> list4 = searchService.SearchCafereturn(map.get("usr"), 10, 1);
@@ -223,6 +217,7 @@ public class SearchController {
 			mav.addObject("Searchvalue", totallist);
 
 		}
+		mav.addObject("usr", map.get("usr"));
 		mav.setViewName("/user/search/testmain");
 		return mav;
 

@@ -128,10 +128,12 @@ public class MyroomController {
 		myroomNextDto.setSubject(query.get("subject"));
 		myroomNextDto.setContent(query.get("content"));
 		myroomNextDto.setIsShare(Integer.parseInt(query.get("isShare")));
-		myroomNextDto.setGroupId(Integer.parseInt(query.get("groupId")));
-		// 여기서 일정 가져오기 
-		int scheduleId = myroomService.getScheduleId(Integer.parseInt(query.get("groupId")));
-		myroomNextDto.setScheduleId(scheduleId);
+		if(Integer.parseInt(query.get("groupId")) != 0) {
+			myroomNextDto.setGroupId(Integer.parseInt(query.get("groupId")));
+			// 여기서 일정 가져오기 
+			int scheduleId = myroomService.getScheduleId(Integer.parseInt(query.get("groupId")));
+			myroomNextDto.setScheduleId(scheduleId);
+		}
 		if(num.equals("100")) {
 			myroomService.insertArticle(myroomNextDto);
 			int myroomNextId = myroomNextDto.getMyroomNextId();

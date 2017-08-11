@@ -18,6 +18,7 @@ import com.akcord.group.model.MajorDto;
 import com.akcord.group.service.CommonService;
 import com.akcord.group.service.GroupService;
 import com.akcord.user.model.UserDto;
+import com.akcord.user.service.UserService;
 import com.akcord.util.PageNavigation;
 
 @Controller
@@ -29,12 +30,18 @@ public class GroupController {
 
 	@Autowired
 	private CommonService commonService;
-
+	@Autowired
+	private UserService userService;
 	@RequestMapping("/make.akcord")
 	public String makegroup(GroupRoomDto groupRoomDto, HttpSession session) {
 		UserDto user = (UserDto) session.getAttribute("user");
 		groupRoomDto.setLeaderId(user.getUser_id());
 		int cnt = groupService.createG(groupRoomDto);
+	      List<GroupRoomDto> group_list = null;
+	      if(user.getType()!=0) { 
+	         group_list = userService.group(user.getUser_id()+"");
+	         session.setAttribute("group_list", group_list);
+	      }
 		return "redirect:/group/list.akcord?pg=1&key=&word=&order=&state=100";
 	}
 
@@ -116,6 +123,11 @@ public class GroupController {
 		map.put("seq", seq);
 		map.put("userId", user.getUser_id() + "");
 		int cnt = groupService.accept(map);
+	      List<GroupRoomDto> group_list = null;
+	      if(user.getType()!=0) { 
+	         group_list = userService.group(user.getUser_id()+"");
+	         session.setAttribute("group_list", group_list);
+	      }
 		return "redirect:/group/waitinglist.akcord?pg=1";
 	}
 }

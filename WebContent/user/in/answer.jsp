@@ -11,15 +11,15 @@
 $(document).ready(function() {
 	$('#summernote').summernote({
 		height : 400,
-		width: 980,
-		codemirror : { // codemirror options
+		width: 650,
+		codemirror : { // c4odemirror options
 			theme : 'monokai'
 		}
 	});
 	
 	$('#qna_comment').summernote({
 		height: 300,   
-		width: 980,// 기본 높이값
+		width: 600,// 기본 높이값
 		minHeight: null,      // 최소 높이값(null은 제한 없음)
 		maxHeight: null,      // 최대 높이값(null은 제한 없음)
 		focus: false,          // 페이지가 열릴때 포커스를 지정함
@@ -52,7 +52,7 @@ $(document).ready(function() {
 	font-size: 5em;
 }
 </style>
-<div class="container col-sm-12 form-group">
+<div class="container akcord">
 	<form id="replyForm" name="replyForm" class="form-horizontal" method="" action="">
 	<input type="hidden" id="qna_id" name="qna_id" class="qna_id" value="${qnaview.qna_id}">
 	<br>
@@ -85,10 +85,10 @@ $(document).ready(function() {
 	<div class="col-sm-1"></div>
 	<div class="col-sm-10" style="border: 1px solid; color: gray">
 		<br> <br> 
-		<label for="comment" class="col-sm-12">아이디 : ${qnaview.id} 님 </label> 
+		<label for="comment" class="col-sm-12">아이디 : ${user.id} 님 </label> 
 		<label class="col-sm-12"><hr></label>
 		<label for="comment" class="col-sm-12">Answer : </label> 
-		<div class="col-sm-10" >
+		<div class="col-sm-12">
 			<input type="text" class="form-control" id="qna_subject" name="qna_subject" placeholder="제목을 입력해주세요">
 		</div>        			
 		<div class="col-sm-10">

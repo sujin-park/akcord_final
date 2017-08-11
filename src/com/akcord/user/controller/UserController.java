@@ -72,8 +72,9 @@ public class UserController {
 	         group_list = userService.group(userDto.getUser_id()+"");
 	      }
 	      if( userDto != null){
+	    	  
 	         session.setAttribute("plist", plist);
-	         //session.setAttribute("psubject",plist.get(0).getSubject());
+	         session.setAttribute("psubject",plist.get(0).getSubject());
 	         session.setAttribute("user", userDto);
 	         session.setAttribute("group_list", group_list);
 	         mav.setViewName("/index");
@@ -82,5 +83,13 @@ public class UserController {
 	      }
 	      return mav;
 	   }
+	
+		@RequestMapping(value="/logout.akcord", method=RequestMethod.GET)
+		public ModelAndView logout(HttpSession session){
+			ModelAndView mav = new ModelAndView();
+			session.invalidate();
+			mav.setViewName("/user/login/loginmain");
+			return mav;
+		}
 	
 }

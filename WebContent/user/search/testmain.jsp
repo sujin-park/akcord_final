@@ -65,16 +65,16 @@
 
 
 </form>	 -->
-
+<input type="hidden" id="searchusr" name="searchusr" value="">
 <div class="col-sm-6 col-sm-offset-3">
 	<button class="btn btn-danger" type="button" id="blogBtn"
-		name="blogBtn">BlogSEARCH</button>
+		name="blogBtn">Blog</button>
 	<button class="btn btn-danger" type="button" id="jisicBtn"
-		name="jisicBtn">JisicSEARCH</button>
+		name="jisicBtn">지식인</button>
 	<button class="btn btn-danger" type="button" id="cafeBtn"
-		name="cafeBtn">CafeSEARCH</button>
+		name="cafeBtn">Cafe</button>
 	<button class="btn btn-danger" type="button" id="akcordBtn"
-		name="akcordBtn">AkcordSEARCH</button>
+		name="akcordBtn">Akcord</button>
 
 </div>
 <div class="container">

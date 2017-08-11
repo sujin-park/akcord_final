@@ -11,11 +11,19 @@
 	}
 	
 	.logo {
-    	color: #eee;
+    	color: transparent;
     	text-decoration:none;
     }
     
     .logo.scrollActive {
         color: #d34e4c;
+    }
+    
+    .fa-gear {
+        color: #eee;
+    }
+    
+    .fa-gear.scrollActive {
+        color: #757171;
     }
 }

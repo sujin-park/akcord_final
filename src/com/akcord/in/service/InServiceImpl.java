@@ -3,6 +3,8 @@ package com.akcord.in.service;
 import java.util.List;
 import java.util.Map;
 
+import javax.xml.namespace.QName;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.metadata.SqlServerCallMetaDataProvider;
@@ -34,13 +36,22 @@ public class InServiceImpl implements InService {
 	}
 
 	@Override
+	public List<InDto> replyCountList(Map<String, String> queryString) {
+		int pg = Integer.parseInt(queryString.get("pg"));
+		int end = pg * BoardConstant.LIST_SIZE;
+		int start = end - BoardConstant.LIST_SIZE;
+		queryString.put("start", start+"");
+		queryString.put("end", end+"");
+		return sqlSession.getMapper(InDao.class).replyCountList(queryString);
+	}
+	
+	@Override
 	public InDto getId(String string) {
 		return null;
 	}
 
 	@Override
 	public InDto getAnswer(int qna_id) {
-		System.out.println(qna_id);
 		return sqlSession.getMapper(InDao.class).getAnswer(qna_id);
 	}
 
@@ -88,5 +99,11 @@ public class InServiceImpl implements InService {
 	public void replyWrite(ReplyDto replyDto) {
 		sqlSession.getMapper(InDao.class).replyWrite(replyDto);
 	}
+
+	@Override
+	public List<ChooseDto> good_or_badAllSelect(String qna_id) {
+		return sqlSession.getMapper(InDao.class).good_or_badAllSelect(qna_id);
+	}
+
 
 }

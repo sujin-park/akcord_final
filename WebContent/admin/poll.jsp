@@ -147,14 +147,14 @@ $(document).on('click','#doPollBtn',function(){//동적으로 만든class들은 
    $(location).attr('href','${root}/poll/dopoll.akcord?poll_id='+poll_id+'&user_id='+user_id+'&content='+content);
 });
 </script>
-<div class="card my-1 card-primary">
+<div class="card my-1 card-primary" id="append1">
             <div class="card-block text-center">
-              <p class="lead">설문조사</p>
+              <p class="lead"><b>설문조사</b></p>
             </div>
              <b>${psubject }</b>
             <ul class="list-group list-group-flush">
             <c:forEach var="plist" items="${plist }">
-                 <li class="list-group-item"><input type="radio" name="poll_id" id="poll_id" data-seq="${plist.poll_id }"value="${plist.content }"><b>${plist.content}</b></li>
+                 <li class="list-group-item"><input type="radio" name="poll_id" id="poll_id" data-seq="${plist.poll_id }"value="${plist.content }">${plist.content}</li>
 <!--                  <li class="list-group-item"><i class="mx-auto fa d-inline fa-clock-o"></i>&nbsp;5&nbsp;<b>JAVA 공부방</b></li> -->
              </c:forEach>
              <li><div class="col-sm-12"  id="btn" align="right">

@@ -87,7 +87,7 @@ $(document).ready(function() {
                                     </td>
                                     <td>
                                        <div class="media">
-                                          <span class="media-meta">${userInfo.name}</span>
+                                          <span class="media-meta">${user.name}</span>
                                        </div>
                                     </td>
                                     <td>

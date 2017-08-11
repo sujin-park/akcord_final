@@ -38,7 +38,6 @@ var name = "";
 		      // 콜랩스 디브 시작부분
 		     // output += '<a href="#"  class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-bell fa-2x" style="color: #d34e4c;"></span><span class="badge"></span></a>';
 		      //output += '<ul class="dropdown-menu dropdown" style="right:0; left:unset;">';
-		      output += '<li><a href="#">내용</a></li>';
 
 		        if(data.list0.length == 0){
 		               output += '<li><a href="#">';
@@ -48,7 +47,7 @@ var name = "";
 		        
 		      for (var i = 0; i < data.list0.length; i++) {
 		         if(data.list0[i].key == 1){
-		            output += '<li><a href="#">';
+		            output += '<li><a href="${root}/alarm/delete.akcord?seq='+data.list0[i].seq+'&key='+data.list0[i].key+'">';
 		            output += '그룹에 초대되었습니다';
 		            output += '</a></li>';
 		            
@@ -104,11 +103,8 @@ var name = "";
  			<div class="panel-heading" style="padding-left: 30%;">
 			</div>
 			<div id="collapse-1" class="panel-collapse collapse in">
-				<div class="input-group">
-					<input type="text" class="form-control" placeholder="단어를 입력해주세요">
-					<span class="input-group-btn">
-						<button class="btn btn-danger" type="button">SEARCH</button>
-					</span>
+				<div style="padding-left:70%">
+						<a href="${root}/user/logout.akcord"><i class="fa fa-sign-out" style="text-decoration:none;" ></i>LOGOUT</a>
 				</div>
 				<ul class="list-group">
                <li class="list-group-item">
@@ -188,7 +184,7 @@ var name = "";
 		<div class="container-head">
 			<div class="container">
 				<%-- <a href="#;" id="toggleSidebar"><img alt="" src="${root}/doc/img/icon.png" height="35" width="35"></a> --%>
-				<a href="#" id="toggleSidebar" style="text-decoration:none"><i class="fa fa-gear fa-2x" style="color:#888;"></i></a>
+				<a href="#" id="toggleSidebar" style="text-decoration:none"><i class="fa fa-gear fa-2x"></i></a>
 				<a href="${root}/index.jsp" class="logo" >Akashic Records</a>
 				<div class="c_03 c pull-right">
 					<div class="dropdown" style="width:100px;">

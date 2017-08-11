@@ -90,7 +90,7 @@ public class AlarmController {
             } 
          }
       }
-      return text;
+      return "redirect:" + text;
    }
 
 }

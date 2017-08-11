@@ -63,11 +63,6 @@ public class MyroomServiceImpl implements MyroomService {
 	public void insertArticle(MyroomNextDto myroomNextDto) {
 		sqlSession.getMapper(MyroomDao.class).insertArticle(myroomNextDto);
 	}
-
-//	@Override
-//	public int getMyroomNextId() {
-//		return sqlSession.getMapper(MyroomDao.class).getMyroomNextId();
-//	}
 	
 	@Override
 	public MyroomNextDto selectArticle(String myroomNextId) {

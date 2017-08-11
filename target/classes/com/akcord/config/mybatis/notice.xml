@@ -5,12 +5,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.akcord.admin.dao.NoticeDao">
 	
-	<update id="updateHit" parameterType="int">
-		update notice
-		set hit = hit+1 
-		where notice_id = #{notice_id}
+	<update id="updateHit" parameterType="String">
+		update notice set hit = hit+1    where notice_id = #{nid}
 	</update>
-	
 	
 	<insert id="noticeWrite" parameterType="noticeDto">
 		insert 
@@ -20,49 +17,51 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="getNoticeList" parameterType="java.util.Map" resultType="noticeDto">
 		select b.*
-		from(select rownum rn,a.* from (select notice_id,subject,content,is_notice,to_char(reg_date,'yy-mm-dd') reg_date,hit 
-				from notice	
-			<if test="word!=''">
-				where subject like '%'||#{word}||'%'
-			</if>
-			<choose>
-				<when test="str==1">
-					order by reg_date asc) a
-				</when>
-				<when test="str==2">
-					order by notice_id asc) a
-				</when>
-				<otherwise>
-					order by reg_date desc) a
-				</otherwise>
-		</choose>
-			where rownum &lt;= #{end}
-		) b
-		where b.rn &gt; #{start}
-	</select>
-	
-	<select id="userNoticeList" parameterType="java.util.Map" resultType="noticeDto">
-		select b.*
-		from(select rownum rn,a.* from (select notice_id,subject,content,is_notice,to_char(reg_date,'yy-mm-dd') reg_date,hit 
-		from notice	where is_notice=1
+		from(select rownum rn,a.* from (select notice_id,subject,content,is_notice,to_char(reg_date,'yy-mm-dd') reg_date,reg_date rd,hit 
+		from notice   
 		<if test="word!=''">
-			and subject like '%'||#{word}||'%'
+			where subject like '%'||#{word}||'%'
 		</if>
 		<choose>
 			<when test="str==1">
-				order by reg_date asc) a
+				order by rd asc) a
 			</when>
 			<when test="str==2">
-				order by notice_id asc) a
+				order by hit desc) a
 			</when>
 			<otherwise>
-				order by reg_date desc) a
+				order by rd desc) a
 			</otherwise>
 		</choose>
 		where rownum &lt;= #{end}
 		) b
 		where b.rn &gt; #{start}
 	</select>
+	
+	<select id="userNoticeList" parameterType="java.util.Map" resultType="noticeDto">
+		select b.*
+		from(select rownum rn,a.* from (select notice_id,subject,content,is_notice,to_char(reg_date,'yy-mm-dd') reg_date,reg_date rd,hit 
+		from notice   where is_notice=1
+		<if test="word!=''">
+			and subject like '%'||#{word}||'%'
+		</if>
+		<choose>
+			<when test="str==1">
+				order by rd asc) a
+			</when>
+			<when test="str==2">
+				order by hit desc) a
+			</when>
+			<otherwise>
+				order by rd desc) a
+			</otherwise>
+		</choose>
+		where rownum &lt;= #{end}
+		) b
+		where b.rn &gt; #{start}
+	</select>
+	
+	
 	
 	<delete id="delete" parameterType="String">
 		delete from notice where notice_id=#{notice_id}
@@ -76,9 +75,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="modify" parameterType="noticeDto">
 		update notice
 		set subject=#{subject},content=#{content},reg_date=sysdate
-		where notice_id=#{notice_id}	
+		where notice_id=#{notice_id}   
 	</update>
 	<update id="noticePublic">
-		update notice set is_notice='1' where notice_id=#{notice_id}		
+		update notice set is_notice='1' where notice_id=#{notice_id}      
 	</update>
 </mapper>

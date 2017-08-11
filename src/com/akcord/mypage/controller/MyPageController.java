@@ -35,8 +35,7 @@ public class MyPageController {
       UserDto userDto = (UserDto) session.getAttribute("user");
       String user_id = userDto.getUser_id()+"";
       UserDto userDto2 = myPageService.mypage(user_id);
-      System.out.println("전번"+userDto.getTel1()+userDto2.getTel2());
-      System.out.println("주소"+userDto2.getAddr1());
+
       mav.addObject("user",userDto2);
       mav.setViewName("/user/mypage/mypage");
       
@@ -83,7 +82,9 @@ public class MyPageController {
          for (int i = 0; i < mypageDto.size(); i++) {
             if(mypageDto.get(i).getCategory()!=null){
                if(mypageDto.get(i).getCategory().equals("1")){
-                  String tmp = "마이룸";
+                  String myroom_next_id = mypageDto.get(i).getSeq()+"";
+                  String gname = myPageService.getgroupname(myroom_next_id);
+                  String tmp = "그룹 공유글("+gname+")";
                   mypageDto.get(i).setCategory(tmp);
                } else if(mypageDto.get(i).getCategory().equals("2")){
                   String tmp = "레코더";
@@ -110,21 +111,28 @@ public class MyPageController {
    }
    
    @RequestMapping(value="/delete.akcord")
-   public String myarticledelete(@RequestParam String category, @RequestParam int seq, @RequestParam int group_id, HttpSession sesstion){
+   public String myarticledelete(@RequestParam String category, @RequestParam int seq, HttpSession sesstion){
       UserDto userDto = (UserDto) sesstion.getAttribute("user");
-      System.out.println("삭제하러 왔슴다!");
+
       if(userDto!=null){
+
          int cnt = 0;
-         if(category.equals("1")){
-            cnt = myPageService.myArticleDeleteShare(seq, group_id);
-         } else if(category.equals("2")){
+         if(category.substring(0, 2).equals("그룹")){
+            cnt = myPageService.myArticleDeleteShare(seq);
+         } else if(category.equals("레코더")){
+            int check = myPageService.searchChile(seq);
+            if(check!=0){
+               myPageService.myArticleDeletechile(seq);
+            }
             cnt = myPageService.myArticleDeleteQna(seq);
-         } else if(category.equals("2")){
+         } else if(category.equals("레코더 답글")){
             cnt = myPageService.myArticleDeleteReply(seq);
+         } else {
          }
+
       }
       
-      String user_id = "/mypage/myarticle.akcord";
+      String user_id = "redirect:/mypage/myarticle.akcord";
       return user_id;
    }
 

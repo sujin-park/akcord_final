@@ -33,27 +33,23 @@ $(document).ready(function(){
 			<div class="col-sm-12">
 			<div class="form-group">
 			</div>
-			<form name="noticeModifyform" method="post" action="">
-				<input type="hidden" name="notice_id" value="${notice.notice_id }">
-				<%-- <input type="hidden" name="is_notice" value="${notice.is_notice }">
-				<input type="hidden" name="reg_date" value="${notice.reg_date }">
-				<input type="hidden" name="hit" value="${notice.hit }"> --%>
-				
-				<label for="title">글 제목</label>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp; 
-			 	<span style="text-align: right">등록일 :${notice.reg_date }&nbsp; 조회수: ${notice.hit }</span>
-				<input type="text" name="subject"
-					class="form-control" id="subject" value="${notice.subject }" disabled="disabled">
+			        <form name="noticeModifyform" method="post" action="">
+            <input type="hidden" name="notice_id" value="${notice.notice_id }">
+            <label for="title">SUBJECT</label>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp; 
+             <span style="text-align: right">등록일 :${notice.reg_date }&nbsp; 조회수: ${notice.hit }</span>
+            <input type="text" name="subject"
+               class="form-control" id="subject" value="${notice.subject }" disabled="disabled">
 
-				<div class="form-group">
-					<label for="content">글 내용</label>
-					<textarea name="content" id="content" cols="67" rows="25"
-						class="form-control" required disabled="disabled">${notice.content }</textarea>
-				</div>
-				<div align="center">
-					<button type="button" class="btn btn-sm" id="listBtn">
-						확인</button>
-				</div>
-			</form>
+            <div class="form-group">
+               <label for="content">CONTENT</label>
+               <textarea name="content" id="content" cols="67" rows="25"
+                  class="form-control" required disabled="disabled">${notice.content }</textarea>
+            </div>
+            <div align="center">
+               <button type="button" class="btn btn-sm" id="listBtn">
+                  확인</button>
+            </div>
+         </form>
 		</div>
 		</div>
 	</div>

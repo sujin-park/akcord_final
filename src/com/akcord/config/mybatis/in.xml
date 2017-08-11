@@ -19,10 +19,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select c.*
         from(select rownum rn, b.*
         from(select a.*, (select count(qna_comment_id) from qna_comment where qna_id=a.qna_id) commentcnt
-        from (select q.qna_id, u.user_id, u.name, u.major_id, q.subject, q.content, q.reg_date, q.hit
+        from (select q.qna_id, u.user_id, u.id, u.name, u.major_id, q.subject, q.content, q.reg_date, q.hit
         from qna q, users u
         where q.user_id = u.user_id and q.major_id = #{major_id}
-        order by reg_date desc) a
+        order by reg_date desc
+        ) a
+        ) b
+        where rownum &lt;= #{end}
+        ) c
+        where c.rn &gt; #{start}
+    </select>
+    
+    <!-- 답변순 리스트목록 -->
+    <select id="replyCountList" parameterType="java.util.Map" resultType="inDto" >
+        select c.*
+        from(select rownum rn, b.*
+        from(select a.*, (select count(qna_comment_id) from qna_comment where qna_id=a.qna_id) commentcnt
+        from (select q.qna_id, u.user_id, u.id, u.name, u.major_id, q.subject, q.content, q.reg_date, q.hit
+        from qna q, users u
+        where q.user_id = u.user_id
+        ) a
+        <if test="ch == 1">            
+            order by commentcnt desc
+        </if>
+        <if test="ch == 2">
+            order by a.hit desc
+        </if>
         ) b
         where rownum &lt;= #{end}
         ) c
@@ -72,6 +94,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </if>
         where qna_comment_id=#{qna_comment_id}
     </update>
+    
+    <select id="good_or_badAllSelect" parameterType="String" resultType="chooseDto">
+        select qna_comment.qna_comment_id, goodcount goodCount, badcount badCount from qna_choose, qna_comment
+        where qna_choose.qna_comment_id=qna_comment.qna_comment_id and qna_id=#{qna_id}
+    </select>
     
     <select id="good_or_badSelect" parameterType="String" resultType="chooseDto">
         select qna_comment_id, goodcount goodCount, badcount badCount from qna_choose

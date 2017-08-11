@@ -4,9 +4,9 @@
 <link rel="stylesheet" type="text/css" href="${root}/common/css/menuresponse.css">
 <div class="container">
 	<div class="rank">
-	        <div class="col-sm-12 page-header">
-	          <h2 align="center" id="titleinfo"><b>Ranking</b></h2>
-	        </div>
+		<div style="border-bottom:1px solid #eee;">
+	          <h2 align="center"><b>Ranking</b></h2>
+	      </div>
 	</div>
 <%@include file="/common/template/rankbar.jsp" %>
 

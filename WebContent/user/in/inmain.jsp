@@ -37,7 +37,11 @@ $(document).ready(function() {
 	});
 });
 </script>
-
+<style>
+body {
+	text-decoration:none;
+}
+</style>
 	<div class="container akcord">
 		<div class="col-sm-12">
 				<div class="page-header titleinfo">
@@ -86,21 +90,21 @@ $(document).ready(function() {
 			</div>
 
 			<!-- 리스트 -->
-			<div class="col-sm-10 form-group">
+			<div class="col-sm-10 form-group" style="text-decoration:none;">
 				<hr>
 				<c:if test="${inlist != null}">
 					<c:forEach var="inDto" items="${inlist}">
 						<a href="#" id="qna_id" name="qna_id" class="link_board_03" data-seq="${inDto.qna_id}">
 							<div class="media col-sm-10">
-								<label class="media-heading col-sm-6" style="font-size: 11px;">
+								<label class="media-heading col-sm-6" style="font-size: 15px;">
 									<p overflow:hidden;>${inDto.subject}</p></label>
-								<label class="media-heading col-sm-3" style="font-size: 11px;">&nbsp;</label>
-								<label class="media-heading col-sm-3" style="font-size: 11px;">아이디 : ${user.id }</label><br>
+								<label class="media-heading col-sm-3" style="font-size: 15px;">&nbsp;</label>
+								<label class="media-heading col-sm-3" style="font-size: 15px;">아이디 : ${user.id }</label><br>
 								<div class="col-sm-12" style="height: 40px; width: 100%; text-overflow: ellipsis; font-size: 10px;">
 									<p class="media-body">${inDto.content}</p>
 								</div>
 							</div>
-							<div class="media-heading col-sm-10" style="font-size: 11px;">
+							<div class="media-heading col-sm-10" style="font-size: 15px;">
 								<label class="col-sm-6">${inDto.reg_date}</label>
 								<label class="col-sm-3">답글수 : ${inDto.commentcnt}</label>
 								<label class="col-sm-3">조회수 : ${inDto.hit}</label>
@@ -123,5 +127,4 @@ $(document).ready(function() {
 		</form>
 	</div>
 </div>
-</body>
-</html>
+<%@include file="/common/template/footer.jsp"%>

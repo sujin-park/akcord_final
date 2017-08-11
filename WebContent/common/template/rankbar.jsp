@@ -2,12 +2,16 @@
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
+<style>
+.list-group-item {
+	border-color: #fff;
+}
+</style>
 <script>
 var output1 = "";
 var output2 = "";
 var output3 = "";
 $(document).ready(function() {
-
 	$.ajax({
 		type : 'GET',
 		dataType : 'json',
@@ -32,7 +36,7 @@ function qnaRank(data) {
 	output1 += '<ul class="list-group list-group-flush">';
 	
 	for (var i = 0; i < data.jq.length; i++) {
-		output1 += '<li class="list-group-item content-main">&nbsp;&nbsp;<b>'+(i+1)+'. '+data.jq[i].subject+'&nbsp;&nbsp;( 조회수 : '+data.jq[i].hit+')</b></li>';
+		output1 += '<li class="list-group-item">&nbsp;&nbsp;'+(i+1)+'. '+data.jq[i].subject+'&nbsp;&nbsp;('+data.jq[i].hit+')</li>';
 	}
 
 	output1 += '</ul>';
@@ -48,7 +52,7 @@ function groupRank(data) {
 	output2 += '<ul class="list-group list-group-flush">';
 	
 	for (var i = 0; i < data.jg.length; i++) {
-		output2 += '<li class="list-group-item content-main">&nbsp;&nbsp;<b>'+(i+1)+'. '+data.jg[i].subject+'&nbsp;&nbsp;( 인원수 : '+data.jg[i].hit+')</b></li>';
+		output2 += '<li class="list-group-item">&nbsp;&nbsp;'+(i+1)+'. '+data.jg[i].subject+'&nbsp;&nbsp;('+data.jg[i].hit+')</li>';
 	}
 
 	output2 += '</ul>';
@@ -64,7 +68,7 @@ function myroomRank(data) {
 	output3 += '<ul class="list-group list-group-flush">';
 	
 	for (var i = 0; i < data.jm.length; i++) {
-		output3 += '<li class="list-group-item content-main">&nbsp;&nbsp;<b>'+(i+1)+'. '+data.jm[i].subject+'&nbsp;&nbsp;( 조회수 : '+data.jm[i].hit+')</b></li>';
+		output3 += '<li class="list-group-item">&nbsp;&nbsp;'+(i+1)+'. '+data.jm[i].subject+'&nbsp;&nbsp;('+data.jm[i].hit+')</li>';
 	}
 
 	output3 += '</ul>';
@@ -73,7 +77,7 @@ function myroomRank(data) {
 }
 
 </script>
-     <div class="row text-left">
+     <div class="row text-left" style="margin-top:20px;">
 	        <div class="col-md-3">
 	          <div class="card my-1 card-primary" id="append1">
 	            <!-- append (1) -->
@@ -90,7 +94,7 @@ function myroomRank(data) {
 	          </div>
 	        </div>
 	        <div class="col-md-3">
-	 <c:if test="${plist.size() !=0} ">
+	 			<c:if test="${plist.size()!=0}">
 	          <%@ include file="/admin/poll.jsp" %>
 				</c:if> 
 	         

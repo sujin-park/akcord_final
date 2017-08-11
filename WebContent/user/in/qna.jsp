@@ -16,8 +16,6 @@
 //});
 
 $(document).ready(function() {
-	
-	$('.good').text($('.good').attr('data-gValue'));
 	$('#answerBtn').click(function() {
 		var qna_id = $('.qna_id').val();
 		$(location).attr('href', '${root}/in/comment.akcord?qna_id='+qna_id + '&qna_comment_id=' + $(this).attr('data-good'));	
@@ -31,22 +29,9 @@ $(document).ready(function() {
 		$('form[name=answerform]').attr('action', '${root}/in/deleteQuestion.akcord').submit();
 	});
 	
-	$(document).on('click','.modifyBtn2',function(){
-		   var qna_id = $('.qna_id').val();
-		   var comment_id=$(this).attr('data-seq');
-		   alert(comment_id);
-		   $(location).attr('href', '${root}/in/qnaAnswermodify.akcord?qna_id='+qna_id+'&comment_id='+comment_id);
-		});
-
-		$(document).on('click','.deleteBtn2',function(){
-		   var qna_id = $('.qna_id').val();
-		   var comment_id=$(this).attr('data-seq');
-		   $(location).attr('href', '${root}/in/qnaAnswerdelete.akcord?qna_id='+qna_id+'&comment_id='+comment_id);
-		});
-	
 	$(document).on('click', '.good', function() {
 		var qna_id = $('.qna_id').val();
-		var qna_comment_id = $('.good').attr('data-good');
+		var qna_comment_id = $(this).attr('data-good');
 		var good_or_bad = $(this).attr('data-gCnt');
 		
 		$.ajax({
@@ -55,31 +40,31 @@ $(document).ready(function() {
 			url : '${root}/in/good_or_bad.akcord',
 			data : {'qna_comment_id':qna_comment_id, 'gob':good_or_bad},
 			success : function(data) {
-				if(data.list.qna_comment_id==qna_id) {					
-					$('.good').text("");
-					$('.good').text(data.list.goodCount);
+				if(data.qna_comment_id==qna_comment_id) {
+					$('#good'+qna_comment_id).empty();
+		            $("#good"+qna_comment_id).append(data.good);
 				}
 			}
 		});
-		//$(location).attr('href', '${root}/in/good_or_bad.akcord?qna_id='+ qna_id +'&qna_comment_id='+qna_comment_id + '&gob=' + good_or_bad);
+
 	});
 	
 	$(document).on('click', '.bad', function() {
 		var qna_id = $('.qna_id').val();
-		var qna_comment_id = $('.bad').attr('data-bad');
+		var qna_comment_id = $(this).attr('data-bad');
 		var good_or_bad = $(this).attr('data-bCnt');
 		
 		$.ajax({
-			type : 'GET',
+			type : 'POST',
 			dataType : 'json',
 			url : '${root}/in/good_or_bad.akcord',
 			data : {'qna_comment_id':qna_comment_id, 'gob':good_or_bad},
 			success : function(data) {
-				$('.bad').text("");
-				$('.bad').text(data.list.goodCount);
+				$('#bad'+qna_comment_id).empty();
+	            $("#bad"+qna_comment_id).append(data.bad);
 			}
 		});
-		//$(location).attr('href', '${root}/in/good_or_bad.akcord?qna_id='+ qna_id +'&qna_comment_id='+qna_comment_id + '&gob=' + good_or_bad);
+
 	});
 	
 	$(document).on('click', '.commendBtn', function() {
@@ -106,13 +91,6 @@ $(document).ready(function() {
 			}
 		});
 	});
-
-	//$(document).on('click', '.bad', function() {
-	//	var qna_comment_id = $(this).attr('data-good');
-	//	var good_or_bad = $(this).attr('data-bCnt');
-	//	var qna_id = $('.qna_id').val();
-	//	$(location).attr('href', '${root}/in/good_or_bad.akcord?qna_id='+ qna_id +'&qna_comment_id='+qna_comment_id + '&gob=' + good_or_bad);
-	//});
 	
 	/* $(document).on('click', '.commendBtn', function() {
 		var qna_comment_id = $(this).attr('data-commend');
@@ -169,6 +147,19 @@ $(document).ready(function() {
 	}); */
 });
 
+$(document).on('click','.modifyBtn2',function(){
+   var qna_id = $('.qna_id').val();
+   var comment_id=$(this).attr('data-seq');
+   alert(comment_id);
+   $(location).attr('href', '${root}/in/qnaAnswermodify.akcord?qna_id='+qna_id+'&comment_id='+comment_id);
+});
+
+$(document).on('click','.deleteBtn2',function(){
+   var qna_id = $('.qna_id').val();
+   var comment_id=$(this).attr('data-seq');
+   $(location).attr('href', '${root}/in/qnaAnswerdelete.akcord?qna_id='+qna_id+'&comment_id='+comment_id);
+});
+
 function makeReplyList(data) {
 	var output = '';
 	var len = data.replyList.length;
@@ -207,8 +198,6 @@ function makeReplyList(data) {
 	$('#replyBbody').empty();
 	$('#replyBbody').append(output);
 }
-
-
 </script>
 
 <style>
@@ -229,7 +218,6 @@ function makeReplyList(data) {
 }
 </style>
 
-
 <form class="answerform" id="answerform" name="answerform" action="" method="">
 <input type="hidden" class="qna_id" name="qna_id" data-qna_id="${qnaview.qna_id}" value="${qnaview.qna_id}">
 <input type="hidden" id="qna_comment_id" name="qna_comment_id" data-qna_comment_id="${qnaview.qna_comment_id}" value="${qnaview.qna_comment_id}">
@@ -237,11 +225,10 @@ function makeReplyList(data) {
 <input type="hidden" class="content" name="content" data-content="${qnaview.content}" value="${qnaview.content}">
 <input type="hidden" class="majorName" name="majorName" data-majorName="${qnaview.majorName}" value="${qnaview.majorName}">
 <input type="hidden" id="user_id" name="user_id" value="${qnaview.user_id}">
-<div class="container col-sm-12 form-group">
-	<br>
-	<div class="col-sm-1"></div>
 
-	<div class="col-sm-10" style="border: 1px solid; color: gray">
+<div class="container akcord">
+
+	<div class="col-sm-12" style="border: 1px solid; color: gray">
 		<br> <br>
 		<label for="comment" class="col-sm-1">아이디 : </label> <label class="col-sm-1">${qnaview.id}</label>
 		<label for="comment" class="col-sm-1">카테고리: </label> <label class="col-sm-1">${qnaview.majorName}</label>
@@ -256,7 +243,6 @@ function makeReplyList(data) {
 		<div class="col-sm-12">
 			<hr>
 		</div>
-
 		<div class="col-sm-12" row="25" style="border: 1px solid; color: gray; height: 250px;">
 			${qnaview.content}
 		</div>
@@ -264,68 +250,71 @@ function makeReplyList(data) {
 		<button type="button" class="btn btn-danger col-sm-1 btn" id="answerBtn">Answer</button>
 	</div>
 	<br>
-
-		<c:forEach var="list" items="${comments}">
-		<input type="hidden" id="qna_comment_id1" name="qna_comment_id1" data-qna_id="${list.qna_comment_id}" value="${list.qna_comment_id}">
-			<div class="col-sm-1"></div>
-			<div class="col-sm-10" style="border: 1px solid; color: gray">
-				<br> <br>
-				<label for="comment" class="col-sm-6">아이디 : ${list.id} 님의 답변입니다.</label>
-				<label for="comment" class="col-sm-4">작성일: ${list.reg_date} </label>
-				<div class="col-sm-2" align="right">
+	<c:forEach var="list" items="${comments}">
+	<input type="hidden" id="qna_comment_id1" name="qna_comment_id1" data-qna_id="${list.qna_comment_id}" value="${list.qna_comment_id}">
+		<div class="col-sm-12" style="border: 1px solid; color: gray">
+			<label for="comment" class="col-sm-6">아이디 : ${list.id} 님의 답변입니다.</label>
+			<label for="comment" class="col-sm-4">작성일: ${list.reg_date} </label>
+			<div class="col-sm-2" align="right">
+				<c:if test="${user.user_id == list.user_id}">
 					<button type="button" name="modifyBtn" class="btn btn-danger modifyBtn2"  data-seq="${list.qna_comment_id }">수정</button>
-            		<button type="button" id="deleteBtn" name="deleteBtn" class="btn btn-danger deleteBtn2" data-seq="${list.qna_comment_id }">삭제</button>
-				</div>
+    	       		<button type="button" id="deleteBtn" name="deleteBtn" class="btn btn-danger deleteBtn2" data-seq="${list.qna_comment_id }">삭제</button>
+				</c:if>
+			</div>
 
-				<div class="col-sm-12">
-					<hr>
-				</div>
-				<div class="col-sm-12">제목 : ${list.qna_subject}</div>
-				<div class="col-sm-12" row="25">답변 : ${list.qna_comment}</div>
-				<div class="col-sm-12">
-					<hr>
-				</div>
-				<div class="col-sm-12">
-					<label class="col-sm-12" style="text-align: right;">
-						<a href="#"><span class="glyphicon glyphicon-thumbs-up gi-2x good"  data-good="${list.qna_comment_id}" data-gCnt="1" data-gValue="${list.goodCount}"></span></a>
+			<div class="col-sm-12">
+				<hr>
+			</div>
+			<div class="col-sm-12">제목 : ${list.qna_subject}</div>
+			<div class="col-sm-12" row="25">답변 : ${list.qna_comment}</div>
+			<div class="col-sm-12">
+				<hr>
+			</div>
+			<div class="col-sm-12">
+				<label class="col-sm-12" style="text-align: right;">
+				<c:forEach var="good_or_bad" items="${good_or_badList }">
+						<c:if test="${good_or_bad.qna_comment_id eq list.qna_comment_id }">
+						<a href="#"><span class="glyphicon glyphicon-thumbs-up gi-2x good" id="good${good_or_bad.qna_comment_id}" data-good="${good_or_bad.qna_comment_id}" data-gCnt="1" data-gValue="${good_or_bad.goodCount}">${good_or_bad.goodCount}</span></a>
 						&nbsp;&nbsp;&nbsp;
-						<a href="#"><span class="glyphicon glyphicon-thumbs-down gi-2x bad" data-bad="${list.qna_comment_id}" data-bCnt="2">${list.badCount }</span></a>
-					</label>
-				</div>
-				<div class="col-sm-12 form-group" style="margin-left: -15px;">
-					<textarea rows="5" cols="160" data-reply="" class="replyText"></textarea>
-					<button type="button" id="commendBtn" name="commendBtn" class="btn btn-danger commendBtn" data-commend="${list.qna_comment_id}">Commend</button>
-				</div>
-				<c:forEach var="reply" items="${replyList}">
-					<c:if test="${list.qna_comment_id == reply.qna_comment_id }">
-						<table width="100%" cellpadding="0" cellspacing="0" border="0">
-							<div id="replyView" class="col-sm-12 replyView">
-								<tr class="replytr">
-									<td class="bg_board_title_02 col-sm-1" height="1" width="10%" style="overflow: hidden;" data-add_id="${reply.qna_comment_id }">${reply.id }</td>
-									<td class="bg_board_title_02 col-sm-8" height="1" width="70%" style="overflow: hidden;" data-add_re_comment="${reply.qna_comment_id }">${reply.re_comment }</td>
-									<td class="bg_board_title_02" height="1" width="10%" style="overflow: hidden; padding: 0px">
-										<div align="right">
-										<c:if test="${user.user_id == reply.user_id }">
-											<button type="button" id="replyModifyBtn" name="replyModifyBtn" class="btn btn-danger replyModifyBtn">수정</button>
-											<button type="button" id="replyDeleteBtn" name="replyDeleteBtn" class="btn btn-danger replyDeleteBtn">삭제</button>
-										</c:if>
-										</div>
-									</td>
-								</tr>
-							</div>
-						</table>
+						<a href="#"><span class="glyphicon glyphicon-thumbs-down gi-2x bad" id="bad${good_or_bad.qna_comment_id}" data-bad="${good_or_bad.qna_comment_id}" data-bCnt="2" data-bValue="${good_or_bad.badCount}">${good_or_bad.badCount}</span></a>
 					</c:if>
 				</c:forEach>
+				</label>
 			</div>
+			<div class="col-sm-12 form-group" style="margin-left: -15px;">
+				<textarea rows="5" cols="100" data-reply="" class="replyText"></textarea>
+				<button type="button" id="commendBtn" name="commendBtn" class="btn btn-danger commendBtn" data-commend="${list.qna_comment_id}">Commend</button>
+			</div>
+			<c:forEach var="reply" items="${replyList}">
+				<c:if test="${list.qna_comment_id == reply.qna_comment_id }">
+					<table width="100%" cellpadding="0" cellspacing="0" border="0">
+						<div id="replyView" class="col-sm-12 replyView">
+							<tr class="replytr">
+								<td class="bg_board_title_02 col-sm-1" height="1" width="10%" style="overflow: hidden;" data-add_id="${reply.qna_comment_id }">${reply.id }</td>
+								<td class="bg_board_title_02 col-sm-8" height="1" width="70%" style="overflow: hidden;" data-add_re_comment="${reply.qna_comment_id }">${reply.re_comment }</td>
+								<td class="bg_board_title_02" height="1" width="10%" style="overflow: hidden; padding: 0px">
+									<div align="right">
+									<c:if test="${user.user_id == reply.user_id }">
+										<button type="button" id="replyModifyBtn" name="replyModifyBtn" class="btn btn-danger replyModifyBtn">수정</button>
+										<button type="button" id="replyDeleteBtn" name="replyDeleteBtn" class="btn btn-danger replyDeleteBtn">삭제</button>
+									</c:if>
+									</div>
+								</td>
+							</tr>
+						</div>
+					</table>
+				</c:if>
+			</c:forEach>
+		</div>
 	
-			<div class="col-sm-12">
-				<label class="col-sm-1"></label>
-				<div class="col-sm-10">
-					<hr>
-				</div>
+		<div class="col-sm-12">
+			<label class="col-sm-1"></label>
+			<div class="col-sm-10">
+				<hr>
 			</div>
-		</c:forEach>
-</div>
+		</div>
+	</c:forEach>
+	</div>
 </form>
 </body>
 </html>

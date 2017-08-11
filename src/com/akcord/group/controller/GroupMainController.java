@@ -27,6 +27,7 @@ import com.akcord.group.model.ScheduleDto;
 import com.akcord.group.service.CommonService;
 import com.akcord.group.service.GroupMainService;
 import com.akcord.user.model.UserDto;
+import com.akcord.user.service.UserService;
 import com.akcord.util.PageNavigation;
 
 @Controller
@@ -41,7 +42,8 @@ public class GroupMainController {
 
 	@Autowired
 	private AlarmService alarmService;
-
+	@Autowired
+	private UserService userService;
 	@RequestMapping("/main.akcord") // 캘린더로 들어가기
 	public ModelAndView main(@RequestParam("groupId") int groupId) {
 		ModelAndView mav = new ModelAndView();
@@ -63,7 +65,8 @@ public class GroupMainController {
 		if (startDate != null) {
 			int totalperson = groupMainService.totalperson(groupId);
 			int countperson = groupMainService.countperson(Integer.parseInt(map.get("scheduleId") + ""));
-			int percent = (countperson / totalperson) * 100;
+			double percent2 = (double) countperson/totalperson;
+			double percent = percent2 * 100;
 			mav.addObject("percent", percent);
 		} else {
 			mav.addObject("percent", 100);
@@ -113,10 +116,16 @@ public class GroupMainController {
 	}
 
 	@RequestMapping("/accept.akcord") // 회원 승인해주기
-	public String accept(@RequestParam Map<String, String> map) {
+	public String accept(@RequestParam Map<String, String> map, HttpSession session) {
 		int cnt = groupMainService.acceptMember(map);
+		UserDto user = (UserDto) session.getAttribute("user");
 		int groupId = Integer.parseInt(map.get("groupId"));
 		alarmService.alarminsertGroupaccept(map.get("seq"));
+	      List<GroupRoomDto> group_list = null;
+	      if(user.getType()!=0) { 
+	         group_list = userService.group(user.getUser_id()+"");
+	         session.setAttribute("group_list", group_list);
+	      }
 		return "redirect:/groupmain/group.akcord?groupId=" + groupId + "&pg=1&key=&word=&order=";
 	}
 
@@ -164,7 +173,7 @@ public class GroupMainController {
 	public ModelAndView articleview(@RequestParam Map<String, String> map) {
 		ModelAndView mav = new ModelAndView();
 		GroupHwDto groupHwDto = groupMainService.articleView(map);
-		// System.out.println(groupHwDto.getMysubject());
+		System.out.println(groupHwDto.getContent());
 		mav.addObject("groupHwDto", groupHwDto);
 		mav.setViewName("/user/group/main/view");
 		return mav;

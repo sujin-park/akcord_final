@@ -18,24 +18,13 @@ $(document).on('click', '#myArticleBtn', function() {
 
 </script>
 <!-- 회원가입 Modal-->
-
-   <div style="width: 33%;" class="container">
-      
+ 	<div class="container akcord">
+		<div class="col-sm-12">
+				<div class="page-header titleinfo">
+					    <h2 id="container"><i class="fa fa-id-badge"></i>  &nbsp;<b>회원정보 수정</b></h2><h5>개인 회원정보를 수정할 수 있습니다.</h5>
+				</div>
       <div>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      
-      <!-- Modal content-->
-      <div>
-         <div>
-            <h4 ><img src="${root}/doc/img/mypage.png" style="width: 100%"></h4>
-         </div>
-         <br>
-      
-         <div>
+         <div style="margin-right:80px;">
             <form class="form-horizontal" id="joinForm" name="joinForm" method="post" action="">
             <input type="hidden" name="name" value="${user.name}">
             <input type="hidden" name="id" value="${user.id}">
@@ -171,10 +160,8 @@ $(document).on('click', '#myArticleBtn', function() {
                               placeholder="상세주소" readonly="readonly">
                      </div>
                   </div>
-         <div align="right">
+         <div align="right" style="margin-right:50px;">
             <button id="mymodify" type="button" class="btn btn-danger">정보 수정</button>
-            <button id="myArticleBtn" type="button" class="btn btn-danger">내글 보기</button>
-           
          </div>
                   
                   
