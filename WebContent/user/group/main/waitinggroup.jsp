@@ -92,14 +92,11 @@
 										    	</c:if>
 											    </td>
 												<td align="center">
-												<c:if test="${listDto.fromto == 2}">
+												<c:if test="${listDto.fromto == 2 || listDto.fromto == 1}">
 													<button type="button" class="btn btn-sm btn-default" id="deleteM"
 													onclick="javascript:deleteM(${listDto.seq})">
 										    			<span class="glyphicon glyphicon-remove"></span>
 										    		</button>
-										    	</c:if>
-										    	<c:if test="${listDto.fromto != 2}">
-										    		<span>대기중</span>
 										    	</c:if>
 											    </td>
 											</tr>

@@ -108,7 +108,7 @@ color: #353535;
 
 .jumbotron{
 	margin-bottom: 0px;
-    background-image: url(http://192.168.18.60/akcord_project/doc/img/main6.png);
+    background-image: url(http://localhost/akcord_project/doc/img/main6.png);
     background-position: 0% 25%;
     background-size: cover;
     background-repeat: no-repeat;

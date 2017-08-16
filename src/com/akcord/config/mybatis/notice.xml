@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.akcord.admin.dao.NoticeDao">
 	
 	<update id="updateHit" parameterType="String">
-		update notice set hit = hit+1    where notice_id = #{nid}
+		update notice set hit = hit+1   where notice_id = #{nid}
 	</update>
 	
 	<insert id="noticeWrite" parameterType="noticeDto">

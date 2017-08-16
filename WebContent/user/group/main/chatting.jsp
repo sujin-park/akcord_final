@@ -43,7 +43,7 @@
 <script type="text/javascript">
 	var state;
     var textarea = document.getElementById("messageWindow");
-    var webSocket = new WebSocket('ws://192.168.18.60:80/akcord_project/broadcasting');
+    var webSocket = new WebSocket('ws://192.168.0.35:80/akcord_project/broadcasting');
     var inputMessage = document.getElementById('inputMessage');
     
     
