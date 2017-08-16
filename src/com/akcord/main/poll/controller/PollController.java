@@ -103,11 +103,11 @@ public class PollController {
 		if(plist.get(0).getChart_type().equals("1"))
 			ChartType="bar";
 		else if(plist.get(0).getChart_type().equals("2"))
-			ChartType="pie";
+			ChartType="doughnut";
 		else if(plist.get(0).getChart_type().equals("3"))
 			ChartType="line";
-		/*else if(plist.get(0).getChart_type().equals("4"))
-			ChartType="line";*/
+		else if(plist.get(0).getChart_type().equals("4"))
+			ChartType="polarArea";
 		jsonObject.put("Subject", plist.get(0).getSubject());
 		jsonObject.put("ChartType", ChartType);
 		jsonObject.put("poll_id", seq);

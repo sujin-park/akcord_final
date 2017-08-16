@@ -158,7 +158,6 @@ public class InController {
 		mav.setViewName("/user/in/answer");
 		return mav;
 	}
-	
 	//지식인 글 수정 버튼 클릭
 	@RequestMapping(value = "/updateQuestion.akcord", method = RequestMethod.GET)
 	public ModelAndView updateAnswer(@RequestParam Map<String, String> queryString) {
@@ -179,14 +178,12 @@ public class InController {
 		mav.addObject("inDto", queryString);
 		return "redirect:/in/list.akcord?major_id=" + major_id + "&pg=1"; // 밑에 메소드로가
 	}
-
 	//지식인 글 삭제 버튼 클릭
 	@RequestMapping(value = "/deleteQuestion.akcord", method = RequestMethod.GET)
 	public String deleteAnswer(@RequestParam Map<String, String> queryString, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		UserDto userDto = (UserDto) session.getAttribute("user");
 		int major_id = userDto.getMajor_id();
-
 		inService.deleteAnswerroom(queryString.get("qna_id"));
 		mav.addObject("inDto", queryString);
 		return "redirect:/in/list.akcord?major_id=" + major_id + "&pg=1"; // 밑에 메소드로가
@@ -233,6 +230,7 @@ public class InController {
 			jarr.add(jobj);
 		}
 		json.put("replyList", jarr); //{"memolist" : [{"mseq" : 1200, "seq" : 100, ...}]}
+		System.out.println("makeReplyKist : " + json);
 		return json;
 	}
 	
@@ -244,12 +242,21 @@ public class InController {
 	
 	@RequestMapping(value = "/replyWrite.akcord", method = RequestMethod.POST)
 	public @ResponseBody String replyWrite(ReplyDto replyDto, HttpSession session){
+        
+        
+        System.out.println("qna_cmt_id>>>"+replyDto.getQna_comment_id());
+        System.out.println("re_comment>>>"+replyDto.getRe_comment());
+        System.out.println("qna-id>>"+replyDto.getQna_id());
 		UserDto userDto = (UserDto) session.getAttribute("user");
 		replyDto.setUser_id(userDto.getUser_id());
 		replyDto.setId(userDto.getId());
 		inService.replyWrite(replyDto);
-		JSONObject json = new JSONObject();
-		json.put("replyDto", replyDto);
+		System.out.println("user_id>>>"+replyDto.getUser_id());
+	/*	JSONObject json = new JSONObject();
+		json.put("replyDto", replyDto);*/
+	
+		JSONObject json = makeRelpyList(replyDto.getQna_id());
+		//json.put("replyDto", replyDto);
 		return json.toJSONString();
 	}
 	

@@ -1,6 +1,7 @@
 package com.akcord.in.model;
 
 public class ReplyDto {
+	private int qna_id;
 	private String id;
 	private int qna_re_id;
 	private int qna_comment_id;
@@ -10,6 +11,14 @@ public class ReplyDto {
 
 	public String getId() {
 		return id;
+	}
+
+	public int getQna_id() {
+		return qna_id;
+	}
+
+	public void setQna_id(int qna_id) {
+		this.qna_id = qna_id;
 	}
 
 	public void setId(String id) {
