@@ -8,7 +8,7 @@ import com.akcord.user.model.UserDto;
 
 public interface MyPageService {
    
-   UserDto mypage(String id);
+   UserDto mypage(String user_id);
    int mypagemodify(Map<String, String> map);   
    
    MypageDto myArticle(String user_id);         

@@ -120,7 +120,14 @@ public class GroupMainController {
 		int cnt = groupMainService.acceptMember(map);
 		UserDto user = (UserDto) session.getAttribute("user");
 		int groupId = Integer.parseInt(map.get("groupId"));
-		alarmService.alarminsertGroupaccept(map.get("seq"));
+		
+		String target_id = user.getUser_id()+"";
+		String alarmcheck = alarmService.alarmcheck(target_id)+"";
+		if(!target_id.equals(alarmcheck)){
+			alarmService.alarminsertGroupaccept(map.get("seq"));
+		}
+
+		
 	      List<GroupRoomDto> group_list = null;
 	      if(user.getType()!=0) { 
 	         group_list = userService.group(user.getUser_id()+"");

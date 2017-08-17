@@ -5,24 +5,25 @@ import java.util.List;
 import com.akcord.alarm.model.AlarmDto;
 
 public interface AlarmService {
-	
-	void alarminsertGroupinvite(String target_id);		// 알람 DB 저장 - Groupinvite
-	void alarminsertGroupaccept(String target_id);		// 알람 DB 저장 - Groupaccept
-	void alarminsertQnareply(String target_id);			// 알람 DB 저장 - Qnareply
-	void alarminsertQnacomment(String target_id);		// 알람 DB 저장 - Qnacomment
-	void alarminsertQnalike(String target_id);			// 알람 DB 저장 - Qnalike
-	void alarminsertQnadislike(String target_id);		// 알람 DB 저장 - Qnadislike
-	
-	List<Integer> alarmMemberCall();	// 모든 멤버 호출
-	void alarminsertNotice(int target_id);// 공지사항 알림 전송
-	
-	List<AlarmDto> alarmlist0(String target_id);	// 안읽은 알람 리스트 호출
-	List<AlarmDto> alarmlist1(String target_id);	// 읽은 알람 리스트 호출
-	int alarmNoneread(String target_id);	// 아직 안 읽은 알람
-	int alarmreadset(int seqence_num);		// 알람 읽음 설정
-	
-	void alarmOff(); 		// 알람 기능 해제
-	void alarmOn(); 		// 알람 기능 켜기
-	
-	
+   
+   void alarminsertGroupinvite(String target_id);   
+   void alarminsertGroupaccept(String target_id);   
+   void alarminsertQnareply(String target_id);      
+   void alarminsertQnacomment(String target_id);      
+   void alarminsertQnalike(String target_id);      
+   void alarminsertQnadislike(String target_id);      
+   
+   List<Integer> alarmMemberCall();   
+   void alarminsertNotice(int target_id);
+   
+   List<AlarmDto> alarmlist0(String target_id);
+   List<AlarmDto> alarmlist1(String target_id);   
+   int alarmNoneread(String target_id);   
+   int alarmreadset(int seqence_num);      
+   
+   void alarmOff(String target_id);       // 알람 끄기
+   void alarmOn(String target_id);       // 알람 켜기
+   int alarmcheck(String target_id);   // 알람 설정 여부
+   
+   
 }

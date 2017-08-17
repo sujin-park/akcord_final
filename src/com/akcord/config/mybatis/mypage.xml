@@ -11,8 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         birth1, birth2, birth3,
         reg_date,
         tel1, tel2, tel3,
-        zipcode, addr1, addr2,
-        is_block
+        zipcode, addr1, addr2,type,user_id,is_block
         from users
         where user_id = #{user_id}
     </select>

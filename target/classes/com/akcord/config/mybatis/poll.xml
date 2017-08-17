@@ -55,9 +55,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="mainpollget" resultType="pollDto">
         select p.poll_id,p.subject,d.content,d.cnt,p.chart_type 
         from poll p,poll_detail d where p.poll_id=d.poll_id and p.poll_id =
-            (select max(a.poll_id) from 
-                (select poll_id,subject ,to_char(start_date, 'YYYY-MM-DD')  
-                    from poll where to_char(end_date, 'YYYY-MM-DD') =to_char(sysdate, 'YYYY-MM-DD')) a)
+        (select max(a.poll_id) from 
+        (select poll_id,subject ,to_char(start_date, 'YYYY-MM-DD')  
+        from poll where to_char(start_date, 'YYYY-MM-DD') &lt;= to_char(sysdate, 'YYYY-MM-DD') and to_char(sysdate, 'YYYY-MM-DD') &lt;=to_char(end_date, 'YYYY-MM-DD')) a)
      </select>
     <update id="pollmodifydate" parameterType="java.util.Map">
         update poll 
@@ -92,7 +92,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select distinct yn.poll_id,yn.user_id
         from poll_yesno yn,
         (select distinct p.poll_id  from poll p,poll_detail d where p.poll_id=d.poll_id and p.poll_id = (select max(a.poll_id) from 
-        (select poll_id,subject ,to_char(start_date, 'YYYY-MM-DD')  from poll where to_char(end_date, 'YYYY-MM-DD') =to_char(sysdate, 'YYYY-MM-DD')) a)) b  where b.poll_id=yn.poll_id
+        (select poll_id,subject ,to_char(start_date, 'YYYY-MM-DD')  
+        from poll where to_char(start_date, 'YYYY-MM-DD') &lt;= to_char(sysdate, 'YYYY-MM-DD') and to_char(sysdate, 'YYYY-MM-DD') &lt;=to_char(end_date, 'YYYY-MM-DD')) a)) b  where b.poll_id=yn.poll_id
     </select>
     
     

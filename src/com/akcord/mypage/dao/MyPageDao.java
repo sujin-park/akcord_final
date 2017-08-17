@@ -8,7 +8,7 @@ import com.akcord.user.model.UserDto;
 
 public interface MyPageDao {
    
-   UserDto mypage(String id);   // 占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙
+   UserDto mypage(String user_id);   // 占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙
    int mypagemodify(Map<String, String> map);   // 占쏙옙 占쏙옙占쏙옙 modify
    
    MypageDto myArticle(String user_id);            // 占쏙옙 占쌜듸옙 호占쏙옙

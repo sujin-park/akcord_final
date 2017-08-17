@@ -92,5 +92,28 @@ public class AlarmController {
       }
       return "redirect:" + text;
    }
+   
+   @RequestMapping(value="/alarmoff.akcord")
+   public String alarmOff(HttpSession session){
+      UserDto userDto = (UserDto) session.getAttribute("user");
+      String target_id = userDto.getUser_id() + "";
+      alarmService.alarmOff(target_id);
+      return "redirect:/mypage/mypage.akcord?id"+target_id;
+   }
+   
+   @RequestMapping(value="/alarmon.akcord")
+   public String alarmOn(HttpSession session){
+      UserDto userDto = (UserDto) session.getAttribute("user");
+      String target_id = userDto.getUser_id() + "";
+      //String target_id = "29";
+      int check = alarmService.alarmcheck(target_id);
+
+      if(check!=0){
+         alarmService.alarmOn(target_id);
+
+      }
+
+      return "redirect:/mypage/mypage.akcord?id="+target_id;
+   }
 
 }

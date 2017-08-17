@@ -158,7 +158,7 @@ var name = "";
                   </div>
                   <div id="collapse-6" class="panel-collapse collapse">
                      <ul>
-                        <li><a href="${root}/mypage/mypage.akcord?id="${user.id}">회원정보 수정</a></li>
+                        <li><a href="${root}/mypage/mypage.akcord">회원정보 수정</a></li>
                         <li><a href="${root}/mypage//myarticle.akcord">내 글 보기</a></li>
                      </ul>
                   </div>  

@@ -18,9 +18,9 @@ public class MyPageServiceImpl implements MyPageService {
    private SqlSession sqlSession;
 
    @Override
-   public UserDto mypage(String id) {
+   public UserDto mypage(String user_id) {
 
-      return sqlSession.getMapper(MyPageDao.class).mypage(id);
+      return sqlSession.getMapper(MyPageDao.class).mypage(user_id);
    }
    @Override
    public int mypagemodify(Map<String, String> map) {

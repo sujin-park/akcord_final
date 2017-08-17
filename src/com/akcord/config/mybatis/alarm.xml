@@ -53,14 +53,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         from alarm
         where target_id like #{target_id}
         and flag = 0
-        order by sysdate
+        
     </select>
     <select id="alarmlist1" parameterType="String" resultType="alarmDto">
         select target_id, key, logtime, sequence_num seq, flag
         from alarm
         where target_id like #{target_id}
         and flag = 1
-        order by sysdate
+        
     </select>
     
     <select id="alarmNoneread" parameterType="String" resultType="int">
@@ -75,8 +75,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         set flag = 1
         where sequence_num = #{sequence_num}
     </update>
-
-
+    
+    <insert id="alarmOff" parameterType="String">
+        insert 
+        into alarm (target_id, key, logtime, sequence_num, flag)
+        values (0, 0, sysdate, 0, #{target_id})
+    </insert>
+    
+    <select id="alarmcheck" parameterType="String" resultType="int">
+        select nvl(max(flag), 0)
+        from alarm
+        where flag = #{target_id}
+    </select>
+    
+    <delete id="alarmOn" parameterType="String">
+        delete alarm
+        where flag = #{target_id}
+    </delete>
+    
+    
     
 </mapper>
-

@@ -8,12 +8,24 @@
 $(document).ready(function() {
 $(document).on('click', '#mymodify', function() {
       var id = document.getElementById("id").value;
-      $(location).attr('href','${root}/mypage/mypagemodify.akcord?id='+id);
+      $('#joinForm').attr('action','${root}/mypage/mypagemodify.akcord').submit();      
    });
 $(document).on('click', '#myArticleBtn', function() {
 
-   $(location).attr('href','${root}/mypage//myarticle.akcord');
+   $(location).attr('href','${root}/mypage/myarticle.akcord');
    });
+   
+$(document).on('click', '#alarmOnBtn', function() {
+    alert("알람이 켜졌습니다.")
+    $(location).attr('href','${root}/alarm/alarmon.akcord');
+ });
+ 
+
+ $(document).on('click', '#alarmOffBtn', function() {
+    alert("알람이 꺼졌습니다.")
+    $(location).attr('href','${root}/alarm/alarmoff.akcord');
+    });
+   
 });
 
 </script>
@@ -28,6 +40,7 @@ $(document).on('click', '#myArticleBtn', function() {
             <form class="form-horizontal" id="joinForm" name="joinForm" method="post" action="">
             <input type="hidden" name="name" value="${user.name}">
             <input type="hidden" name="id" value="${user.id}">
+            <input type="hidden" name="type" value="${user.type}">
             <input type="hidden" name="pg" value="1">
             <input type="hidden" name="key" value="">
             <input type="hidden" name="word" value="">
@@ -162,6 +175,14 @@ $(document).on('click', '#myArticleBtn', function() {
                   </div>
          <div align="right" style="margin-right:50px;">
             <button id="mymodify" type="button" class="btn btn-danger">정보 수정</button>
+                <c:choose>
+                 <c:when test="${user.user_id == alarm}">
+                    <button id="alarmOnBtn" type="button" class="btn btn-danger">알람 켜기</button>
+                 </c:when>
+                 <c:otherwise>
+                    <button id="alarmOffBtn" type="button" class="btn btn-danger">알람 끄기</button>
+                 </c:otherwise>
+             </c:choose>
          </div>
                   
                   

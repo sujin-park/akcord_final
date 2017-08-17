@@ -56,7 +56,7 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 	@Override
 	public void updateHit(String notice_id) {
-		sqlSession.update(notice_id);
+		sqlSession.getMapper(NoticeDao.class).updateHit(notice_id);
 	}
 	
 }

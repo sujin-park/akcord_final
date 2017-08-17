@@ -24,11 +24,11 @@ import com.akcord.user.service.UserService;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-	@Autowired
-	private PollService pollService;
+	
 	@Autowired
 	private UserService userService;
-	
+	@Autowired
+	private PollService pollService;
 	@RequestMapping(value="/join.akcord", method=RequestMethod.GET)
 	public String join(){
 		return "/user/join/join";
@@ -68,11 +68,11 @@ public class UserController {
 	      UserDto userDto = userService.login(map);
 	      List<PollDto> plist = pollService.mainpollget();
 	      List<GroupRoomDto> group_list = null;
-	     /* if(userDto.getType()!=0) { 
+	      if(userDto.getType()!=0) { 
 	         group_list = userService.group(userDto.getUser_id()+"");
-	      }*/
+	      }
 	      if( userDto != null){
-	    	 if(plist!=null){
+	    	 if(plist.size()!=0){
 	         session.setAttribute("plist", plist);
 	         session.setAttribute("psubject",plist.get(0).getSubject());
 	         }
@@ -85,13 +85,12 @@ public class UserController {
 	      return mav;
 	   }
 	
-
-	@RequestMapping("/logout.akcord")
-	public ModelAndView logout(HttpSession session) {
-		ModelAndView mav = new ModelAndView();
-		session.invalidate();
-		mav.setViewName("/user/login/loginmain");
-		return mav;
-	}
+		@RequestMapping(value="/logout.akcord", method=RequestMethod.GET)
+		public ModelAndView logout(HttpSession session){
+			ModelAndView mav = new ModelAndView();
+			session.invalidate();
+			mav.setViewName("/user/login/loginmain");
+			return mav;
+		}
 	
 }
