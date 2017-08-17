@@ -24,7 +24,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                            g.content content, g.g_count gCount, u.name name from users u, grouproom g, major m
                            where u.user_id = g.leader_id and
                            g.major_id = m.major_id
-                           and g.leader_id != #{myseq}
                         <if test="key != '' and word != ''">
                             <if test="key == 'majorName'">
                                 and m.major_name like '%' || #{word} ||'%'

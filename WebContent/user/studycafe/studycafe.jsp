@@ -119,13 +119,12 @@ $(document).ready(function(){
     $("#keyword").val("");
 });
 </script>
-<div class="container akcord">
+<div class="container" style="padding-bottom:20px;">
 	<div class="col-sm-12">
 			<div class="page-header titleinfo">
 				    <h2 id="container"><i class="fa fa-coffee"></i>  &nbsp;<b>STUDY CAFE</b></h2><h5>공부를 할 수 있는 스터디카페를 검색할 수 있습니다.</h5>
 			</div>
-	<div class="col-sm-1"></div>
-	<div id="col-sm-7" class="col-sm-7" align="center">
+	<div id="col-sm-8" class="col-sm-8" align="center">
 		<div class="map_wrap">
 			<div id="map" style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
 		</div>

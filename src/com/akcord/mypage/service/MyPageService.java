@@ -7,22 +7,24 @@ import com.akcord.mypage.model.MypageDto;
 import com.akcord.user.model.UserDto;
 
 public interface MyPageService {
-	
-	UserDto mypage(String id);	// �� ���� ����
-	int mypagemodify(Map<String, String> map);	// �� ���� modify
-	
-	MypageDto myArticle(String user_id);			// �� �۵� ȣ��
-	
-	List<String> groupcheck(int user_id);	// �׷� ���� üũ
-	List<String> groupshare(String group_id);	// �׷� ���� Ȯ�� �� ���� �� ��ȣ
-	Map<String, String> getgroupname(String group_id);	// �׷� �̸� ȣ��
-	
-	List<MypageDto> myArticleSearch(String user_id);			// �� �� �߿� �˻�
-	MypageDto myArticleGo(Map<String, String> map);	// �� ���� �ִ� �Խ������� �̵�
-	
-	int myArticleDeleteReply(int seq);		// �� �� �ٷ� ���� - �亯
-	int myArticleDeleteQna(int seq);		// �� �� �ٷ� ���� - ������
-	int myArticleDeleteShare(int seq, int group_id);		// �� �� �ٷ� ���� - ������
-	
+   
+   UserDto mypage(String id);
+   int mypagemodify(Map<String, String> map);   
+   
+   MypageDto myArticle(String user_id);         
+   
+   List<String> groupcheck(int user_id);   
+   List<String> groupshare(String group_id);   
+
+   List<MypageDto> myArticleSearch(String user_id);         
+   String getgroupname(String myroom_next_id);   // 그룹 이름 가져와요
+   MypageDto myArticleGo(Map<String, String> map);
+   
+   int myArticleDeleteReply(int seq);      
+   int myArticleDeleteQna(int seq);      
+   int myArticleDeleteShare(int seq);      
+   int myArticleDeletechile(int seq);      // 하위 답글 삭제
+   int searchChile(int seq);            // 하위 답글 유무 검색
+   
 
 }

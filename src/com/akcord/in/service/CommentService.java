@@ -7,10 +7,13 @@ import com.akcord.in.model.*;
 
 public interface CommentService {
 	
-	CommentDto getAnswer(int qna_id); //클릭시 질문 글번호 가져오기
-	int answerSave(CommentDto commentDto); //답변 저장
-	List<CommentDto> list(Map<String, String> queryString); //답변 저장 후 리스트 뷰
-	List<ChooseDto> getlist(int qna_id); //클릭시 답변 글번호 가져오기
-	int updateHit(int qna_id); //조회수 업데이트
-	int modify(CommentDto commentDto);//수정
+	CommentDto getQnaAnswer(int qna_comment_id);
+	CommentDto getAnswer(int qna_id);
+	int answerSave(CommentDto commentDto);
+	List<CommentDto> list(Map<String, String> queryString);
+	List<ChooseDto> getlist(int qna_id);
+	int updateHit(int qna_id);
+	int modify(CommentDto commentDto);
+	void deleteQnaAnswer(int qna_comment_id);
+	void deleteAnswerRe(int qna_comment_id);
 }

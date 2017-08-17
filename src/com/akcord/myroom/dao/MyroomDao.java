@@ -23,5 +23,5 @@ public interface MyroomDao {
 	void updateCategory(MyroomDto myroomDto);
 	void deleteCategory(String myroomId);
 	
-	public int getScheduleId(int groupId);
+	public String getScheduleId(int groupId);
 }

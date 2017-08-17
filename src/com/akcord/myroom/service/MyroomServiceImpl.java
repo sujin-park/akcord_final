@@ -101,7 +101,7 @@ public class MyroomServiceImpl implements MyroomService {
 	}
 
 	@Override
-	public int getScheduleId(int groupId) {
+	public String getScheduleId(int groupId) {
 		return sqlSession.getMapper(MyroomDao.class).getScheduleId(groupId);
 	}
 

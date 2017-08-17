@@ -48,6 +48,10 @@ public class CommonServiceImpl implements CommonService {
 			totalArticleCount = sqlSession.getMapper(CommonDao.class).totalWaitCount(query);
 		} else if (type.equals("origin")) {
 			totalArticleCount = sqlSession.getMapper(CommonDao.class).totalOriginCount(query);
+		} else if(type.equals("in")) {
+			totalArticleCount = sqlSession.getMapper(CommonDao.class).totalInListCount(query);
+		} else if(type.equals("inReply")) {
+			totalArticleCount = sqlSession.getMapper(CommonDao.class).totalInReplyListCount(query);
 		}
 
 

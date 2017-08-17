@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.akcord.main.rank.dao.RankDao">
     
     <select id="getQna" resultType="rankDto">
-        select subject, hit, qna_id id
+        select substr(subject,1,15) || '...' subject, hit, qna_id id
         from qna
         order by hit desc
     </select>
@@ -24,14 +24,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <select id="getMyroom" resultType="rankDto">
-        select subject, hit, myroom_id id
+        select substr(subject,1,15) || '...' subject, nvl(hit,0) hit, myroom_id id
         from myroom_next
         where is_share = 1
         order by hit desc
     </select>
     
     <select id="getGroupname" parameterType="String" resultType="String">
-        select group_name subject
+        select substr(group_name,1,15) || '...'  subject
         from grouproom
         where group_id = #{id}
     </select>

@@ -4,28 +4,11 @@
 <link rel="stylesheet" type="text/css" href="${root}/common/css/menuresponse.css">
 <div class="container">
 	<div class="rank">
-		<div class="row">
-	        <div class="col-sm-12">
-	          <h2 align="center">Ranking</h2>
-	        </div>
-	   </div>
+		<div style="border-bottom:1px solid #eee;">
+	          <h2 align="center"><b>Ranking</b></h2>
+	      </div>
 	</div>
 <%@include file="/common/template/rankbar.jsp" %>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 
     <div id="myCarousel" class="carousel slide container" data-ride="carousel" style="margin-bottom:20px;">
   <!-- Indicators -->

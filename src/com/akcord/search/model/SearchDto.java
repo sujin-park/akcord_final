@@ -11,6 +11,14 @@ public class SearchDto {
 	private String description;
 	private String bloggername;
 	private String bloggerlink;
+	private int count;
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
 
 	public String getPostdate() {
 		return postdate;

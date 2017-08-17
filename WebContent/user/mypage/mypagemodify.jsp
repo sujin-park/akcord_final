@@ -141,15 +141,13 @@ function appendDay(){
 
 </script>
 <!-- 회원가입 Modal-->
-<div >
-   <div style="width: 33%;" class="container">
-      
+ 	<div class="container akcord">
+		<div class="col-sm-12">
+				<div class="page-header titleinfo">
+					    <h2 id="container"><i class="fa fa-comments"></i>  &nbsp;<b>GROUP LIST</b></h2><h5>그룹원들과 소통하며 일정을 효율적으로 관리할 수 있습니다.</h5>
+				</div>
       <div>
       <!-- Modal content-->
-      <div >
-         <div >
-            <h4 ><img src="${root}/doc/img/join.jpg" style="width: 100%"></h4>
-         </div>
          <div >
             <form class="form-horizontal" id="joinForm" name="joinForm" method="post" action="">
                <fieldset>
@@ -294,4 +292,3 @@ function appendDay(){
          </div>
       </div>
    </div>
-</div>

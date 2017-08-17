@@ -16,13 +16,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.akcord.group.model.GroupRoomDto;
+import com.akcord.main.poll.model.PollDto;
+import com.akcord.main.poll.service.PollService;
 import com.akcord.user.model.UserDto;
 import com.akcord.user.service.UserService;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
-	
+	@Autowired
+	private PollService pollService;
 	@Autowired
 	private UserService userService;
 	
@@ -59,23 +62,26 @@ public class UserController {
 	}
 	
 	@RequestMapping(value= "/login.akcord", method=RequestMethod.POST)
-	public ModelAndView login(@RequestParam Map<String, String> map, HttpSession session){
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("/user/login/loginfail");
-		UserDto userDto = userService.login(map);
-		List<GroupRoomDto> group_list = null;
-		if(userDto.getType()!=0) { 
-			group_list = userService.group(userDto.getUser_id()+"");
-		}
-		if( userDto != null){
-			session.setAttribute("user", userDto);
-			session.setAttribute("group_list", group_list);
-			mav.setViewName("/index");
-			//redirect로 해도 상관없음. String으로 리턴을 해서 
-			//ModelAndView는 request와 같기때문에 한번 받아오면 그 다음 페이지부터 유지할수 없음.
-		}
-		return mav;
-	}
+	   public ModelAndView login(@RequestParam Map<String, String> map, HttpSession session){
+	      ModelAndView mav = new ModelAndView();
+	      mav.setViewName("/user/login/loginfail");
+	      UserDto userDto = userService.login(map);
+	      List<PollDto> plist = pollService.mainpollget();
+	      List<GroupRoomDto> group_list = null;
+	     /* if(userDto.getType()!=0) { 
+	         group_list = userService.group(userDto.getUser_id()+"");
+	      }*/
+	      if( userDto != null){
+	         session.setAttribute("plist", plist);
+	         session.setAttribute("psubject",plist.get(0).getSubject());
+	         session.setAttribute("user", userDto);
+	         session.setAttribute("group_list", group_list);
+	         mav.setViewName("/index");
+	         //redirect로 해도 상관없음. String으로 리턴을 해서 
+	         //ModelAndView는 request와 같기때문에 한번 받아오면 그 다음 페이지부터 유지할수 없음.
+	      }
+	      return mav;
+	   }
 	
 
 	@RequestMapping("/logout.akcord")

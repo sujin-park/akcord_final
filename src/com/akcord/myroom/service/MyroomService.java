@@ -22,5 +22,5 @@ public interface MyroomService {
 	void updateCategory(MyroomDto myroomDto); //카테고리 수정
 	void deleteCategory(String myroomId); //카테고리 삭제
 	
-	int getScheduleId(int groupId);
+	String getScheduleId(int groupId);
 }

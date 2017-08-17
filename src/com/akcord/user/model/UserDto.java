@@ -16,7 +16,7 @@ public class UserDto {
 	private int tel1;
 	private int tel2;
 	private int tel3;
-	private int zipcode;
+	private String zipcode;
 	private String addr1;
 	private String addr2;
 	private int is_block;
@@ -133,11 +133,11 @@ public class UserDto {
 		this.tel3 = tel3;
 	}
 
-	public int getZipcode() {
+	public String getZipcode() {
 		return zipcode;
 	}
 
-	public void setZipcode(int zipcode) {
+	public void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
 	}
 

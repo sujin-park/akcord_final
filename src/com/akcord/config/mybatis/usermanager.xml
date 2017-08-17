@@ -7,42 +7,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="getUserList" parameterType="java.util.Map" resultType="userManageDto">
         select b.*
         from(
-                select rownum rn,a.* 
-                from(
-                        select user_id,id,name,m.major_name,tel1,tel2,tel3,reg_date,is_block
-                        from users u,major m 
-                        where m.major_id=u.major_id 
-                        and is_block=0
-                        <if test="key!=''and word!=''">
-                            <choose>
-                                <when test="key=='snum'">
-                                    and u.tel3 like '%'||#{word}||'%'
-                                </when>
-                                <when test="key=='sname'">
-                                    and u.name = #{word}
-                                </when>
-                                <when test="key=='sid'">
-                                    and u.id = #{word}
-                                </when>
-                            </choose>
-                       </if>
+        select rownum rn,a.* 
+        from(
+        select user_id,id,name,m.major_name,tel1,tel2,tel3,reg_date,is_block,gender
+        from users u,major m 
+        where m.major_id=u.major_id 
+        and is_block=0
+        <if test="key!=''and word!=''">
+            <choose>
+                <when test="key=='snum'">
+                    and u.tel3 like '%'||#{word}||'%'
+                </when>
+                <when test="key=='sname'">
+                    and u.name = #{word}
+                </when>
+                <when test="key=='sid'">
+                    and u.id = #{word}
+                </when>
+            </choose>
+        </if>
         
-                        <if test="memberskey!=null">
-                            <choose>
-                                <when test="memberskey == 1">
-                                    order by u.reg_date asc) a
-                                </when>
-                                <when test="memberskey == 2">
-                                    order by u.name desc)a
-                                </when>
-                                <otherwise>
-                                    order by u.user_id desc)a
-                                </otherwise>                                
-                            </choose>
-                        </if>
-                        <if test="memberskey==null">
-                            order by u.id desc)a
-                        </if>     
+        <if test="memberskey!=null">
+            <choose>
+                <when test="memberskey == 1">
+                    order by u.reg_date asc) a
+                </when>
+                <when test="memberskey == 2">
+                    order by u.name desc)a
+                </when>
+                <otherwise>
+                    order by u.user_id desc)a
+                </otherwise>                                
+            </choose>
+        </if>
+        <if test="memberskey==null">
+            order by u.id desc)a
+        </if>     
         where rownum &lt;= #{end}
         ) b
         where b.rn &gt; #{start}
@@ -51,7 +51,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <select id="getBlackUserList" parameterType="java.util.Map" resultType="userManageDto">
         select b.*
-        from(select rownum rn,a.* from(select user_id,id,name,m.major_name,tel1,tel2,tel3,reg_date,is_block
+        from(select rownum rn,a.* from(select user_id,id,name,m.major_name,tel1,tel2,tel3,reg_date,is_block,gender
         from users u,major m where m.major_id=u.major_id and is_block=1
         <if test="key!=''and word!=''">
             <choose>
@@ -104,5 +104,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <delete id="bUserOut" parameterType="String">
         delete from users where user_id=#{user_id}   
     </delete>
-
+    
 </mapper>

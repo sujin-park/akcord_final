@@ -24,4 +24,7 @@ public interface CommonDao {
 	
 
 	int totalPollListCount(Map<String, String> query);
+	
+	int totalInListCount(Map<String, String> query);
+	int totalInReplyListCount(Map<String, String> query);
 }

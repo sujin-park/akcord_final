@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         zipcode, addr1, addr2,
         is_block
         from users
-        where id = #{id}
+        where user_id = #{user_id}
     </select>
     
     <update id="mypagemodify" parameterType="java.util.Map">
@@ -23,7 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         birth1 =  #{birth1}, birth2 =  #{birth2}, birth3 =  #{birth3},
         tel1 =  #{tel1}, tel2 =  #{tel2}, tel3 =  #{tel3},
         zipcode = #{zipcode}, addr1 = #{addr1}, addr2 = #{addr2}
-        where id =  #{id}
+        where user_id =  #{id}
     </update>
     
     <select id="myArticleSearch" parameterType="String" resultType="mypageDto">
@@ -57,8 +57,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where gropu_id = #{group_id}
     </select>
     
-    <select id="getgroupname" parameterType="String" resultType="java.util.Map">
-        select group_id, group_name
+    <select id="getgroupname" parameterType="String" resultType="String">
+        select group_name
         from grouproom
         where group_id =  (select gh.group_id
         from grouproom_hw gh, schedule sc
@@ -78,8 +78,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <delete id="myArticleDeleteShare">
         delete grouproom_hw
-        where myroom_next_id = #{seq}
-        and group_id = #{id}
+        where group_id = (select gh.group_id
+        from grouproom_hw gh, schedule sc
+        where gh.schedule_id = sc.schedule_id
+        and myroom_next_id = #{seq})
     </delete>
+    
+    <delete id="myArticleDeletechile">
+        delete qna_comment
+        where qna_id = #{seq}
+    </delete>
+    
+    <select id="searchChile" resultType="int">
+        select count(qna_comment_id)
+        from qna_comment
+        where qna_id = #{seq} 
+    </select>
     
 </mapper>

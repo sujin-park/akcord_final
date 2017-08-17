@@ -78,6 +78,7 @@ public class MyroomController {
 		pageNavigation.setRoot("/akcord_project");
 		pageNavigation.setNavigator();
 		mav.addObject("navigator", pageNavigation);
+		query.put("major_id", query.get("key"));
 		mav.addObject("query", query);
 		mav.setViewName("/user/myroom/myroomlist");
 		return mav;
@@ -128,10 +129,15 @@ public class MyroomController {
 		myroomNextDto.setSubject(query.get("subject"));
 		myroomNextDto.setContent(query.get("content"));
 		myroomNextDto.setIsShare(Integer.parseInt(query.get("isShare")));
-		myroomNextDto.setGroupId(Integer.parseInt(query.get("groupId")));
-		// 여기서 일정 가져오기 
-		int scheduleId = myroomService.getScheduleId(Integer.parseInt(query.get("groupId")));
-		myroomNextDto.setScheduleId(scheduleId);
+		
+		if(Integer.parseInt(query.get("groupId")) != 0) {
+			myroomNextDto.setGroupId(Integer.parseInt(query.get("groupId")));
+			// 여기서 일정 가져오기 
+			String scheduleId = myroomService.getScheduleId(Integer.parseInt(query.get("groupId")));
+			if(scheduleId != null) {
+				myroomNextDto.setScheduleId(scheduleId);
+			}
+		}
 		if(num.equals("100")) {
 			myroomService.insertArticle(myroomNextDto);
 			int myroomNextId = myroomNextDto.getMyroomNextId();

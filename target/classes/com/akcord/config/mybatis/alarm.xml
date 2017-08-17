@@ -49,14 +49,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </insert>
     
     <select id="alarmlist0" parameterType="String" resultType="alarmDto">
-        select target_id, key, logtime, sequence_num, flag
+        select target_id, key, logtime, sequence_num seq, flag
         from alarm
         where target_id like #{target_id}
         and flag = 0
         order by sysdate
     </select>
     <select id="alarmlist1" parameterType="String" resultType="alarmDto">
-        select target_id, key, logtime, sequence_num, flag
+        select target_id, key, logtime, sequence_num seq, flag
         from alarm
         where target_id like #{target_id}
         and flag = 1

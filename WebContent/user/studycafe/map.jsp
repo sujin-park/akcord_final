@@ -4,9 +4,12 @@
 <%@include file="/common/template/nav.jsp"%>
 <%@include file="/user/studycafe/searchForm.jsp"%>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ce7904fc14ee11cd832eb0acb92d2713&libraries=services"></script>
-<div class="container akcord" style="padding-bottom:30px;">
-	<div class="col-sm-1"></div>
-	<div class="col-sm-7" align="center">
+<div class="container">
+	<div class="col-sm-12"  style="padding-bottom:20px;">
+			<div class="page-header titleinfo">
+				    <h2 id="container"><i class="fa fa-coffee"></i>  &nbsp;<b>STUDY CAFE</b></h2><h5>공부를 할 수 있는 스터디카페를 검색할 수 있습니다.</h5>
+			</div>
+	<div class="col-sm-8" align="center">
 		<div class="map_wrap">
 			<div id="map" style="width: 100%; height: 100%; position: relative; overflow: hidden;">
 				<input type="hidden" id="X" name="X" value="${X}">
@@ -21,6 +24,7 @@
 			</li>
     	</ul>
 	</div>
+</div>
 </div>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ce7904fc14ee11cd832eb0acb92d2713&libraries=services"></script>
 <script>

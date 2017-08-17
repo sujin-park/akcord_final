@@ -36,6 +36,14 @@ $(document).ready(function() {
 		$('#major_id').val('${queryString.major_id}');
 		$('#commonForm').attr('action', '${root}/in/list.akcord').submit();
 	});
+	
+	$('#replyCount').click(function() {
+		$(location).attr('href', '${root}/in/replyCountList.akcord?pg=1&ch=1');
+	});
+	
+	$('#viewCount').click(function() {
+		$(location).attr('href', '${root}/in/replyCountList.akcord?pg=1&ch=2');
+	});
 });
 </script>
 
@@ -83,8 +91,8 @@ $(document).ready(function() {
 
 			<!-- 답변수, 조회수 정렬 -->
 			<div class="col-xs-10 form-group">
-				<a href="" class="col-sm-2" style="height: 10px; font-size: 12px;">답변수</a>
-				<a href="" class="col-sm-2" style="height: 10px; font-size: 12px;">조회수</a>
+				<a href="#" class="col-sm-2" style="height: 10px; font-size: 12px;" id="replyCount">답변수</a>
+				<a href="#" class="col-sm-2" style="height: 10px; font-size: 12px;" id="viewCount">조회수</a>
 			</div>
 
 			<!-- 리스트 -->
@@ -97,14 +105,14 @@ $(document).ready(function() {
 								<label class="media-heading col-sm-6" style="font-size: 11px;">
 									<p overflow:hidden;>${inDto.subject}</p></label>
 								<label class="media-heading col-sm-3" style="font-size: 11px;">&nbsp;</label>
-								<label class="media-heading col-sm-3" style="font-size: 11px;">아이디 : ${user.id }</label><br>
+								<label class="media-heading col-sm-3" style="font-size: 11px;">아이디 : ${inDto.id}</label><br>
 								<div class="col-sm-12" style="height: 40px; width: 100%; text-overflow: ellipsis; font-size: 10px;">
 									<p class="media-body">${inDto.content}</p>
 								</div>
 							</div>
 							<div class="media-heading col-sm-10" style="font-size: 11px;">
 								<label class="col-sm-6">${inDto.reg_date}</label>
-								<label class="col-sm-3">답글수 : ${inDto.commentcnt}</label>
+								<label class="col-sm-3">답변수 : ${inDto.commentcnt}</label>
 								<label class="col-sm-3">조회수 : ${inDto.hit}</label>
 							</div>
 							<hr class="col-sm-11">

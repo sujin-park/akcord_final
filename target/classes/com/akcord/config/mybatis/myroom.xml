@@ -11,63 +11,76 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="myroomList" parameterType="hashmap" resultType="myroomNextDto">
         select b.*
         from(select rownum rn, a.*
-            from(
-                select myroom_next_id myroomNextId, myroom_id myroomId, user_id, subject, content, reg_date, update_date, is_share isShare
-                from myroom_next
-                where user_id=#{user_id}
-                order by update_date desc
-                ) a
-            where rownum &lt;= #{end}
-            ) b
+        from(
+        select myroom_next_id myroomNextId, myroom_id myroomId, user_id, subject, content, reg_date, update_date, is_share isShare
+        from myroom_next
+        where user_id=#{user_id}
+        order by update_date desc
+        ) a
+        where rownum &lt;= #{end}
+        ) b
         where b.rn &gt; #{start}
     </select>
     
     <select id="choiceSectionList" parameterType="hashmap" resultType="myroomNextDto">
         select b.*
         from(select rownum rn, a.*
-            from(
-                select myroom_next_id myroomNextId, myroom_id myroomId, user_id, subject, content, reg_date, update_date, is_share isShare
-                from myroom_next
-                where user_id=#{user_id} and myroom_id=#{myroomId}
-                order by update_date desc
-                ) a
-            where rownum &lt;= #{end}
-            ) b
+        from(
+        select myroom_next_id myroomNextId, myroom_id myroomId, user_id, subject, content, reg_date, update_date, is_share isShare
+        from myroom_next
+        where user_id=#{user_id} and myroom_id=#{myroomId}
+        order by update_date desc
+        ) a
+        where rownum &lt;= #{end}
+        ) b
         where b.rn &gt; #{start}
     </select>
     
     <select id="searchList" parameterType="hashmap" resultType="myroomNextDto">
         select b.*
         from(select rownum rn, a.*
-            from(
-                select myroom_next_id myroomNextId, myroom_id myroomId, user_id, subject, content, reg_date, update_date, is_share isShare
-                from myroom_next
-                where user_id=#{user_id}
-            <if test="key == '전체'">
-                and content like '%' || #{word} ||'%'
-            </if>
-            <if test="key != '전체'">
-                and myroom_id=#{key} and content like '%' || #{word} ||'%'
-            </if>
-                order by update_date desc
-                ) a
-            where rownum &lt;= #{end}
-            ) b
+        from(
+        select myroom_next_id myroomNextId, myroom_id myroomId, user_id, subject, content, reg_date, update_date, is_share isShare
+        from myroom_next
+        where user_id=#{user_id}
+        <if test="key == '전체'">
+            and content like '%' || #{word} ||'%'
+        </if>
+        <if test="key != '전체'">
+            and myroom_id=#{key} and content like '%' || #{word} ||'%'
+        </if>
+        order by update_date desc
+        ) a
+        where rownum &lt;= #{end}
+        ) b
         where b.rn &gt; #{start}
     </select>
     
     <select id="groupNameList" parameterType="String" resultType="groupRoomDto">
-        select g.group_id groupId, group_name groupName from grouproom_list l, grouproom g 
-        where l.group_id=g.group_id and l.user_id=#{user_id}
+        <!--select g.group_id groupId, group_name groupName
+        from grouproom_list l, grouproom g 
+        where l.group_id=g.group_id and l.user_id=#{user_id} and is_accept=1-->
+        select g.group_id groupId, group_name groupName
+        from grouproom_list l, grouproom g, schedule s
+        where l.group_id=g.group_id and g.group_id=s.group_id
+        and l.user_id=#{user_id} and is_accept=1
+        and sysdate &gt; = start_date and sysdate &lt; = end_date
     </select>
     
     <insert id="insertArticle" parameterType="myroomNextDto">
-        insert all
-        into myroom_next(myroom_next_id, myroom_id, user_id, subject, content, reg_date, update_date, is_share)
-        values(SEQ_MYROOM_NEXT_ID.nextval, #{myroomId}, #{user_id}, #{subject}, #{content}, sysdate, sysdate, #{isShare})
-        into grouproom_hw values(SEQ_MYROOM_NEXT_ID.currval, #{groupId}, #{scheduleId})
-        select * from dual
-        <selectKey  keyProperty="myroomNextId" resultType="Integer" order="AFTER"> SELECT SEQ_MYROOM_NEXT_ID.currval FROM dual </selectKey>
+        <if test="groupId == 0">
+            insert into myroom_next(myroom_next_id, myroom_id, user_id, subject, content, reg_date, update_date, is_share)
+            values(SEQ_MYROOM_NEXT_ID.nextval, #{myroomId}, #{user_id}, #{subject}, #{content}, sysdate, sysdate, #{isShare})
+        </if>
+        <if test="groupId != 0">
+            insert all
+            into myroom_next(myroom_next_id, myroom_id, user_id, subject, content, reg_date, update_date, is_share)
+            values(SEQ_MYROOM_NEXT_ID.nextval, #{myroomId}, #{user_id}, #{subject}, #{content}, sysdate, sysdate, #{isShare})
+            into grouproom_hw
+            values(SEQ_MYROOM_NEXT_ID.currval, #{groupId}, #{scheduleId})
+            select * from dual
+        </if>
+        <!--<selectKey  keyProperty="myroomNextId" resultType="Integer" order="AFTER"> SELECT SEQ_MYROOM_NEXT_ID.currval FROM dual </selectKey>-->
     </insert>
     
     <select id="getMyroomNextId" resultType="int">
@@ -75,9 +88,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <select id="selectArticle" parameterType="String" resultType="myroomNextDto">
-        select m.myroom_next_id myroomNextId, myroom_id myroomId, user_id, subject, content, reg_date, update_date, is_share isShare, g.group_id groupId
-        from myroom_next m, grouproom_hw g
-        where m.myroom_next_id=g.myroom_next_id and m.myroom_next_id=#{myroomNextId}
+        select m.myroom_next_id myroomNextId, myroom_id myroomId, user_id, subject, content, reg_date, update_date, is_share isShare
+        from myroom_next m
+        where myroom_next_id = #{myroom_next_id}
     </select>
     
     <update id="updateMyAtricle" parameterType="myroomNextDto">
@@ -107,7 +120,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         delete from myroom where myroom_id=#{myroomId}
     </delete>
     
-    <select id="getScheduleId" parameterType="int" resultType="int">
-        select min(schedule_id) from schedule where sysdate &gt;= start_date and sysdate &lt;= end_date and group_id=#{groupId}
+    <select id="getScheduleId" parameterType="int" resultType="String">
+        select min(schedule_id)
+        from schedule 
+        where sysdate &gt; = start_date and sysdate &lt; = end_date and group_id=#{groupId}
     </select>
 </mapper>

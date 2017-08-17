@@ -37,7 +37,7 @@
 							</tr>
 							<tr align="center">
 								<td><strong>내용</strong></td>
-								<td colspan="3">${groupHwDto.mycontent}</td>
+								<td colspan="3" >${groupHwDto.mycontent}</td>
 	                            <td></td>
 							</tr>
 						</table>
@@ -47,4 +47,3 @@
 		</div>
 	</div>
 	</div>
- <%@include file="/common/template/footer.jsp"%>

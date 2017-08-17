@@ -9,85 +9,90 @@ var name = "";
 	$(document).ready(function() {
 	    
 	    
-		$.ajax({
-			type : 'GET',
-			dataType : 'json',
-			url : '${root}/alarm/alarm.akcord',
-			//data : {'data', data},
+		  $.ajax({
+		         type : 'GET',
+		         dataType : 'json',
+		         url : '${root}/alarm/alarm.akcord',
+		         //data : {'data', data},
 
-			success : function(data) {
-				//getHidden(data);
+		         success : function(data) {
+		            //getHidden(data);
 
-				setVal(data);
-				listCall(data)
-			}
+		            setVal(data);
+		            listCall(data)
+		         }
 
-		});
+		      });
 
-	});
+		   });
 
-	function setVal(data) {
-		nr = data.nr;
-		name = data.name;
-		$('.badge').text(nr);
-		$('#username').text(name);
-	}
-	
-	function listCall(data) {
-		var resultView = $('.dropdown');
-		// 콜랩스 디브 시작부분
-		output += '<ul class="dropdown-menu dropdown" style="right:0; left:unset;">';
-		output += '<li><a href="#">내용</a></li>';
+		   function setVal(data) {
+		      nr = data.nr;
+		      name = data.name;
+		      $('#username').text(name);
+		      $('.badge').text(nr);
+		   }
+		   
+		   function listCall(data) {
+		      var resultView = $('.dropdown-menu');
+		      // 콜랩스 디브 시작부분
+		     // output += '<a href="#"  class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-bell fa-2x" style="color: #d34e4c;"></span><span class="badge"></span></a>';
+		      //output += '<ul class="dropdown-menu dropdown" style="right:0; left:unset;">';
 
-		for (var i = 0; i < data.list0.length; i++) {
-			if(data.list0[i].key == 1){
-				output += '<li><a href="#">';
-				output += '그룹에 초대되었습니다';
-				output += '</a></li>';
-				
-			} else if(data.list0[i].key == 2){
-				output += '<li><a href="#">';
-				output += '그룹에 가입되었습니다!';
-				output += '</a></li>';
-			} else if(data.list0[i].key == 3){
-				output += '<li><a href="#">';
-				output += '레코더에 답변이 등록되었습니다!';
-				output += '</a></li>';
-			} else if(data.list0[i].key == 4){
-				output += '<li><a href="#">';
-				output += '레코더에 덧글이 달렸습니다.';
-				output += '</a></li>';
-			} else if(data.list0[i].key == 5){
-				output += '<li><a href="#">';
-				output += '레코더에 좋아요가 표시되었습니다';
-				output += '</a></li>';
-			} else if(data.list0[i].key == 6){
-				output += '<li><a href="#">';
-				output += '레코더에 싫어요가 표시되었습니다ㅠ';
-				output += '</a></li>';
-			} else if(data.list0[i].key == 7){
-				output += '<li><a href="#">';
-				output += '공지사항이 등록되었습니다.';
-				output += '</a></li>';
-			} else {
-				output += '<li><a href="#">';
-				output += '서버에 오류가 발생했습니다.';
-				output += '</a></li>';
-			}
-		}
-		
-		output += '<li><a href="#">About Us</a></li></ul>';
+		        if(data.list0.length == 0){
+		               output += '<li><a href="#">';
+		                output += '등록된 알람이 없습니다.';
+		                output += '</a></li>';
+		            }
+		        
+		      for (var i = 0; i < data.list0.length; i++) {
+		         if(data.list0[i].key == 1){
+		            output += '<li><a href="${root}/alarm/delete.akcord?seq='+data.list0[i].seq+'&key='+data.list0[i].key+'">';
+		            output += '그룹에 초대되었습니다';
+		            output += '</a></li>';
+		            
+		         } else if(data.list0[i].key == 2){
+		            output += '<li><a href="${root}/alarm/delete.akcord?seq='+data.list0[i].seq+'&key='+data.list0[i].key+'">';
+		            output += '그룹에 가입되었습니다!';
+		            output += '</a></li>';
+		         } else if(data.list0[i].key == 3){
+		            output += '<li><a href="${root}/alarm/delete.akcord?seq='+data.list0[i].seq+'&key='+data.list0[i].key+'">';
+		            output += '레코더에 답변이 등록되었습니다!';
+		            output += '</a></li>';
+		         } else if(data.list0[i].key == 4){
+		            output += '<li><a href="${root}/alarm/delete.akcord?seq='+data.list0[i].seq+'&key='+data.list0[i].key+'">';
+		            output += '레코더에 덧글이 달렸습니다.';
+		            output += '</a></li>';
+		         } else if(data.list0[i].key == 5){
+		            output += '<li><a href="${root}/alarm/delete.akcord?seq='+data.list0[i].seq+'&key='+data.list0[i].key+'">';
+		            output += '레코더에 좋아요가 표시되었습니다';
+		            output += '</a></li>';
+		         } else if(data.list0[i].key == 6){
+		            output += '<li><a href="${root}/alarm/delete.akcord?seq='+data.list0[i].seq+'&key='+data.list0[i].key+'">';
+		            output += '레코더에 싫어요가 표시되었습니다ㅠ';
+		            output += '</a></li>';
+		         } else if(data.list0[i].key == 7){
+		            output += '<li><a href="${root}/alarm/delete.akcord?seq='+data.list0[i].seq+'&key='+data.list0[i].key+'">';
+		            output += '공지사항이 등록되었습니다.';
+		            output += '</a></li>';
+		         } else {
+		            output += '<li><a href="#">';
+		            output += '서버에 오류가 발생했습니다.';
+		            output += '</a></li>';
+		         }
+		      }
+		      
+		      resultView.empty();
+		      resultView.append(output);
+		   }
 
-		resultView.empty();
-		resultView.append(output);
-	}
+		$(function(){
+		   $('#toggleSidebar').on('click', function(){
+		      $('#sidebar').toggleClass('on');
+		   })
+		})
+		</script>
 
-$(function(){
-	$('#toggleSidebar').on('click', function(){
-		$('#sidebar').toggleClass('on');
-	})
-})
-</script>
 
 <body>
 <div class="headline">
@@ -98,11 +103,8 @@ $(function(){
  			<div class="panel-heading" style="padding-left: 30%;">
 			</div>
 			<div id="collapse-1" class="panel-collapse collapse in">
-				<div class="input-group">
-					<input type="text" class="form-control" placeholder="단어를 입력해주세요">
-					<span class="input-group-btn">
-						<button class="btn btn-danger" type="button">SEARCH</button>
-					</span>
+				<div style="padding-left:70%">
+						<a href="${root}/user/logout.akcord"><i class="fa fa-sign-out" style="text-decoration:none;" ></i>LOGOUT</a>
 				</div>
 				<ul class="list-group">
                <li class="list-group-item">
@@ -151,9 +153,15 @@ $(function(){
                   </div>
                   <div class="list-heading1">
                      <h4 class="list-title" style="padding-top:20px;"> 
-                        <a href="${root}/mypage/mypage.akcord?id="${user.id}><i class="fa fa-id-badge"></i>&nbsp; MY PAGE</a>
+                        <a href="#collapse-6"  a data-toggle="collapse"><i class="fa fa-id-badge"></i>&nbsp; MY PAGE</a>
                      </h4>
-                  </div> 
+                  </div>
+                  <div id="collapse-6" class="panel-collapse collapse">
+                     <ul>
+                        <li><a href="${root}/mypage/mypage.akcord?id="${user.id}">회원정보 수정</a></li>
+                        <li><a href="${root}/mypage//myarticle.akcord">내 글 보기</a></li>
+                     </ul>
+                  </div>  
                   <div class="list-heading">
                      <h4 class="list-title">
                         <a href="#collapse-3" a data-toggle="collapse"><i class="fa fa-cog fa-fw"></i>&nbsp;관리</a>
@@ -176,7 +184,7 @@ $(function(){
 		<div class="container-head">
 			<div class="container">
 				<%-- <a href="#;" id="toggleSidebar"><img alt="" src="${root}/doc/img/icon.png" height="35" width="35"></a> --%>
-				<a href="#" id="toggleSidebar" style="text-decoration:none"><i class="fa fa-gear fa-2x" style="color:#888;"></i></a>
+				<a href="#" id="toggleSidebar" style="text-decoration:none"><i class="fa fa-gear fa-2x"></i></a>
 				<a href="${root}/index.jsp" class="logo" >Akashic Records</a>
 				<div class="c_03 c pull-right">
 					<div class="dropdown" style="width:100px;">

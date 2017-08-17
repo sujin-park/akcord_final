@@ -54,7 +54,6 @@ $(document).ready(function(){
 			</div>	
 			</form>
 			<fieldset>
-
 		</div>
 	</div>
 <!-- 회원가입 모달 -->

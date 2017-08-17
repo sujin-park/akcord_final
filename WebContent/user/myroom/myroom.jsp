@@ -55,11 +55,16 @@ $(document).ready(function() {
 	
 	$('#resetBtn').click(function() {
 		var myroomId = $('.myroomId1').val();
-		$(location).attr('href', "${root}/myroom/myroomlist.akcord?ch=2&myroomId=${query.myroomId1}&pg=1");
+		$(location).attr('href', "${root}/myroom/myroomlist.akcord?ch=2&myroomId="+myroomId+"&pg=1");
 	});
 		
 	$('#registerBtn').click(function() {
-		$('#pageform').attr('action', '${root}/myroom/write.akcord?num=100').submit();
+		//if('${scheduleId}' == null) {			
+		//	alert("과제 제출일이 존재하지 않습니다.");
+		//	return;
+		//} else {
+			$('#pageform').attr('method', 'POST').attr('action', '${root}/myroom/write.akcord?num=100').submit();
+		//}
 	});
 	
 	$('#modifyBtn').click(function() {
@@ -133,9 +138,11 @@ $(document).ready(function() {
 							<select id="groupId" name="groupId">
 								<option value="0">----------</option>
 								<c:set var="groupId" value="${myroomNextDto.groupId}" />
+								<c:if test="${groupNameList != null}">
 								<c:forEach var="grouproomDto" items="${groupNameList}">
 									<option value="${grouproomDto.groupId}" ${groupId == grouproomDto.groupId?'selected="selected"':''}>${grouproomDto.groupName}</option>
 								</c:forEach>
+								</c:if>
 							</select>
 						</div>
 						<div align="center" id="btnMouseDiv">

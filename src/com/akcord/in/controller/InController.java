@@ -60,6 +60,48 @@ public class InController {
 		mav.setViewName("/user/in/inmain"); // 받아온걸 페이지로 준다.
 		return mav;
 	}
+	
+	@RequestMapping("/replyCountList.akcord")
+	public ModelAndView replyCountList(HttpSession session, @RequestParam Map<String, String> queryString) {
+		ModelAndView mav = new ModelAndView();
+		UserDto userDto = (UserDto) session.getAttribute("user");
+
+		List<InDto> inlist = inService.replyCountList(queryString);
+		List<MajorDto> majorlist = inService.majorlist();
+		mav.addObject("majorlist", majorlist);
+		mav.addObject("inlist", inlist);
+
+		mav.addObject("queryString", queryString);
+
+		queryString.put("type", "inReply");
+		PageNavigation pageNavigation = commonService.makePageNavigation(queryString);
+		pageNavigation.setRoot("/akcord_project");
+		pageNavigation.setNavigator();
+		mav.addObject("navigator", pageNavigation);
+		mav.setViewName("/user/in/inmain"); // 받아온걸 페이지로 준다.
+		return mav;
+	}
+	
+	@RequestMapping("/hitCountList.akcord")
+	public ModelAndView hitCountList(HttpSession session, @RequestParam Map<String, String> queryString) {
+		ModelAndView mav = new ModelAndView();
+		UserDto userDto = (UserDto) session.getAttribute("user");
+
+		List<InDto> inlist = inService.replyCountList(queryString);
+		List<MajorDto> majorlist = inService.majorlist();
+		mav.addObject("majorlist", majorlist);
+		mav.addObject("inlist", inlist);
+
+		mav.addObject("queryString", queryString);
+
+		queryString.put("type", "inReply");
+		PageNavigation pageNavigation = commonService.makePageNavigation(queryString);
+		pageNavigation.setRoot("/akcord_project");
+		pageNavigation.setNavigator();
+		mav.addObject("navigator", pageNavigation);
+		mav.setViewName("/user/in/inmain"); // 받아온걸 페이지로 준다.
+		return mav;
+	}
 
 	//질문하기 버튼 클릭
 	@RequestMapping(value = "/question.akcord", method = RequestMethod.GET)
@@ -94,10 +136,12 @@ public class InController {
 			int cnt = commentService.updateHit(qna_id); //조회수 증가
 			CommentDto commentDto2 = commentService.getAnswer(qna_id); //질문뷰
 			list = commentService.getlist(qna_id); //답변 리스트
+			List<ChooseDto> good_or_badList = inService.good_or_badAllSelect(qna_id+"");
 			List<ReplyDto> replyList = inService.replyList(qna_id); //댓글 리스트
 			mav.addObject("hit", cnt);
 			mav.addObject("comments", list);
 			mav.addObject("qnaview", commentDto2);
+			mav.addObject("good_or_badList", good_or_badList);
 			mav.addObject("replyList", replyList);
 		}
 		mav.setViewName("/user/in/qna");
@@ -161,7 +205,7 @@ public class InController {
 			int cnt = commentService.answerSave(commentDto);
 			mav.addObject("comment", commentDto);
 		}
-		return "redirect:/in/clicklist.akcord?major_id="+ major_id + "&qna_id=" + qna_id; 	 
+		return "redirect:/in/clicklist.akcord?major_id="+ major_id + "&qna_id=" + qna_id;
 	}
 	
 	@RequestMapping(value = "/good_or_bad.akcord", method = RequestMethod.POST)
@@ -170,7 +214,9 @@ public class InController {
 			inService.good_or_badUpdate(queryString);
 			ChooseDto chooseDto = inService.good_or_badSelect(queryString.get("qna_comment_id"));
 			JSONObject json = new JSONObject();
-			json.put("list", chooseDto);
+			json.put("good", chooseDto.getGoodCount());
+			json.put("bad", chooseDto.getBadCount());
+			json.put("qna_comment_id", chooseDto.getQna_comment_id());
 		return json.toJSONString();
 	}
 	
@@ -206,6 +252,58 @@ public class InController {
 		json.put("replyDto", replyDto);
 		return json.toJSONString();
 	}
+	
+	@RequestMapping(value = "/qnaAnswermodify.akcord" ,method = RequestMethod.GET)
+	   public ModelAndView qnaAnswermodify(@RequestParam Map<String,String> query, HttpSession session) {
+	      ModelAndView mav = new ModelAndView();
+	      UserDto userDto = (UserDto) session.getAttribute("user");
+	      int qna_comment_id = Integer.parseInt(query.get("comment_id"));
+	      int major_id;
+	      int qna_id = Integer.parseInt(query.get("qna_id"));
+	        if(userDto.getType()==0)
+	           major_id=0;
+	        else
+	           major_id = userDto.getMajor_id();
+	        CommentDto commentDto=commentService.getAnswer(qna_id);
+	        CommentDto commentDto2=commentService.getQnaAnswer(qna_comment_id);
+	        mav.addObject("qna", commentDto);
+	        mav.addObject("answer", commentDto2);
+	      mav.setViewName("/user/in/qnaAnswerModify");
+	      //return "redirect:/comment/list.akcord?major_id="+ major_id + "&qna_id=" + qna_id;
+	      return mav;
+	   }
+	
+	@RequestMapping(value = "/qnaAnswerdelete.akcord" ,method = RequestMethod.GET)
+	   public String qnamodify(@RequestParam Map<String,String> query, HttpSession session) {
+	      ModelAndView mav = new ModelAndView();
+	      UserDto userDto = (UserDto) session.getAttribute("user");
+	      int qna_comment_id = Integer.parseInt(query.get("comment_id"));
+	      int major_id;
+	      int qna_id = Integer.parseInt(query.get("qna_id"));
+	        if(userDto.getType()==0)
+	           major_id=0;
+	        else
+	           major_id = userDto.getMajor_id();
+	      commentService.deleteQnaAnswer(qna_comment_id);
+	      commentService.deleteAnswerRe(qna_comment_id);
+	      mav.setViewName("/user/in/qnaAnswerModify");
+	      return "redirect:/comment/list.akcord?major_id="+ major_id + "&qna_id=" + qna_id;     
+	   }
+	   
+	   @RequestMapping(value="/answerModify.akcord", method=RequestMethod.POST) 
+	   public String answerModify(CommentDto commentDto, HttpSession session){//여기서는 리스트를 불러온다.
+	      UserDto userDto = (UserDto) session.getAttribute("user");
+	      int major_id;
+	      int qna_id = commentDto.getQna_id();
+	        if(userDto.getType()==0)
+	           major_id=0;
+	        else
+	           major_id = userDto.getMajor_id();
+	      if(userDto != null) {
+	         int cnt = commentService.modify(commentDto);
+	      }
+	      return "redirect:/comment/list.akcord?major_id="+ major_id + "&qna_id=" + qna_id;     
+	   }
 	
 	/*@RequestMapping(value = "/replyWrite.akcord", method = RequestMethod.POST)
 	public @ResponseBody String replyWrite(ReplyDto replyDto, HttpSession session){

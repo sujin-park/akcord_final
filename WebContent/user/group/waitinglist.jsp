@@ -87,7 +87,7 @@
 											</div>
 										</td>
 										<td>
-											<div class="media">
+											<div class="media content-main">
 												<span class="media-meta">${WaitDto.content}</span>
 											</div>
 										</td>
@@ -97,13 +97,17 @@
 											</div>
 										</td>
 										<td align="center">
+										<c:if test="${WaitDto.fromto == 1}">
+												<button class="btn btn-default" id="cancel${WaitDto.groupId}" onclick="javascript:cancel(${WaitDto.groupId});">
+													<span class="glyphicon glyphicon-remove">
+													</span>
+												</button>
+										</c:if>
 										<c:if test="${WaitDto.fromto == 2}">
 												<button class="btn btn-danger" id="accept${WaitDto.groupId}" onclick="javascript:accept(${WaitDto.groupId});">
 													<span class="glyphicon glyphicon-heart">
 													</span>
 												</button>
-										</c:if>
-										<c:if test="${WaitDto.fromto == 1}">
 												<button class="btn btn-default" id="cancel${WaitDto.groupId}" onclick="javascript:cancel(${WaitDto.groupId});">
 													<span class="glyphicon glyphicon-remove">
 													</span>

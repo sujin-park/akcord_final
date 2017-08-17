@@ -85,7 +85,7 @@ $(document).ready(function() {
 	<div class="col-sm-1"></div>
 	<div class="col-sm-10" style="border: 1px solid; color: gray">
 		<br> <br> 
-		<label for="comment" class="col-sm-12">아이디 : ${qnaview.id} 님 </label> 
+		<label for="comment" class="col-sm-12">아이디 : ${user.id} 님 </label> 
 		<label class="col-sm-12"><hr></label>
 		<label for="comment" class="col-sm-12">Answer : </label> 
 		<div class="col-sm-10" >

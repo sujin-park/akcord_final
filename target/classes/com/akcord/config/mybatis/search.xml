@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper     
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.akcord.search.dao.SearchDao">
+    <select id="SearchMypageDto" parameterType="String" resultType="MyroomNextDto" >
+       select myroom_next_id myroomNextId, myroom_id myroomId, user_id, subject, content, reg_date, update_date, is_share isShare  from myroom_next  where
+       is_share=1 and (content like '%'||#{keyword}||'%' or subject like '%'||#{keyword}||'%')
+    </select>
+ 
+    <select id="SearchInQnaDto" parameterType="String" resultType="InDto" >
+       select * from qna  where
+      content like '%'||#{keyword}||'%' or subject like '%'||#{keyword}||'%'
+    </select>
+   
+    
+</mapper>

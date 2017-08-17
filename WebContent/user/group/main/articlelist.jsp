@@ -10,7 +10,6 @@
 		$('#listBtn_G').click(function(){
 			$(location).attr('href','${root}/groupmain/main.akcord?groupId='+groupId);
 		});
-		
 		$('.viewBtn').click(function(){
 			var num = $(this).attr('data-num');
 			
@@ -57,13 +56,12 @@
 				</div>
 			</div>
 			 <c:forEach var="article" items="${alist}" varStatus="i">
-			 <input type="hidden" id="">
 					 <c:if test="${i.index%2 != 1}">
-		            <div class="row">
+		           <div class="row">
 					 </c:if>
 		                <div class="col-sm-6"> 
-		                    <div class="brdr bgc-fff pad-10 box-shad btm-mrg-20 property-listing">
-		                        <div class="media">
+		                    <div class="brdr bgc-fff pad-10 box-shad btm-mrg-20 property-listing content-myroom">
+		                        <div class="media ">
 		                            <div class="media-body fnt-smaller">
 		                                <a href="#" target="_parent"></a>
 		                                <h4 class="media-heading">
@@ -77,10 +75,10 @@
 		                       </div>
 		                   </div>
 		                </div><!-- End Listing-->
+         			
 						<c:if test="${i.index%2 == 1}">
 		                 </div>
 		                 </c:if>
 				 </c:forEach>
                </div><!-- End Listing-->
           </div><!-- End Col -->
- <%@include file="/common/template/footer.jsp"%>

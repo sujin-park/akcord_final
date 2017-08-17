@@ -167,7 +167,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <select id="totalperson" parameterType="int" resultType="int">
-        select count(user_id), group_id from grouproom_list where group_id = #{groupId} group by group_id
+        select count(user_id), group_id from grouproom_list where group_id = #{groupId}  and is_accept = 1 group by group_id
     </select>
     
     <delete id="deleteArticle" parameterType="java.util.Map">

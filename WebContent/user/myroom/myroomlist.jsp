@@ -18,7 +18,6 @@ select {
 </style>
 <script>
 $(document).ready(function() {
-	$('.searchDiv').hide();
 	
 	$('#writeBtn').click(function() {
 		$('#pg').val('1');
@@ -85,12 +84,12 @@ $(document).ready(function() {
 	
 	$('#searchBtn').click(function() {
 		$('#pg').val('1');
-		$('#key').val($("#search option:selected").val());
+		var key = $('#key').val($("#search option:selected").val());
 		$('#word').val($.trim($('#searchText').val()));
 		$('#ch').val('1');
 		$('#commonForm').attr('action', '${root}/myroom/searchlist.akcord').submit();
 		
-		$('.searchDiv').show();
+		//$('.searchDiv').show();
 		//searchDiv.append('<font color="black">' + $.trim($('#searchText').val()) + '</font> 로 검색한 결과입니다.');
 	});
 });
@@ -133,7 +132,6 @@ $(document).ready(function() {
 			<div class="col-sm-1"></div>
 			<div class="col-sm-10" style="padding-bottom: 10px;">
 				<h1>My Room List</h1>
-				<div class="searchDiv">'${query.word}'로 검색한 결과입니다.</div>
 				<div class="col-sm-12" align="right" style="padding-bottom: 10px;">
 					<c:if test="${query.ch != 1}">
 						<input type="button" id="writeBtn" name="writeBtn" class=" btn btn-danger" value="글작성">

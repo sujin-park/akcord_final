@@ -44,36 +44,32 @@ $('#content').summernote({
 });
 </script>
 <%@ include file="/common/template/nav.jsp"%>
-<div class="container-fluid" style="padding-top: 60px;">
-	<div class="row">
-		<div class="col-sm-3"></div>
-		<div class="col-sm-6" style="padding-top: 60px;">
+	<div class="container akcord">
+		<div class="col-sm-12">
+				<div class="page-header titleinfo">
+					    <h2 id="container"><i class="fa fa-comments"></i>  &nbsp;<b>공지사항 작성</b></h2>
+				</div>
+		<div class="col-sm-12"></div>
 
 			<form name="noticeWriteform" method="post" action="">
-				<div class="form-group">
-					<h2>공지사항 글쓰기</h2>
-				
-				<div class="form-group">
-					<div class="col-sm-8"><label for="title">SUBJECT</label> </div>
-				<input type="text" name="subject" class="form-control" id="subject" value="" disabled="disabled">
-				</div>
-				</div>
-				<div class="form-group">
-					<label for="content">CONTENT</label>
-					<textarea name="content" id="content" class="form-control" cols="67" rows="25" disabled="disabled">
-					</textarea>                              
-				</div>
-				<div align="center">
-					<button type="button" class="btn btn-sm" id="modifyBtn">
-						수정</button>
-					<button type="button" class="btn btn-sm">취소</button>
-				</div>
+			<div class="form-group">
+               <div class="col-sm-8"><label for="title">SUBJECT</label> </div>
+               <div class="col-sm-4" align="right"><input type="checkbox" id="is_notice" name="is_notice" value="0">공개</div>
+               <input type="text" name="subject" class="form-control" id="subject" value=""></div>
+            </div>
+            <div class="form-group">
+               <label for="content">CONTENT</label>
+               <textarea name="content" id="content" class="form-control" cols="67" rows="25" required>
+               </textarea>                              
+            </div>
+            <div align="center">
+               <button type="button" class="btn btn-sm" id="registerBtn">
+                  등록</button>
+               <button type="button" class="btn btn-sm" id="cancelBtn">취소</button>
+            </div>
+      </div>
+      <div class="col-sm-3"></div>
 			</form>
-		</div>
-		<div class="col-sm-3"></div>
-
 	</div>
-
-</div>
 </body>
 </html>
