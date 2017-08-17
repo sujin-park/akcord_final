@@ -3,6 +3,17 @@
 <%@include file="/common/template/head_include.jsp"%>
 <link rel="stylesheet" href="/akcord/user/group/css/list.css">
 <%@ include file="/common/template/nav.jsp" %>
+<script>
+	$(document).ready(function(){
+		$('#scrapBtn').on('click', function(){
+			$(location).attr('href','${root}/groupmain/scrap.akcord?groupId=${groupId}&articleseq=${articleseq}');
+		});
+		
+	});
+		
+		
+</script>
+
    <div class="container akcord" style="padding-top:60px;">
      <div class="col-sm-12">
      <div id="property-listings">
@@ -41,6 +52,7 @@
 	                            <td></td>
 							</tr>
 						</table>
+						<button id="scrapBtn" type="button" class="btn btn-danger pull-right">스크랩</button>
 					</div>
 				</div>
 			</div>

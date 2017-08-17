@@ -94,10 +94,14 @@ function myroomRank(data) {
 	          </div>
 	        </div>
 	        <div class="col-md-3">
-	 			<c:if test="${plist.size()!=0}">
-	          <%@ include file="/admin/poll.jsp" %>
-				</c:if> 
-	         
+	 			<c:choose> 
+				<c:when test="${plist.size()!=0}">
+				<%@ include file="/admin/poll.jsp" %>
+				</c:when>
+				<c:otherwise>
+				 <h4>설문조사준비중입니다.</h4>
+				</c:otherwise>
+				</c:choose>
 	        </div>
      </div>
 </body>

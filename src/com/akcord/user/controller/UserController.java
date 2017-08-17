@@ -72,8 +72,10 @@ public class UserController {
 	         group_list = userService.group(userDto.getUser_id()+"");
 	      }*/
 	      if( userDto != null){
+	    	 if(plist!=null){
 	         session.setAttribute("plist", plist);
 	         session.setAttribute("psubject",plist.get(0).getSubject());
+	         }
 	         session.setAttribute("user", userDto);
 	         session.setAttribute("group_list", group_list);
 	         mav.setViewName("/index");

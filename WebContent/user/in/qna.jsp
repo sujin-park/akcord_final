@@ -67,30 +67,7 @@ $(document).ready(function() {
 
 	});
 	
-	$(document).on('click', '.commendBtn', function() {
-		var qna_comment_id = $(this).attr('data-commend');
-		var content = $(this).parent().children('.replyText').val();
-		$.ajax({
-			type : 'POST',
-			dataType : 'json',
-			url : '${root}/in/replyWrite.akcord',
-			data : {'qna_comment_id':qna_comment_id, 're_comment' : content},
-			success : function(data) {
-				alert("왜 성공 안돼");
-				alert(data.replyDto);
-				alert(data.replyDto.id);
-				alert(data.replyDto.re_comment)
-				$('<div id="replyView" class="col-sm-12 replyView">').append('<tr class="replytr">');
-				$('<tr class="replytr">').append('<td class="bg_board_title_02 col-sm-1" height="1" width="10%" style="overflow: hidden;" data-add_id="">'+data.replyDto.id+'</td>');
-				$('<td class="bg_board_title_02 col-sm-1" height="1" width="10%" style="overflow: hidden;" data-add_id="">'+data.replyDto.id+'</td>').append('<td class="bg_board_title_02 col-sm-8" height="1" width="70%" style="overflow: hidden;" data-add_re_comment="">'+data.replyDto.re_comment+'</td>');
-				$('<td class="bg_board_title_02 col-sm-8" height="1" width="70%" style="overflow: hidden;" data-add_re_comment="">'+data.replyDto.re_comment+'</td>').append('<td class="bg_board_title_02" height="1" width="10%" style="overflow: hidden; padding: 0px">');
-				$('<td class="bg_board_title_02" height="1" width="10%" style="overflow: hidden; padding: 0px">').append('<div align="right">');
-				$('<div align="right">').append('<button type="button" id="replyModifyBtn" name="replyModifyBtn" class="btn btn-danger replyModifyBtn">수정</button>');
-				$('<button type="button" id="replyModifyBtn" name="replyModifyBtn" class="btn btn-danger replyModifyBtn">수정</button>').append('<button type="button" id="replyDeleteBtn" name="replyDeleteBtn" class="btn btn-danger replyDeleteBtn">삭제</button>');
-				$('</div>');
-			}
-		});
-	});
+	
 	
 	/* $(document).on('click', '.commendBtn', function() {
 		var qna_comment_id = $(this).attr('data-commend');
@@ -145,7 +122,37 @@ $(document).ready(function() {
 			});
 		}
 	}); */
+$(document).on('click', '#commendBtn', function() {
+	var qna_id = $('.qna_id').val();	
+	var qna_comment_id = $(this).attr('data-commend');
+	var content = $(this).parent().children('.replyText').val();
+	$.ajax({
+		type : 'POST',
+		//dataType : 'json',
+		url : '${root}/in/replyWrite.akcord',
+		data : {'qna_comment_id':qna_comment_id, 're_comment' : content,'qna_id':qna_id},
+		async: false,
+		success : function(data) {
+			/* alert(data.replyDto);
+			alert(data.replyDto.id);
+			alert(data.replyDto.re_comment); */
+			makeReplyList(data);
+			/* $('<div id="replyView" class="col-sm-12 replyView">').append('<tr class="replytr">');
+			$('<tr class="replytr">').append('<td class="bg_board_title_02 col-sm-1" height="1" width="10%" style="overflow: hidden;" data-add_id="">'+data.replyDto.id+'</td>');
+			$('<td class="bg_board_title_02 col-sm-1" height="1" width="10%" style="overflow: hidden;" data-add_id="">'+data.replyDto.id+'</td>').append('<td class="bg_board_title_02 col-sm-8" height="1" width="70%" style="overflow: hidden;" data-add_re_comment="">'+data.replyDto.re_comment+'</td>');
+			$('<td class="bg_board_title_02 col-sm-8" height="1" width="70%" style="overflow: hidden;" data-add_re_comment="">'+data.replyDto.re_comment+'</td>').append('<td class="bg_board_title_02" height="1" width="10%" style="overflow: hidden; padding: 0px">');
+			$('<td class="bg_board_title_02" height="1" width="10%" style="overflow: hidden; padding: 0px">').append('<div align="right">');
+			$('<div align="right">').append('<button type="button" id="replyModifyBtn" name="replyModifyBtn" class="btn btn-danger replyModifyBtn">수정</button>');
+			$('<button type="button" id="replyModifyBtn" name="replyModifyBtn" class="btn btn-danger replyModifyBtn">수정</button>').append('<button type="button" id="replyDeleteBtn" name="replyDeleteBtn" class="btn btn-danger replyDeleteBtn">삭제</button>');
+			$('</div>'); */
+		},
+		error : function(error){
+			console.log('commend error', error);
+		}
+	});
+	});
 });
+
 
 $(document).on('click','.modifyBtn2',function(){
    var qna_id = $('.qna_id').val();
@@ -160,11 +167,13 @@ $(document).on('click','.deleteBtn2',function(){
    $(location).attr('href', '${root}/in/qnaAnswerdelete.akcord?qna_id='+qna_id+'&comment_id='+comment_id);
 });
 
-function makeReplyList(data) {
+function makeReplyList(data2) {
 	var output = '';
+//	var len = data.replyList.length;
+	var data = $.parseJSON(data2);
 	var len = data.replyList.length;
+	console.log(len, data);
 	for(var i=0; i<len; i++) {
-		alert("aaaaaaaaaaaaaaaaaaaaaa");
 		if(data.replyList[i].qna_comment_id == $('.commendBtn').attr('data-commend')) {
 			output += '	<table width="100%" cellpadding="0" cellspacing="0" border="0">';
 			output += '		<div id="replyView" class="col-sm-12">';
@@ -181,22 +190,22 @@ function makeReplyList(data) {
 			output += '			</td>';
 			output += '			</tr>';
 			output += '		</div>';
-			output += '<tr>';
+			/* output += '<tr>';
 			output += '	<td colspan="4" width="100%">';
 			output += '		<div id="modifyDiv'+ data.replyList[i].qna_comment_id +'" style="display: none;">';
 			output += '		<table width="100%">';
 			output += '		<tr>';
-			output += '			<td><textarea id="mcontent'+ data.memolist[i].mseq +'" name="mcontent" style="width: 100%; height: 80px;">'+ data.replyList[i].re_comment +'</textarea></td>';
+			output += '			<td><textarea id="mcontent'+ data.memolist[i].qna_comment_id +'" name="mcontent" style="width: 100%; height: 80px;">'+ data.replyList[i].re_comment +'</textarea></td>';
 			output += '			<td><input type="button" class="replyModifyBtn" data-qna_comment_id="'+ data.replyList[i].qna_comment_id +'" value="수정"></td>';
 			output += '			<td><input type="button" class="replyDeleteBtn" data-qna_comment_id="'+ data.replyList[i].qna_comment_id +'" value="취소"></td>';
-			output += '		</tr>';
+			output += '		</tr>'; */
 			output += '		</table>';
 			output += '		</div>';
 			output += '	</table>';
 		}
 	}
-	$('#replyBbody').empty();
-	$('#replyBbody').append(output);
+	$('#replyBody').empty();
+	$('#replyBody').append(output);
 }
 </script>
 
@@ -291,10 +300,11 @@ function makeReplyList(data) {
 				<textarea rows="5" cols="160" data-reply="" class="replyText"></textarea>
 				<button type="button" id="commendBtn" name="commendBtn" class="btn btn-danger commendBtn" data-commend="${list.qna_comment_id}">Commend</button>
 			</div>
+			<div id="replyBody">
 			<c:forEach var="reply" items="${replyList}">
 				<c:if test="${list.qna_comment_id == reply.qna_comment_id }">
 					<table width="100%" cellpadding="0" cellspacing="0" border="0">
-						<div id="replyView" class="col-sm-12 replyView">
+						<div id="replyView" class="col-sm-12">
 							<tr class="replytr">
 								<td class="bg_board_title_02 col-sm-1" height="1" width="10%" style="overflow: hidden;" data-add_id="${reply.qna_comment_id }">${reply.id }</td>
 								<td class="bg_board_title_02 col-sm-8" height="1" width="70%" style="overflow: hidden;" data-add_re_comment="${reply.qna_comment_id }">${reply.re_comment }</td>
@@ -311,6 +321,7 @@ function makeReplyList(data) {
 					</table>
 				</c:if>
 			</c:forEach>
+			</div>
 		</div>
 	
 		<div class="col-sm-12">

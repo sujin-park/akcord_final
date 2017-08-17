@@ -92,37 +92,37 @@ public class PollController {
       return jsonObject.toJSONString();
    }
 
-   @RequestMapping(value = "/result.akcord")
-   public @ResponseBody String pollresult(@RequestParam("pseq") int seq) {
-      int poll_id = seq;
-      String ChartType="";
-      // 먼저 제목과 날짜 먼저 호출하자
-      JSONObject jsonObject = new JSONObject();
-      JSONArray jarr = new JSONArray();
-      List<PollDto> plist = pollService.pollresult(poll_id); // 투표 정보를 불러온다
-      if(plist.get(0).getChart_type().equals("1"))
-         ChartType="bar";
-      else if(plist.get(0).getChart_type().equals("2"))
-         ChartType="doughnut";
-      else if(plist.get(0).getChart_type().equals("3"))
-         ChartType="line";
-      else if(plist.get(0).getChart_type().equals("4"))
-         ChartType="polarArea";
-      jsonObject.put("Subject", plist.get(0).getSubject());
-      jsonObject.put("ChartType", ChartType);
-      jsonObject.put("poll_id", seq);
-      for (PollDto pollDto : plist) {
-         JSONObject jsontmp = new JSONObject();
-         // String text = plist.get(i);
-         jsontmp.put("content", pollDto.getContent());
-         jsontmp.put("cnt", pollDto.getCnt());
-         // jalist.add(text);
-         jarr.add(jsontmp);
-      }
-      jsonObject.put("pollresult", jarr);
-      // 모달 창이 유지되어야 한다!!
-      return jsonObject.toJSONString();
-   }
+	@RequestMapping(value = "/result.akcord")
+	public @ResponseBody String pollresult(@RequestParam("pseq") int seq) {
+		int poll_id = seq;
+		String ChartType="";
+		// 먼저 제목과 날짜 먼저 호출하자
+		JSONObject jsonObject = new JSONObject();
+		JSONArray jarr = new JSONArray();
+		List<PollDto> plist = pollService.pollresult(poll_id); // 투표 정보를 불러온다
+		if(plist.get(0).getChart_type().equals("1"))
+			ChartType="bar";
+		else if(plist.get(0).getChart_type().equals("2"))
+			ChartType="doughnut";
+		else if(plist.get(0).getChart_type().equals("3"))
+			ChartType="line";
+		else if(plist.get(0).getChart_type().equals("4"))
+			ChartType="polarArea";
+		jsonObject.put("Subject", plist.get(0).getSubject());
+		jsonObject.put("ChartType", ChartType);
+		jsonObject.put("poll_id", seq);
+		for (PollDto pollDto : plist) {
+			JSONObject jsontmp = new JSONObject();
+			// String text = plist.get(i);
+			jsontmp.put("content", pollDto.getContent());
+			jsontmp.put("cnt", pollDto.getCnt());
+			// jalist.add(text);
+			jarr.add(jsontmp);
+		}
+		jsonObject.put("pollresult", jarr);
+		// 모달 창이 유지되어야 한다!!
+		return jsonObject.toJSONString();
+	}
 
    @RequestMapping(value = "/pollupdate.akcord")
    public @ResponseBody String pollupdate(@RequestParam Map<String, String> query, HttpSession session) {

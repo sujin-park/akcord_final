@@ -173,8 +173,9 @@ public class GroupMainController {
 	public ModelAndView articleview(@RequestParam Map<String, String> map) {
 		ModelAndView mav = new ModelAndView();
 		GroupHwDto groupHwDto = groupMainService.articleView(map);
-		System.out.println(groupHwDto.getContent());
 		mav.addObject("groupHwDto", groupHwDto);
+		mav.addObject("groupId", map.get("groupId"));
+		mav.addObject("articleseq", map.get("articleseq"));
 		mav.setViewName("/user/group/main/view");
 		return mav;
 	}
@@ -298,5 +299,14 @@ public class GroupMainController {
 		}
 		int groupId = Integer.parseInt(map.get("groupId"));
 		return "redirect:/groupmain/list.akcord?groupId=" + groupId + "&scheduleId=" + scheduleId;
+	}
+	
+	@RequestMapping("/scrap.akcord")
+	public ModelAndView scrap(@RequestParam Map<String, String> map) {
+		ModelAndView mav = new ModelAndView();
+		GroupHwDto groupHwDto = groupMainService.articleView(map);
+		mav.addObject("groupHwDto", groupHwDto);
+		mav.setViewName("/user/group/main/scrap");
+		return mav;
 	}
 }

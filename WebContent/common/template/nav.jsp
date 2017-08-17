@@ -162,6 +162,7 @@ var name = "";
                         <li><a href="${root}/mypage//myarticle.akcord">내 글 보기</a></li>
                      </ul>
                   </div>  
+                     <c:if test="${user.type == 0 }">
                   <div class="list-heading">
                      <h4 class="list-title">
                         <a href="#collapse-3" a data-toggle="collapse"><i class="fa fa-cog fa-fw"></i>&nbsp;관리</a>
@@ -173,6 +174,7 @@ var name = "";
                         <li><a href="${root }/poll/list.akcord?pg=1&key=&word=&order=">온라인 투표 관리</a></li>
                      </ul>
                   </div> 
+                  </c:if>
                </li>
             </ul>
          </div>
